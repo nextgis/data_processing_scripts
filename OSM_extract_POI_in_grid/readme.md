@@ -42,3 +42,6 @@ time python main.py
 ## Обработка
 
 Отдельно в таблицу boundary импортируется полигон границы страны из OSM.
+
+![alt tag](info01low.png)
+![alt tag](info02low2.png)
