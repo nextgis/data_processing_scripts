@@ -1,0 +1,1661 @@
+"Use 1-3, Do not use 0. Higher number gets priority in any area.",,,,,,,,,,,
+"Preference","key","value","link","help",,,,,,,
+1,"aerialway","cable_car","http://wiki.openstreetmap.org/wiki/Tag:aerialway%3Dcable_car","  Cablecar or Tramway. Just one or two large cars. The traction cable forms a loop, but the cars do not loop around, they just move up and down on their own side, rolling along static cables over which they are suspended.
+",,,,,,,
+0,"aerialway","gondola","http://wiki.openstreetmap.org/wiki/Tag:aerialway%3Dgondola"," 
+",,,,,,,
+0,"aerialway","chair_lift","http://wiki.openstreetmap.org/wiki/Tag:aerialway%3Dchair_lift"," 
+",,,,,,,
+1,"aerialway","mixed_lift","http://wiki.openstreetmap.org/wiki/Tag:aerialway%3Dmixed_lift"," 
+",,,,,,,
+0,"aerialway","drag_lift","http://wiki.openstreetmap.org/wiki/Tag:aerialway%3Ddrag_lift"," 
+",,,,,,,
+0,"aerialway","t-bar","http://wiki.openstreetmap.org/wiki/Tag:aerialway%3Dt-bar","
+",,,,,,,
+0,"aerialway","j-bar","http://wiki.openstreetmap.org/wiki/Tag:aerialway%3Dj-bar","
+",,,,,,,
+0,"aerialway","platter","http://wiki.openstreetmap.org/wiki/Tag:aerialway%3Dplatter","
+",,,,,,,
+0,"aerialway","rope_tow","http://wiki.openstreetmap.org/wiki/Tag:aerialway%3Drope_tow","
+",,,,,,,
+0,"aerialway","magic_carpet","http://wiki.openstreetmap.org/wiki/Tag:aerialway%3Dmagic_carpet","
+",,,,,,,
+1,"aerialway","zip_line","http://wiki.openstreetmap.org/wiki/Tag:aerialway%3Dzip_line","
+",,,,,,,
+0,"aerialway","pylon","http://wiki.openstreetmap.org/wiki/Tag:aerialway%3Dpylon","  Aerial lift pylon is a pylon supporting the aerialway cable.
+",,,,,,,
+2,"aerialway","station","http://wiki.openstreetmap.org/wiki/Tag:aerialway%3Dstation","
+",,,,,,,
+0,"aerialway","canopy","http://wiki.openstreetmap.org/wiki/Tag:aerialway%3Dcanopy"," Obsolete, please use aerialway=zip_line instead. This automatically implies oneway=yes (drawn downward).
+",,,,,,,
+0,"aerialway","goods","http://wiki.openstreetmap.org/wiki/Tag:aerialway%3Dgoods"," 
+",,,,,,,
+0,"aeroway","aerodrome","http://wiki.openstreetmap.org/wiki/Tag:aeroway%3Daerodrome","  Aerodrome in the United Kingdom or Airport in North America is used to map the main area details (other than  helicopters only).
+",,,,,,,
+0,"aeroway","apron","http://wiki.openstreetmap.org/wiki/Tag:aeroway%3Dapron","  Airport apron is an area where planes are parked, unloaded or loaded, refueled, or boarded.
+",,,,,,,
+2,"aeroway","gate","http://wiki.openstreetmap.org/wiki/Tag:aeroway%3Dgate","  Airport gate is used to mark the gate numbers at the airports where passengers wait before boarding their flight.
+",,,,,,,
+0,"aeroway","hangar","http://wiki.openstreetmap.org/wiki/Tag:aeroway%3Dhangar","  Hangar is a structure to hold aircraft or spacecraft.
+",,,,,,,
+0,"aeroway","helipad","http://wiki.openstreetmap.org/wiki/Tag:aeroway%3Dhelipad","  Helipad is used to mark the landing area or platform for Helicopters
+",,,,,,,
+0,"aeroway","heliport","http://wiki.openstreetmap.org/wiki/Tag:aeroway%3Dheliport","  Heliport is used to map the main area details for helicopters.
+",,,,,,,
+0,"aeroway","navigationaid","http://wiki.openstreetmap.org/wiki/Tag:aeroway%3Dnavigationaid","  Radio navigation aid is used to mark systems that determine a position on the Earth which helps pilots guide their aircraft during flight.
+",,,,,,,
+0,"aeroway","runway","http://wiki.openstreetmap.org/wiki/Tag:aeroway%3Drunway","  Runway is a rectangular area in which aerodrome are prepared for the landing and takeoff of aircraft.
+",,,,,,,
+0,"aeroway","taxiway","http://wiki.openstreetmap.org/wiki/Tag:aeroway%3Dtaxiway","  Taxiway is a path on an airport connecting runways with ramps, hangars, terminals and other facilities.
+",,,,,,,
+2,"aeroway","terminal","http://wiki.openstreetmap.org/wiki/Tag:aeroway%3Dterminal","  Airport terminal is a building at an airport where passengers transfer between ground transportation and the facilities that allow them to board and disembark from aircraft.
+",,,,,,,
+0,"aeroway","windsock","http://wiki.openstreetmap.org/wiki/Tag:aeroway%3Dwindsock","  Windsock is designed to indicate wind direction and relative wind speed.
+",,,,,,,
+2,"amenity","bar","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dbar"," Bar is a purpose-built commercial establishment that sells alcoholic drinks to be consumed on the premises. They are characterised by a noisy and vibrant atmosphere, similar to a party and usually don't sell food. See also the description of the tags amenity=pub;bar;restaurant for a distinction between these.
+",,,,,,,
+1,"amenity","bbq","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dbbq"," BBQ or Barbecue is a permanently built grill for cooking food, which is most typically used outdoors by the public. For example these may be found in city parks or at beaches. Use the tag fuel=* to specify the source of heating, such as fuel=wood;electric;charcoal. For mapping nearby table and chairs, see also the tag tourism=picnic_site. For mapping campfires and firepits, instead use the tag leisure=firepit.
+",,,,,,,
+0,"amenity","biergarten","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dbiergarten"," Biergarten or beer garden is an open-air area where alcoholic beverages along with food is prepared and served. See also the description of the tags amenity=pub;bar;restaurant. A biergarten can commonly be found attached to a beer hall, pub, bar, or restaurant. In this case, you can use biergarten=yes additional to amenity=pub;bar;restaurant.
+",,,,,,,
+1,"amenity","cafe","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dcafe"," Cafe is generally an informal place that offers casual meals and beverages; typically, the focus is on coffee or tea. Also known as a coffeehouse/shop, bistro or sidewalk cafe. The kind of food served may be mapped with the tags cuisine=* and diet=*. See also the tags amenity=restaurant;bar;fast_food.
+",,,,,,,
+0,"amenity","drinking_water","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Ddrinking_water"," Drinking water is a place where humans can obtain potable water for consumption. Typically, the water is used for only drinking. Also known as a drinking fountain or bubbler.
+",,,,,,,
+0,"amenity","fast_food","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dfast_food"," Fast food restaurant (see also amenity=restaurant). The kind of food served can be tagged with cuisine=* and diet=*.
+",,,,,,,
+0,"amenity","food_court","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dfood_court"," An area with several different restaurant food counters and a shared eating area. Commonly found in malls, airports, etc.
+",,,,,,,
+0,"amenity","ice_cream","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dice_cream"," Ice cream shop or ice cream parlour. A place that sells ice cream and frozen yoghurt over the counter
+",,,,,,,
+2,"amenity","pub","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dpub"," A place selling beer and other alcoholic drinks; may also provide food or accommodation (UK). See description of amenity=bar and amenity=pub for distinction between bar and pub
+",,,,,,,
+1,"amenity","restaurant","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Drestaurant"," Restaurant (not fast food, see amenity=fast_food). The kind of food served can be tagged with cuisine=* and diet=*.
+",,,,,,,
+1,"amenity","college","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dcollege"," A college campus or buildings
+",,,,,,,
+0,"amenity","kindergarten","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dkindergarten"," For children too young for a regular school (also known as playschool or nursery school).
+",,,,,,,
+3,"amenity","library","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dlibrary"," A public library (municipal, university, …) to borrow books from.
+",,,,,,,
+0,"amenity","public_bookcase","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dpublic_bookcase"," A street furniture containing books. Take one or leave one.
+",,,,,,,
+0,"amenity","school","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dschool"," School and grounds
+",,,,,,,
+0,"amenity","music_school","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dmusic_school"," Music school
+",,,,,,,
+0,"amenity","driving_school","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Ddriving_school"," Driving School
+",,,,,,,
+0,"amenity","language_school","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dlanguage_school"," Language School
+",,,,,,,
+2,"amenity","university","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Duniversity"," An university campus
+",,,,,,,
+0,"amenity","bicycle_parking","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dbicycle_parking"," Parking for bicycles
+",,,,,,,
+0,"amenity","bicycle_repair_station","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dbicycle_repair_station"," Self-service repair stand
+",,,,,,,
+0,"amenity","bicycle_rental","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dbicycle_rental"," Rent a bicycle
+",,,,,,,
+0,"amenity","boat_sharing","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dboat_sharing"," Share a Boat
+",,,,,,,
+2,"amenity","bus_station","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dbus_station"," May also be tagged as public_transport=station.
+",,,,,,,
+0,"amenity","car_rental","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dcar_rental"," Rent a car
+",,,,,,,
+0,"amenity","car_sharing","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dcar_sharing"," Share a car
+",,,,,,,
+0,"amenity","car_wash","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dcar_wash"," Wash a car
+",,,,,,,
+0,"amenity","charging_station","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dcharging_station"," Charging facility for electric vehicles
+",,,,,,,
+1,"amenity","ferry_terminal","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dferry_terminal"," Ferry terminal/stop. A place where people/cars/etc. can board and leave a ferry.
+",,,,,,,
+0,"amenity","fuel","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dfuel"," Petrol station; gas station; marine fuel; … Streets to petrol stations are often tagged highway=service.
+",,,,,,,
+0,"amenity","grit_bin","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dgrit_bin"," A container that holds grit or a mixture of salt and grit.
+",,,,,,,
+0,"amenity","motorcycle_parking","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dmotorcycle_parking"," Parking for motorcycles
+",,,,,,,
+0,"amenity","parking","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dparking"," Car park. Nodes and areas (without access tag) will get a parking symbol. Areas will be coloured. Streets on car parking are often tagged highway=service and service=parking_aisle.
+",,,,,,,
+0,"amenity","parking_entrance","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dparking_entrance"," An entrance or exit to an underground or multi-storey parking facility. Group multiple parking entrances together with a relation using the tags type=site and site=parking. Do not mix with amenity=parking.
+",,,,,,,
+0,"amenity","parking_space","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dparking_space"," A single parking space. Group multiple parking spaces together with a relation using the tags type=site and site=parking. Do not mix with amenity=parking.
+",,,,,,,
+0,"amenity","taxi","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dtaxi"," A place where taxis wait for passengers.
+",,,,,,,
+0,"amenity","atm","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Datm"," an ATM or cash point
+",,,,,,,
+1,"amenity","bank","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dbank"," a bank (for a bank that also has an ATM, it is preferred that a separate node for each ATM is added)
+",,,,,,,
+0,"amenity","bureau_de_change","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dbureau_de_change"," Bureau de change, currency exchange, Wechsel, cambio – a place to change foreign bank notes and travellers cheques
+",,,,,,,
+0,"amenity","baby_hatch","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dbaby_hatch"," A place where a baby can be, out of necessity, anonymously left to be safely cared for and perhaps adopted.
+",,,,,,,
+1,"amenity","clinic","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dclinic","  A medium-sized medical facility or health centre.
+",,,,,,,
+0,"amenity","dentist","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Ddentist"," A dentist practice / surgery.
+",,,,,,,
+0,"amenity","doctors","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Ddoctors"," A doctor's practice / surgery.
+",,,,,,,
+2,"amenity","hospital","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dhospital"," Often used in conjunction with emergency=* to note whether or not the hospital has emergency facilities (A&E (brit.) or ER (am.))
+",,,,,,,
+0,"amenity","nursing_home","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dnursing_home"," A home for disabled or elderly persons who need permanent care. See social_facility=* for more details.
+",,,,,,,
+0,"amenity","pharmacy","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dpharmacy"," Pharmacydispensing=yesdispensing=no or omitted
+",,,,,,,
+2,"amenity","social_facility","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dsocial_facility"," A facility that provides social services.
+",,,,,,,
+0,"amenity","veterinary","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dveterinary"," A place where a veterinary surgeon (vet) practices.
+",,,,,,,
+1,"amenity","arts_centre","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Darts_centre"," A venue where a variety of arts are performed or conducted
+",,,,,,,
+0,"amenity","brothel","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dbrothel"," An establishment specifically dedicated to prostitution
+",,,,,,,
+0,"amenity","casino","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dcasino","  A gambling venue with at least one table game(e.g. roulette, blackjack) that takes bets on sporting and other events at agreed upon odds.
+",,,,,,,
+2,"amenity","cinema","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dcinema"," A place where films are shown (US: movie theater)
+",,,,,,,
+1,"amenity","community_centre","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dcommunity_centre"," A place mostly used for local events and festivities.
+",,,,,,,
+3,"amenity","fountain","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dfountain"," A fountain for cultural / decorational / recreational purposes.
+",,,,,,,
+0,"amenity","gambling","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dgambling","  A place for gambling, not being a shop=bookmaker, shop=lottery, amenity=casino, or leisure=adult_gaming_centre.
+Games that are covered by this definition include bingo and pachinko.
+
+",,,,,,,
+0,"amenity","nightclub","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dnightclub"," A place to drink and dance (nightclub). The German word is \Disco\"" or \""Discothek\"". Please don't confuse this with the German \""Nachtclub\"" which is most likely  amenity=stripclub.",,,,,,,
+0,",
+amenity""","stripclub","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dstripclub"," A place to drink and dance (nightclub). The German word is \Disco\"" or \""Discothek\"". Please don't confuse this with the German \""Nachtclub\"" which is most likely  amenity=stripclub.",,,,,,,
+3,",
+amenity""","planetarium","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dplanetarium"," A planetarium.
+",,,,,,,
+0,"amenity","social_centre","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dsocial_centre"," A place for free and not-for-profit activities.
+",,,,,,,
+0,"amenity","stripclub","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dstripclub"," A place that offers striptease or lapdancing (for sexual services use amenity=brothel).
+",,,,,,,
+0,"amenity","studio","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dstudio"," TV radio or recording studio
+",,,,,,,
+0,"amenity","swingerclub","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dswingerclub","  A club where people meet to have a party and group sex.
+",,,,,,,
+2,"amenity","theatre","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dtheatre"," A theatre or opera house. Use amenity=cinema for movie theaters.
+",,,,,,,
+0,"amenity","animal_boarding","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Danimal_boarding"," A facility where you, paying a fee, can bring your animal for a limited period of time (e.g. for holidays)
+",,,,,,,
+0,"amenity","animal_shelter","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Danimal_shelter"," A shelter that recovers animals in trouble
+",,,,,,,
+0,"amenity","bench","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dbench"," A bench to sit down and relax a bit
+",,,,,,,
+0,"amenity","clock","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dclock"," A public visible clock
+",,,,,,,
+3,"amenity","courthouse","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dcourthouse"," A place where justice is dispensed
+",,,,,,,
+0,"amenity","coworking_space","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dcoworking_space"," A place where people can go to work (might require a fee); not limited to a single employer
+",,,,,,,
+0,"amenity","crematorium","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dcrematorium","  A place where dead human bodies are burnt
+",,,,,,,
+0,"amenity","crypt","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dcrypt","  It is a stone chamber or vault beneath the floor of a burial vault possibly containing sarcophagi, coffins or relics.
+",,,,,,,
+0,"amenity","dive_centre","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Ddive_centre","  A dive center is the base location where sports divers usually start scuba diving or make dive guided trips at new locations.
+",,,,,,,
+1,"amenity","dojo","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Ddojo","  Training place for any of the Japanese arts.
+",,,,,,,
+2,"amenity","embassy","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dembassy"," An embassy
+",,,,,,,
+2,"amenity","fire_station","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dfire_station"," A fire station
+",,,,,,,
+0,"amenity","game_feeding","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dgame_feeding"," Game feeding place
+",,,,,,,
+0,"amenity","grave_yard","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dgrave_yard"," A (smaller) place of burial, often you'll find a church nearby. Large places should be landuse=cemetery instead.
+",,,,,,,
+0,"amenity","hunting_stand","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dhunting_stand"," A hunting stand
+",,,,,,,
+0,"amenity","internet_cafe","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dinternet_cafe"," A place whose principal role is providing internet services to the public.
+",,,,,,,
+0,"amenity","kneipp_water_cure","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dkneipp_water_cure"," Outdoor foot bath facility. Usually this is a pool with cold water and handrail. Popular in German speaking countries.
+",,,,,,,
+1,"amenity","marketplace","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dmarketplace"," A place where trade is regulated, e.g. a square.
+",,,,,,,
+0,"amenity","photo_booth","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dphoto_booth","  Photo Booth – A stand to create instant photo.
+",,,,,,,
+3,"amenity","place_of_worship","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dplace_of_worship"," A church, mosque, or temple, etc. Note that you also need religion=*, usually denomination=* and preferably name=* as well as amenity=place_of_worship. See the article for details.
+",,,,,,,
+1,"amenity","police","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dpolice"," A police station
+",,,,,,,
+0,"amenity","post_box","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dpost_box"," A box for the reception of mail. Alternative mail-carriers can be tagged via operator=*
+",,,,,,,
+3,"amenity","post_office","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dpost_office"," Post office building with postal services
+",,,,,,,
+0,"amenity","prison","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dprison"," A prison
+",,,,,,,
+0,"amenity","ranger_station","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dranger_station"," National Park Visitor Headquarters
+",,,,,,,
+0,"amenity","recycling","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Drecycling"," Recycling facilities (bottle banks, etc.). Combine with recycling_type=container for containers or recycling_type=centre for recycling centres.
+",,,,,,,
+0,"amenity","rescue_station","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Drescue_station"," A rescue station
+",,,,,,,
+0,"amenity","sauna","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dsauna"," A small room or house to experience dry or wet heat sessions.  Also frequently used: leisure=sauna
+",,,,,,,
+0,"amenity","shelter","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dshelter"," A small shelter against bad weather conditions. To additionally describe the kind of shelter use shelter_type=*.
+",,,,,,,
+0,"amenity","shower","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dshower"," Public shower or bath.
+",,,,,,,
+0,"amenity","telephone","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dtelephone"," Public telephone
+",,,,,,,
+0,"amenity","toilets","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dtoilets"," Public toilets (might require a fee)
+",,,,,,,
+3,"amenity","townhall","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dtownhall"," Building where the administration of a village, town or city may be located, or just a community meeting place
+",,,,,,,
+0,"amenity","vending_machine","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dvending_machine"," A machine selling goods – food, tickets, newspapers, etc. Add type of goods using vending=*
+",,,,,,,
+0,"amenity","waste_basket","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dwaste_basket"," A single small container for depositing garbage that is easily accessible for pedestrians.
+",,,,,,,
+0,"amenity","waste_disposal","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dwaste_disposal"," A place where canal boaters, caravaners, etc. can dispose of rubbish (trash/waste).
+",,,,,,,
+0,"amenity","waste_transfer_station","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dwaste_transfer_station"," A waste transfer station is a location that accepts, consolidates and transfers waste in bulk.
+",,,,,,,
+0,"amenity","watering_place","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dwatering_place"," Place where water is contained and animals can drink
+",,,,,,,
+0,"amenity","water_point","http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dwater_point"," Place where you can get large amounts of drinking water
+",,,,,,,
+0,"barrier","cable_barrier","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dcable_barrier","  Way. Also called guard cable. This is a road side or median barrier made of steel wire ropes mounted on weak posts. See also the more extensive wikipedia description.
+",,,,,,,
+0,"barrier","city_wall","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dcity_wall"," A fortification used to defend a city or settlement from potential aggressors. From ancient to modern times, they are used to enclose settlements.
+ Right side is bottom, left side is top.
+ If both sides are same height then add \two_sided=yes\"".",,,,,,,
+0,",
+barrier""","ditch","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dditch"," A trench, ditch or ravine, usually with a stream at the bottom, that is not easily crossed, especially if not on foot. Can be used in combination with waterway=stream or waterway=drain.
+",,,,,,,
+0,"barrier","fence","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dfence"," A structure supported by posts driven into the ground and designed to prevent movement across a boundary. It is distinguished from a wall by the lightness of its construction. Use fence_type=* to add details.
+",,,,,,,
+0,"barrier","guard_rail","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dguard_rail"," A guard_rail, also called a crash barrier. Right side is inner, left side is outer.
+",,,,,,,
+0,"barrier","handrail","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dhandrail"," is designed to be grasped by the hand so as to provide stability or support.
+",,,,,,,
+0,"barrier","hedge","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dhedge"," is a line of closely spaced shrubs and bushes, planted and trained in such a way as to form a barrier or to mark the boundary of an area.
+",,,,,,,
+0,"barrier","kerb","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dkerb"," A (for example footway) kerb is a barrier for vehicles and wheelchair drivers. The height of the kerb is important and with this information, the usage by different groups can be determined. The height of the kerb is tagged additionally as height=*, if available. Right side is bottom, left side is top.
+",,,,,,,
+0,"barrier","retaining_wall","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dretaining_wall"," Retaining walls serve to retain the lateral pressure of soil. Right side is bottom, left side is top.
+",,,,,,,
+0,"barrier","tank_trap","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dtank_trap"," Static anti-tank obstacle defences may take a number of forms, such as Czech hedgehog (barrier=tank_trap; tank_trap=czech_hedgehog).
+",,,,,,,
+0,"barrier","wall","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dwall"," A freestanding solid structure designed to restrict or prevent movement across a boundary.  Usually made from solid brick, concrete or stone and almost always built so that it is opaque to vision.
+",,,,,,,
+0,"barrier","block","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dblock"," A large, solid, immobile block that can be moved only with heavy machinery or great effort. Typically big solid things made of concrete for stopping larger vehicles. Sometimes natural boulders are used for the same purpose.
+",,,,,,,
+0,"barrier","bollard","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dbollard"," Solid (usually concrete or metal) pillar or pillars in the middle of the road to prevent passage by some traffic.
+",,,,,,,
+2,"barrier","border_control","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dborder_control"," This is a control point at an international border between two countries.  Passports or other forms of ID will be checked.
+",,,,,,,
+0,"barrier","bump_gate","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dbump_gate","  See wikipedia:Bump gate
+",,,,,,,
+0,"barrier","bus_trap","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dbus_trap","  See wikipedia:Bus trap
+",,,,,,,
+0,"barrier","cattle_grid","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dcattle_grid"," Bars in the road surface that allow wheeled vehicles but not animals to cross. Sometimes known as a Texas Gate, even outside of Texas
+",,,,,,,
+0,"barrier","chain","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dchain"," A chain used to prevent motorised vehicles.
+",,,,,,,
+0,"barrier","cycle_barrier","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dcycle_barrier"," Barriers to bicycle traffic, most typically a pair of staggered steel bars perpendicular to the way itself whose gaps allow pedestrians to pass.
+",,,,,,,
+0,"barrier","debris","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Ddebris"," A road is blocked by debris with or without ground. This might be for short or long time. Often used as first step in blocking an abandoned road.
+",,,,,,,
+0,"barrier","entrance","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dentrance"," A gap in a linear barrier with nothing that limits passing through. access=yes is implied. The limitations are the same of the way that crosses it, if there is such.
+",,,,,,,
+0,"barrier","full-height_turnstile","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dfull-height_turnstile"," A full-height turnstile, also called HEET-turnstile (High Entrance/Exit Turnstile), like the ones to access security areas. Note the mix of hyphen and underscore.
+",,,,,,,
+0,"barrier","gate","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dgate"," An entrance that can be opened or closed to get through the barrier. Combine with access=* where appropriate.
+",,,,,,,
+0,"barrier","hampshire_gate","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dhampshire_gate"," A section of wire fence which can be removed temporarily. Combine with access=* where appropriate.
+",,,,,,,
+0,"barrier","height_restrictor","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dheight_restrictor"," Combine with maxheight=*.
+",,,,,,,
+0,"barrier","horse_stile","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dhorse_stile"," A horse stile allows pedestrians and horses to cross a gap through a fence, but prevents or makes it very difficult for motorcycles and live stock to cross.
+",,,,,,,
+0,"barrier","jersey_barrier","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Djersey_barrier"," A jersey barrier consists of heavy prefabricated blocks to create a barrier. Use material=plastic or material=concrete to express the used material.
+",,,,,,,
+0,"barrier","kent_carriage_gap","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dkent_carriage_gap"," A Kent carriage gap is used by local authorities in the UK to prevent motorised vehicles from accessing public rights of way whilst allowing most horse drawn carriages to pass. These are now becoming common on byways in the UK
+",,,,,,,
+0,"barrier","kissing_gate","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dkissing_gate"," A gate which allows people to cross, but not livestock.
+",,,,,,,
+0,"barrier","lift_gate","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dlift_gate"," A lift gate (boom barrier) is a bar, or pole pivoted in such a way as to allow the boom to block vehicular access through a controlled point. Combine with access=* where appropriate.
+",,,,,,,
+0,"barrier","log","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dlog"," Use this when the passage is closed by lumber (trunk of a tree). This kind of barrier is often useful to sit on. This barrier is a penalty to cyclists but can be crossed by lifting the bike over.
+",,,,,,,
+0,"barrier","motorcycle_barrier","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dmotorcycle_barrier"," Barriers along paths that prevent access by motorcycles.
+",,,,,,,
+0,"barrier","rope","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Drope"," A flexible barrier made of fibres, twisted or braided together to improve strength. As a barrier it is often more symbolic than actually physically preventing pedestrians from accessing.
+",,,,,,,
+0,"barrier","sally_port","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dsally_port"," A sally port is used to pass through thick or city walls, and is a type of covered gate with two doors.
+",,,,,,,
+0,"barrier","spikes","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dspikes"," Spikes on the ground that prevent unauthorized access. Can also be removeable e.g. after payment in a garage.
+",,,,,,,
+0,"barrier","stile","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dstile"," A stile allows pedestrians to cross a wall or fence, but never actually \opens\"" the barrier (unlike a gate","a stile has few or no moving parts).",,,,,,
+0,",
+barrier""","sump_buster","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dsump_buster"," A sump buster is a concrete slab or steel structure that prevents passing of two-tracked vehicles with less than a minimum track and ground clearance. (Typically stops normal cars.)
+",,,,,,,
+0,"barrier","swing_gate","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dswing_gate"," Similar to a lift gate but rotates sidewards to open. It is usually made out of metal bars (wood or other material possible) and is intended to prevent cars from access but can usually be crossed by pedestrians and cyclists.
+",,,,,,,
+0,"barrier","toll_booth","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dtoll_booth"," A road usage toll or fee is collected here. Used with toll=* and charge=*
+",,,,,,,
+0,"barrier","turnstile","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dturnstile"," A turnstile (also called baffle gate) is used to allow one person at a time to pass. Use this for small turnstiles like the ones in supermarkets or some subways.
+",,,,,,,
+0,"barrier","yes","http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dyes"," A barrier which nature cannot be determined; typically only used in mapping using aerial imagery. Should be replaced by a specific value.
+",,,,,,,
+0,"boundary","administrative","http://wiki.openstreetmap.org/wiki/Tag:boundary%3Dadministrative","  An administrative boundary. Subdivisions of areas/territories/jurisdictions recognised by governments or other organisations for administrative purposes.  These range from large groups of nation states right down to small administrative districts and suburbs, as indicated by the 'admin_level=*' combo tag
+",,,,,,,
+0,"boundary","historic","http://wiki.openstreetmap.org/wiki/Tag:boundary%3Dhistoric"," Historic
+",,,,,,,
+0,"boundary","maritime","http://wiki.openstreetmap.org/wiki/Tag:boundary%3Dmaritime"," Maritime boundaries
+",,,,,,,
+0,"boundary","national_park","http://wiki.openstreetmap.org/wiki/Tag:boundary%3Dnational_park"," Area of outstanding natural beauty, set aside for conservation and for recreation (Other languages)
+",,,,,,,
+0,"boundary","political","http://wiki.openstreetmap.org/wiki/Tag:boundary%3Dpolitical"," Electoral boundaries
+",,,,,,,
+0,"boundary","postal_code","http://wiki.openstreetmap.org/wiki/Tag:boundary%3Dpostal_code"," Postal code boundaries
+",,,,,,,
+0,"boundary","protected_area","http://wiki.openstreetmap.org/wiki/Tag:boundary%3Dprotected_area"," Protected areas, such as for national-parks, water protection areas or indigenous areas.
+",,,,,,,
+0,"bridge","yes","http://wiki.openstreetmap.org/wiki/Tag:bridge%3Dyes"," If the railway goes over a street, waterway or other railway.
+",,,,,,,
+0,"building","apartments","http://wiki.openstreetmap.org/wiki/Tag:building%3Dapartments"," A building arranged into individual dwellings, often on separate floors. May also have retail outlets on the ground floor.
+",,,,,,,
+1,"building","farm","http://wiki.openstreetmap.org/wiki/Tag:building%3Dfarm"," A residential building on a farm (farmhouse). For other buildings see below building=farm_auxiliary, building=barn, … If in your country farmhouse looks same as general residential house then you can tag as building=house as well. See also landuse=farmyard
+",,,,,,,
+2,"building","hotel","http://wiki.openstreetmap.org/wiki/Tag:building%3Dhotel"," A building designed with separate rooms available for overnight accommodation. Normally used in conjunction with tourism=hotel for the hotel grounds including recreation areas and parking.
+",,,,,,,
+0,"building","house","http://wiki.openstreetmap.org/wiki/Tag:building%3Dhouse"," A dwelling unit inhabited by a single household (a family or small group sharing facilities such as a kitchen). Houses forming half of a semi-detached pair, or one of a row of terraced houses, should share at least two nodes with joined neighbours, thereby defining the party wall between the properties.
+",,,,,,,
+0,"building","detached","http://wiki.openstreetmap.org/wiki/Tag:building%3Ddetached"," A single dwelling unit inhabited by family or small group sharing facilities such as a kitchen.
+",,,,,,,
+1,"building","residential","http://wiki.openstreetmap.org/wiki/Tag:building%3Dresidential"," A general tag for a building used primarily for residential purposes. Where additional detail is available consider using 'apartments', 'terrace', 'house' or 'detached'.
+",,,,,,,
+1,"building","dormitory","http://wiki.openstreetmap.org/wiki/Tag:building%3Ddormitory"," For a shared building, as used by college/university students (not a share room for multiple occupants as implied by the term in British English). Alternatively, use building=residential plus residential=university.
+",,,,,,,
+1,"building","terrace","http://wiki.openstreetmap.org/wiki/Tag:building%3Dterrace"," A single way used to define the outline of a linear row of residential dwellings, each of which normally has its own entrance, which form a terrace (row-house in North American English). Consider defining each dwelling separately using 'house'.
+",,,,,,,
+0,"building","houseboat","http://wiki.openstreetmap.org/wiki/Tag:building%3Dhouseboat"," A boat used primarily as a home
+",,,,,,,
+0,"building","bungalow","http://wiki.openstreetmap.org/wiki/Tag:building%3Dbungalow"," A single-storey detached small house, Dacha.
+",,,,,,,
+0,"building","static_caravan","http://wiki.openstreetmap.org/wiki/Tag:building%3Dstatic_caravan"," A mobile home (semi)permanently left on a single site
+",,,,,,,
+1,"building","commercial","http://wiki.openstreetmap.org/wiki/Tag:building%3Dcommercial"," A building where non-specific commercial activities take place; use office=* to describe the type of office. Consider tagging the area using landuse=commercial. Use 'retail' if the building consists primarily of shops.
+",,,,,,,
+1,"building","industrial","http://wiki.openstreetmap.org/wiki/Tag:building%3Dindustrial"," A building where some industrial process takes place. Use warehouse if the purpose is known to be primarily for storage/distribution. Consider using landuse=industrial for the surrounding area and the proposed industrial=* tag to describe the industrial activity.
+",,,,,,,
+1,"building","retail","http://wiki.openstreetmap.org/wiki/Tag:building%3Dretail"," A building primarily used for selling goods are sold to the public; use shop=* to identify the sort of goods sold. Consider use landuse=retail for the surrounding area.
+",,,,,,,
+1,"building","warehouse","http://wiki.openstreetmap.org/wiki/Tag:building%3Dwarehouse"," A building primarily used for the storage or goods or as part of a distribution system.
+",,,,,,,
+2,"building","cathedral","http://wiki.openstreetmap.org/wiki/Tag:building%3Dcathedral"," A building that was built as a cathedral. Used in conjunction with amenity=place_of_worship, religion=*, denomination=* and landuse=religious for the cathedral grounds where it is in current use.
+",,,,,,,
+2,"building","chapel","http://wiki.openstreetmap.org/wiki/Tag:building%3Dchapel"," A building that was built as a chapel. Used in conjunction with amenity=place_of_worship, religion=*, denomination=* and landuse=religious for the chapel grounds where it is in current use.
+",,,,,,,
+2,"building","church","http://wiki.openstreetmap.org/wiki/Tag:building%3Dchurch"," A building that was built as a church. Used in conjunction with amenity=place_of_worship, religion=* , denomination=* and landuse=religious for the church grounds where it is in current use.
+",,,,,,,
+3,"building","mosque","http://wiki.openstreetmap.org/wiki/Tag:building%3Dmosque"," A mosque. Used in conjunction with amenity=place_of_worship, religion=*,  denomination=*  and landuse=religious for the grounds where it is in current use.
+",,,,,,,
+3,"building","temple","http://wiki.openstreetmap.org/wiki/Tag:building%3Dtemple"," A building that was built as a temple. Used in conjunction with amenity=place_of_worship, religion=*, denomination=* and landuse=religious for the grounds where it is in current use.
+",,,,,,,
+3,"building","synagogue","http://wiki.openstreetmap.org/wiki/Tag:building%3Dsynagogue"," A building that was built as a synagogue. Used in conjunction with amenity=place_of_worship, religion=*, denomination=* and landuse=religious for the grounds where it is in current use.
+",,,,,,,
+3,"building","shrine","http://wiki.openstreetmap.org/wiki/Tag:building%3Dshrine"," A building that was built as a shrine. Used in conjunction with amenity=place_of_worship, religion=*, denomination=* and landuse=religious for the grounds where it is in current use. Small buildings should consider historic=wayside_shrine.
+",,,,,,,
+1,"building","civic","http://wiki.openstreetmap.org/wiki/Tag:building%3Dcivic"," For any civic amenity, for example amenity=community_centre, amenity=library, amenity=toilets, leisure=sports_centre, leisure=swimming_pool, amenity=townhall etc. Use amenity=* or leisure=* etc. to provide further details. See building=public as well.
+",,,,,,,
+1,"building","hospital","http://wiki.openstreetmap.org/wiki/Tag:building%3Dhospital"," A building which forms part of a hospital. Use amenity=hospital for the hospital grounds.
+",,,,,,,
+1,"building","school","http://wiki.openstreetmap.org/wiki/Tag:building%3Dschool"," For any generic school buildings. Buildings for specific uses (sports halls etc.) should be tagged for their purpose. Use amenity=school for the perimeter of the school grounds.
+",,,,,,,
+2,"building","stadium","http://wiki.openstreetmap.org/wiki/Tag:building%3Dstadium"," A stadium building.
+",,,,,,,
+2,"building","train_station","http://wiki.openstreetmap.org/wiki/Tag:building%3Dtrain_station"," A train station building.
+",,,,,,,
+1,"building","transportation","http://wiki.openstreetmap.org/wiki/Tag:building%3Dtransportation"," A building related to public transport. You will probably want to tag it with proper transport related tag as well, such as public_transport=station. Note that there is a special tag for train station buildings - building=train_station.
+",,,,,,,
+2,"building","university","http://wiki.openstreetmap.org/wiki/Tag:building%3Duniversity"," A university building. Use amenity=university for the whole university area.
+",,,,,,,
+0,"building","public","http://wiki.openstreetmap.org/wiki/Tag:building%3Dpublic"," A public building. Don't use amenity=public_building.
+",,,,,,,
+1,"building","barn","http://wiki.openstreetmap.org/wiki/Tag:building%3Dbarn"," An agricultural building used for storage and as a covered workplace.
+",,,,,,,
+1,"building","bridge","http://wiki.openstreetmap.org/wiki/Tag:building%3Dbridge"," A building used as a bridge. Can also represent a gatehouse for drawbridges. See also bridge=yes for highway=*. Don't use this tag just for marking bridges (their outlines). For such purposes use man_made=bridge.
+",,,,,,,
+0,"building","bunker","http://wiki.openstreetmap.org/wiki/Tag:building%3Dbunker"," A hardened military building. Also use military=bunker.
+",,,,,,,
+1,"building","cabin","http://wiki.openstreetmap.org/wiki/Tag:building%3Dcabin"," A cabin is a small, roughly built house usually with a wood exterior and typically found in rural areas.
+",,,,,,,
+0,"building","construction","http://wiki.openstreetmap.org/wiki/Tag:building%3Dconstruction"," Used for buildings under construction. Use construction=* to hold the value for the completed building.
+",,,,,,,
+0,"building","cowshed","http://wiki.openstreetmap.org/wiki/Tag:building%3Dcowshed"," A cowshed (cow barn, cow house) is a building for housing cows, usually found on farms.
+",,,,,,,
+0,"building","farm_auxiliary","http://wiki.openstreetmap.org/wiki/Tag:building%3Dfarm_auxiliary"," A building on a farm that is not a dwelling (use 'farm' or 'house' for the farm house).
+",,,,,,,
+1,"building","garage","http://wiki.openstreetmap.org/wiki/Tag:building%3Dgarage"," A garage is a building suitable for the storage of one or possibly more motor vehicle or similar. See building=garages for larger shared buildings.
+",,,,,,,
+1,"building","garages","http://wiki.openstreetmap.org/wiki/Tag:building%3Dgarages"," A building that consists of a number of discrete storage spaces for different owners/tenants. See also building=garage.
+",,,,,,,
+1,"building","greenhouse","http://wiki.openstreetmap.org/wiki/Tag:building%3Dgreenhouse"," A greenhouse is a glass or plastic covered building used to grow plants. Use landuse=greenhouse_horticulture for the area
+",,,,,,,
+0,"building","hangar","http://wiki.openstreetmap.org/wiki/Tag:building%3Dhangar"," A hangar is a building used for the storage of airplanes, helicopters or space-craft. Consider adding aeroway=hangar, when appropriate.
+",,,,,,,
+0,"building","hut","http://wiki.openstreetmap.org/wiki/Tag:building%3Dhut"," A hut is a small and crude shelter.
+",,,,,,,
+0,"building","roof","http://wiki.openstreetmap.org/wiki/Tag:building%3Droof"," A structure that consists of a roof with open sides, such as a rain shelter, and also gas stations
+",,,,,,,
+0,"building","shed","http://wiki.openstreetmap.org/wiki/Tag:building%3Dshed"," A shed is a simple, single-storey structure in a back garden or on an allotment that is used for storage, hobbies, or as a workshop.
+",,,,,,,
+0,"building","stable","http://wiki.openstreetmap.org/wiki/Tag:building%3Dstable"," A stable is a building where horses are kept.
+",,,,,,,
+0,"building","sty","http://wiki.openstreetmap.org/wiki/Tag:building%3Dsty"," A sty (pigsty, pig ark, pig-shed) is a building for raising domestic pigs, usually found on farms.
+",,,,,,,
+1,"building","transformer_tower","http://wiki.openstreetmap.org/wiki/Tag:building%3Dtransformer_tower"," A transformer tower is a characteristic tall building comprising a distribution transformer and constructed to connect directly  to a medium voltage overhead power line. Quite often the power line has since been undergrounded but the building may still serve as a substation. If the building is still in use as a substation it should additionally be tagged as power=substation + substation=minor_distribution.
+",,,,,,,
+0,"building","service","http://wiki.openstreetmap.org/wiki/Tag:building%3Dservice"," Service building usually is a small unmanned building with certain machinery (like pumps or transformers).
+",,,,,,,
+0,"building","kiosk","http://wiki.openstreetmap.org/wiki/Tag:building%3Dkiosk"," Small retail building.
+",,,,,,,
+1,"building","ruins","http://wiki.openstreetmap.org/wiki/Tag:building%3Druins"," A house, a village or other building abandoned.
+",,,,,,,
+0,"busway","lane","http://wiki.openstreetmap.org/wiki/Tag:busway%3Dlane"," Bus lane on both sides of the road.
+",,,,,,,
+1,"craft","agricultural_engines","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dagricultural_engines"," Planning and constructing engines and tools for agricultural use.
+",,,,,,,
+1,"craft","basket_maker","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dbasket_maker"," Producing baskets, often made from Willow.
+",,,,,,,
+1,"craft","beekeeper","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dbeekeeper"," A place where honey bees are kept for the purposes of securing commodities such as honey, beeswax or pollen.
+",,,,,,,
+1,"craft","blacksmith","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dblacksmith"," A place where a blacksmith forges tools, horseshoes, etc. from iron.
+",,,,,,,
+1,"craft","boatbuilder","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dboatbuilder"," Planning and constructing boats.
+",,,,,,,
+1,"craft","bookbinder","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dbookbinder"," Physically assembling a book from a number of sheets of paper.
+",,,,,,,
+1,"craft","brewery","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dbrewery"," A brewery is a dedicated building for the making of beer
+",,,,,,,
+1,"craft","builder","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dbuilder"," Constructs buildings, streets and other objects.
+",,,,,,,
+1,"craft","carpenter","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dcarpenter"," Workplace or office of Carpenters that work with timber to construct, install and maintain buildings, furniture, and other objects.
+",,,,,,,
+1,"craft","carpet_layer","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dcarpet_layer"," Workplace or office of carpet layers that bring carpet on your floor.
+",,,,,,,
+1,"craft","caterer","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dcaterer"," Workplace or office of one who prepares customized meals for takeout, or provides prepared meals or supplies to a group at social gatherings.
+",,,,,,,
+1,"craft","chimney_sweeper","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dchimney_sweeper"," Workplace or office of a person who cleans chimneys for a living.
+",,,,,,,
+1,"craft","clockmaker","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dclockmaker"," Workplace or office of a clockmaker that is building or repairing clocks but not watches. See also craft=watchmaker
+",,,,,,,
+1,"craft","confectionery","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dconfectionery"," A place where the set of food items that are rich in sugar, any one or type of which is called a confection is produced.
+",,,,,,,
+1,"craft","distillery","http://wiki.openstreetmap.org/wiki/Tag:craft%3Ddistillery"," Distillery
+",,,,,,,
+1,"craft","dressmaker","http://wiki.openstreetmap.org/wiki/Tag:craft%3Ddressmaker"," A place where clothes are created, repaired or altered to fit personal needs.
+",,,,,,,
+1,"craft","electrician","http://wiki.openstreetmap.org/wiki/Tag:craft%3Delectrician"," Workplace or office of an electrician which is a tradesman specialized in electrical wiring of buildings, stationary machines and related equipment.
+",,,,,,,
+1,"craft","floorer","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dfloorer"," Workplace or office of a floorer which is a tradesman specialized in laying floors.  See also craft=parquet_layer craft=carpet_layer craft=tiler
+",,,,,,,
+1,"craft","gardener","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dgardener"," Workplace or office of a garden designer or a landscape gardener.
+",,,,,,,
+1,"craft","glaziery","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dglaziery"," A place where residential, commercial, and artistic glass is selected, cut, installed, replaced, and removed
+",,,,,,,
+1,"craft","handicraft","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dhandicraft"," A place where useful and decorative devices are made completely by hand or using only simple tools
+",,,,,,,
+1,"craft","hvac","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dhvac"," Workplace or office of an HVAC system designer (Heating, Ventilating, and Air Conditioning)
+",,,,,,,
+1,"craft","insulation","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dinsulation"," Workplace or office of a person who does thermal insulation in buildings.
+",,,,,,,
+1,"craft","jeweller","http://wiki.openstreetmap.org/wiki/Tag:craft%3Djeweller"," A place where necklaces, rings, brooches, earrings and bracelets and other personal adornments are created or repaired.
+",,,,,,,
+1,"craft","key_cutter","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dkey_cutter"," A place where keys can be duplicated from originals.
+",,,,,,,
+1,"craft","locksmith","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dlocksmith"," A place where locks and keys are created or repaired.
+",,,,,,,
+1,"craft","metal_construction","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dmetal_construction"," A place where handrails, gates, ramps and similar things from metal are made.
+",,,,,,,
+1,"craft","optician","http://wiki.openstreetmap.org/wiki/Tag:craft%3Doptician"," A place where lenses for the correction of a person's vision are designed, fitted and dispensed.
+",,,,,,,
+1,"craft","painter","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dpainter"," Workplace or office of a house painter which is a tradesman responsible for the painting and decorating of buildings.
+",,,,,,,
+1,"craft","parquet_layer","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dparquet_layer"," Workplace or office of a parquet layer.
+",,,,,,,
+1,"craft","photographer","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dphotographer"," Workplace or office of a person who takes photographs using a camera.
+",,,,,,,
+1,"craft","photographic_laboratory","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dphotographic_laboratory"," A place where photos taken on a film or digital images are transformed into a more permanent form, often on paper or plastic foil.
+",,,,,,,
+1,"craft","piano_tuner","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dpiano_tuner"," A piano tuner or technician. A professional that tunes, regulates and makes the maintenance of pianos. Most of them repair simple problems and some restore a whole piano.
+",,,,,,,
+1,"craft","plasterer","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dplasterer"," Workplace or office of a tradesman who works with plaster, such as forming a layer of plaster on an interior wall or plaster decorative moldings on ceilings or walls.
+",,,,,,,
+1,"craft","plumber","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dplumber"," Workplace or office of a tradesman who specializes in installing and maintaining systems used for potable (drinking) water, sewage, and drainage.
+",,,,,,,
+1,"craft","pottery","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dpottery"," A place where earthenware, stoneware and porcelain and other ceramic ware is made by potters.
+",,,,,,,
+1,"craft","rigger","http://wiki.openstreetmap.org/wiki/Tag:craft%3Drigger"," Workplace or office of a person who makes  masts, yards, sails, and cordage for sailboats and sailing ships.
+",,,,,,,
+1,"craft","roofer","http://wiki.openstreetmap.org/wiki/Tag:craft%3Droofer"," Workplace or office of a tradesman who is specialized in roof construction.
+",,,,,,,
+1,"craft","saddler","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dsaddler"," A place where saddles or accessories for cars and boats are produced or repaired.
+",,,,,,,
+1,"craft","sailmaker","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dsailmaker"," Workplace or office of a person who makes and repairs sails for sailboats and sailing ships, typically working on shore in a sail loft.
+",,,,,,,
+1,"craft","sawmill","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dsawmill"," A workplace where logs are cut into boards.
+",,,,,,,
+1,"craft","scaffolder","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dscaffolder"," Workplace or office of a tradesman who builds temporary structure used to support people and material in the construction or repair of buildings and other large structures.
+",,,,,,,
+1,"craft","sculptor","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dsculptor"," A place where Sculpture are made.
+",,,,,,,
+1,"craft","shoemaker","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dshoemaker"," A place where shoes, boots, sandals, clogs and moccasins are created, repaired or altered to fit personal needs. See also shop=shoes for a place where shoes are sold, but not made or altered
+",,,,,,,
+1,"craft","stand_builder","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dstand_builder"," Workplace of a company that builds stands/booths for fairs.
+",,,,,,,
+1,"craft","stonemason","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dstonemason"," A place where rough pieces of rock are shaped into accurate geometrical shapes.
+",,,,,,,
+1,"craft","sun_protection","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dsun_protection"," A place where sun protection is made, repaired, or delivered for assembly, especially awnings and shutters.
+",,,,,,,
+1,"craft","tailor","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dtailor"," A place where clothing is made, repaired, or altered professionally, especially suits and men's clothing.
+",,,,,,,
+1,"craft","tiler","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dtiler"," Workplace or office of a person who lays tiles on floors, swimming pools and such.
+",,,,,,,
+1,"craft","tinsmith","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dtinsmith"," A tinsmith, or tinner or tinker or tinplate worker. Workplace or office of a person who makes and repairs things made of light-coloured metal, particularly tinware.
+",,,,,,,
+1,"craft","turner","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dturner"," A turner or wood turner.
+",,,,,,,
+1,"craft","upholsterer","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dupholsterer"," A place where furniture, especially seats are provided with padding, springs, webbing, and fabric or leather covers.
+",,,,,,,
+1,"craft","watchmaker","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dwatchmaker"," A watchmaker is an artisan who makes and repairs watches. Today due to industrial production they mostly repair watches. For other kinds of clocks see craft=clockmaker
+",,,,,,,
+1,"craft","window_construction","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dwindow_construction"," Construct windows
+",,,,,,,
+1,"craft","winery","http://wiki.openstreetmap.org/wiki/Tag:craft%3Dwinery"," Produces wine
+",,,,,,,
+0,"cutting","yes","http://wiki.openstreetmap.org/wiki/Tag:cutting%3Dyes"," A section where the railway is significantly lower than ground level.
+",,,,,,,
+0,"cycleway","lane","http://wiki.openstreetmap.org/wiki/Tag:cycleway%3Dlane"," A lane is a route that lies within the roadway
+",,,,,,,
+0,"cycleway","opposite","http://wiki.openstreetmap.org/wiki/Tag:cycleway%3Dopposite"," Used on ways with oneway=yes where it is legally permitted to cycle in both directions. Used together with oneway:bicycle=no.
+",,,,,,,
+0,"cycleway","opposite_lane","http://wiki.openstreetmap.org/wiki/Tag:cycleway%3Dopposite_lane"," Used on ways with oneway=yes that have a cycling lane going the opposite direction of normal traffic flow (a \contraflow\"" lane). Used together with oneway:bicycle=no.",,,,,,,
+0,",
+cycleway""","track","http://wiki.openstreetmap.org/wiki/Tag:cycleway%3Dtrack"," A track provides a route that is separated from traffic. In the United States, this term is often used to refer to bike lanes that are separated from lanes for cars by pavement buffers, bollards, parking lanes, and curbs. Note that a cycle track may alternatively be drawn as a separate way next to the road which is tagged as highway=cycleway.
+",,,,,,,
+0,"cycleway","opposite_track","http://wiki.openstreetmap.org/wiki/Tag:cycleway%3Dopposite_track"," Used on ways with oneway=yes that have a cycling track going the opposite direction of normal traffic flow
+",,,,,,,
+0,"cycleway","share_busway","http://wiki.openstreetmap.org/wiki/Tag:cycleway%3Dshare_busway"," There is a bus lane that cyclists are permitted to use.
+",,,,,,,
+0,"cycleway","shared_lane","http://wiki.openstreetmap.org/wiki/Tag:cycleway%3Dshared_lane"," Cyclists share a lane with motor vehicles, but there are markings indicating that they should share the lane with motorists.
+",,,,,,,
+0,"emergency","ambulance_station","http://wiki.openstreetmap.org/wiki/Tag:emergency%3Dambulance_station"," An ambulance station is a structure or other area set aside for storage of ambulance vehicles, medical equipment, personal protective equipment, and other medical supplies.
+",,,,,,,
+0,"emergency","defibrillator","http://wiki.openstreetmap.org/wiki/Tag:emergency%3Ddefibrillator"," An Automated External Defibrillator (AED) is a first-aid device that automates the process of diagnosing life-threatening cardiac arrhythmia and performing defibrillation. Previously tagged as emergency=aed or medical=aed.
+",,,,,,,
+0,"emergency","fire_extinguisher","http://wiki.openstreetmap.org/wiki/Tag:emergency%3Dfire_extinguisher"," A fire extinguisher is an active fire protection device used to extinguish or control small fires, often in emergency situations.
+",,,,,,,
+0,"emergency","fire_flapper","http://wiki.openstreetmap.org/wiki/Tag:emergency%3Dfire_flapper"," A flapper is a wildland firefighting tool also called a swatter or a beater. It is designed for extinguishing minor fires in rural areas such as heaths.
+",,,,,,,
+0,"emergency","fire_hose","http://wiki.openstreetmap.org/wiki/Tag:emergency%3Dfire_hose"," A fire hose is a high-pressure hose used to carry water or other fire retardant (such as foam) to a fire to extinguish it.
+",,,,,,,
+0,"emergency","fire_hydrant","http://wiki.openstreetmap.org/wiki/Tag:emergency%3Dfire_hydrant"," A fire hydrant is an active fire protection measure, and a source of water provided in most urban, suburban and rural areas with municipal water service or other water source to enable firefighters to tap into the municipal water supply to assist in extinguishing a fire.
+",,,,,,,
+0,"emergency","water_tank","http://wiki.openstreetmap.org/wiki/Tag:emergency%3Dwater_tank"," Stock tank for fire-fighting water.
+",,,,,,,
+0,"emergency","lifeguard_base","http://wiki.openstreetmap.org/wiki/Tag:emergency%3Dlifeguard_base"," Base building of lifeguard. Main place for vehicles, equipment and centre of communication
+",,,,,,,
+0,"emergency","lifeguard_tower","http://wiki.openstreetmap.org/wiki/Tag:emergency%3Dlifeguard_tower"," Tower used by lifeguard to watch and supervise swimmers in order to prevent drownings and other dangers.
+",,,,,,,
+0,"emergency","lifeguard_platform","http://wiki.openstreetmap.org/wiki/Tag:emergency%3Dlifeguard_platform"," Platform used by lifeguard to watch and supervise swimmers in order to prevent drownings and other dangers. Building not so high as tower and mostly without walls and roof
+",,,,,,,
+0,"emergency","lifeguard_place","http://wiki.openstreetmap.org/wiki/Tag:emergency%3Dlifeguard_place"," A place where a lifeguard is on duty but without any building (tower or platform)
+",,,,,,,
+0,"emergency","life_ring","http://wiki.openstreetmap.org/wiki/Tag:emergency%3Dlife_ring"," Life rings to help save a life if someone is in the water.
+",,,,,,,
+0,"emergency","assembly_point","http://wiki.openstreetmap.org/wiki/Tag:emergency%3Dassembly_point"," Point or area, where people are crowd in a case of emergency
+",,,,,,,
+0,"emergency","access_point","http://wiki.openstreetmap.org/wiki/Tag:emergency%3Daccess_point"," Access points in areas which are hard to access (see also highway=emergency_access_point)
+",,,,,,,
+0,"emergency","phone","http://wiki.openstreetmap.org/wiki/Tag:emergency%3Dphone"," An emergency phone is specifically provided for making calls to emergency services. They may be found in places of danger or remote areas.
+",,,,,,,
+0,"emergency","ses_station","http://wiki.openstreetmap.org/wiki/Tag:emergency%3Dses_station"," A State Emergency Service is an Australian volunteer organisation that provides emergency help during and after declared (natural or otherwise) disasters.
+",,,,,,,
+0,"emergency","siren","http://wiki.openstreetmap.org/wiki/Tag:emergency%3Dsiren"," A siren is a loud noise maker. Most modern ones are civil defense, \air raid\"" sirens or tornado sirens.",,,,,,,
+0,",
+emergency""","phone","http://wiki.openstreetmap.org/wiki/Tag:emergency%3Dphone"," A calling device can be used to tell on your current position in case of an emergency. Use with ref=NUMBER_ON_THE_SIGN
+",,,,,,,
+0,"healthcare","blood_donation","http://wiki.openstreetmap.org/wiki/Tag:healthcare%3Dblood_donation"," A place where you can donate blood, plasma and/or platelets, and possibly have stem cell samples taken.
+",,,,,,,
+0,"highway","motorway","http://wiki.openstreetmap.org/wiki/Tag:highway%3Dmotorway"," A restricted access major divided highway, normally with 2 or more running lanes plus emergency hard shoulder. Equivalent to the Freeway, Autobahn, etc..
+",,,,,,,
+0,"highway","trunk","http://wiki.openstreetmap.org/wiki/Tag:highway%3Dtrunk"," The most important roads in a country's system that aren't motorways. (Need not necessarily be a divided highway.)
+",,,,,,,
+0,"highway","primary","http://wiki.openstreetmap.org/wiki/Tag:highway%3Dprimary"," The next most important roads in a country's system. (Often link larger towns.)
+",,,,,,,
+0,"highway","secondary","http://wiki.openstreetmap.org/wiki/Tag:highway%3Dsecondary"," The next most important roads in a country's system. (Often link towns.)
+",,,,,,,
+0,"highway","tertiary","http://wiki.openstreetmap.org/wiki/Tag:highway%3Dtertiary"," The next most important roads in a country's system. (Often link smaller towns and villages)
+",,,,,,,
+0,"highway","unclassified","http://wiki.openstreetmap.org/wiki/Tag:highway%3Dunclassified"," The least most important through roads in a country's system – i.e. minor roads of a lower classification than tertiary, but which serve a purpose other than access to properties. Often link villages and hamlets. (The word 'unclassified' is a historical artefact of the UK road system and does not mean that the classification is unknown; you can use highway=road for that.)
+",,,,,,,
+0,"highway","residential","http://wiki.openstreetmap.org/wiki/Tag:highway%3Dresidential"," Roads which serve as an access to housing, without function of connecting settlements. Often lined with housing.
+",,,,,,,
+0,"highway","service","http://wiki.openstreetmap.org/wiki/Tag:highway%3Dservice"," For access roads to, or within an industrial estate, camp site, business park, car park etc. Can be used in conjunction with service=* to indicate the type of usage and with access=* to indicate who can use it and in what circumstances.
+",,,,,,,
+0,"highway","motorway_link","http://wiki.openstreetmap.org/wiki/Tag:highway%3Dmotorway_link"," The link roads (sliproads/ramps) leading to/from a motorway from/to a motorway or lower class highway. Normally with the same motorway restrictions.
+",,,,,,,
+0,"highway","trunk_link","http://wiki.openstreetmap.org/wiki/Tag:highway%3Dtrunk_link"," The link roads (sliproads/ramps) leading to/from a trunk road from/to a trunk road or lower class highway.
+",,,,,,,
+0,"highway","primary_link","http://wiki.openstreetmap.org/wiki/Tag:highway%3Dprimary_link"," The link roads (sliproads/ramps) leading to/from a primary road from/to a primary road or lower class highway.
+",,,,,,,
+0,"highway","secondary_link","http://wiki.openstreetmap.org/wiki/Tag:highway%3Dsecondary_link"," The link roads (sliproads/ramps) leading to/from a secondary road from/to a secondary road or lower class highway.
+",,,,,,,
+0,"highway","tertiary_link","http://wiki.openstreetmap.org/wiki/Tag:highway%3Dtertiary_link"," The link roads (sliproads/ramps) leading to/from a tertiary road from/to a tertiary road or lower class highway.
+",,,,,,,
+0,"highway","living_street","http://wiki.openstreetmap.org/wiki/Tag:highway%3Dliving_street"," For living streets, which are residential streets where pedestrians have legal priority over cars, speeds are kept very low and where children are allowed to play on the street.
+",,,,,,,
+0,"highway","pedestrian","http://wiki.openstreetmap.org/wiki/Tag:highway%3Dpedestrian"," For roads used mainly/exclusively for pedestrians in shopping and some residential areas which may allow access by motorised vehicles only for very limited periods of the day. To create a 'square' or 'plaza' create a closed way and tag as pedestrian and also with area=yes.
+",,,,,,,
+0,"highway","track","http://wiki.openstreetmap.org/wiki/Tag:highway%3Dtrack"," Roads for mostly agricultural or forestry uses. To describe the quality of a track, see tracktype=*. Note: Although tracks are often rough with unpaved surfaces, this tag is not describing the quality of a road but its use. Consequently, if you want to tag a general use road, use one of the general highway values instead of track.
+",,,,,,,
+0,"highway","bus_guideway","http://wiki.openstreetmap.org/wiki/Tag:highway%3Dbus_guideway"," A busway where the vehicle guided by the way (though not a railway) and is not suitable for other traffic. Please note: this is not a normal bus lane, use access=no, psv=yes instead!
+",,,,,,,
+0,"highway","raceway","http://wiki.openstreetmap.org/wiki/Tag:highway%3Draceway"," A course or track for (motor) racing
+",,,,,,,
+0,"highway","road","http://wiki.openstreetmap.org/wiki/Tag:highway%3Droad"," A road where the mapper is unable to ascertain the classification from the information available. This is intended as a temporary tag to mark a road until it has been properly surveyed. Once it has been surveyed, the classification should be updated to the appropriate value.
+",,,,,,,
+0,"highway","footway","http://wiki.openstreetmap.org/wiki/Tag:highway%3Dfootway"," For designated footpaths; i.e., mainly/exclusively for pedestrians. This includes walking tracks and gravel paths. If bicycles are allowed as well, you can indicate this by adding a bicycle=yes tag.  Should not be used for paths where the primary or intended usage is unknown. Use highway=pedestrian for pedestrianised roads in shopping or residential areas and highway=track if it is usable by agricultural or similar vehicles.
+",,,,,,,
+0,"highway","bridleway","http://wiki.openstreetmap.org/wiki/Tag:highway%3Dbridleway"," For horses. Equivalent to highway=path + horse=designated.
+",,,,,,,
+0,"highway","steps","http://wiki.openstreetmap.org/wiki/Tag:highway%3Dsteps"," For flights of steps (stairs) on footways. Use with step_count=* to indicate the number of steps
+",,,,,,,
+0,"highway","path","http://wiki.openstreetmap.org/wiki/Tag:highway%3Dpath"," A non-specific path. Use highway=footway for paths mainly for walkers,  highway=cycleway for one also usable by cyclists, highway=bridleway for ones available to horses as well as walkers and highway=track for ones which is passable by agriculture or similar vehicles.
+",,,,,,,
+0,"highway","cycleway","http://wiki.openstreetmap.org/wiki/Tag:highway%3Dcycleway"," For designated cycleways. Add foot=* only if default-access-restrictions do not apply.
+",,,,,,,
+0,"highway","proposed","http://wiki.openstreetmap.org/wiki/Tag:highway%3Dproposed"," For planned roads, use with proposed=* and also proposed=* with a value of the proposed highway value.
+",,,,,,,
+0,"highway","construction","http://wiki.openstreetmap.org/wiki/Tag:highway%3Dconstruction"," For roads under construction. Use construction=* to hold the value for the completed road.
+",,,,,,,
+0,"highway","bus_stop","http://wiki.openstreetmap.org/wiki/Tag:highway%3Dbus_stop"," A small bus stop. Can be mapped more rigorously using public_transport=stop_position for the position where the vehicle stops and public_transport=platform for the place where passengers wait. See public_transport=* for more details.
+",,,,,,,
+0,"highway","crossing","http://wiki.openstreetmap.org/wiki/Tag:highway%3Dcrossing"," Pedestrians can cross a street here; e.g., zebra crossing
+",,,,,,,
+0,"highway","elevator","http://wiki.openstreetmap.org/wiki/Tag:highway%3Delevator"," Elevator
+",,,,,,,
+0,"highway","emergency_access_point","http://wiki.openstreetmap.org/wiki/Tag:highway%3Demergency_access_point"," Sign number which can be used to define your current position in case of an emergency. Use with ref=NUMBER_ON_THE_SIGN
+",,,,,,,
+0,"highway","escape","http://wiki.openstreetmap.org/wiki/Tag:highway%3Descape"," Emergency lane beside long descending slopes for trucks and other vehicles to stop safely after brake failure.  In the USA this is called a \runaway truck\"" lane or ramp.",,,,,,,
+0,",
+highway""","give_way","http://wiki.openstreetmap.org/wiki/Tag:highway%3Dgive_way"," A \give way","\"" or \""Yield\"" sign",,,,,,
+0,",
+highway""","mini_roundabout","http://wiki.openstreetmap.org/wiki/Tag:highway%3Dmini_roundabout"," Similar to roundabouts, but at the center there is either a painted circle or a fully traversable island. In case of an untraversable center island, junction=roundabout should be used.
+Rendered as anti-clockwise by default direction=anticlockwise. To render clockwise add the tag direction=clockwise.
+
+",,,,,,,
+0,"highway","motorway_junction","http://wiki.openstreetmap.org/wiki/Tag:highway%3Dmotorway_junction"," Indicates a junction (UK) or exit (US). ref=* should be set to the exit number or junction identifier. (Some roads – e.g., the A14 – also carry junction numbers, so the tag may be encountered elsewhere despite its name)
+",,,,,,,
+0,"highway","passing_place","http://wiki.openstreetmap.org/wiki/Tag:highway%3Dpassing_place"," The location of a passing space
+",,,,,,,
+0,"highway","rest_area","http://wiki.openstreetmap.org/wiki/Tag:highway%3Drest_area"," Place where drivers can leave the road to rest, but not refuel.
+",,,,,,,
+0,"highway","speed_camera","http://wiki.openstreetmap.org/wiki/Tag:highway%3Dspeed_camera","  A fixed road-side or overhead speed camera.
+",,,,,,,
+0,"highway","street_lamp","http://wiki.openstreetmap.org/wiki/Tag:highway%3Dstreet_lamp"," A street light, lamppost, street lamp, light standard, or lamp standard is a raised source of light on the edge of a road, which is turned on or lit at a certain time every night
+",,,,,,,
+0,"highway","services","http://wiki.openstreetmap.org/wiki/Tag:highway%3Dservices"," A service station to get food and eat something, often found at motorways
+",,,,,,,
+0,"highway","stop","http://wiki.openstreetmap.org/wiki/Tag:highway%3Dstop"," A stop sign
+",,,,,,,
+0,"highway","traffic_signals","http://wiki.openstreetmap.org/wiki/Tag:highway%3Dtraffic_signals"," Lights that control the traffic
+",,,,,,,
+0,"highway","turning_circle","http://wiki.openstreetmap.org/wiki/Tag:highway%3Dturning_circle"," A turning circle is a rounded, widened area usually, but not necessarily, at the end of a road to facilitate easier turning of a vehicle. Also known as a cul de sac.
+",,,,,,,
+2,"historic","aircraft","http://wiki.openstreetmap.org/wiki/Tag:historic%3Daircraft"," A decommissioned aircraft which generally remains in one place
+",,,,,,,
+2,"historic","archaeological_site","http://wiki.openstreetmap.org/wiki/Tag:historic%3Darchaeological_site"," A place in which evidence of past activity is preserved
+",,,,,,,
+2,"historic","battlefield","http://wiki.openstreetmap.org/wiki/Tag:historic%3Dbattlefield"," The site of a battle or military skirmish in the past. This could be on land or at sea.
+",,,,,,,
+2,"historic","boundary_stone","http://wiki.openstreetmap.org/wiki/Tag:historic%3Dboundary_stone"," A historic boundary stone usually found along the way.
+",,,,,,,
+2,"historic","cannon","http://wiki.openstreetmap.org/wiki/Tag:historic%3Dcannon"," A historic/retired cannon. Usually found at on forts or battlefields.
+",,,,,,,
+2,"historic","castle","http://wiki.openstreetmap.org/wiki/Tag:historic%3Dcastle"," Castles are (often fortified) buildings from medieval and modern times. Other languages
+",,,,,,,
+2,"historic","city_gate","http://wiki.openstreetmap.org/wiki/Tag:historic%3Dcity_gate"," A  city gate (or town gate) is a gate within a city wall.
+",,,,,,,
+2,"historic","citywalls","http://wiki.openstreetmap.org/wiki/Tag:historic%3Dcitywalls"," A  defensive wall is a fortification used to protect a city or settlement from potential aggressors.
+",,,,,,,
+2,"historic","farm","http://wiki.openstreetmap.org/wiki/Tag:historic%3Dfarm"," A historical farm, kept in it's original state.
+",,,,,,,
+2,"historic","fort","http://wiki.openstreetmap.org/wiki/Tag:historic%3Dfort"," A military fort – distinct from a castle as it is generally more modern
+",,,,,,,
+2,"historic","gallows","http://wiki.openstreetmap.org/wiki/Tag:historic%3Dgallows"," A structure designed for capital punishment by hanging.
+",,,,,,,
+2,"historic","highwater_mark","http://wiki.openstreetmap.org/wiki/Tag:historic%3Dhighwater_mark"," A marker for indicating past flood.
+",,,,,,,
+2,"historic","locomotive","http://wiki.openstreetmap.org/wiki/Tag:historic%3Dlocomotive"," A decommissioned locomotive which generally remains in one place.
+",,,,,,,
+2,"historic","manor","http://wiki.openstreetmap.org/wiki/Tag:historic%3Dmanor"," Historic  manors /  mansions
+",,,,,,,
+2,"historic","memorial","http://wiki.openstreetmap.org/wiki/Tag:historic%3Dmemorial"," Much like a monument, but smaller. Might range from a WWII memorial to a simple plate on a wall.
+",,,,,,,
+2,"historic","milestone","http://wiki.openstreetmap.org/wiki/Tag:historic%3Dmilestone"," A historic marker that shows the distance to important destinations.
+",,,,,,,
+2,"historic","monastery","http://wiki.openstreetmap.org/wiki/Tag:historic%3Dmonastery"," An historic monastery. See Also amenity=monastery.
+",,,,,,,
+2,"historic","monument","http://wiki.openstreetmap.org/wiki/Tag:historic%3Dmonument"," An object, especially large and made of stone, built to remember and show respect to a person or group of people. Other languages
+",,,,,,,
+2,"historic","optical_telegraph","http://wiki.openstreetmap.org/wiki/Tag:historic%3Doptical_telegraph"," Historic optical telegraph
+",,,,,,,
+2,"historic","pillory","http://wiki.openstreetmap.org/wiki/Tag:historic%3Dpillory"," A construction designed to immobilitate and humiliate a person who was convicted in lower courts.
+",,,,,,,
+2,"historic","ruins","http://wiki.openstreetmap.org/wiki/Tag:historic%3Druins"," Remains of structures that were once complete, but have fallen into partial or complete disrepair. If the type of original structure is known or apparent it can be described using ruins=*, e.g. ruins=castle.
+Alternative tagging is historic=castle, ruins=yes.
+See the proposal and discussion at Proposed features/ruins for ruins of historic buildings. 
+
+",,,,,,,
+2,"historic","rune_stone","http://wiki.openstreetmap.org/wiki/Tag:historic%3Drune_stone"," A  runestone is typically a raised stone with a runic inscription.
+",,,,,,,
+2,"historic","ship","http://wiki.openstreetmap.org/wiki/Tag:historic%3Dship"," A decommissioned ship or submarine
+",,,,,,,
+2,"historic","tomb","http://wiki.openstreetmap.org/wiki/Tag:historic%3Dtomb"," Historic tomb
+",,,,,,,
+2,"historic","wayside_cross","http://wiki.openstreetmap.org/wiki/Tag:historic%3Dwayside_cross"," A historical (usually christian) cross. Frequently found along the way in Southern Germany, Austria and probably elsewhere.
+",,,,,,,
+2,"historic","wayside_shrine","http://wiki.openstreetmap.org/wiki/Tag:historic%3Dwayside_shrine"," A historical shrine often showing a religious depiction. Frequently found along the way in Southern Germany, Austria and probably elsewhere.
+",,,,,,,
+2,"historic","wreck","http://wiki.openstreetmap.org/wiki/Tag:historic%3Dwreck"," Nautical craft that has unintentionally been sunk or destroyed.
+",,,,,,,
+2,"historic","yes","http://wiki.openstreetmap.org/wiki/Tag:historic%3Dyes"," Used to add the historic significance of the objects described by other tags.
+",,,,,,,
+0,"junction","roundabout","http://wiki.openstreetmap.org/wiki/Tag:junction%3Droundabout"," This automatically implies oneway=yes, the oneway direction is defined by the sequential ordering of nodes within the Way. This applies on a way, tagged with highway=* already.
+",,,,,,,
+0,"landuse","allotments","http://wiki.openstreetmap.org/wiki/Tag:landuse%3Dallotments"," A piece of land given over to local residents for growing vegetables and flowers.
+",,,,,,,
+0,"landuse","basin","http://wiki.openstreetmap.org/wiki/Tag:landuse%3Dbasin"," An area of water that drains into a river.Together with basin=* for stormwater/rainwater infiltration/detention/retention basins.Other languages.
+",,,,,,,
+0,"landuse","brownfield","http://wiki.openstreetmap.org/wiki/Tag:landuse%3Dbrownfield"," Describes land scheduled for new development where old buildings have been demolished and cleared
+",,,,,,,
+0,"landuse","cemetery","http://wiki.openstreetmap.org/wiki/Tag:landuse%3Dcemetery"," Place for burials. You can add religion=* (values listed in the place of worship page). Smaller places (e.g. with a church nearby) may use amenity=grave_yard instead.
+",,,,,,,
+0,"landuse","commercial","http://wiki.openstreetmap.org/wiki/Tag:landuse%3Dcommercial"," Predominantly offices, business parks, etc.
+",,,,,,,
+0,"landuse","construction","http://wiki.openstreetmap.org/wiki/Tag:landuse%3Dconstruction"," \Under construction\"" site","should become something different once the construction is finished",,,,,,
+0,",
+landuse""","farmland","http://wiki.openstreetmap.org/wiki/Tag:landuse%3Dfarmland"," An area of farmland used for tillage and pasture (animals, crops, vegetables, flowers, fruit growing).
+",,,,,,,
+0,"landuse","farmyard","http://wiki.openstreetmap.org/wiki/Tag:landuse%3Dfarmyard"," An area of land with farm buildings like farmhouse, dwellings, farmsteads, sheds, stables, barns, equipment sheds, feed bunkers, etc. plus the open space in between them and the shrubbery/trees around them.
+",,,,,,,
+0,"landuse","forest","http://wiki.openstreetmap.org/wiki/Tag:landuse%3Dforest"," Managed forest or woodland plantation (Other languages).
+",,,,,,,
+0,"landuse","garages","http://wiki.openstreetmap.org/wiki/Tag:landuse%3Dgarages"," One level buildings with boxes commonly for cars, usually made of brick and metal. Usually this area belong to garage cooperative with own name, chairman, budget, rules, security, etc.
+",,,,,,,
+0,"landuse","grass","http://wiki.openstreetmap.org/wiki/Tag:landuse%3Dgrass"," For areas covered with grass. Consider landuse=meadow for meadow. and landuse=pasture for pasture.Note that this is actually a Landcover tag, not a landuse tag and there is a proposal to deprecate it.
+",,,,,,,
+0,"landuse","greenfield","http://wiki.openstreetmap.org/wiki/Tag:landuse%3Dgreenfield"," Describes land scheduled for new development where there have been no buildings before. A greenfield is scheduled to turn into a construction site
+",,,,,,,
+0,"landuse","greenhouse_horticulture","http://wiki.openstreetmap.org/wiki/Tag:landuse%3Dgreenhouse_horticulture"," Area used for growing plants in greenhouses
+",,,,,,,
+0,"landuse","industrial","http://wiki.openstreetmap.org/wiki/Tag:landuse%3Dindustrial"," Predominantly workshops, factories or warehouses
+",,,,,,,
+0,"landuse","landfill","http://wiki.openstreetmap.org/wiki/Tag:landuse%3Dlandfill"," Place where waste is dumped. Other languages
+",,,,,,,
+0,"landuse","meadow","http://wiki.openstreetmap.org/wiki/Tag:landuse%3Dmeadow"," An area of land primarily vegetated by grass and other non-woody plants, usually mowed for making hay (Other Languages).
+",,,,,,,
+0,"landuse","military","http://wiki.openstreetmap.org/wiki/Tag:landuse%3Dmilitary"," For land areas owned/used by the military for whatever purpose
+",,,,,,,
+0,"landuse","orchard","http://wiki.openstreetmap.org/wiki/Tag:landuse%3Dorchard"," intentional planting of trees or shrubs maintained for food production
+",,,,,,,
+0,"landuse","pasture","http://wiki.openstreetmap.org/wiki/Tag:landuse%3Dpasture"," (Proposed in Proposed features/pasture:) An area of land primarily vegetated by grass, used for grazing.
+",,,,,,,
+0,"landuse","peat_cutting","http://wiki.openstreetmap.org/wiki/Tag:landuse%3Dpeat_cutting"," An excavation created by the removal of peat.
+",,,,,,,
+0,"landuse","plant_nursery","http://wiki.openstreetmap.org/wiki/Tag:landuse%3Dplant_nursery"," intentional planting of plants maintaining for the production of new plants
+",,,,,,,
+0,"landuse","port","http://wiki.openstreetmap.org/wiki/Tag:landuse%3Dport"," coastal industrial area where commercial traffic is handled
+",,,,,,,
+0,"landuse","quarry","http://wiki.openstreetmap.org/wiki/Tag:landuse%3Dquarry"," Surface mineral extraction (Other languages)
+",,,,,,,
+0,"landuse","railway","http://wiki.openstreetmap.org/wiki/Tag:landuse%3Drailway"," Area for railway use, generally off-limits to the general public
+",,,,,,,
+0,"landuse","recreation_ground","http://wiki.openstreetmap.org/wiki/Tag:landuse%3Drecreation_ground"," An open green space for general recreation, which may include pitches, nets and so on, usually municipal but possibly also private to colleges or companies
+",,,,,,,
+0,"landuse","reservoir","http://wiki.openstreetmap.org/wiki/Tag:landuse%3Dreservoir"," Stores water, may be covered or uncovered; for a covered reservoir see also man_made=reservoir_covered (Other languages). See water=reservoir for alternative tagging.
+",,,,,,,
+0,"landuse","residential","http://wiki.openstreetmap.org/wiki/Tag:landuse%3Dresidential"," Predominantly houses or apartment buildings
+",,,,,,,
+0,"landuse","retail","http://wiki.openstreetmap.org/wiki/Tag:landuse%3Dretail"," Predominantly shops
+",,,,,,,
+0,"landuse","salt_pond","http://wiki.openstreetmap.org/wiki/Tag:landuse%3Dsalt_pond"," A place where sea water is evaporated to extract its salt
+",,,,,,,
+0,"landuse","village_green","http://wiki.openstreetmap.org/wiki/Tag:landuse%3Dvillage_green"," An area of common land, usually grass, in the centre of a village (quintessentially English – defined separately from 'common land' under the Commons Registration Act 1965 and the Commons Act 2006).
+",,,,,,,
+0,"landuse","vineyard","http://wiki.openstreetmap.org/wiki/Tag:landuse%3Dvineyard"," A piece of land where grapes are grown.
+",,,,,,,
+0,"landuse","railway","http://wiki.openstreetmap.org/wiki/Tag:landuse%3Drailway"," Ground used around railways and railway-stations.
+",,,,,,,
+0,"leisure","firepit","http://wiki.openstreetmap.org/wiki/Tag:leisure%3Dfirepit"," Deprecated. For campfires and firepits, see Tag:leisure=firepit
+",,,,,,,
+2,"leisure","adult_gaming_centre","http://wiki.openstreetmap.org/wiki/Tag:leisure%3Dadult_gaming_centre","   A venue with pay-to-play games, such as video games, driving simulators, pinball machines, merchandisers, etc. With a set age limit. As opposed to leisure=amusement_arcade.
+",,,,,,,
+2,"leisure","amusement_arcade","http://wiki.openstreetmap.org/wiki/Tag:leisure%3Damusement_arcade","   A venue with pay-to-play games, such as video games, driving simulators, pinball machines, merchandisers, etc. Without a set age limit. As opposed to leisure=adult_gaming_centre.
+",,,,,,,
+2,"leisure","beach_resort","http://wiki.openstreetmap.org/wiki/Tag:leisure%3Dbeach_resort","  To mark the boundary of a managed beach.
+",,,,,,,
+2,"leisure","bandstand","http://wiki.openstreetmap.org/wiki/Tag:leisure%3Dbandstand","  An open structure where musical bands can perform concerts.
+",,,,,,,
+2,"leisure","bird_hide","http://wiki.openstreetmap.org/wiki/Tag:leisure%3Dbird_hide","  A place to observe birds.
+",,,,,,,
+2,"leisure","common","http://wiki.openstreetmap.org/wiki/Tag:leisure%3Dcommon","  A common land.
+",,,,,,,
+2,"leisure","dance","http://wiki.openstreetmap.org/wiki/Tag:leisure%3Ddance","  A place to go dancing.
+",,,,,,,
+2,"leisure","dog_park","http://wiki.openstreetmap.org/wiki/Tag:leisure%3Ddog_park","  Designated area, with or without a fenced boundary, where dog-owners are permitted to exercise their pets unrestrained.
+",,,,,,,
+2,"leisure","firepit","http://wiki.openstreetmap.org/wiki/Tag:leisure%3Dfirepit","  A permanent location or structure to host campfires, bonfires, etc.
+",,,,,,,
+2,"leisure","fishing","http://wiki.openstreetmap.org/wiki/Tag:leisure%3Dfishing","
+",,,,,,,
+2,"leisure","garden","http://wiki.openstreetmap.org/wiki/Tag:leisure%3Dgarden","  Place where flowers and other plants are grown in a decorative and structured manner or for scientific purposes.
+",,,,,,,
+2,"leisure","golf_course","http://wiki.openstreetmap.org/wiki/Tag:leisure%3Dgolf_course"," The outline of a golf course.  The node form may be used to place an icon within the course. This tag implies sport=golf.
+",,,,,,,
+2,"leisure","hackerspace","http://wiki.openstreetmap.org/wiki/Tag:leisure%3Dhackerspace","  A place where people with common interests, often in computers, technology, science, digital art or electronic art, can meet, socialize and/or collaborate.
+",,,,,,,
+2,"leisure","ice_rink","http://wiki.openstreetmap.org/wiki/Tag:leisure%3Dice_rink"," A place where you can skate or play ice hockey.
+",,,,,,,
+2,"leisure","marina","http://wiki.openstreetmap.org/wiki/Tag:leisure%3Dmarina"," For mooring leisure yachts and motor boats.
+",,,,,,,
+2,"leisure","miniature_golf","http://wiki.openstreetmap.org/wiki/Tag:leisure%3Dminiature_golf","  A place or area that you can play miniature golf.
+",,,,,,,
+2,"leisure","nature_reserve","http://wiki.openstreetmap.org/wiki/Tag:leisure%3Dnature_reserve","  Protected area of importance for wildlife, flora, fauna or features of geological or other special interest.
+",,,,,,,
+2,"leisure","park","http://wiki.openstreetmap.org/wiki/Tag:leisure%3Dpark","  Open, green area for recreation, usually municipal.
+",,,,,,,
+2,"leisure","pitch","http://wiki.openstreetmap.org/wiki/Tag:leisure%3Dpitch"," e.g. a field for playing football/soccer, cricket, baseball sports, and skate parks. To describe what kind of sport(s) use sport=*.
+",,,,,,,
+2,"leisure","playground","http://wiki.openstreetmap.org/wiki/Tag:leisure%3Dplayground"," Playground for little children.
+",,,,,,,
+2,"leisure","slipway","http://wiki.openstreetmap.org/wiki/Tag:leisure%3Dslipway"," Boats can be launched here.
+",,,,,,,
+2,"leisure","sports_centre","http://wiki.openstreetmap.org/wiki/Tag:leisure%3Dsports_centre","  A distinct facility where a range of sports take place within an enclosed area. To describe what kind of sport(s) use sport=*.
+",,,,,,,
+2,"leisure","stadium","http://wiki.openstreetmap.org/wiki/Tag:leisure%3Dstadium"," A major sports arena with substantial tiered seating. To describe what kind of sport(s) use sport=*.
+",,,,,,,
+2,"leisure","summer_camp","http://wiki.openstreetmap.org/wiki/Tag:leisure%3Dsummer_camp","  Summer camp is a supervised program for children or teenagers conducted during the summer months in some countries. Children and adolescents who attend summer camp are known as campers.
+",,,,,,,
+2,"leisure","swimming_area","http://wiki.openstreetmap.org/wiki/Tag:leisure%3Dswimming_area","  A swimming area - place over river, lake or other water reservoir where swimming is allowed.
+",,,,,,,
+2,"leisure","swimming_pool","http://wiki.openstreetmap.org/wiki/Tag:leisure%3Dswimming_pool","  A swimming pool.
+",,,,,,,
+2,"leisure","track","http://wiki.openstreetmap.org/wiki/Tag:leisure%3Dtrack"," e.g. running, cycle-racing, greyhound, horses. To describe what kind of sport(s) use sport=*.
+",,,,,,,
+2,"leisure","water_park","http://wiki.openstreetmap.org/wiki/Tag:leisure%3Dwater_park","  Amusement area with water slides, recreational swimming pools and dressing rooms.
+",,,,,,,
+2,"leisure","wildlife_hide","http://wiki.openstreetmap.org/wiki/Tag:leisure%3Dwildlife_hide","  A place to observe wildlife. See also leisure=bird_hide.
+",,,,,,,
+0,"military","airfield","http://wiki.openstreetmap.org/wiki/Tag:military%3Dairfield"," A place where military planes take off and land.
+",,,,,,,
+0,"military","ammunition","http://wiki.openstreetmap.org/wiki/Tag:military%3Dammunition"," Military ammunition storage area.
+",,,,,,,
+0,"military","bunker","http://wiki.openstreetmap.org/wiki/Tag:military%3Dbunker"," Buildings, often build from concrete, to stand even heavier fire.  Also  WW2 pillboxes.
+",,,,,,,
+1,"military","barracks","http://wiki.openstreetmap.org/wiki/Tag:military%3Dbarracks"," Buildings where soldiers live and work.
+",,,,,,,
+0,"military","checkpoint","http://wiki.openstreetmap.org/wiki/Tag:military%3Dcheckpoint","  Place of a possible access to a restricted or secured area, where civilian visitors and vehicles will be controled by a military authority.
+",,,,,,,
+0,"military","danger_area","http://wiki.openstreetmap.org/wiki/Tag:military%3Ddanger_area"," Usually a large marked area around something like a firing range, bombing range, etc which can be an exclusion zone.
+",,,,,,,
+0,"military","naval_base","http://wiki.openstreetmap.org/wiki/Tag:military%3Dnaval_base"," A naval base
+",,,,,,,
+0,"military","nuclear_explosion_site","http://wiki.openstreetmap.org/wiki/Tag:military%3Dnuclear_explosion_site"," Nuclear weapons test site
+",,,,,,,
+0,"military","obstacle_course","http://wiki.openstreetmap.org/wiki/Tag:military%3Dobstacle_course"," A military obstacle course.
+",,,,,,,
+1,"military","office","http://wiki.openstreetmap.org/wiki/Tag:military%3Doffice"," Military offices, e.g. general staff office, military recruitment office etc
+",,,,,,,
+0,"military","range","http://wiki.openstreetmap.org/wiki/Tag:military%3Drange"," Where soldiers practice with their weapons (firing, bombing, artillery, …).
+",,,,,,,
+0,"military","training_area","http://wiki.openstreetmap.org/wiki/Tag:military%3Dtraining_area"," An area where soldiers train and weapons or other military technology are experimented with or are tested.
+",,,,,,,
+0,"military","trench","http://wiki.openstreetmap.org/wiki/Tag:military%3Dtrench"," Trenches used for military purposes
+",,,,,,,
+0,"natural","wood","http://wiki.openstreetmap.org/wiki/Tag:natural%3Dwood"," Woodland where timber production does not dominate use. Be aware of landuse=forest. For more detail, one can use leaf_type=*.
+",,,,,,,
+0,"natural","tree_row","http://wiki.openstreetmap.org/wiki/Tag:natural%3Dtree_row"," Line of trees.
+",,,,,,,
+0,"natural","tree","http://wiki.openstreetmap.org/wiki/Tag:natural%3Dtree"," Lone or significant trees.
+",,,,,,,
+0,"natural","scrub","http://wiki.openstreetmap.org/wiki/Tag:natural%3Dscrub"," Uncultivated land covered with bushes or stunted trees.
+",,,,,,,
+0,"natural","heath","http://wiki.openstreetmap.org/wiki/Tag:natural%3Dheath"," Bare lower lying uncultivated land with bushes but little or no tree cover.Note. This is not for parks whose name contains the word \heath\"".",,,,,,,
+0,",
+natural""","moor","http://wiki.openstreetmap.org/wiki/Tag:natural%3Dmoor"," Upland areas, characterised by low-growing vegetation on acidic soils.
+",,,,,,,
+0,"natural","grassland","http://wiki.openstreetmap.org/wiki/Tag:natural%3Dgrassland"," Where vegetation is dominated by grasses (Poaceae) and other herbaceous (non-woody) plants, except for ornamental grass (see landuse=grass), mowing for hay, etc. (see landuse=meadow).
+",,,,,,,
+0,"natural","fell","http://wiki.openstreetmap.org/wiki/Tag:natural%3Dfell"," Habitat above tree line in alpine and subpolar regions, principally covered with uncultivated grass, low growing shrubs and mosses and sometimes grazed.
+",,,,,,,
+0,"natural","bare_rock","http://wiki.openstreetmap.org/wiki/Tag:natural%3Dbare_rock"," An area with sparse or no vegetation, so that the bedrock becomes visible.
+",,,,,,,
+0,"natural","scree","http://wiki.openstreetmap.org/wiki/Tag:natural%3Dscree"," Unconsolidated angular rocks formed by rockfall and weathering from adjacent rockfaces.
+",,,,,,,
+0,"natural","shingle","http://wiki.openstreetmap.org/wiki/Tag:natural%3Dshingle"," An accumulation of water-eroded rocks, usually pebbles and gravel, but sometimes larger.
+",,,,,,,
+0,"natural","sand","http://wiki.openstreetmap.org/wiki/Tag:natural%3Dsand"," Ground coverage of mostly silica particles, with no or very sparse vegetation. See natural=beach as well.
+",,,,,,,
+0,"natural","mud","http://wiki.openstreetmap.org/wiki/Tag:natural%3Dmud"," (Other languages) Undocumented tag. Have a look at natural=wetland + subtag wetland=*
+",,,,,,,
+0,"natural","water","http://wiki.openstreetmap.org/wiki/Tag:natural%3Dwater"," Lakes, etc.
+",,,,,,,
+0,"natural","wetland","http://wiki.openstreetmap.org/wiki/Tag:natural%3Dwetland"," Waterlogged area (on Wikipedia).
+",,,,,,,
+0,"natural","glacier","http://wiki.openstreetmap.org/wiki/Tag:natural%3Dglacier"," Areas (or peaks) covered with ice throughout the year.
+",,,,,,,
+0,"natural","bay","http://wiki.openstreetmap.org/wiki/Tag:natural%3Dbay"," A bay, a large body of water partially enclosed by land but with a wide mouth. (Other languages).
+",,,,,,,
+0,"natural","beach","http://wiki.openstreetmap.org/wiki/Tag:natural%3Dbeach"," A beach, a flat area of sand, gravel or pebble next to water (Other languages).
+",,,,,,,
+0,"natural","coastline","http://wiki.openstreetmap.org/wiki/Tag:natural%3Dcoastline"," The mean high water spring line between the sea and land (with the water on the right side of the way.)
+",,,,,,,
+0,"natural","spring","http://wiki.openstreetmap.org/wiki/Tag:natural%3Dspring"," A place where ground water flows naturally from the ground (Other languages).
+",,,,,,,
+0,"natural","hot_spring","http://wiki.openstreetmap.org/wiki/Tag:natural%3Dhot_spring"," A hot spring is a spring produced by the emergence of geothermally heated groundwater that rises from the Earth's crust.
+",,,,,,,
+0,"natural","geyser","http://wiki.openstreetmap.org/wiki/Tag:natural%3Dgeyser"," A geyser is a spring characterized by intermittent discharge of water ejected turbulently and accompanied by steam.
+",,,,,,,
+1,"natural","peak","http://wiki.openstreetmap.org/wiki/Tag:natural%3Dpeak"," Top of a hill or mountain (summit).
+",,,,,,,
+0,"natural","volcano","http://wiki.openstreetmap.org/wiki/Tag:natural%3Dvolcano"," A volcano, either dormant, extinct or active.
+",,,,,,,
+0,"natural","valley","http://wiki.openstreetmap.org/wiki/Tag:natural%3Dvalley"," A valley.
+",,,,,,,
+0,"natural","river_terrace","http://wiki.openstreetmap.org/wiki/Tag:natural%3Driver_terrace"," A river terrace.
+",,,,,,,
+0,"natural","ridge","http://wiki.openstreetmap.org/wiki/Tag:natural%3Dridge"," A ridge.
+",,,,,,,
+0,"natural","arete","http://wiki.openstreetmap.org/wiki/Tag:natural%3Darete"," An arête, a thin, almost knife-like, ridge of rock which is typically formed when two glaciers erode parallel U-shaped valleys.
+",,,,,,,
+0,"natural","cliff","http://wiki.openstreetmap.org/wiki/Tag:natural%3Dcliff"," A cliff, a significant vertical, or near vertical, rock exposure (leave the lower face to the right of the way.)
+",,,,,,,
+0,"natural","saddle","http://wiki.openstreetmap.org/wiki/Tag:natural%3Dsaddle"," The lowest point along a ridge or between two mountain tops
+",,,,,,,
+0,"natural","rock","http://wiki.openstreetmap.org/wiki/Tag:natural%3Drock"," A notable rock or group of rocks with connection to the ground.
+",,,,,,,
+0,"natural","stone","http://wiki.openstreetmap.org/wiki/Tag:natural%3Dstone"," Freestanding stone; e.g., glacial erratic.
+",,,,,,,
+0,"natural","sinkhole","http://wiki.openstreetmap.org/wiki/Tag:natural%3Dsinkhole"," A natural depression or hole in the surface topography.
+",,,,,,,
+0,"natural","cave_entrance","http://wiki.openstreetmap.org/wiki/Tag:natural%3Dcave_entrance"," The entrance to a cave.
+",,,,,,,
+0,"place","country","http://wiki.openstreetmap.org/wiki/Tag:place%3Dcountry"," See boundary=administrative, admin_level=2
+",,,,,,,
+0,"place","state","http://wiki.openstreetmap.org/wiki/Tag:place%3Dstate"," See boundary=administrative, admin_level=* varies; may not be used in all countries.
+",,,,,,,
+0,"place","region","http://wiki.openstreetmap.org/wiki/Tag:place%3Dregion"," See boundary=administrative, admin_level=* varies; may not be used in all countries.  For natural regions other keys should be searched.
+",,,,,,,
+0,"place","district","http://wiki.openstreetmap.org/wiki/Tag:place%3Ddistrict"," See boundary=administrative, admin_level=* varies; may not be used in all countries.
+",,,,,,,
+0,"place","county","http://wiki.openstreetmap.org/wiki/Tag:place%3Dcounty"," See boundary=administrative, admin_level=* varies; may not be used in all countries.
+",,,,,,,
+0,"place","municipality","http://wiki.openstreetmap.org/wiki/Tag:place%3Dmunicipality"," See boundary=administrative, admin_level=* varies; depending on the country a collection of arbitrary hamlets, villages and towns may form an administrative unit; sometimes members of a unit reform or join with another municipality as a result of political process.  Within a municipality individual settlements are a lot less connected than those within a city, where they have grown connected over time.
+",,,,,,,
+0,"place","city","http://wiki.openstreetmap.org/wiki/Tag:place%3Dcity"," The largest urban settlements in the territory, normally including the national, state and provincial capitals. These are defined by charter or other governmental designation in some territories and are a matter of judgement in others. Should normally have a population of at least 100,000 people and be larger than nearby towns. See place=suburb and place=neighbourhood on how to tag divisions within a city. The outskirts of urban settlements may or may not match the administratively declared boundary of the city.
+",,,,,,,
+0,"place","suburb","http://wiki.openstreetmap.org/wiki/Tag:place%3Dsuburb"," A distinct section of an urban settlement (city, town, etc.) with its own name and identity.  e.g.
+ annexed towns or villages which were formerly independent,
+ independent (or dependent) municipalities within a city or next to a much bigger town
+ historical districts of settlements
+ industrial districts or recreation areas within a settlements with specific names.
+",,,,,,,
+0,"place","quarter","http://wiki.openstreetmap.org/wiki/Tag:place%3Dquarter"," A named part of a bigger settlement where this part is smaller than a suburb and bigger than a neighbourhood. This does not have to be an administrative entity.The term quarter is sometimes used synonymously for neighbourhood.
+",,,,,,,
+1,"place","neighbourhood","http://wiki.openstreetmap.org/wiki/Tag:place%3Dneighbourhood"," A named part of a place=village, a place=town or a place=city. Smaller than place=suburb and place=quarter.The term quarter is sometimes used synonymously for neighbourhood, but may also stand for borough or suburb and hence is often avoided in OSM. See  Quarter_(urban_subdivision)
+",,,,,,,
+1,"place","city_block","http://wiki.openstreetmap.org/wiki/Tag:place%3Dcity_block"," A named city block that is part of a place=city. See  City_block
+",,,,,,,
+0,"place","plot","http://wiki.openstreetmap.org/wiki/Tag:place%3Dplot"," A named plot is a tract or parcel of land owned or meant to be owned by some owner.
+",,,,,,,
+0,"place","town","http://wiki.openstreetmap.org/wiki/Tag:place%3Dtown"," A second tier urban settlement of local importance, often with a population of 10,000 people and good range of local facilities including schools, medical facilities etc and traditionally a market. In areas of low population, towns may have significantly lower populations. See place=neighbourhood and possibly also place=suburb on how to tag divisions within a town.
+",,,,,,,
+0,"place","village","http://wiki.openstreetmap.org/wiki/Tag:place%3Dvillage"," A smaller distinct settlement, smaller than a town with few facilities available with people traveling to nearby towns to access these. Populations of villages vary widely in different territories but will nearly always be less than 10,000 people, often a lot less. See place=neighbourhood on how to tag divisions within a larger village.
+",,,,,,,
+1,"place","hamlet","http://wiki.openstreetmap.org/wiki/Tag:place%3Dhamlet"," A smaller rural community typically with fewer than 100-200 inhabitants, few infrastructure.
+",,,,,,,
+1,"place","isolated_dwelling","http://wiki.openstreetmap.org/wiki/Tag:place%3Disolated_dwelling"," Smallest kind of human settlement. No more than 2 households.
+",,,,,,,
+1,"place","farm","http://wiki.openstreetmap.org/wiki/Tag:place%3Dfarm"," A farm that has its own name. If the farm is not a part of bigger settlement use place=isolated_dwelling. See also landuse=farmyard
+",,,,,,,
+1,"place","allotments","http://wiki.openstreetmap.org/wiki/Tag:place%3Dallotments","  Dacha or cottage settlement, which is located outside  other inhabited locality. This value is used mainly in Russia and other countries of the former Soviet Union, where a lot of such unofficial settlements exist
+",,,,,,,
+0,"place","continent","http://wiki.openstreetmap.org/wiki/Tag:place%3Dcontinent"," One of the seven continents: Africa, Antarctica, Asia, Australia, Europe, North America, South America
+",,,,,,,
+0,"place","archipelago","http://wiki.openstreetmap.org/wiki/Tag:place%3Darchipelago"," Identifies the relation of an archipelago, which contains several islands and islets.
+",,,,,,,
+0,"place","island","http://wiki.openstreetmap.org/wiki/Tag:place%3Disland"," Identifies the coastline of an island (> 1 km2), also consider place=islet for very small islands
+",,,,,,,
+0,"place","islet","http://wiki.openstreetmap.org/wiki/Tag:place%3Dislet"," Identifies an islet (< 1 km2).
+",,,,,,,
+1,"place","square","http://wiki.openstreetmap.org/wiki/Tag:place%3Dsquare"," For a  square in a town (English: square, French: place, German: Platz, Italian: piazza, Spanish: plaza, Russian: площадь).
+",,,,,,,
+2,"place","locality","http://wiki.openstreetmap.org/wiki/Tag:place%3Dlocality"," For an unpopulated named place.
+",,,,,,,
+0,"place","hamlet","http://wiki.openstreetmap.org/wiki/Tag:place%3Dhamlet"," The hamlet of the object.
+",,,,,,,
+0,"power","plant","http://wiki.openstreetmap.org/wiki/Tag:power%3Dplant"," A place/industrial facility where power is generated. Individual generating units within the facility should be tagged as power=generator.
+",,,,,,,
+0,"power","cable","http://wiki.openstreetmap.org/wiki/Tag:power%3Dcable"," A way following the path of underground cables, such as the local 0.4 kV network between transformer stations, distribution boxes and cable connection points, or sea cables. Not to be confused with non-power supply cables such as cables for telecommunication. May be combined with voltage=*, circuits=* and location=*.
+",,,,,,,
+0,"power","compensator","http://wiki.openstreetmap.org/wiki/Tag:power%3Dcompensator"," Several kind of power devices used to insure of power quality and network resilience.
+",,,,,,,
+0,"power","converter","http://wiki.openstreetmap.org/wiki/Tag:power%3Dconverter"," An HVDC converter converts electric power from high voltage alternating current (AC) to high-voltage direct current (HVDC), or vice-versa.
+",,,,,,,
+0,"power","generator","http://wiki.openstreetmap.org/wiki/Tag:power%3Dgenerator"," A device used to convert power from one form to another. Use in combination with generator:source=*, generator:method=* and generator:output=*.
+",,,,,,,
+0,"power","heliostat","http://wiki.openstreetmap.org/wiki/Tag:power%3Dheliostat"," A mirror of a heliostat device.
+",,,,,,,
+0,"power","insulator","http://wiki.openstreetmap.org/wiki/Tag:power%3Dinsulator"," A device to protect a power line from grounding on supports
+",,,,,,,
+0,"power","line","http://wiki.openstreetmap.org/wiki/Tag:power%3Dline"," A way following the path of (overground) power cables. For minor power lines with poles and not towers, you may want to use power=minor_line. Useful combinations: voltage=*, cables=* and wires=*. Please see the respective feature pages for details.
+",,,,,,,
+0,"power","minor_line","http://wiki.openstreetmap.org/wiki/Tag:power%3Dminor_line"," A way following the path of (overground) minor power cables, supported by poles and not towers/pylons. (This isn't quite so simple, as sometimes larger towers are replaced by smaller poles made with a stronger material; a better distinction might be based on voltage).
+",,,,,,,
+0,"power","pole","http://wiki.openstreetmap.org/wiki/Tag:power%3Dpole"," For single (often wooden or concrete) poles carrying medium/low voltage electricity cables.
+",,,,,,,
+0,"power","portal","http://wiki.openstreetmap.org/wiki/Tag:power%3Dportal"," Power supporting structure composed of vertical legs with cables between them attached to a horizontal crossarm
+",,,,,,,
+0,"power","catenary_mast","http://wiki.openstreetmap.org/wiki/Tag:power%3Dcatenary_mast"," A catenary mast supports system of overhead wires used to supply electricity to electricaly powered vehicle equipped with a pantograph.
+",,,,,,,
+0,"power","substation","http://wiki.openstreetmap.org/wiki/Tag:power%3Dsubstation"," A tag for electricity substations. These provide voltage step-up/step-down, switching, conditioning, etc. Substations may be large facilities (up to several acres) for very high voltage transmission lines or just small buildings or kiosks near the street for low voltage distribution lines. Useful combinations: voltage=*, substation=* and location=*, see the feature page for details.
+",,,,,,,
+0,"power","switch","http://wiki.openstreetmap.org/wiki/Tag:power%3Dswitch"," A tag for electricity switches which are devices which allow operators to power up & down lines and transformer in substations or outside.
+",,,,,,,
+0,"power","terminal","http://wiki.openstreetmap.org/wiki/Tag:power%3Dterminal"," Point of connection between overhead power lines to buildings or walls
+",,,,,,,
+0,"power","tower","http://wiki.openstreetmap.org/wiki/Tag:power%3Dtower"," For towers or pylons carrying high voltage electricity cables. Normally constructed from steel latticework but tubular or solid pylons are also commonly used. Should not be used for medium or low voltage electricity conductors carried on single wooden poles which might be tagged power=pole. See power=tower for detailed tagging of tower types.
+",,,,,,,
+0,"power","transformer","http://wiki.openstreetmap.org/wiki/Tag:power%3Dtransformer"," A static device for transferring electric energy by inductive coupling between its windings. Large power transformers are typically located inside substations.
+",,,,,,,
+0,"public_transport","stop_position","http://wiki.openstreetmap.org/wiki/Tag:public_transport%3Dstop_position"," The position on the street or rails where a bus, tram or train stops.
+",,,,,,,
+1,"public_transport","platform","http://wiki.openstreetmap.org/wiki/Tag:public_transport%3Dplatform"," The place where passengers are waiting for the transportation vehicle.
+",,,,,,,
+1,"public_transport","station","http://wiki.openstreetmap.org/wiki/Tag:public_transport%3Dstation"," A station where several buses or trains end their service. Used in combination with building=yes or area=yes.
+",,,,,,,
+1,"public_transport","stop_area","http://wiki.openstreetmap.org/wiki/Tag:public_transport%3Dstop_area"," The stop area is a relation that contains all elements of a train/subway/monorail/tram/bus/trolleybus/aerialway/ferry stop.
+",,,,,,,
+0,"public_transport","stop_position","http://wiki.openstreetmap.org/wiki/Tag:public_transport%3Dstop_position"," The position on the railway track where the train (its center) stops at a platform. This is useful for routing on long platforms where also short trains stop and on long platforms where multiple trains stop behind each other.
+",,,,,,,
+2,"public_transport","platform","http://wiki.openstreetmap.org/wiki/Tag:public_transport%3Dplatform"," This is parallel to the rail line for showing where the actual platforms are. It is also to know where you can change platform and enter the station, so use footpaths to connect them. This is really useful for routing too. Use only if the platform is served by public transport.
+",,,,,,,
+0,"railway","abandoned","http://wiki.openstreetmap.org/wiki/Tag:railway%3Dabandoned"," The course of a former railway which has been abandoned and the track and infrastucture removed. The course may be still recognized through embankments, cuttings, bridges, tunnel and rolling or straight ways.
+",,,,,,,
+0,"railway","construction","http://wiki.openstreetmap.org/wiki/Tag:railway%3Dconstruction"," Railway under construction.
+",,,,,,,
+0,"railway","disused","http://wiki.openstreetmap.org/wiki/Tag:railway%3Ddisused"," A section of railway which is no longer used but where the track and infrastructure remains in place. See the disused:*=* namespace for alternative tagging.
+",,,,,,,
+2,"railway","funicular","http://wiki.openstreetmap.org/wiki/Tag:railway%3Dfunicular"," Cable driven inclined railways. In many cases they serve touristic interest, giving easy access to spectacular mountain views.
+",,,,,,,
+,"railway","light_rail","http://wiki.openstreetmap.org/wiki/Tag:railway%3Dlight_rail"," A higher-standard tram system, normally in its own right-of-way. Often it connects towns and thus reaches a considerable length (tens of kilometer).
+",,,,,,,
+0,"railway","miniature","http://wiki.openstreetmap.org/wiki/Tag:railway%3Dminiature"," Miniature railways are narrower than narrow gauge and carry passengers. They can be found in parks.
+",,,,,,,
+0,"railway","monorail","http://wiki.openstreetmap.org/wiki/Tag:railway%3Dmonorail"," A railway with only a single rail. A monorail can run above the rail like in Las Vegas and Disneyland or can suspend below the rail like the Wuppertal Schwebebahn (Germany).
+",,,,,,,
+0,"railway","narrow_gauge","http://wiki.openstreetmap.org/wiki/Tag:railway%3Dnarrow_gauge"," Narrow-gauge passenger or freight trains. Narrow gauge railways can have mainline railway service like the Rhaetian Railway in Switzerland or can be a small light industrial railway. Use gauge=* to specify the actual width of rails.
+",,,,,,,
+0,"railway","preserved","http://wiki.openstreetmap.org/wiki/Tag:railway%3Dpreserved"," A railway running historic trains, usually a tourist attraction (changed to preserved from preserved_rail as \rail\"" is redundant). Using railway:preserved=yes is an alternate method to mark railway as preserved.",,,,,,,
+0,",
+railway""","rail","http://wiki.openstreetmap.org/wiki/Tag:railway%3Drail"," Full sized passenger or freight trains in the standard gauge for the country or state.
+",,,,,,,
+2,"railway","subway","http://wiki.openstreetmap.org/wiki/Tag:railway%3Dsubway"," A city passenger rail service running mostly grade separated (see Wikipedia:rapid transit).
+",,,,,,,
+1,"railway","tram","http://wiki.openstreetmap.org/wiki/Tag:railway%3Dtram"," One or two carriage rail vehicles, usually sharing motor road (Other languages).
+",,,,,,,
+0,"railway","halt","http://wiki.openstreetmap.org/wiki/Tag:railway%3Dhalt"," A small station without switches
+",,,,,,,
+1,"railway","platform","http://wiki.openstreetmap.org/wiki/Tag:railway%3Dplatform"," This is parallel to the rail line for showing where the actual platforms are. It is also to know where you can change platform and enter the station, so use footpaths to connect them. This is really useful for routing too. Use in addition to public_transport=platform
+",,,,,,,
+3,"railway","station","http://wiki.openstreetmap.org/wiki/Tag:railway%3Dstation"," Railway station.
+",,,,,,,
+1,"railway","subway_entrance","http://wiki.openstreetmap.org/wiki/Tag:railway%3Dsubway_entrance"," The entrance to a subway station, usually going from surface to underground.
+",,,,,,,
+1,"railway","tram_stop","http://wiki.openstreetmap.org/wiki/Tag:railway%3Dtram_stop"," A tram stop is a place where a passenger can embark / disembark a tram.
+",,,,,,,
+0,"railway","buffer_stop","http://wiki.openstreetmap.org/wiki/Tag:railway%3Dbuffer_stop"," stops the train at the end of a track. see Buffer_stop.
+",,,,,,,
+0,"railway","derail","http://wiki.openstreetmap.org/wiki/Tag:railway%3Dderail"," a device used to prevent fouling of a rail track by unauthorized movements of trains or unattended rolling stock. See Derail_(railroad).
+",,,,,,,
+0,"railway","crossing","http://wiki.openstreetmap.org/wiki/Tag:railway%3Dcrossing"," A point where pedestrians may cross.
+",,,,,,,
+0,"railway","level_crossing","http://wiki.openstreetmap.org/wiki/Tag:railway%3Dlevel_crossing"," A point where rails and roads cross.
+",,,,,,,
+0,"railway","signal","http://wiki.openstreetmap.org/wiki/Tag:railway%3Dsignal"," Any kind of railway signal.
+",,,,,,,
+0,"railway","switch","http://wiki.openstreetmap.org/wiki/Tag:railway%3Dswitch"," Full Connections between railways (aka 'points').
+",,,,,,,
+0,"railway","railway_crossing","http://wiki.openstreetmap.org/wiki/Tag:railway%3Drailway_crossing"," Crossing rails with no interconnection.
+",,,,,,,
+0,"railway","turntable","http://wiki.openstreetmap.org/wiki/Tag:railway%3Dturntable"," These are used for changing the direction that part of a train is pointing in.
+",,,,,,,
+0,"railway","roundhouse","http://wiki.openstreetmap.org/wiki/Tag:railway%3Droundhouse"," A semicircular building with many stalls for servicing engines.
+",,,,,,,
+0,"railway","traverser","http://wiki.openstreetmap.org/wiki/Tag:railway%3Dtraverser"," These are used for changing trains between railways. Also known as transfer table.
+",,,,,,,
+0,"service","alley","http://wiki.openstreetmap.org/wiki/Tag:service%3Dalley"," See Key:service for more details.
+",,,,,,,
+0,"service","siding","http://wiki.openstreetmap.org/wiki/Tag:service%3Dsiding"," Relatively short lengths of track, running parallel to (and connected to) a main route
+",,,,,,,
+0,"service","spur","http://wiki.openstreetmap.org/wiki/Tag:service%3Dspur"," Relatively short lengths of track, built to give one company or entity access to a main or branch line.
+",,,,,,,
+0,"service","yard","http://wiki.openstreetmap.org/wiki/Tag:service%3Dyard"," Tracks within railway company operated marshaling or maintenance yards.
+",,,,,,,
+1,"shop","alcohol","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dalcohol"," Shop selling alcohol to take away
+",,,,,,,
+1,"shop","bakery","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dbakery"," Shop focused on selling bread
+",,,,,,,
+1,"shop","beverages","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dbeverages"," Shop focused on selling alcoholic and non-alcoholic beverages. See also shop=alcohol.
+",,,,,,,
+1,"shop","brewing_supplies","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dbrewing_supplies"," Shop focused on selling supplies for home brewing of beer, wine and spirits (where permitted).
+",,,,,,,
+1,"shop","butcher","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dbutcher"," Shop focused on selling meat
+",,,,,,,
+1,"shop","cheese","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dcheese"," Shop focused on selling cheese.
+",,,,,,,
+1,"shop","chocolate","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dchocolate"," Shop focused on selling chocolate.
+",,,,,,,
+1,"shop","coffee","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dcoffee"," Shop focused on selling coffee.
+",,,,,,,
+1,"shop","confectionery","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dconfectionery"," Shop focused on selling sweets or candy
+",,,,,,,
+1,"shop","convenience","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dconvenience"," A small local shop carrying a small subset of the items you would find in a supermarket
+",,,,,,,
+1,"shop","deli","http://wiki.openstreetmap.org/wiki/Tag:shop%3Ddeli"," Shop focused on selling delicatessen (fine foods, gourmet foods), possibly also fine wine. Not to be confused with the US delis.
+",,,,,,,
+1,"shop","dairy","http://wiki.openstreetmap.org/wiki/Tag:shop%3Ddairy"," Shop focused on selling dairy products.
+",,,,,,,
+1,"shop","farm","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dfarm"," Shop or roadside stand focused on selling freshly harvested farm produce
+",,,,,,,
+1,"shop","greengrocer","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dgreengrocer"," Shop focused on selling vegetables and fruits.
+",,,,,,,
+1,"shop","pasta","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dpasta"," Shop focused on selling (fresh) pasta, ravioli, etc.
+",,,,,,,
+1,"shop","pastry","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dpastry"," Shop focused on selling baked sweets like cakes, biscuits, strudel and pies.
+",,,,,,,
+1,"shop","seafood","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dseafood"," Shop focused on selling fish/seafood.
+",,,,,,,
+1,"shop","spices","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dspices"," Shop focused on selling spices.
+",,,,,,,
+1,"shop","tea","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dtea"," Shop focused on selling tea.
+",,,,,,,
+1,"shop","wine","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dwine"," Shop focused on selling wine. Also covered by shop=alcohol
+",,,,,,,
+1,"shop","department_store","http://wiki.openstreetmap.org/wiki/Tag:shop%3Ddepartment_store"," A single large store – often multiple storeys high – selling a large variety of goods (see also shop=mall)
+",,,,,,,
+1,"shop","general","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dgeneral"," A store that carries a general line of merchandise. (see also shop=convenience if it sells food).
+",,,,,,,
+1,"shop","kiosk","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dkiosk"," A small shop on the pavement that sells magazines, tobacco, newspapers, sweets and stamps.
+",,,,,,,
+1,"shop","mall","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dmall"," A shopping mall – multiple stores under one roof (also known as a shopping centre)
+",,,,,,,
+1,"shop","supermarket","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dsupermarket"," Supermarket – a large store with groceries and other items
+",,,,,,,
+1,"shop","baby_goods","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dbaby_goods"," Shop focused on selling objects for babies (clothes, prams, cots, toys).
+",,,,,,,
+1,"shop","bag","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dbag"," Shop focused on selling bags.
+",,,,,,,
+1,"shop","boutique","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dboutique"," A small shopping outlet, especially one that specializes in elite and fashionable items
+",,,,,,,
+1,"shop","clothes","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dclothes"," Shop focused on selling clothes (other related value in use is fashion)
+",,,,,,,
+1,"shop","fabric","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dfabric"," Shop focused on selling fabric and other materials for the purpose of making clothes and other products, eg dress making.
+",,,,,,,
+1,"shop","fashion","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dfashion"," Shop focused on selling fashion.
+",,,,,,,
+1,"shop","jewelry","http://wiki.openstreetmap.org/wiki/Tag:shop%3Djewelry"," Jewellers shops.
+",,,,,,,
+1,"shop","leather","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dleather"," Shop focused on selling products made out of leather.
+",,,,,,,
+1,"shop","shoes","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dshoes"," Shop focused on selling shoes.
+",,,,,,,
+1,"shop","tailor","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dtailor"," Use craft=tailor instead.
+",,,,,,,
+1,"shop","watches","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dwatches"," Shop focused on selling watches.
+",,,,,,,
+1,"shop","charity","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dcharity"," A charity shop is a shop operated by a charity, for the purposes of fundraising.
+",,,,,,,
+1,"shop","second_hand","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dsecond_hand"," A shop buying and selling used clothes and other things. See also shop=pawnbroker
+",,,,,,,
+1,"shop","variety_store","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dvariety_store"," A variety store retailer is a retail store that sells inexpensive items, sometimes with a single price point for all items in the store.
+",,,,,,,
+1,"shop","beauty","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dbeauty"," A non-hairdresser beauty shop, spa, nail salon, etc.. See also shop=hairdresser.
+",,,,,,,
+1,"shop","chemist","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dchemist"," Shop focused on selling articles of personal hygiene, cosmetics, and household cleaning products (for a shop that potentially dispenses prescription drugs, cf. pharmacy. U.S. drug store, see amenity=pharmacy)
+",,,,,,,
+1,"shop","cosmetics","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dcosmetics"," Shop focused on selling cosmetics
+",,,,,,,
+1,"shop","erotic","http://wiki.openstreetmap.org/wiki/Tag:shop%3Derotic"," Shop focused on selling erotic toys, -clothes or other erotic stuff.
+",,,,,,,
+1,"shop","hairdresser","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dhairdresser"," Here you can get your hair cut, coloured, … See also shop=beauty
+",,,,,,,
+1,"shop","hearing_aids","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dhearing_aids","  Shop focused on selling hearing aids devices
+",,,,,,,
+1,"shop","herbalist","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dherbalist","  Shop focused on selling herbs, often for medical purposes. (See also: healthcare:speciality=herbalism and healthcare=alternative).
+",,,,,,,
+1,"shop","massage","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dmassage"," A massage shop
+",,,,,,,
+1,"shop","medical_supply","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dmedical_supply"," Shop focused on selling medical supplies.
+",,,,,,,
+1,"shop","nutrition_supplements","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dnutrition_supplements"," Shops that sells one or more nutritional supplements (of vitamins, minerals and/or herbs)
+",,,,,,,
+1,"shop","optician","http://wiki.openstreetmap.org/wiki/Tag:shop%3Doptician"," Shop focused on selling eyeglasses, contact lenses (may also check your eyes).
+",,,,,,,
+1,"shop","perfumery","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dperfumery"," Shop focused on selling perfumery
+",,,,,,,
+1,"shop","tattoo","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dtattoo"," A tattoo parlour.
+",,,,,,,
+1,"shop","bathroom_furnishing","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dbathroom_furnishing"," Shop focused on selling bathroom furniture and accessories
+",,,,,,,
+1,"shop","doityourself","http://wiki.openstreetmap.org/wiki/Tag:shop%3Ddoityourself"," Shop focused on selling tools and supplies to do-it-yourself householders, gardening, …
+",,,,,,,
+1,"shop","electrical","http://wiki.openstreetmap.org/wiki/Tag:shop%3Delectrical"," Shop focused on selling electrical supplies and devices
+",,,,,,,
+1,"shop","energy","http://wiki.openstreetmap.org/wiki/Tag:shop%3Denergy"," Shop focused on selling energy
+",,,,,,,
+1,"shop","fireplace","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dfireplace"," Shop focused on selling wood fireplaces.
+",,,,,,,
+1,"shop","florist","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dflorist"," Shop focused on selling bouquets of flowers (see shop=garden_centre for potted flowers).
+",,,,,,,
+1,"shop","garden_centre","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dgarden_centre"," Shop focused on selling potted flowers, maybe even trees (see also shop=florist for flower bouquets).
+",,,,,,,
+1,"shop","garden_furniture","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dgarden_furniture"," Shop focused on selling garden furniture (sheds, outdoor tables, gates, fences, ...). See shop=garden_centre if also plants are sold.
+",,,,,,,
+1,"shop","gas","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dgas"," Shop focused on selling technical gas, such as argon, oxygen, acetylene, nitrogen, carbon dioxide, etc. in pressurized containers
+",,,,,,,
+1,"shop","glaziery","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dglaziery"," Shop focused on selling and installing glazing for windows and doors.
+",,,,,,,
+1,"shop","hardware","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dhardware"," Shop focused on selling building supplies including screws, bolts & paints, … See also shop=doityourself
+",,,,,,,
+1,"shop","houseware","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dhouseware"," Shop focused on selling crockery, cutlery, kitchenware, small household appliances.
+",,,,,,,
+1,"shop","locksmith","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dlocksmith"," Shop focused on selling keys, see also craft=locksmith and craft=key_cutter
+",,,,,,,
+1,"shop","paint","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dpaint"," Shop focused on selling paints.
+",,,,,,,
+1,"shop","trade","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dtrade"," Shop focused on selling one or more building supplies such as timber/wood, cement etc. See also shop=doityourself
+",,,,,,,
+1,"shop","antiques","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dantiques"," Shop focused on selling antiques.
+",,,,,,,
+1,"shop","bed","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dbed"," Shop focused on selling mattresses and other bedding products.
+",,,,,,,
+1,"shop","candles","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dcandles"," Shop focused on selling candles and candle accessories (holders, etc)
+",,,,,,,
+1,"shop","carpet","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dcarpet"," Shop focused on selling carpets
+",,,,,,,
+1,"shop","curtain","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dcurtain"," Shop focused on selling curtains or drapes (see also shop=fabric)
+",,,,,,,
+1,"shop","furniture","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dfurniture"," Shop focused on selling furniture, might range from small decorational items to a whole flat interior
+",,,,,,,
+1,"shop","interior_decoration","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dinterior_decoration"," Shop focused on selling interior decorations.
+",,,,,,,
+1,"shop","kitchen","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dkitchen"," A shop where you can plan and buy your kitchen. (Sometimes called \kitchen studio\"" and the like","but plain kitchen is the most frequently used tag so far.)",,,,,,
+1,",
+shop""","lamps","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dlamps"," Shop focused on selling lamps.
+",,,,,,,
+1,"shop","window_blind","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dwindow_blind"," Shop focused on selling window blinds.
+",,,,,,,
+1,"shop","computer","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dcomputer"," Shop focused on selling computers, peripherals, software, …
+",,,,,,,
+1,"shop","electronics","http://wiki.openstreetmap.org/wiki/Tag:shop%3Delectronics"," Shop focused on selling consumer electronics (TV, radio, …). Larger ones may also sell computers, fridges, …
+",,,,,,,
+1,"shop","hifi","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dhifi"," Shop focused on selling High Fidelity or High End environment to listen music or watch films at home
+",,,,,,,
+1,"shop","mobile_phone","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dmobile_phone"," Shop focused on selling mobile phones and accessories
+",,,,,,,
+1,"shop","radiotechnics","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dradiotechnics"," Shop focused on selling electronic components, electrical products, radio measuring devices, supplies for radio and electronics.
+",,,,,,,
+1,"shop","vacuum_cleaner","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dvacuum_cleaner"," Shop focused on selling vacuum cleaners and associated products.
+",,,,,,,
+1,"shop","bicycle","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dbicycle"," Shop focused on selling bicycles, bicycle equipment and may rent or repair them
+",,,,,,,
+1,"shop","car","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dcar"," Car store – a place to buy cars or to get your car repaired
+",,,,,,,
+1,"shop","car_repair","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dcar_repair"," Shop focused on car repair (usually independent of a specific car brand).
+",,,,,,,
+1,"shop","car_parts","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dcar_parts"," Shop focused on selling auto parts, auto accessories, motor oil, car chemicals, etc.
+",,,,,,,
+1,"shop","fishing","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dfishing"," Shop focused on selling fishing equipment.
+",,,,,,,
+1,"shop","free_flying","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dfree_flying"," Shop focused on selling free flying equipment.
+",,,,,,,
+1,"shop","hunting","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dhunting"," Shop focused on selling gun and hunting equipment.
+",,,,,,,
+1,"shop","junk_yard","http://wiki.openstreetmap.org/wiki/Tag:shop%3Djunk_yard"," Focusing and storage and destruction of old automobiles including selling of after market parts.
+",,,,,,,
+1,"shop","motorcycle","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dmotorcycle"," Shop focused on selling motorcycles and/or related accessories, clothes, parts, repair and rental services.
+",,,,,,,
+1,"shop","outdoor","http://wiki.openstreetmap.org/wiki/Tag:shop%3Doutdoor"," Shop focused on selling camping, walking, climbing, and other outdoor sports equipment (GPSes, etc.)
+",,,,,,,
+1,"shop","scuba_diving","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dscuba_diving"," Shop focused on selling scuba diving equipment.
+",,,,,,,
+1,"shop","sports","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dsports"," Shop focused on selling sporting goods.
+",,,,,,,
+1,"shop","swimming_pool","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dswimming_pool"," A store that sells swimming pool equipment and supplies.
+",,,,,,,
+1,"shop","tyres","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dtyres"," Shop focused on selling tyres.
+",,,,,,,
+1,"shop","art","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dart"," Shop which sells works of art. May be paintings, sculpture, or other types of art
+",,,,,,,
+1,"shop","collector","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dcollector"," A shop for different collector's items like stamps, coins, action figures, etc.
+",,,,,,,
+1,"shop","craft","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dcraft"," An arts and crafts supply store. Commonly sold items are paper, canvas, paint, pencils, crafting wood, crafting tools, etc. - look at craft=*
+",,,,,,,
+1,"shop","frame","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dframe"," Shop focused on selling frames.
+",,,,,,,
+1,"shop","games","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dgames"," Shop focused on selling board games, card games and/or role-playing games.
+",,,,,,,
+1,"shop","model","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dmodel"," Shop specialising in the sale of scale models.
+",,,,,,,
+1,"shop","music","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dmusic"," Shop focused on selling recorded music (vinyl/CDs/...)
+",,,,,,,
+1,"shop","musical_instrument","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dmusical_instrument"," Shop focused on selling musical instruments, lyrics, scores. If focused on a specific instrument, specify with musical_instrument=*
+",,,,,,,
+1,"shop","photo","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dphoto"," Shop focused on selling products or services related with photography.
+",,,,,,,
+1,"shop","trophy","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dtrophy"," Store selling trophies, awards, plaques etc.
+",,,,,,,
+1,"shop","video","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dvideo"," Shop focused on selling or renting out videos/DVDs.
+",,,,,,,
+1,"shop","video_games","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dvideo_games"," Shop focused on selling video games.
+",,,,,,,
+1,"shop","anime","http://wiki.openstreetmap.org/wiki/Tag:shop%3Danime"," Shop focused on selling anime stuff.
+",,,,,,,
+1,"shop","books","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dbooks"," Shop focused on selling books (for a library that lends books, see amenity=library)
+",,,,,,,
+1,"shop","gift","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dgift"," Shop focused on selling gifts, greeting cards, or tourist gifts (souvenirs)
+",,,,,,,
+1,"shop","lottery","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dlottery"," A shop of which the main or only purpose is the sale of lottery tickets.
+",,,,,,,
+1,"shop","newsagent","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dnewsagent"," Shop focused on selling newspapers, cigarettes, other goods
+",,,,,,,
+1,"shop","stationery","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dstationery"," Shop focused on selling office supplies
+",,,,,,,
+1,"shop","ticket","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dticket"," Shop focused on selling tickets for concerts, events, public transport, …
+",,,,,,,
+1,"shop","bookmaker","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dbookmaker"," A shop that takes bets on sporting and other events at agreed upon odds.
+",,,,,,,
+1,"shop","copyshop","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dcopyshop"," Shop focused on selling photocopying and printing services.
+",,,,,,,
+1,"shop","dry_cleaning","http://wiki.openstreetmap.org/wiki/Tag:shop%3Ddry_cleaning"," Shop or kiosk offering a clothes dry cleaning service. The actual cleaning may be done elsewhere.
+",,,,,,,
+1,"shop","e-cigarette","http://wiki.openstreetmap.org/wiki/Tag:shop%3De-cigarette"," Shop focused on selling electronic cigarettes.
+",,,,,,,
+1,"shop","funeral_directors","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dfuneral_directors"," Providing services related to funeral arrangements, may also be known as a \funeral parlour\"" or \""undertakers\"".",,,,,,,
+1,",
+shop""","laundry","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dlaundry"," A shop to get your normal clothes washed. Might be self service coin operated, with service staff for drop off, …
+",,,,,,,
+1,"shop","money_lender","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dmoney_lender"," A money lender offers small personal loans at high rates of interest.
+",,,,,,,
+1,"shop","pawnbroker","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dpawnbroker"," A pawnbroker (or pawnshop) is an individual or business that offers secured loans to people. See also shop=second_hand
+",,,,,,,
+1,"shop","pet","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dpet"," A shop for pets, animals and toys or food for them.
+",,,,,,,
+1,"shop","pyrotechnics","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dpyrotechnics"," Store of pyrotechnics: fireworks, firecrackers, sparklers etc.
+",,,,,,,
+1,"shop","religion","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dreligion"," Shop focused on selling religious articles, church shop. See also religion=*
+",,,,,,,
+1,"shop","tobacco","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dtobacco"," Shop focused on selling tobacco, cigarettes and their related accessories.
+",,,,,,,
+1,"shop","toys","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dtoys"," Shop focused on selling toys.
+",,,,,,,
+1,"shop","travel_agency","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dtravel_agency"," Shop focused on selling tickets for travelling.
+",,,,,,,
+1,"shop","vacant","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dvacant"," Not an actual shop, of course. You may want to use this tag when a shop has been closed, to avoid confusing other mappers who may not know about this (please leave a note=*). Plus, you can keep the corresponding object and simply edit it when a new shop opens on the same spot. May be confusing, a vacancy is not a shop and should not show up on maps as a shop. disused:shop=* is an alternative
+",,,,,,,
+1,"shop","weapons","http://wiki.openstreetmap.org/wiki/Tag:shop%3Dweapons"," Shop focused on selling weapons like knifes, guns etc.
+",,,,,,,
+0,"sport","9pin","http://wiki.openstreetmap.org/wiki/Tag:sport%3D9pin","  Nine-pin bowling (Also known as kegeln in German) is a bowling game played primarily in Europe with only nine pins.Useful combination: amenity=bar;pub;restaurant and leisure=bowling_alleySee Also: sport=10pin;bowls;horseshoes
+",,,,,,,
+0,"sport","10pin","http://wiki.openstreetmap.org/wiki/Tag:sport%3D10pin","  Ten-pin bowling is a sport in which a player, or \bowler\"" rolls a bowling ball down a lane with the objective of scoring points by knocking down as many pins as possible. In Canada","the United States","United Kingdom and Australia","the game is commonly referred to as just \""Bowling\"".Useful combination: amenity=bar;pub;restaurant and leisure=bowling_alleySee Also: sport=9pin;bowls;horseshoes",,,,
+0,",
+sport""","american_football","http://wiki.openstreetmap.org/wiki/Tag:sport%3Damerican_football","  American football is a sport played by two teams of eleven players on a rectangular field with goalposts at each end.Useful combination: leisure=pitch;stadium;sports_centreSee Also: sport=rugby_league;rugby_union;soccer, or sport=australian_football;canadian_footballThe ambiguous sport=football tag is sometimes confused with this one.
+",,,,,,,
+0,"sport","aikido","http://wiki.openstreetmap.org/wiki/Tag:sport%3Daikido","  Aikido is a Japanese martial art by blending with the motion of the attacker and redirecting the force of the attack rather than opposing it head-on.Useful combination: amenity=dojoSee Also: sport=judo;taekwondo
+",,,,,,,
+1,"sport","archery","http://wiki.openstreetmap.org/wiki/Tag:sport%3Darchery","  Archery is the art, practice, or skill of propelling arrows with the use of a bow.Useful combination: leisure=pitch;stadium;sports_centre - Indicating that Archery is the sport the facility or area is intended for.See Also: sport=shooting;fencing
+",,,,,,,
+0,"sports","athletics","http://wiki.openstreetmap.org/wiki/Tag:sports%3Dathletics","  Track and field athletics is a collection of sports which combines various athletic contests based on the skills of running, jumping, and throwing.Track and field is often categorised under the umbrella sport of athletics, which also includes road running, cross country running, and race walking.Useful combination: leisure=track;pitch;stadiumSee Also: sport=running;cycling
+",,,,,,,
+0,"sport","australian_football","http://wiki.openstreetmap.org/wiki/Tag:sport%3Daustralian_football","  Australian rules football, officially known as Australian football, also called football, footy, Aussie rules, or AFL is a sport played between two teams of eighteen players on the field of either an Australian football ground, a modified cricket field, or a similarly sized sports venue.Useful combination: leisure=pitch;stadium;sports_centreSee Also: sport=soccer;american_football;canadian_football
+",,,,,,,
+0,"sport","base","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dbase","  BASE jumping, is an activity that employs an initially packed parachute to jump from fixed objects. \B.A.S.E.\"" is an acronym that stands for four categories of fixed objects: buildings","antennas","spans","and earth. A more down to earth approach to parachuting.Useful combination: building=*","man_made=*","bridge=*","natural=cliffSee Also: sport=cliff_diving;free_flying;paragliding",
+0,",
+sport""","badminton","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dbadminton","  Badminton is a racquet sport played by singles or in teams of two, who take positions on opposite halves of a rectangular court (pitch) divided by a net. Players score points by striking a shuttlecock with their racquet so that it passes over the net.Useful combination: leisure=pitch;sports_centreSee Also: sport=tennis;paddle_tennis;table_tennis
+",,,,,,,
+0,"sport","bandy","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dbandy","  Bandy is a team winter sport played on ice, in which skaters use sticks to direct a ball into the opposing team's goal. The sport has common background with association football, ice hockey and field hockey. The bandy field is about the same size as a football pitch. It is played on ice like ice hockey.Useful combination: leisure=pitch;stadium;sports_centre, surface=*See Also: sport=ice_hockey;soccer;field_hockey
+",,,,,,,
+1,"sport","baseball","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dbaseball","  Baseball is a bat-and-ball game played between two teams of nine players on a field (pitch or stadium) each who take turns batting and fielding.Useful combination: leisure=pitch;stadium;sports_centre, surface=*See Also: sport=cricket
+",,,,,,,
+1,"sport","basketball","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dbasketball","  Basketball is a sport played by two teams of five players on a rectangular court. Played indoors or outdoorsUseful combination: leisure=pitch;stadium;sports_centre, surface=*See Also: sport=volleyball;handball
+",,,,,,,
+0,"sport","beachvolleyball","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dbeachvolleyball","  Beach volleyball is a team sport played by two teams of two players on a sand court divided by a net.Useful combination: leisure=pitch;beach_resort;sports_centre, natural=sand;beach, surface=sandSee Also: sport=volleyball;handball
+",,,,,,,
+0,"sport","billiards","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dbilliards","  Cue sports, also known as billiard sports, are a wide variety of games of skill generally played with a cue stick which is used to strike billiard balls, moving them around a cloth-covered billiards table bounded by rubber cushions.Useful combination: leisure=bowling_alley, amenity=bar;pub;restaurantSee Also: sport=darts;10pin;horseshoes
+",,,,,,,
+0,"sport","bmx","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dbmx","  BMX or Bicycle motocross is a cycle sport performed on BMX bikes, either in competitive BMX racing or freestyle BMX, or else in general on- or off-road recreation.Useful combination: leisure=track;pitch;sports_centre, surface=earth, length=*, lanes=*, surface=*See Also: sport=cycling
+",,,,,,,
+0,"sport","bobsleigh","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dbobsleigh","  Bobsleigh, Luge, or Bobslede is a winter sport in which teams of two or four make timed runs down narrow, twisting, banked, iced tracks in a gravity-powered sled.Useful combination: leisure=track;sports_centre, surface=*See Also: sport=toboggan, Piste Maps, Winter sports
+",,,,,,,
+0,"sport","boules","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dboules","  Boules (Pétanque, lyonnaise, bocce, and bocce volo) is a group of games in which the objective is to throw or roll heavy balls as close as possible to a small target ball.DO NOT USE this old style combined with the tag type=* when describing the type of game. This is meant to specify the type of relations.Useful combination: leisure=pitch;sports_centre, surface=*, For game type use boules=petanque;lyonnaise;bocceSee Also: sport=bowls;pelota;10pin, sport=9pin;horseshoes
+",,,,,,,
+0,"sport","bowls","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dbowls","  Bowls or lawn bowls is a sport in which the objective is to roll biased balls so that they stop close to a smaller ball called a  \jack\"" or \""kitty\"". It is played on a pitch which may be flat (for \""flat-green bowls\"") or convex or uneven (for \""crown-green bowls\""). It is normally played outdoors (although there are many indoor venues) and the outdoor surface is either natural grass","artificial turf","or cotula (in New Zealand).Useful combination: leisure=pitch;stadium;sports_centre","surface=*See Also: sport=boules;pelota;10pin","sport=9pin;horseshoes",,,
+0,",
+sport""","boxing","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dboxing","  Boxing (pugilism, prize fighting, the sweet science or in Greek pygmachia) is a combat sport played in a boxing ring in which two people engage in a contest of strength, speed, reflexes, endurance, and will, by throwing punches  with gloved hands against each other.Useful combination: leisure=stadium;sports_centre;pitch, surface=*See Also: sport=aikido;fencing;athletics
+",,,,,,,
+0,"sport","canadian_football","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dcanadian_football","  Canadian football (CFL) is a form of gridiron football played in Canada in which two teams of 12 players each compete for territorial control of a field of play called a pitch. In Canada, the term football may refer to Canadian football and American football collectively, or either sport specifically, depending on context.Useful combination: leisure=pitch;stadium;sports_centre and surface=*See Also: sport=american_football;australian_football;rugby_league, sport=soccer;rugby_union
+",,,,,,,
+0,"sport","canoe","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dcanoe","  Canoe and  Kayak are a narrow human-powered boats, primarily designed to be manually propelled by means of a paddle for the use of racing, whitewater canoeing, touring and camping, freestyle, and general recreation. The intended use of the canoe dictates its hull shape and construction material.Useful combination: landuse=recreation_ground, leisure=sports_centre, amenity=canoe_hire;boat_rental, club=*, shop=*See Also: sport=water_ski;swimming;surfing
+",,,,,,,
+0,"sport","chess","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dchess","  Chess is a two-player strategy board game played on a chessboard.The intended use is for big chess-boards in the open air.Useful combination: leisure=pitch;picnic_tableSee Also: club=chess
+",,,,,,,
+0,"sport","cliff_diving","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dcliff_diving","  Non-competitive diving is jumping from a cliff or a rock into water. Such non-competitive diving can occur indoors and outdoors.  Outdoor diving typically takes place from cliffs or other rock formations either into fresh or salt water.  However, man-made diving platforms are sometimes constructed in popular swimming destinations.  Outdoor diving requires knowledge of the water depth and currents as conditions can be dangerous.Useful combination: natural=cliff, height=*, depth=*, tidal=*, surface=*, note=*See Also: sport=climbing;swimming
+",,,,,,,
+0,"sport","climbing","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dclimbing","  Rock climbing marks elements to represent natural climbing sites (climbing areas, sectors, crags, halls, frozen waterfalls, etc.) or artificial climbs (Climbing walls, Indoor climbing, etc.).Useful combination: landuse=recreation_ground, leisure=sports_centre, surface=*See Also: name=*, ele=*, website=*, url=*, opening_hours=*, fee=*
+",,,,,,,
+0,"sport","climbing_adventure","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dclimbing_adventure","  Climbing Adventure often called \Adventure Park\""","\""Ropes Courses\""","\""Climbing Adventure\""","\""Zip-line\""","or \""Treetop Adventure\""","can be used for the recreational sport when people get mountain hiking accessories and try to climb","walk or otherwise move on prebuilt wires and other objects high above on the trees using continuous safety measures. These are usually open for everyone including kids and do not require special abilities apart from good physical condition.Useful combination: landuse=recreation_ground","leisure=sports_centreSee Also: sport=climbing"
+0,",
+sport""","cockfighting","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dcockfighting","  Cockfighting is a common spectator sport in many countries between two roosters (cocks), held in a ring called a cockpit.Useful combination: leisure=pitch for informal rings.
+",,,,,,,
+0,"sport","cricket","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dcricket","  Cricket is a bat-and-ball sport contested by two teams, usually of eleven players, each on a large grass Cricket pitch. Played on a large circular or oval-shaped grassy Cricket field ground.Useful combination: leisure=pitch;stadium;sports_centre, landuse=recreation_ground, surface=*See Also: sport=baseball
+",,,,,,,
+0,"sport","croquet","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dcroquet","  Croquet is a sport or game that is played between two or more players embedded on a small grass playing court or pitch which involves hitting plastic or wooden balls with a mallet through hoops (often called \wickets\"" in the United States).Useful combination: leisure=pitch;stadium;sports_centre","landuse=recreation_ground","surface=*See Also: sport=field_hockey",,,,,
+0,",
+sport""","curling","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dcurling","  Curling is a sport in which players slide stones on a sheet of ice towards a target area which is segmented into four concentric rings. It is related to bowls, boules and shuffleboard. Indicating that curling is the sport the facility is intended for.Useful combination: leisure=pitch;stadium;sports_centreSee Also: sport=ice_stock;bowls;boules, surface=*
+",,,,,,,
+0,"sport","cycling","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dcycling","  Cycling, also called bicycling, Mountain biking or biking, is the use of bicycles for transport, recreation, or for sport.Useful combination: leisure=track;stadium;sports_centre, surface=*
+",,,,,,,
+0,"sport","darts","http://wiki.openstreetmap.org/wiki/Tag:sport%3Ddarts","  Darts is a form of throwing game in which small missiles are thrown at a circular target (dartboard) fixed to a wall.Useful combination: amenity=bar;pub;restaurant, leisure=bowling_alleySee Also: sport=billiards;10pin;horseshoes
+",,,,,,,
+0,"sport","dog_racing","http://wiki.openstreetmap.org/wiki/Tag:sport%3Ddog_racing","  Greyhound racing being the most common type of this sport. There are other sports that involves dog racing, such as Dogsled, Dachshund, Dog scootering, Lure coursing, and Skijoring racing.Useful combination: leisure=track;stadium;sports_centre, surface=*See Also: sport=horse_racing
+",,,,,,,
+0,"sport","equestrian","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dequestrian","  Equestrianism sports involving the skill of riding horses. See also Riding.
+Often associated internationally with show jumping and dressage, but also including endurance riding, eventing, reining, tent pegging, vaulting, polo, horse racing, driving, rodeo and more.See also sport=horse_racing
+
+",,,,,,,
+0,"sport","fencing","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dfencing","  Fencing is the martial art of fighting with blades. The most common version of fencing today, also called olympic fencing or competitive fencing, is divided into three weapon categories: foil, sabre (spelled saber in the United States) and épée. Classical fencing uses the same three weapons, but approaches fencing as a martial art.Useful combination: leisure=pitch;stadium;sports_centre, surface=*See Also: sport=boxing;wrestling
+",,,,,,,
+0,"sport","field_hockey","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dfield_hockey","  Field hockey is a team sport of the hockey family. Players use sticks made out of wood or fiber glass to hit a round, hard, rubber like ball. The game can be played on a grass field or a turf field as well as an indoor board surface.Useful combination: leisure=pitch;sports_centre;stadiumSee Also: sport=ice_hockey;ice_skating
+",,,,,,,
+0,"sport","free_flying","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dfree_flying","  Hang gliding and/or  Paragliding that is a foot launched aircraft, without motorisation. Paragliding/Hanggliding/... takeoff, landings, towing, etc. and related amenities and properties
+",,,,,,,
+0,"sport","gaelic_games","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dgaelic_games","  Gaelic games such as Hurling, Gaelic Football, Camogie, predominantly played in Ireland.
+For tagging individual games under this category see the tag page.  
+
+",,,,,,,
+0,"sport","golf","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dgolf","  Golf for golf courses, use leisure=golf_course
+",,,,,,,
+1,"sport","gymnastics","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dgymnastics","  Gymnastics
+",,,,,,,
+0,"sport","handball","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dhandball","  Handball
+",,,,,,,
+0,"sport","hapkido","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dhapkido","  Hapkido is a dynamic and highly eclectic Korean martial art. It is a form of self-defense that employs joint locks, grappling and throwing techniques of other martial arts, as well as kicks, punches, and other striking attacks.Useful combination: amenity=dojoSee Also: sport=aikido;judo;taekwondo
+",,,,,,,
+0,"sport","horseshoes","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dhorseshoes","  Horseshoes
+",,,,,,,
+0,"sport","horse_racing","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dhorse_racing","  Horse racing. It has been proposed that this page or section be merged with sport=equestrian
+",,,,,,,
+0,"sport","ice_hockey","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dice_hockey","  Ice Hockey is a team sport played on ice in which two teams of skaters use sticks to shoot a hard rubber hockey puck into their opponent's net to score points.Useful combination: leisure=ice_rink;stadium;sports_centreSee Also: sport=field_hockey;ice_skating
+",,,,,,,
+2,"sport","ice_skating","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dice_skating","  Ice skating is a sport or pastime by moving on ice while using ice skates.Useful combination: leisure=ice_rink;sports_centre;pitchSee Also: sport=ice_hockey;roller_skatingThe disambiguous sport=skating tag is sometimes confused with this one.
+",,,,,,,
+0,"sport","ice_stock","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dice_stock","  Ice stock sport, also known as Bavarian Curling, is a winter sport, somewhat similar to  Curling. In German, it is known as  EisstockschießenUseful combination: leisure=pitch;stadium;sports_centreSee Also: sport=curling
+",,,,,,,
+0,"sport","judo","http://wiki.openstreetmap.org/wiki/Tag:sport%3Djudo","  Judo
+",,,,,,,
+0,"sport","karting","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dkarting","  Kart racing. When used together with highway=raceway then please add also area=no, otherwise the raceway is not rendered.See also sport=motor;motocross
+",,,,,,,
+0,"sport","kitesurfing","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dkitesurfing","  Kitesurfing
+",,,,,,,
+0,"sport","korfball","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dkorfball","  Korfball
+",,,,,,,
+0,"sport","model_aerodrome","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dmodel_aerodrome","  Radio-controlled aircraft
+",,,,,,,
+2,"sport","motocross","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dmotocross","  Motocross is a form of motorcycle racing held on enclosed off-road circuits.See also sport=motor;karting
+",,,,,,,
+0,"sport","motor","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dmotor","  Motorsport.See also sport=karting;motocross
+",,,,,,,
+0,"sport","multi","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dmulti","  Use this to indicate that that this pitch can be used to practise different kinds of sport.This is a shortcut to indicate that several unspecified sports are catered for, while you might instead use a semi-colon separated list of sports as a value (to be more precise)
+",,,,,,,
+0,"sport","netball","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dnetball","   Netball is a sport played by two teams on a rectangular court.
+",,,,,,,
+0,"sport","obstacle_course","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dobstacle_course","  Obstacle course. A series of challenging physical obstacles an individual or team must navigate usually while being timed.
+",,,,,,,
+0,"sport","orienteering","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dorienteering","  Orienteering. Navigation sport with Map and compass.
+",,,,,,,
+0,"sport","paddle_tennis","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dpaddle_tennis","  Paddle tennis
+",,,,,,,
+0,"sport","parachuting","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dparachuting","  Parachuting or skydiving take-off or landing site
+",,,,,,,
+0,"sport","paragliding","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dparagliding","  Paragliding. Paragliding take-off or landing site
+",,,,,,,
+0,"sport","pelota","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dpelota","  Pelota. Spanish Group name for a number of ball games (Baseball, Basque pelota, Bocce, Jai alai, Valencian pilota).
+",,,,,,,
+0,"sport","racquet","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dracquet","  Racquetball. Group name of sports that are played with a racquet
+",,,,,,,
+0,"sport","rc_car","http://wiki.openstreetmap.org/wiki/Tag:sport%3Drc_car","  Radio-controlled car
+",,,,,,,
+1,"sport","roller_skating","http://wiki.openstreetmap.org/wiki/Tag:sport%3Droller_skating","  Roller skating is a sport or recreational activity by travelling on surfaces with roller skates.See Also: sport=ice_skating;skateboard;field_hockeyThe disambiguous sport=skating tag is sometimes confused with this one.
+",,,,,,,
+0,"sport","rowing","http://wiki.openstreetmap.org/wiki/Tag:sport%3Drowing","  Rowing
+",,,,,,,
+0,"sport","rugby_league","http://wiki.openstreetmap.org/wiki/Tag:sport%3Drugby_league","  Rugby league. One of the two codes of rugby football, split from rugby union in 1895, along with subsequent rule changes
+",,,,,,,
+0,"sport","rugby_union","http://wiki.openstreetmap.org/wiki/Tag:sport%3Drugby_union","  Rugby union. Rugby union is a full contact team sport, a form of football which originated in England in the early 19th century.
+",,,,,,,
+1,"sport","running","http://wiki.openstreetmap.org/wiki/Tag:sport%3Drunning","  Running
+",,,,,,,
+0,"sport","sailing","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dsailing","  Sailing
+",,,,,,,
+1,"sport","scuba_diving","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dscuba_diving","  Scuba diving
+",,,,,,,
+0,"sport","shooting","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dshooting","  Shooting sportSee also sport=archery
+",,,,,,,
+2,"sport","skateboard","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dskateboard","  Skateboard
+",,,,,,,
+1,"sport","soccer","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dsoccer","  Soccer. Association football, more commonly known as football or soccer, a team sport played between two teams of eleven players. Note: While called \football\"" (fussball","fotball","…) in many countries","and by the International Olympic Committee","it is best to tag it as \""soccer\"" to avoid confusion with other usages of \""football\""",,,
+0,",
+sport""","surfing","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dsurfing","  Surfing
+",,,,,,,
+3,"sport","swimming","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dswimming","  Swimming
+",,,,,,,
+0,"sport","table_tennis","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dtable_tennis","  Table tennis
+",,,,,,,
+0,"sport","table_soccer","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dtable_soccer","  Table Soccer or Table Football, also known as Foosball, Fussball, Kicker, or Tecball, is a table-top game and sport based off association football (soccer).Useful combination: amenity=pub;bar;restaurantSee Also: sport=soccer;table_tennis;billiards, leisure=amusement_arcade;adult_gaming_centre, club=table_soccer
+",,,,,,,
+0,"sport","tennis","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dtennis","  Tennis
+",,,,,,,
+0,"sport","toboggan","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dtoboggan","  Toboggan. public sledding run; see also Piste Maps (piste:type=sled, piste:difficulty=advanced, piste:lit=yes)
+",,,,,,,
+0,"sport","volleyball","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dvolleyball","  Volleyball
+",,,,,,,
+0,"sport","water_ski","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dwater_ski","  Waterskiing either on a cable ski course, or pulled by a boat. Requires area=yes/no on closed ways, to distinguish between closed-loop cables and areas.
+",,,,,,,
+0,"sport","yoga","http://wiki.openstreetmap.org/wiki/Tag:sport%3Dyoga","  Yoga
+",,,,,,,
+1,"tourism","alpine_hut","http://wiki.openstreetmap.org/wiki/Tag:tourism%3Dalpine_hut","  Alpine hut or a mountain hut is a remote building positioned in the mountains designed to provided lodging accommodation for mountaineers, climbers and hikers. The access is usually restricted to foot, mountain bike or ski. Typically, these are operated by an Alpine Club or a similar organisation.
+",,,,,,,
+1,"tourism","apartment","http://wiki.openstreetmap.org/wiki/Tag:tourism%3Dapartment"," This stands for a holiday apartment or holiday flat which is a place that can be rented for holiday purposes. They do not offer services like receptions, bars or breakfast like a hotel or a guesthouse would, although, normally these include a cooking facility. This tag can be applied to a building accommodating one or more holiday flats. It may be similar to the tag tourism=chalet where these are found more as single houses in mountain regions, whereas, apartment is often found in villages, and in buildings with several flats.
+",,,,,,,
+1,"tourism","aquarium","http://wiki.openstreetmap.org/wiki/Tag:tourism%3Daquarium"," An aquarium, meant as  Public aquarium is the aquatic counterpart of a zoo with living aquatic animals for public viewing.
+",,,,,,,
+2,"tourism","artwork","http://wiki.openstreetmap.org/wiki/Tag:tourism%3Dartwork","  Artwork is used to tag public pieces of art. Typically, these are outdoors.
+",,,,,,,
+3,"tourism","attraction","http://wiki.openstreetmap.org/wiki/Tag:tourism%3Dattraction","  Attraction or tourist attraction is a general place of interest for visitors. Typically used for its natural or historical significance. This tag is often used in combination with other tags such as historic=*, building=*, amenity=*.
+",,,,,,,
+0,"tourism","camp_site","http://wiki.openstreetmap.org/wiki/Tag:tourism%3Dcamp_site","  Campsite, camp ground or camping pitch is an area where people can temporarily use a shelter, such as a tent, camper van or sometimes a caravan. Typically, the area is spilt into \pitches\"" or \""sites\"".",,,,,,,
+0,",
+tourism""","caravan_site","http://wiki.openstreetmap.org/wiki/Tag:tourism%3Dcaravan_site","  Caravan site, caravan park or RV park is an area where people with caravans, motorhomes, recreational vehicles can stay overnight, or longer, in allotted spaces known as \pitches\"" or \""sites\"". They usually provide facilities including toilets","waste disposal","water supply","power supply etc.",,,,
+0,",
+tourism""","chalet","http://wiki.openstreetmap.org/wiki/Tag:tourism%3Dchalet"," Chalet is a type of accommodation used in the hospitality industry to describe one or more detached cottages with self-contained cooking facilities and/or bathroom and toilet facilities. This is not to be confused with the Swiss term for a type of wood house, use the tags building=cabin or building=yes instead. Similar to tourism=apartment, the tag apartment is often found in villages, and in buildings with several flats, while the tag chalet is found more as single houses in mountain regions.
+",,,,,,,
+3,"tourism","gallery","http://wiki.openstreetmap.org/wiki/Tag:tourism%3Dgallery","  Art gallery or art museum is an area or typically a building that displays a variety of visual art exhibitions; The most common exhibits being paintings, sculpture or photography. This is not to be confused with tourism=museum.
+",,,,,,,
+0,"tourism","guest_house","http://wiki.openstreetmap.org/wiki/Tag:tourism%3Dguest_house","  Guest houses, similar to a Hostel, provides lodging accommodation without a hotel license that is typically owner-operated. They usually offer a private room served with breakfast, but the staff is not convenient around-the-clock. These range from custom-built guest houses to family-based homes, frequently refer to as a bed and breakfast.
+",,,,,,,
+2,"tourism","hostel","http://wiki.openstreetmap.org/wiki/Tag:tourism%3Dhostel","  Hostels provide inexpensive accommodation, typically with them having shared bedrooms, bathrooms, kitchens, and lounges.
+",,,,,,,
+2,"tourism","hotel","http://wiki.openstreetmap.org/wiki/Tag:tourism%3Dhotel","  Hotels provide accommodation for guests with usually numbered rooms. Some facilities provided may include a basic bed, storage for clothing and additional guest facilities may include swimming pool, childcare, and conference facilities.
+",,,,,,,
+2,"tourism","information","http://wiki.openstreetmap.org/wiki/Tag:tourism%3Dinformation","  Information, visitor center or centre,  visitor information center or tourist information center is an information source for tourists, travellers and visitors. To additionally describe the kind of information use the tag information=*.
+",,,,,,,
+2,"tourism","motel","http://wiki.openstreetmap.org/wiki/Tag:tourism%3Dmotel","  Motel is an abbreviation which is shortened by the term \motor hotel\"". It's an establishment that provides accommodation designed for motorists usually on a short-term basis","with convenient parking for motor cars at or close to the room.",,,,,,
+2,",
+tourism""","museum","http://wiki.openstreetmap.org/wiki/Tag:tourism%3Dmuseum","  Museum is an institution which has exhibitions on scientific, historical, artistic, or cultural artifacts. Typically these are open to the public as a tourist attraction.
+",,,,,,,
+2,"tourism","picnic_site","http://wiki.openstreetmap.org/wiki/Tag:tourism%3Dpicnic_site","  Picnic site is an area that is suitable for eating outdoors and may have a number of facilities within it. For example they might include: toilets, water taps for drinking or cleaning, BBQ grills, benches, table with benches (picnic tables) and covered structures for bad weather. They also may be used on a grassy area that is popular for picnics.
+",,,,,,,
+2,"tourism","theme_park","http://wiki.openstreetmap.org/wiki/Tag:tourism%3Dtheme_park","  Theme park or amusement park is an area where entertainment is provided by rides, game concessions, etc., catering to large numbers to people. For example: Disneyland, Magic Kingdom, Universal Studios Florida, Europa Park, and Ocean Park.
+",,,,,,,
+2,"tourism","viewpoint","http://wiki.openstreetmap.org/wiki/Tag:tourism%3Dviewpoint","  Viewpoint, also known as a overlook, observation point, lookout, viewing point,  scenic area or vista point is a place for visitors, often high, with good a scenery view of the surrounding countryside or notable buildings.
+",,,,,,,
+2,"tourism","wilderness_hut","http://wiki.openstreetmap.org/wiki/Tag:tourism%3Dwilderness_hut","  Wilderness hut or backcountry hut is a remote building, with generally a fireplace, intended to provide temporary shelter and sleeping accommodation. See also  Bothy
+",,,,,,,
+2,"tourism","zoo","http://wiki.openstreetmap.org/wiki/Tag:tourism%3Dzoo","  Zoo is an abbreviation for a zoological garden or park that has confined animals on display for viewing by the public.
+",,,,,,,
+2,"tourism","yes","http://wiki.openstreetmap.org/wiki/Tag:tourism%3Dyes"," To add tourist interest to something described by other tags.
+",,,,,,,
+0,"tunnel","yes","http://wiki.openstreetmap.org/wiki/Tag:tunnel%3Dyes"," If the railway goes below ground. Should be always present on subways.
+",,,,,,,
+0,"tunnel","culvert","http://wiki.openstreetmap.org/wiki/Tag:tunnel%3Dculvert"," For streams passing under a road in culverts use tunnel=culvert+layer=-1 on the section of stream passing under the road. Don't use either of these tags for streams passing under bridges.
+",,,,,,,
+0,"waterway","river","http://wiki.openstreetmap.org/wiki/Tag:waterway%3Driver"," For narrow rivers which will be rendered as a line.  For larger rivers see also waterway=riverbank (Other languages).
+",,,,,,,
+0,"waterway","riverbank","http://wiki.openstreetmap.org/wiki/Tag:waterway%3Driverbank"," Used for larger rivers in addition to waterway=river, to define an area between the opposite riverbanks. See water=river for alternative tagging.
+",,,,,,,
+0,"waterway","stream","http://wiki.openstreetmap.org/wiki/Tag:waterway%3Dstream"," A naturally-formed waterway that is too thin to be classed as a river. An active, able-bodied person should be able to jump over it if trees along it aren't too thick.
+",,,,,,,
+0,"waterway","canal","http://wiki.openstreetmap.org/wiki/Tag:waterway%3Dcanal"," An artificial open waterway used for transportation, waterpower, or irrigation.(Other languages).
+",,,,,,,
+0,"waterway","drain","http://wiki.openstreetmap.org/wiki/Tag:waterway%3Ddrain"," An artificial waterway for carrying storm water or industrial discharge.
+",,,,,,,
+0,"waterway","ditch","http://wiki.openstreetmap.org/wiki/Tag:waterway%3Dditch"," A small to moderate depression created to channel water.
+",,,,,,,
+0,"waterway","fairway","http://wiki.openstreetmap.org/wiki/Tag:waterway%3Dfairway"," A navigable route in a lake or sea marked by buoys. (Note: conflicts with seamark:type=fairway)
+",,,,,,,
+0,"waterway","dock","http://wiki.openstreetmap.org/wiki/Tag:waterway%3Ddock"," An 'enclosed' area of water used for building or repairing ships.
+",,,,,,,
+0,"waterway","boatyard","http://wiki.openstreetmap.org/wiki/Tag:waterway%3Dboatyard"," Boat yard – a place for constructing, repairing and storing vessels out of the water.
+",,,,,,,
+0,"waterway","dam","http://wiki.openstreetmap.org/wiki/Tag:waterway%3Ddam"," A wall built across a river or stream to impound the water. A dam normally does not have water flowing over the top of it.
+",,,,,,,
+0,"waterway","weir","http://wiki.openstreetmap.org/wiki/Tag:waterway%3Dweir"," A barrier built across a river, sometimes to divert water for industrial purposes. Water can still flow over the top.
+",,,,,,,
+0,"waterway","waterfall","http://wiki.openstreetmap.org/wiki/Tag:waterway%3Dwaterfall"," A waterfall, use in combination with natural=cliff
+",,,,,,,
+0,"waterway","lock_gate","http://wiki.openstreetmap.org/wiki/Tag:waterway%3Dlock_gate"," To mark the position of gates at each end of a lock. Alternatively, for smaller locks use a single lock=yes node in the middle of the lock.
+",,,,,,,
+0,"waterway","turning_point","http://wiki.openstreetmap.org/wiki/Tag:waterway%3Dturning_point"," A place to turn the driving direction for vessels, where the boats are longer than the river/canal is wide. Use maxlength=* to denote the maximum length of the vessel.
+",,,,,,,
+0,"waterway","water_point","http://wiki.openstreetmap.org/wiki/Tag:waterway%3Dwater_point"," A place to fill fresh water holding tanks of a boat.
+",,,,,,,
