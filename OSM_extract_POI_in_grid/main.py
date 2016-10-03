@@ -17,10 +17,6 @@ processor=process.Processor()
 #processor.needed_tags() #выгрузка всей базы в шейпы
 processor.grid_cycle() #генерирует в цикле сетку по одной строке, и пересекает точки
 
-#deprecated processor.generate_grid() #полуручная генерация сетки
-#deprecated processor.points_in_grid()
-
-
 
 
 

@@ -1,9 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Project: Выкачать домики из OSM
+# Project: Специальное вытаскивание данных из OSM по специальному алгоритму
 # Author: Artem Svetlov <artem.svetlov@nextgis.com>
 # Copyright: 2016, NextGIS <info@nextgis.com>
 
+'''
+ ▗▄▖  ▗▄▖ ▗▄ ▄▖           ▗▄▄▖                ▄▄ ▄▄▄ ▗▄▖              ▄▄ █ ▗▄▖             
+ █▀█ ▗▛▀▜ ▐█ █▌           ▐▛▀▜▖          ▐▌  █▀▀▌▀█▀▗▛▀▜             ▐▛▀ ▀ ▝▜▌ ▐▌          
+▐▌ ▐▌▐▙   ▐███▌   ▐▄▖     ▐▌ ▐▌▟█▙ ▗▟██▖▐███▐▌    █ ▐▙      ▐▄▖     ▐█████  ▐▌▐███ ▟█▙ █▟█▌
+▐▌ ▐▌ ▜█▙ ▐▌█▐▌    ▝▀▙▖   ▐██▛▐▛ ▜▌▐▙▄▖▘ ▐▌ ▐▌▗▄▖ █  ▜█▙     ▝▀▙▖    ▐▌  █  ▐▌ ▐▌ ▐▙▄▟▌█▘  
+▐▌ ▐▌   ▜▌▐▌▀▐▌    ▗▄▛▘   ▐▌  ▐▌ ▐▌ ▀▀█▖ ▐▌ ▐▌▝▜▌ █    ▜▌    ▗▄▛▘    ▐▌  █  ▐▌ ▐▌ ▐▛▀▀▘█   
+ █▄█ ▐▄▄▟▘▐▌ ▐▌   ▐▀▘     ▐▌  ▝█▄█▘▐▄▄▟▌ ▐▙▄ █▄▟▌▄█▄▐▄▄▟▘   ▐▀▘      ▐▌▗▄█▄▖▐▙▄▐▙▄▝█▄▄▌█   
+ ▝▀▘  ▀▀▘ ▝▘ ▝▘           ▝▘   ▝▀▘  ▀▀▀   ▀▀  ▀▀ ▀▀▀ ▀▀▘             ▝▘▝▀▀▀▘ ▀▀ ▀▀ ▝▀▀ ▀                                                                                            
+'''
 
 import os
 
@@ -13,8 +22,9 @@ import pprint
 import datetime
 from time import gmtime, strftime
 
+import config
+
 global str
-# sudo mount -t vboxsf -o uid=user,rw GIS /home/user/GIS
 
 
 
@@ -23,7 +33,7 @@ class Processor:
 
     statistic={}
 	    #Define our connection string
-    conn_string = "host=localhost user=trolleway dbname=osm_ch3 password=16208 "
+    conn_string = config.psycopg2_postgresql_connection_string
      
 	    # print the connection string we will use to connect
 
@@ -103,17 +113,36 @@ class Processor:
 
         return filterstring
 
+
+
+
+
     def osmimport(self,filename):
+        '''
+▄▄▄                           ▗▄▖  ▗▄▖ ▗▄ ▄▖               ▗▄▄▖                ▄▄ ▄▄▄ ▗▄▖ 
+▀█▀                    ▐▌     █▀█ ▗▛▀▜ ▐█ █▌    ▐▌         ▐▛▀▜▖          ▐▌  █▀▀▌▀█▀▗▛▀▜ 
+ █ ▐█▙█▖▐▙█▙  ▟█▙ █▟█▌▐███   ▐▌ ▐▌▐▙   ▐███▌   ▐███ ▟█▙    ▐▌ ▐▌▟█▙ ▗▟██▖▐███▐▌    █ ▐▙   
+ █ ▐▌█▐▌▐▛ ▜▌▐▛ ▜▌█▘   ▐▌    ▐▌ ▐▌ ▜█▙ ▐▌█▐▌    ▐▌ ▐▛ ▜▌   ▐██▛▐▛ ▜▌▐▙▄▖▘ ▐▌ ▐▌▗▄▖ █  ▜█▙ 
+ █ ▐▌█▐▌▐▌ ▐▌▐▌ ▐▌█    ▐▌    ▐▌ ▐▌   ▜▌▐▌▀▐▌    ▐▌ ▐▌ ▐▌   ▐▌  ▐▌ ▐▌ ▀▀█▖ ▐▌ ▐▌▝▜▌ █    ▜▌
+▄█▄▐▌█▐▌▐█▄█▘▝█▄█▘█    ▐▙▄    █▄█ ▐▄▄▟▘▐▌ ▐▌    ▐▙▄▝█▄█▘   ▐▌  ▝█▄█▘▐▄▄▟▌ ▐▙▄ █▄▟▌▄█▄▐▄▄▟▘
+▀▀▀▝▘▀▝▘▐▌▀▘  ▝▀▘ ▀     ▀▀    ▝▀▘  ▀▀▘ ▝▘ ▝▘     ▀▀ ▝▀▘    ▝▘   ▝▀▘  ▀▀▀   ▀▀  ▀▀ ▀▀▀ ▀▀▘ 
+
+        '''
         print 'Import OSM to PostGIS'
 
 
-        cmd='''
-psql -U trolleway -d osm_ch3 -c "DROP TABLE planet_osm_line CASCADE;"
-psql -U trolleway -d osm_ch3 -c "DROP TABLE planet_osm_point CASCADE;"
-psql -U trolleway -d osm_ch3 -c "DROP TABLE planet_osm_polygon CASCADE;"
-psql -U trolleway -d osm_ch3 -c "DROP TABLE planet_osm_roads CASCADE;"
+
+
+        sql='''
+        DROP TABLE planet_osm_line CASCADE;
+        DROP TABLE planet_osm_point CASCADE;
+        DROP TABLE planet_osm_polygon CASCADE;
+        DROP TABLE planet_osm_roads CASCADE;
+
         '''
-        os.system(cmd)
+        self.cursor.execute(sql)
+        self.conn.commit()
+
     
         print 'pbf to o5m'
         cmd='osmconvert {filename}.osm.pbf -o={filename}.o5m'.format(filename=filename)
@@ -122,7 +151,7 @@ psql -U trolleway -d osm_ch3 -c "DROP TABLE planet_osm_roads CASCADE;"
 
         print 'o5m tag filtration'
         cmd='osmfilter {filename}.o5m --drop-author --keep="{fl}" --out-o5m >{filename}-filtered.o5m'.format(filename=filename, fl=self.generate_filter_string())
-        #print cmd        
+        print cmd        
         #os.system(cmd)
 
         print 'o5m to pbf'
@@ -132,19 +161,11 @@ psql -U trolleway -d osm_ch3 -c "DROP TABLE planet_osm_roads CASCADE;"
 
 
         print 'pbf to postgis'
-        cmd='osm2pgsql -s --create --multi-geometry --latlon --database osm_ch3 --username trolleway -C 12000 --number-processes 3    --style special.style {filename}-filtered.pbf'.format(filename=filename)
+        cmd='osm2pgsql {osm2pgsql_config}  -s --create --multi-geometry --latlon   -C 12000 --number-processes 3 --password --style osm/special.style {filename}-filtered.pbf'.format(osm2pgsql_config=config.osm2pgsql,filename=filename)
         print cmd        
         os.system(cmd)
 
-        #print cmd
-        #print "osm2pgsql -s --create --multi-geometry --latlon --database osm_ch3 --username trolleway -C 12000 --number-processes 3   --style special.style  osm/oklahoma-latest.osm.pbf"
-        '''
 
-time osmconvert osm/oklahoma-latest.osm.pbf -o=osm/oklahoma-latest.o5m
-time osmfilter osm/oklahoma-latest.o5m  --drop-author --out-o5m >osm/oklahoma-latest-da.o5m
-time osmconvert osm/oklahoma-latest-da.o5m -o=osm/oklahoma-latest-da.pbf
-time osm2pgsql -s --create --multi-geometry --latlon --database osm_ch3 --username trolleway -C 12000 --number-processes 3    --style special.style osm/oklahoma-latest-da.pbf
-        '''
 
 
 
@@ -158,35 +179,29 @@ time osm2pgsql -s --create --multi-geometry --latlon --database osm_ch3 --userna
         print now.isoformat()
         print('Создаются таблицы именно с нужными тегами ')
 
-        print ('Импортируем отдельно выгруженную границу страны, в которой нужно считать точки. Нужно, что бы в квадраты не попали точки находящиеся за Канадской границей. В файле границ не должно быть атрибутов. Выполнение.')
-        cmd='ogr2ogr -f "PostgreSQL" PG:"dbname=osm_ch3 user=trolleway" "osm/usa_boundary_osm_buffer.shp" -nln boundary  -nlt MultiPolygon -overwrite'
-        print cmd
-        os.system(cmd)
+        #print ('Импортируем отдельно выгруженную границу страны, в которой нужно считать точки. Нужно, что бы в квадраты не попали точки находящиеся за Канадской границей. В файле границ не должно быть атрибутов. Выполнение.')
+        #cmd='ogr2ogr -f "PostgreSQL" PG:"dbname=processing_osm_ch3 user=trolleway" "osm/usa_boundary_osm_buffer.shp" -nln boundary  -nlt MultiPolygon -overwrite'
+        #print cmd
+        #os.system(cmd)
 
         selects=self.generate_sql_query_string()
         
 
 
         sql='''
-    DROP TABLE IF EXISTS special_point;
-    CREATE TABLE special_point AS 
-    ( 
-    SELECT 
-        planet_osm_point.* 
-
-    FROM 
-        planet_osm_point
-    WHERE 
-
-    ''' + selects+ '''
-    )
-    ;
-
+        TRUNCATE TABLE special_point;
         '''
-
-        print('Создаётся таблица точек')
         self.cursor.execute(sql)
         self.conn.commit()
+
+        sql='''
+        INSERT INTO special_point (way, '''+self.generate_sql_columns_string()+''') (SELECT way AS way, '''+self.generate_sql_columns_string()+''' FROM planet_osm_point WHERE ''' + selects+ '''  ) 
+        '''
+        print('Добавляются  POI из таблицы точек')
+        self.cursor.execute(sql)
+        self.conn.commit()
+
+
 
         sql='''
         INSERT INTO special_point (way, '''+self.generate_sql_columns_string()+''') (SELECT ST_PointOnSurface(way) AS way, '''+self.generate_sql_columns_string()+''' FROM planet_osm_polygon WHERE ''' + selects+ '''  ) 
@@ -200,7 +215,7 @@ time osm2pgsql -s --create --multi-geometry --latlon --database osm_ch3 --userna
 
 
 
-        print 'Создать индексы для точек вручную. Затем нужно вручную отрезать точки, находящиеся за границей страны. Это я не знаю как. В needed_points потом должны быть только точки, попавшие в границу страны'
+        print 'Проверь, есть ли индексы'
         '''
 ALTER TABLE special_point ADD COLUMN key_column BIGSERIAL PRIMARY KEY;
 CREATE INDEX "special_point-index" ON  "special_point" USING GIST (way);
@@ -212,84 +227,25 @@ SELECT special_point.osm_id FROM special_point LEFT JOIN boundary  ON ST_Interse
 
         
         return 0;
-        os.system('ogr2ogr -overwrite  -progress -f "ESRI Shapefile" -nlt "POINT" output/point.shp  -lco ENCODING=UTF-8  PG:"host=localhost user=trolleway dbname=osm_ch3 password=16208" -sql "SELECT *  FROM special_point" -a_srs "EPSG:4326" ')
         
 
-        sql='''
-    DROP TABLE IF EXISTS special_polygon;
-    CREATE TABLE special_polygon AS 
-    ( 
-    SELECT 
-        planet_osm_polygon.* 
 
-    FROM 
-        planet_osm_polygon
-    WHERE 
-
-    ''' + processor.selects+ '''
-    )
-    ;
-
-        '''
-
-
-        print('Создаётся таблица полигонов')
-        processor.cursor.execute(sql)
-        processor.conn.commit()
-        os.system('ogr2ogr -overwrite  -progress  -f "GeoJSON" -nlt "MULTIPOLYGON" output/polygon.geojson  -lco ENCODING=UTF-8  PG:"host=localhost user=trolleway dbname=osm_ch2 password=16208"     -a_srs "EPSG:4326" "special_polygon"')
-
-        '''-where "OGR_GEOMETRY=\'MULTIPOLYGON\'"'''
-        sql='''
-    DROP TABLE IF EXISTS special_line;
-    CREATE TABLE special_line AS 
-    ( 
-    SELECT 
-        planet_osm_line.* 
-
-    FROM 
-        planet_osm_line
-    WHERE 
-
-    ''' + selects+ '''
-    )
-    ;
-
-        '''
-
-
-        print('Создаётся таблица линий')
-        cursor.execute(sql)
-        conn.commit()
-        os.system('ogr2ogr -overwrite  -progress -f "ESRI Shapefile"  output/line.shp  -lco ENCODING=UTF-8  PG:"host=localhost user=trolleway dbname=osm_ch2 password=16208" -sql "SELECT *  FROM special_line" -a_srs "EPSG:4326" ')
-
-        return 0
-
-
-
-    def taglist_2db():
-        '''
-
-CREATE TABLE tagpref (
-    "Preference" text,
-    key character varying(50),
-    value character varying(50)
-);
-
-
-ALTER TABLE tagpref OWNER TO trolleway;
-
---
-psql -U trolleway -d osm_ch3 -c "DROP TABLE IF EXISTS tagpref"
-psql -U trolleway -d osm_ch3 -c "CREATE TABLE tagpref (    "Preference" text,    key character varying(50),    value character varying(50));"
-psql -U trolleway -d osm_ch3 -c "ALTER TABLE tagpref OWNER TO trolleway;"
-psql -U trolleway -d osm_ch3 -c "COPY tagpref FROM '/home/trolleway/GIS/GIS/project84_osmextract_usa/tagpref.csv' WITH CSV HEADER;"
-psql -U trolleway -d osm_ch3 -c "ALTER TABLE tagpref ADD COLUMN uid SERIAL PRIMARY KEY;"
-'''
-        '''/home/trolleway/GIS/GIS/project84_osmextract_usa/tagpref.csv'''
 
 
 
     def grid_cycle(self):
+        '''
+          █     ▗▖                        ▗▄▖      
+          ▀     ▐▌                        ▝▜▌      
+ ▟█▟▌█▟█▌██   ▟█▟▌            ▟██▖▝█ █▌▟██▖▐▌  ▟█▙ 
+▐▛ ▜▌█▘   █  ▐▛ ▜▌           ▐▛  ▘ █▖█▐▛  ▘▐▌ ▐▙▄▟▌
+▐▌ ▐▌█    █  ▐▌ ▐▌           ▐▌    ▐█▛▐▌   ▐▌ ▐▛▀▀▘
+▝█▄█▌█  ▗▄█▄▖▝█▄█▌           ▝█▄▄▌  █▌▝█▄▄▌▐▙▄▝█▄▄▌
+ ▞▀▐▌▀  ▝▀▀▀▘ ▝▀▝▘            ▝▀▀   █  ▝▀▀  ▀▀ ▝▀▀ 
+ ▜█▛▘                              █▌              
+                     ▀▀▀▀▀                         
+
+        '''
         srid='3857'
 
         #координаты взял из qgis ручками
@@ -370,7 +326,7 @@ psql -U trolleway -d osm_ch3 -c "ALTER TABLE tagpref ADD COLUMN uid SERIAL PRIMA
             gridgeojson.write(self.geojson_footer)
             gridgeojson.close()
             print 'Сетка из grid.geojson импортируется в PostGIS одной операцией. В таблице всё время держится по одному столбцу сетки.'
-            os.system('ogr2ogr  -f "PostgreSQL" PG:"dbname=osm_ch3 user=trolleway" "grid.geojson" -nln grid4326 -overwrite -t_srs EPSG:4326')
+            os.system('ogr2ogr  -f "PostgreSQL" PG:"{ogr2ogr_pg}" "grid.geojson" -nln grid4326 -overwrite -t_srs EPSG:4326'.format(ogr2ogr_pg=config.ogr2ogr_pg))
         
             
             #print 'Создается таблица только используемых квадратов'
@@ -430,145 +386,20 @@ SELECT distinct on (grid4326.wkb_geometry) grid4326.wkb_geometry , grid4326.x, g
 
 
 
-
-
-
-
-
-
-    def generate_grid(self):
-        #deprecated
-        print "полуавтоматическая генерация сетки. См. комментарии для полного запуска"
-        # CREATE TABLE  grid ( id int4, x int4, y int4, geom geometry(POLYGON,3857) ) WITH OIDS; --создать таблицу так
-
-        # http://gis.stackexchange.com/questions/16374/how-to-create-a-regular-polygon-grid-in-postgis
-        #каждую часть (потом)
-        #преобраовать в 3857
-        srid='3857'
-        #вытащить xmin ymin из геометрии границ
-    
-        #координаты взял из qgis ручками
-        xmin=-13854247
-        ymax=6340463
-        ymin=2781805
-        xmax=-7445254
-
-
-
-        #New York
-        xmin=-8879144
-        ymax=5627188
-        ymin=4935454
-        xmax=-7990595
-
-
-        #oklakhoma
-        xmin=-11479022
-        ymax=4459167
-        xmax=-10452195
-        ymin=3924009
-
-        #West half
-        xmin=-14050421
-        ymax=6224627
-        xmax=-10898518
-        ymin=4029510
-        
-        #придумать начало координат
-        x0=0
-        y0=0
-        
-
-        #придумать шаг в единицах измерения СК
-        xstep=1609.34*1
-        ystep=1609.34*1
-
-
-        #цикл по шагу
-        startx=((xmin / xstep)*xstep)+0
-        starty=((ymin / ystep)*ystep)+0
-
-        x=startx-xstep
-        y=starty-ystep
-
-        print 'Cетка записывается в файл grid.geojson'
-        gridgeojson = open('grid.geojson','w')
-        gridgeojson.write(self.geojson_header3857)
-
-        while x < xmax:
-            x=x+xstep
-
-            xnum= x // xstep
-
-            y=starty-ystep
-            while y < ymax:
-                y=y+ystep
-                ynum=y // ystep
-                
-        
-                str1='{ "type": "Feature", "properties": { "id": null, "x": '+str(int(xnum))+', "y": '+str(int(ynum))+' }, "geometry": { "type": "Polygon", "coordinates":'
-
-                
-                str2=' [ [ [ {0}, {1} ], [ {2}, {3} ], [ {4}, {5} ], [ {6}, {7} ], [ {0}, {1} ] ] ] '.format( str(x+xstep),str(y),str(x+xstep),str(y+ystep),str(x),str(y+ystep),str(x),str(y) )
-                str3="} }, \n"
-
-
-                gridgeojson.write(str1+str2+str3)
-
-
-
-
-        #определить, какой № квадрата в этой точке
-        #insert into
-        gridgeojson.write(self.geojson_footer)
-        gridgeojson.close()
-        print 'Сетка из grid.geojson импортируется в PostGIS одной операцией'
-        os.system('ogr2ogr -progress -f "PostgreSQL" PG:"dbname=osm_ch3 user=trolleway" "grid.geojson" -nln grid -overwrite ')
-
-
-        print 'перепроецирeтся в 4326'
-        sql=        '''
-DROP TABLE if exists grid4326;
-CREATE TABLE grid4326 AS 
-  SELECT ST_Transform(wkb_geometry,4326) AS wkb_geometry , x, y
-  FROM grid;'''
-        self.cursor.execute(sql)
-        self.conn.commit()
-        print 'Создать индексы для сетки вручную'
-        '''
-CREATE INDEX "grid4326-index" ON  "grid4326" USING GIST (wkb_geometry);
-VACUUM ANALYZE;
-        '''
-        print 'Создать таблицу только используемых квадратов вручную'
-        '''
-DROP TABLE if exists grid4326used;
-CREATE TABLE grid4326used AS SELECT distinct on (grid4326.wkb_geometry) grid4326.wkb_geometry , grid4326.x, grid4326.y  from grid4326  JOIN special_point  ON ST_Covers(grid4326.wkb_geometry , special_point.way);
-DROP INDEX IF EXISTS "grid4326used-index";
-CREATE INDEX "grid4326used-index" ON  "grid4326used" USING GIST (wkb_geometry);
-
-VACUUM ANALYZE;
-        '''
-
-
-
-        return 0
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     def points_in_grid(self):
+        '''
+                                                                               
+            █                             █                            █     ▗▖
+            ▀        ▐▌                   ▀                            ▀     ▐▌
+▐▙█▙  ▟█▙  ██  ▐▙██▖▐███▗▟██▖            ██  ▐▙██▖            ▟█▟▌█▟█▌██   ▟█▟▌
+▐▛ ▜▌▐▛ ▜▌  █  ▐▛ ▐▌ ▐▌ ▐▙▄▖▘             █  ▐▛ ▐▌           ▐▛ ▜▌█▘   █  ▐▛ ▜▌
+▐▌ ▐▌▐▌ ▐▌  █  ▐▌ ▐▌ ▐▌  ▀▀█▖             █  ▐▌ ▐▌           ▐▌ ▐▌█    █  ▐▌ ▐▌
+▐█▄█▘▝█▄█▘▗▄█▄▖▐▌ ▐▌ ▐▙▄▐▄▄▟▌           ▗▄█▄▖▐▌ ▐▌           ▝█▄█▌█  ▗▄█▄▖▝█▄█▌
+▐▌▀▘  ▝▀▘ ▝▀▀▀▘▝▘ ▝▘  ▀▀ ▀▀▀            ▝▀▀▀▘▝▘ ▝▘            ▞▀▐▌▀  ▝▀▀▀▘ ▝▀▝▘
+▐▌                                                            ▜█▛▘             
+                                ▀▀▀▀▀                ▀▀▀▀▀                     
+
+        '''
 
         pref=0
         tags_by_pref={}
@@ -632,98 +463,95 @@ VACUUM ANALYZE;
 
             #запрос количества объектов в квадрате с заданным приоритетом
             priority=3
-            sql = "select COUNT(p2.wkb_geometry)  from special_point p1, grid4326used p2 where st_within (p1.way, p2.wkb_geometry) AND (" +tags_by_pref[priority]+ ") AND  concat(p2.x,'-',p2.y)='"+str(row[1])+"' LIMIT 1"
+            sql = "select COUNT(p2.wkb_geometry)  from special_point p1, grid4326used p2 where st_within (p1.way, p2.wkb_geometry) AND (" +tags_by_pref[priority]+ ") AND  concat(p2.x,'-',p2.y)='"+str(row[1])+"' AND p1.name IS NOT NULL LIMIT 1"
             self.cursor.execute(sql)
             self.conn.commit()
             rows2 = self.cursor.fetchall()
-
             records_in_element=0
             for row2 in rows2:
                 records_in_element=row2[0]
-            print "Количество записей с приоритетом = 3 в квадрате: ", records_in_element
-
+            print "Количество записей с приоритетом = 3 AND name IS NOT NULL в квадрате: ", records_in_element
             if  records_in_element > 0 :
                 print "Вставляем в квадрат запись с приоритетом 3"
-                sql =" INSERT INTO special_point2 (wkb_geometry,  name,"+sql_columns+") select p1.way, name, "+sql_columns+" from special_point p1, grid4326used p2 where st_within (p1.way, p2.wkb_geometry) AND (" +tags_by_pref[priority]+ ") AND  concat(p2.x,'-',p2.y)='"+str(row[1])+"'  OFFSET floor(random()*"+str(records_in_element)+") LIMIT 1"
+                sql =" INSERT INTO special_point2 (wkb_geometry,  name,"+sql_columns+") select p1.way, name, "+sql_columns+" from special_point p1, grid4326used p2 where st_within (p1.way, p2.wkb_geometry) AND (" +tags_by_pref[priority]+ ") AND  concat(p2.x,'-',p2.y)='"+str(row[1])+"' AND p1.name IS NOT NULL  OFFSET floor(random()*"+str(records_in_element)+") LIMIT 1"
                 self.cursor.execute(sql)
                 self.conn.commit()
             else:
-                priority=2
-                sql = "SELECT COUNT(p2.wkb_geometry)  \n FROM special_point p1, grid4326used p2 \n WHERE st_within (p1.way, p2.wkb_geometry) AND (\n" +tags_by_pref[priority]+ ") \n AND  concat(p2.x,'-',p2.y)='"+str(row[1])+"' LIMIT 1"
+                sql = "select COUNT(p2.wkb_geometry)  from special_point p1, grid4326used p2 where st_within (p1.way, p2.wkb_geometry) AND (" +tags_by_pref[priority]+ ") AND  concat(p2.x,'-',p2.y)='"+str(row[1])+"' AND p1.name IS NULL LIMIT 1"
                 self.cursor.execute(sql)
                 self.conn.commit()
                 rows2 = self.cursor.fetchall()
                 records_in_element=0
                 for row2 in rows2:
                     records_in_element=row2[0]
-                print "Количество записей с приоритетом = 2 в квадрате: ", records_in_element
+                print "Количество записей с приоритетом = 3 AND name IS NULL в квадрате: ", records_in_element
                 if  records_in_element > 0 :
-                                print "Вставляем в квадрат запись с приоритетом 2"
-                                sql =" INSERT INTO special_point2 (wkb_geometry, name, "+sql_columns+") select p1.way, name, "+sql_columns+" from special_point p1, grid4326used p2 where st_within (p1.way, p2.wkb_geometry) AND (" +tags_by_pref[priority]+ ") AND  concat(p2.x,'-',p2.y)='"+str(row[1])+"'  OFFSET floor(random()*"+str(records_in_element)+") LIMIT 1"
-
-                                self.cursor.execute(sql)
-                                self.conn.commit()
+                    print "Вставляем в квадрат запись с приоритетом 3"
+                    sql =" INSERT INTO special_point2 (wkb_geometry,  name,"+sql_columns+") select p1.way, name, "+sql_columns+" from special_point p1, grid4326used p2 where st_within (p1.way, p2.wkb_geometry) AND (" +tags_by_pref[priority]+ ") AND  concat(p2.x,'-',p2.y)='"+str(row[1])+"' AND p1.name IS  NULL  OFFSET floor(random()*"+str(records_in_element)+") LIMIT 1"
+                    self.cursor.execute(sql)
+                    self.conn.commit()
                 else:
-                    priority=1
-                    sql = "select COUNT(p2.wkb_geometry)  from special_point p1, grid4326used p2 where st_within (p1.way, p2.wkb_geometry) AND (" +tags_by_pref[priority]+ ") AND  concat(p2.x,'-',p2.y)='"+str(row[1])+"' LIMIT 1"
+
+                    priority=2
+                    sql = "SELECT COUNT(p2.wkb_geometry)  \n FROM special_point p1, grid4326used p2 \n WHERE st_within (p1.way, p2.wkb_geometry) AND (\n" +tags_by_pref[priority]+ ") \n AND  concat(p2.x,'-',p2.y)='"+str(row[1])+"' AND p1.name IS NOT NULL LIMIT 1"
                     self.cursor.execute(sql)
                     self.conn.commit()
                     rows2 = self.cursor.fetchall()
                     records_in_element=0
                     for row2 in rows2:
                         records_in_element=row2[0]
-                    print "Количество записей с приоритетом = 1 в квадрате: ", records_in_element
+                    print "Количество записей с приоритетом = 2 AND p1.name IS NOT NULL в квадрате: ", records_in_element
                     if  records_in_element > 0 :
-                                    print "Вставляем в квадрат запись с приоритетом 1"
-                                    sql =" INSERT INTO special_point2 (wkb_geometry, name, "+sql_columns+") select p1.way, name, "+sql_columns+" from special_point p1, grid4326used p2 where st_within (p1.way, p2.wkb_geometry) AND (" +tags_by_pref[priority]+ ") AND  concat(p2.x,'-',p2.y)='"+str(row[1])+"'  OFFSET floor(random()*"+str(records_in_element)+") LIMIT 1"
-                                    
+                                    print "Вставляем в квадрат запись с приоритетом 2"
+                                    sql =" INSERT INTO special_point2 (wkb_geometry, name, "+sql_columns+") select p1.way, name, "+sql_columns+" from special_point p1, grid4326used p2 where st_within (p1.way, p2.wkb_geometry) AND (" +tags_by_pref[priority]+ ") AND  concat(p2.x,'-',p2.y)='"+str(row[1])+"' AND p1.name IS NOT NULL  OFFSET floor(random()*"+str(records_in_element)+") LIMIT 1"
 
                                     self.cursor.execute(sql)
                                     self.conn.commit()
+                    else:
+                        sql = "SELECT COUNT(p2.wkb_geometry)  \n FROM special_point p1, grid4326used p2 \n WHERE st_within (p1.way, p2.wkb_geometry) AND (\n" +tags_by_pref[priority]+ ") \n AND  concat(p2.x,'-',p2.y)='"+str(row[1])+"' AND p1.name IS  NULL LIMIT 1"
+                        self.cursor.execute(sql)
+                        self.conn.commit()
+                        rows2 = self.cursor.fetchall()
+                        records_in_element=0
+                        for row2 in rows2:
+                            records_in_element=row2[0]
+                        print "Количество записей с приоритетом = 2 AND p1.name IS  NULL в квадрате: ", records_in_element
+                        if  records_in_element > 0 :
+                                        print "Вставляем в квадрат запись с приоритетом 2"
+                                        sql =" INSERT INTO special_point2 (wkb_geometry, name, "+sql_columns+") select p1.way, name, "+sql_columns+" from special_point p1, grid4326used p2 where st_within (p1.way, p2.wkb_geometry) AND (" +tags_by_pref[priority]+ ") AND  concat(p2.x,'-',p2.y)='"+str(row[1])+"' AND p1.name IS  NULL  OFFSET floor(random()*"+str(records_in_element)+") LIMIT 1"
+
+                                        self.cursor.execute(sql)
+                                        self.conn.commit()
+                        else:
+                            priority=1
+                            sql = "select COUNT(p2.wkb_geometry)  from special_point p1, grid4326used p2 where st_within (p1.way, p2.wkb_geometry) AND (" +tags_by_pref[priority]+ ") AND  concat(p2.x,'-',p2.y)='"+str(row[1])+"' AND p1.name IS NOT NULL LIMIT 1"
+                            self.cursor.execute(sql)
+                            self.conn.commit()
+                            rows2 = self.cursor.fetchall()
+                            records_in_element=0
+                            for row2 in rows2:
+                                records_in_element=row2[0]
+                            print "Количество записей с приоритетом = 1  AND p1.name IS NOT NULL в квадрате: ", records_in_element
+                            if  records_in_element > 0 :
+                                            print "Вставляем в квадрат запись с приоритетом 1"
+                                            sql =" INSERT INTO special_point2 (wkb_geometry, name, "+sql_columns+") select p1.way, name, "+sql_columns+" from special_point p1, grid4326used p2 WHERE st_within (p1.way, p2.wkb_geometry) AND (" +tags_by_pref[priority]+ ") AND  concat(p2.x,'-',p2.y)='"+str(row[1])+"'  AND p1.name IS NOT NULL  OFFSET floor(random()*"+str(records_in_element)+") LIMIT 1"
+                                            
+                                            self.cursor.execute(sql)
+                                            self.conn.commit()
+                            else:
+                                sql = "select COUNT(p2.wkb_geometry)  from special_point p1, grid4326used p2 where st_within (p1.way, p2.wkb_geometry) AND (" +tags_by_pref[priority]+ ") AND  concat(p2.x,'-',p2.y)='"+str(row[1])+"' AND p1.name IS  NULL LIMIT 1"
+                                self.cursor.execute(sql)
+                                self.conn.commit()
+                                rows2 = self.cursor.fetchall()
+                                records_in_element=0
+                                for row2 in rows2:
+                                    records_in_element=row2[0]
+                                print "Количество записей с приоритетом = 1  AND p1.name IS NULL в квадрате: ", records_in_element
+                                if  records_in_element > 0 :
+                                                print "Вставляем в квадрат запись с приоритетом 1"
+                                                sql =" INSERT INTO special_point2 (wkb_geometry, name, "+sql_columns+") select p1.way, name, "+sql_columns+" from special_point p1, grid4326used p2 WHERE st_within (p1.way, p2.wkb_geometry) AND (" +tags_by_pref[priority]+ ") AND  concat(p2.x,'-',p2.y)='"+str(row[1])+"'  AND p1.name IS NULL  OFFSET floor(random()*"+str(records_in_element)+") LIMIT 1"
+                                                
+                                                self.cursor.execute(sql)
+                                                self.conn.commit()
                     
             
-
-            '''select * from special_point p1, grid4326 p2 where st_within (p1.way, p2.geom)
-AND concat(p2.x,'-',p2.y)='-9-2' 
-
-UPDATE special_point
-SET attr = hstore('shop',special_point.shop)
-WHERE special_point.shop IS NOT NULL;
-
-            '''
-
-
-    
-
-    def tag_stat(selects):
-        #не нужно
-        
-        sql='''
-    select count(*), aerialway, aeroway, amenity, barrier, building, craft, historic, leisure, military, place, public_transport, railway, shop, sport, tourism
-     from special_point
-    group by aerialway, aeroway, amenity, barrier, building, craft, historic, leisure, military, place, public_transport, railway, shop, sport, tourism
-
-    order by count
-
-    ;
-            '''
-
-
-        print('Создаётся таблица полигонов')
-        cursor.execute(sql)
-        conn.commit()
-
-        #не нужно
-    '''
-create table grid_used as
-select p2.*  from boundary, grid4326 p2 
-where ST_Intersects(boundary.wkb_geometry , p2.geom)  
-    ogr2ogr -f "PostgreSQL" PG:"dbname=osm_ch3 user=trolleway" "source/state new york.geojson" -nln boundary -overwrite
-    '''
-
-'''
-get boundaries
-time osmfilter north-america-latest.o5m --keep= --keep-relations="admin_level=2" --out-o5m >osms/admin_level2.o5m
-
-
-'''
