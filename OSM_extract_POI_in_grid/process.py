@@ -95,7 +95,7 @@ class Processor:
         tags_array=[]            
         for row in rows:
             tags_array.append('"'+row[0]+'"='+"'"+row[1]+"'")             
-        filterstring="\n OR ".join(tags_array)
+        filterstring=" OR ".join(tags_array)
 
         return filterstring
 
@@ -195,7 +195,7 @@ class Processor:
         self.conn.commit()
 
         sql='''
-        INSERT INTO special_point (way, '''+self.generate_sql_columns_string()+''') (SELECT way AS way, '''+self.generate_sql_columns_string()+''' FROM planet_osm_point WHERE ''' + selects+ '''  ) 
+        INSERT INTO special_point (way, name, '''+self.generate_sql_columns_string()+''') (SELECT way AS way, name, '''+self.generate_sql_columns_string()+''' FROM planet_osm_point WHERE ''' + selects+ '''  ) 
         '''
         print('Добавляются  POI из таблицы точек')
         self.cursor.execute(sql)
@@ -204,7 +204,7 @@ class Processor:
 
 
         sql='''
-        INSERT INTO special_point (way, '''+self.generate_sql_columns_string()+''') (SELECT ST_PointOnSurface(way) AS way, '''+self.generate_sql_columns_string()+''' FROM planet_osm_polygon WHERE ''' + selects+ '''  ) 
+        INSERT INTO special_point (way, name, '''+self.generate_sql_columns_string()+''') (SELECT ST_PointOnSurface(way) AS way, name, '''+self.generate_sql_columns_string()+''' FROM planet_osm_polygon WHERE ''' + selects+ '''  ) 
         '''
         print('Добавляются центроиды полигонов POI')
         self.cursor.execute(sql)
