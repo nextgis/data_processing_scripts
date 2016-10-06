@@ -25,6 +25,7 @@ time python main.py
 Код лежит в process.py
 Скопировать config.example.py в config.py, ввести туда параметры доступа к БД 
 Часть структуры базы - в dump.sql Лучше один раз создать таблицы с индексами и последовательностями, и потом при повторных запусках скрипта им делать TRUNCATE, чем DROP; CREATE TABLE
+Добавить osm_id с буквами: n,p
 
 
 ogr2ogr -f "PostgreSQL" PG:"host=192.168.250.1 dbname=processing_osm_ch3 user=trolleway password=" "source/starbucks.geojson" -nln starbucks  -nlt point -overwrite

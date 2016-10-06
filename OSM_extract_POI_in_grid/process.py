@@ -195,6 +195,14 @@ class Processor:
         self.conn.commit()
 
         sql='''
+        INSERT INTO special_point (way, name, amenity) (SELECT wkb_geometry AS way, brand AS name, 'cafe' AS amenity  FROM starbucks   ) ;
+        '''
+        print('Добавляются точки starbucks')
+        self.cursor.execute(sql)
+        self.conn.commit()
+
+
+        sql='''
         INSERT INTO special_point (way, name, '''+self.generate_sql_columns_string()+''') (SELECT way AS way, name, '''+self.generate_sql_columns_string()+''' FROM planet_osm_point WHERE ''' + selects+ '''  ) 
         '''
         print('Добавляются  POI из таблицы точек')
