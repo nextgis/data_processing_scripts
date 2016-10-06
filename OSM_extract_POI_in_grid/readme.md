@@ -27,6 +27,8 @@ time python main.py
 Часть структуры базы - в dump.sql Лучше один раз создать таблицы с индексами и последовательностями, и потом при повторных запусках скрипта им делать TRUNCATE, чем DROP; CREATE TABLE
 
 
+ogr2ogr -f "PostgreSQL" PG:"host=192.168.250.1 dbname=processing_osm_ch3 user=trolleway password=" "source/starbucks.geojson" -nln starbucks  -nlt point -overwrite
+#Этот файл взят из https://opendata.socrata.com/Business/All-Starbucks-Locations-in-the-World-Point-Map/7sg8-44ed?_ga=1.93541853.1197251441.1365557881, но из него удалены некоторые поля
 
 
 # Более детальные описания фрагментов алгоритма
