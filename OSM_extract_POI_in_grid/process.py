@@ -203,7 +203,7 @@ class Processor:
 
 
         sql='''
-        INSERT INTO special_point (way, name, osm_id,'''+self.generate_sql_columns_string()+''') (SELECT way AS way, name, CONCAT('n',"osm_id") AS osm_id '''+self.generate_sql_columns_string()+''' FROM planet_osm_point WHERE ''' + selects+ '''  ) 
+        INSERT INTO special_point (way, name, osm_id,'''+self.generate_sql_columns_string()+''') (SELECT way AS way, name, CONCAT('n',"osm_id") AS osm_id, '''+self.generate_sql_columns_string()+''' FROM planet_osm_point WHERE ''' + selects+ '''  ) 
         '''
         print('Добавляются  POI из таблицы точек')
         self.cursor.execute(sql)
@@ -212,7 +212,7 @@ class Processor:
 
 
         sql='''
-        INSERT INTO special_point (way, name, osm_id,'''+self.generate_sql_columns_string()+''') (SELECT ST_PointOnSurface(way) AS way, name,  CONCAT('p',"osm_id") AS osm_id '''+self.generate_sql_columns_string()+''' FROM planet_osm_polygon WHERE ''' + selects+ '''  ) 
+        INSERT INTO special_point (way, name, osm_id,'''+self.generate_sql_columns_string()+''') (SELECT ST_PointOnSurface(way) AS way, name,  CONCAT('p',"osm_id") AS osm_id, '''+self.generate_sql_columns_string()+''' FROM planet_osm_polygon WHERE ''' + selects+ '''  ) 
         '''
         print('Добавляются центроиды полигонов POI')
         self.cursor.execute(sql)
