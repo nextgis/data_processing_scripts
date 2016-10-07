@@ -205,6 +205,7 @@ class Processor:
         sql='''
         INSERT INTO special_point (way, name, osm_id,'''+self.generate_sql_columns_string()+''') (SELECT way AS way, name, CONCAT('n',"osm_id")::varchar(20) AS osm_id, '''+self.generate_sql_columns_string()+''' FROM planet_osm_point WHERE ''' + selects+ '''  ) 
         '''
+        print sql
         print('Добавляются  POI из таблицы точек')
         self.cursor.execute(sql)
         self.conn.commit()
