@@ -107,7 +107,7 @@ class Processor:
         self.conn.commit()
         rows = self.cursor.fetchall()
         tags_array=[]       
-        tags_array.append('"osm_id, "')        
+        tags_array.append('"osm_id"')        
         for row in rows:
             tags_array.append('"'+row[0]+'"')             
         filterstring=' , '.join(tags_array)
