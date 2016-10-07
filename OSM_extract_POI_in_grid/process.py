@@ -106,8 +106,7 @@ class Processor:
         self.cursor.execute(sql)
         self.conn.commit()
         rows = self.cursor.fetchall()
-        tags_array=[]       
-        tags_array.append('"osm_id"')        
+        tags_array=[]           
         for row in rows:
             tags_array.append('"'+row[0]+'"')             
         filterstring=' , '.join(tags_array)
@@ -488,7 +487,7 @@ SELECT distinct on (grid4326.wkb_geometry) grid4326.wkb_geometry , grid4326.x, g
             print "Количество записей с приоритетом = 3 AND name IS NOT NULL в квадрате: ", records_in_element
             if  records_in_element > 0 :
                 print "Вставляем в квадрат запись с приоритетом 3"
-                sql =" INSERT INTO special_point2 (wkb_geometry,  name,"+sql_columns+") select p1.way, name, "+sql_columns+" from special_point p1, grid4326used p2 where st_within (p1.way, p2.wkb_geometry) AND (" +tags_by_pref[priority]+ ") AND  concat(p2.x,'-',p2.y)='"+str(row[1])+"' AND p1.name IS NOT NULL  OFFSET floor(random()*"+str(records_in_element)+") LIMIT 1"
+                sql =" INSERT INTO special_point2 (wkb_geometry,  name, osm_id,"+sql_columns+") select p1.way, name, osm_id, "+sql_columns+" from special_point p1, grid4326used p2 where st_within (p1.way, p2.wkb_geometry) AND (" +tags_by_pref[priority]+ ") AND  concat(p2.x,'-',p2.y)='"+str(row[1])+"' AND p1.name IS NOT NULL  OFFSET floor(random()*"+str(records_in_element)+") LIMIT 1"
                 self.cursor.execute(sql)
                 self.conn.commit()
             else:
@@ -502,7 +501,7 @@ SELECT distinct on (grid4326.wkb_geometry) grid4326.wkb_geometry , grid4326.x, g
                 print "Количество записей с приоритетом = 3 AND name IS NULL в квадрате: ", records_in_element
                 if  records_in_element > 0 :
                     print "Вставляем в квадрат запись с приоритетом 3"
-                    sql =" INSERT INTO special_point2 (wkb_geometry,  name,"+sql_columns+") select p1.way, name, "+sql_columns+" from special_point p1, grid4326used p2 where st_within (p1.way, p2.wkb_geometry) AND (" +tags_by_pref[priority]+ ") AND  concat(p2.x,'-',p2.y)='"+str(row[1])+"' AND p1.name IS  NULL  OFFSET floor(random()*"+str(records_in_element)+") LIMIT 1"
+                    sql =" INSERT INTO special_point2 (wkb_geometry,  name, osm_id,"+sql_columns+") select p1.way, name, osm_id, "+sql_columns+" from special_point p1, grid4326used p2 where st_within (p1.way, p2.wkb_geometry) AND (" +tags_by_pref[priority]+ ") AND  concat(p2.x,'-',p2.y)='"+str(row[1])+"' AND p1.name IS  NULL  OFFSET floor(random()*"+str(records_in_element)+") LIMIT 1"
                     self.cursor.execute(sql)
                     self.conn.commit()
                 else:
@@ -518,7 +517,7 @@ SELECT distinct on (grid4326.wkb_geometry) grid4326.wkb_geometry , grid4326.x, g
                     print "Количество записей с приоритетом = 2 AND p1.name IS NOT NULL в квадрате: ", records_in_element
                     if  records_in_element > 0 :
                                     print "Вставляем в квадрат запись с приоритетом 2"
-                                    sql =" INSERT INTO special_point2 (wkb_geometry, name, "+sql_columns+") select p1.way, name, "+sql_columns+" from special_point p1, grid4326used p2 where st_within (p1.way, p2.wkb_geometry) AND (" +tags_by_pref[priority]+ ") AND  concat(p2.x,'-',p2.y)='"+str(row[1])+"' AND p1.name IS NOT NULL  OFFSET floor(random()*"+str(records_in_element)+") LIMIT 1"
+                                    sql =" INSERT INTO special_point2 (wkb_geometry, name, osm_id, "+sql_columns+") select p1.way, name, osm_id, "+sql_columns+" from special_point p1, grid4326used p2 where st_within (p1.way, p2.wkb_geometry) AND (" +tags_by_pref[priority]+ ") AND  concat(p2.x,'-',p2.y)='"+str(row[1])+"' AND p1.name IS NOT NULL  OFFSET floor(random()*"+str(records_in_element)+") LIMIT 1"
 
                                     self.cursor.execute(sql)
                                     self.conn.commit()
@@ -533,7 +532,7 @@ SELECT distinct on (grid4326.wkb_geometry) grid4326.wkb_geometry , grid4326.x, g
                         print "Количество записей с приоритетом = 2 AND p1.name IS  NULL в квадрате: ", records_in_element
                         if  records_in_element > 0 :
                                         print "Вставляем в квадрат запись с приоритетом 2"
-                                        sql =" INSERT INTO special_point2 (wkb_geometry, name, "+sql_columns+") select p1.way, name, "+sql_columns+" from special_point p1, grid4326used p2 where st_within (p1.way, p2.wkb_geometry) AND (" +tags_by_pref[priority]+ ") AND  concat(p2.x,'-',p2.y)='"+str(row[1])+"' AND p1.name IS  NULL  OFFSET floor(random()*"+str(records_in_element)+") LIMIT 1"
+                                        sql =" INSERT INTO special_point2 (wkb_geometry, name, osm_id, "+sql_columns+") select p1.way, name, osm_id, "+sql_columns+" from special_point p1, grid4326used p2 where st_within (p1.way, p2.wkb_geometry) AND (" +tags_by_pref[priority]+ ") AND  concat(p2.x,'-',p2.y)='"+str(row[1])+"' AND p1.name IS  NULL  OFFSET floor(random()*"+str(records_in_element)+") LIMIT 1"
 
                                         self.cursor.execute(sql)
                                         self.conn.commit()
@@ -564,7 +563,7 @@ SELECT distinct on (grid4326.wkb_geometry) grid4326.wkb_geometry , grid4326.x, g
                                 print "Количество записей с приоритетом = 1  AND p1.name IS NULL в квадрате: ", records_in_element
                                 if  records_in_element > 0 :
                                                 print "Вставляем в квадрат запись с приоритетом 1"
-                                                sql =" INSERT INTO special_point2 (wkb_geometry, name, "+sql_columns+") select p1.way, name, "+sql_columns+" from special_point p1, grid4326used p2 WHERE st_within (p1.way, p2.wkb_geometry) AND (" +tags_by_pref[priority]+ ") AND  concat(p2.x,'-',p2.y)='"+str(row[1])+"'  AND p1.name IS NULL  OFFSET floor(random()*"+str(records_in_element)+") LIMIT 1"
+                                                sql =" INSERT INTO special_point2 (wkb_geometry, name, osm_id, "+sql_columns+") select p1.way, name, osm_id, "+sql_columns+" from special_point p1, grid4326used p2 WHERE st_within (p1.way, p2.wkb_geometry) AND (" +tags_by_pref[priority]+ ") AND  concat(p2.x,'-',p2.y)='"+str(row[1])+"'  AND p1.name IS NULL  OFFSET floor(random()*"+str(records_in_element)+") LIMIT 1"
                                                 
                                                 self.cursor.execute(sql)
                                                 self.conn.commit()
