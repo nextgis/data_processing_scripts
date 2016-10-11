@@ -77,8 +77,8 @@ node,way   admin_level  text         linear
 node,way   place        text         polygon
 node,way   capital      text         polygon
 node,way   name         text         polygon
-node,way   name_en      text         polygon
-node,way   name_ru      text         polygon
+node,way   name:en      text         polygon
+node,way   name:ru      text         polygon
 node,way   int_name      text         polygon
 node,way   loc_name      text         polygon
 node,way   alt_name      text         polygon

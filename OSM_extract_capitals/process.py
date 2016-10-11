@@ -28,6 +28,7 @@ class Processor:
     statistic={}
 	    #Define our connection string
     conn_string = config.psycopg2_postgresql_connection_string
+    pgpass=config.pgpass #for osm2pgsql
      
 	    # print the connection string we will use to connect
 
@@ -96,34 +97,35 @@ class Processor:
 
 
         sql='''
-        DROP TABLE planet_osm_line CASCADE;
-        DROP TABLE planet_osm_point CASCADE;
-        DROP TABLE planet_osm_polygon CASCADE;
-        DROP TABLE planet_osm_roads CASCADE;
+        DROP TABLE IF EXISTS planet_osm_line CASCADE;
+        DROP TABLE IF EXISTS planet_osm_point CASCADE;
+        DROP TABLE IF EXISTS planet_osm_polygon CASCADE;
+        DROP TABLE IF EXISTS planet_osm_roads CASCADE;
 
         '''
         self.cursor.execute(sql)
         self.conn.commit()
 
+        os.system('export PGPASS='+self.pgpass)
     
         print 'pbf to o5m'
         cmd='osmconvert {filename}.osm.pbf -o={filename}.o5m'.format(filename=filename)
         print cmd        
-        #os.system(cmd)
+        os.system(cmd)
 
         print 'o5m tag filtration'
-        cmd='osmfilter {filename}.o5m --drop-author --keep-nodes="{fl}" --out-o5m >{filename}-filtered.o5m'.format(filename=filename, fl=self.generate_filter_string())
+        cmd='osmfilter {filename}.o5m --drop-author --keep= --keep-nodes="{fl}"   --out-o5m >{filename}-filtered.o5m'.format(filename=filename, fl=self.generate_filter_string())
         print cmd        
-        #os.system(cmd)
+        os.system(cmd)
 
         print 'o5m to pbf'
         cmd='osmconvert {filename}-filtered.o5m -o={filename}-filtered.pbf'.format(filename=filename)
         print cmd        
-        #os.system(cmd)
+        os.system(cmd)
 
 
         print 'pbf to postgis'
-        cmd='osm2pgsql {osm2pgsql_config}  --slim  --create --multi-geometry --latlon   -C 12000 --number-processes 3 --password --style osm/special.style {filename}-filtered.pbf'.format(osm2pgsql_config=config.osm2pgsql,filename=filename)
+        cmd='osm2pgsql {osm2pgsql_config}  --slim  --create --multi-geometry --latlon   -C 12000 --number-processes 3 --password --style special.style {filename}-filtered.pbf'.format(osm2pgsql_config=config.osm2pgsql,filename=filename)
         print cmd        
         os.system(cmd)
 
