@@ -114,7 +114,7 @@ class Processor:
         os.system(cmd)
 
         print 'o5m tag filtration'
-        cmd='osmfilter {filename}.o5m --drop-author --keep={fl}"   --out-o5m >{filename}-filtered.o5m'.format(filename=filename, fl=self.generate_filter_string())
+        cmd='osmfilter {filename}.o5m --drop-author --keep="{fl}"   --out-o5m >{filename}-filtered.o5m'.format(filename=filename, fl=self.generate_filter_string())
         print cmd        
         os.system(cmd)
 
@@ -125,7 +125,7 @@ class Processor:
 
 
         print 'pbf to postgis'
-        cmd='osm2pgsql {osm2pgsql_config}  --slim  --create --multi-geometry --latlon   -C 12000 --number-processes 3 --style special.style {filename}-filtered.pbf'.format(osm2pgsql_config=config.osm2pgsql,filename=filename)
+        cmd='osm2pgsql {osm2pgsql_config} --password --slim  --create --multi-geometry --latlon   -C 12000 --number-processes 3 --style special.style {filename}-filtered.pbf'.format(osm2pgsql_config=config.osm2pgsql,filename=filename)
         print cmd        
         os.system(cmd)
 

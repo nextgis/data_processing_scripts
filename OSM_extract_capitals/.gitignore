@@ -2,6 +2,8 @@ config.py
 grid.geojson
 .xlsx#
 
+osm/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
