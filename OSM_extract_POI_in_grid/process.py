@@ -265,6 +265,12 @@ SELECT special_point.osm_id FROM special_point LEFT JOIN boundary  ON ST_Interse
         ymin=2781805
         xmax=-7445254
 
+        #США с заморскими территориями
+        xmin=-20014504
+        ymax=11612294
+        ymin=-1672092
+        xmax=20037398
+
         '''
         #Oklakhoma-edit
         xmin=-11479022
@@ -284,8 +290,8 @@ SELECT special_point.osm_id FROM special_point LEFT JOIN boundary  ON ST_Interse
 
 
         #придумать шаг в единицах измерения СК
-        xstep=1609.34*0.25
-        ystep=1609.34*0.25
+        xstep=1609.34*0.25*10000
+        ystep=1609.34*0.25*10000
 
         #цикл по шагу
         startx=((xmin / xstep)*xstep)+0
