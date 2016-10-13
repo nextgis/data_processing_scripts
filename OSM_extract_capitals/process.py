@@ -70,7 +70,7 @@ class Processor:
 
     def generate_filter_string(self):
         print "Generate tag filrer for osmfilter call"
-        filterstring = 'admin_level=*'
+        filterstring = 'capital=*'
 
         return filterstring
 

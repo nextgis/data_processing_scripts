@@ -12,7 +12,7 @@ import process
 
 
 processor=process.Processor()
-processor.osmimport('osm/australia-oceania-latest')
+processor.osmimport('osm/planet-latest')
 
 
 
