@@ -161,9 +161,9 @@ class Processor:
 
 
         print 'pbf to postgis'
-        cmd='osm2pgsql {osm2pgsql_config}  -s --create --multi-geometry --latlon   -C 12000 --number-processes 3 --password --style osm/special.style {filename}-filtered.pbf'.format(osm2pgsql_config=config.osm2pgsql,filename=filename)
+        cmd='osm2pgsql {osm2pgsql_config}  -s --create --multi-geometry --latlon   -C 12000 --number-processes 3 --style osm2pgsql.style {filename}-filtered.pbf'.format(osm2pgsql_config=config.osm2pgsql,filename=filename)
         print cmd        
-        #os.system(cmd)
+        os.system(cmd)
 
 
 
