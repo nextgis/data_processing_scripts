@@ -22,7 +22,7 @@ def updateDump():
         os.system(cmd)
 
     #if prevdump dump exists - run osmupdate, it updating it to last hour state with MosOblast clipping, and save as currentdump
-    os.system('osmupdate '+ work_dump + ' ' + updated_dump + '') #add --day or --hour --day
+    os.system('osmupdate '+ work_dump + ' ' + updated_dump + '' -v) #add --day or --hour --day
     
     #rename currentdump to prevdump
     os.remove(work_dump)
