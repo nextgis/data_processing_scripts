@@ -27,4 +27,4 @@ def updateDump():
     os.remove(work_dump)
     os.rename(updated_dump, work_dump)
 
-return 0
+    return 0
