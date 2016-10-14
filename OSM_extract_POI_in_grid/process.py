@@ -310,8 +310,7 @@ SELECT special_point.osm_id FROM special_point LEFT JOIN boundary  ON ST_Interse
         self.conn.commit()
 
         #print "Добавляются все starbucks по миру, кроме тех что в границе USA"
-        #sql ='''INSERT INTO special_point2 (wkb_geometry, name, amenity) (SELECT t1.wkb_geometry AS way, t1.brand AS name, 'cafe' AS amenity  FROM starbucks t1, boundary t2 WHERE ST_Disjoint(t1.wkb_geometry, t2.wkb_geometry)  ) ;
-        '''
+        #sql ='''INSERT INTO special_point2 (wkb_geometry, name, amenity) (SELECT t1.wkb_geometry AS way, t1.brand AS name, 'cafe' AS amenity  FROM starbucks t1, boundary t2 WHERE ST_Disjoint(t1.wkb_geometry, t2.wkb_geometry)  ) ;'''
         #self.cursor.execute(sql)
         #self.conn.commit()
 
