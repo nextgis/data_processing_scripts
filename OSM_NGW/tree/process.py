@@ -128,7 +128,7 @@ class Processor:
         os.system(cmd)
 
 
-    def postgis2geojson(self.table):
+    def postgis2geojson(self,table):
         if os.path.exists(table+'.geojson'):
             os.remove(table+'.geojson')
 
