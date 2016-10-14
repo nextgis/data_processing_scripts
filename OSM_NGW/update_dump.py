@@ -8,7 +8,7 @@ import os
 #if prevdump not exists - download CFO from geofabrik and crop to MosOblast
 def updateDump():
     
-    dump_url='http://planet.openstreetmap.org/pbf/planet-latest.osm.pbf'
+    #dump_url='http://planet.openstreetmap.org/pbf/planet-latest.osm.pbf'
     dump_utl='http://download.geofabrik.de/europe/belarus-latest.osm.pbf'
     downloaded_dump='planet-latest.osm.pbf'
     work_dump='data.o5m'
