@@ -134,7 +134,7 @@ class Processor:
 
         cmd='''
     ogr2ogr -f GeoJSON '''+table+'''.geojson    \
-      "PG:'''+ogr2ogr_pg+'''" "'''+table+'''"
+      "PG:'''+self.ogr2ogr_pg+'''" "'''+table+'''"
         '''
         print cmd
         os.system(cmd)        
