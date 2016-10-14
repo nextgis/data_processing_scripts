@@ -9,7 +9,7 @@ import os
 def updateDump():
     
     #dump_url='http://planet.openstreetmap.org/pbf/planet-latest.osm.pbf'
-    dump_utl='http://download.geofabrik.de/europe/belarus-latest.osm.pbf'
+    dump_url='http://download.geofabrik.de/europe/belarus-latest.osm.pbf'
     downloaded_dump='planet-latest.osm.pbf'
     work_dump='data.o5m'
     updated_dump='just_updated_dump.o5m'
