@@ -33,7 +33,7 @@ class Processor:
     osm2pgsql_style=config.osm2pgsql_style
     
     ngw_url = config.ngw_url
-    ngw_user = config.ngw_user
+    ngw_login = config.ngw_login
     ngw_password = config.ngw_password
     ngw_res_id = config.ngw_res_id
     
