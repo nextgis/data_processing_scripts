@@ -139,8 +139,8 @@ class Processor:
             os.remove(table+'.geojson')
 
         cmd='''
-    ogr2ogr -f GeoJSON '''+table+'''.geojson    \
-      "PG:'''+self.ogr2ogr_pg+'''" "'''+table+'''" -fieldTypeToString Integer
+    ogr2ogr -fieldTypeToString Integer -f GeoJSON '''+table+'''.geojson    \
+      "PG:'''+self.ogr2ogr_pg+'''" "'''+table+'''" 
         '''
         print cmd
         os.system(cmd)        
