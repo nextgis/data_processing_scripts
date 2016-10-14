@@ -30,6 +30,7 @@ class Processor:
     conn_string = config.psycopg2_postgresql_connection_string
     ogr2ogr_pg = config.ogr2ogr_pg
     pgpass=config.pgpass #for osm2pgsql
+    osm2pgsql_style=config.osm2pgsql_style
      
 	    # print the connection string we will use to connect
 
