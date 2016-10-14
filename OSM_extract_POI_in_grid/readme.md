@@ -51,8 +51,9 @@ ogr2ogr -f "PostgreSQL" PG:"host=192.168.250.1 dbname=processing_osm_ch3 user=tr
 ## Обработка
 
 Отдельно в таблицу boundary импортируется полигон границы страны из OSM вручную c https://mapzen.com/data/borders/
-В базе он правится вручную из qgis
 
+В базе он правится вручную из qgis
+Там должна быть одна фича
 
 ![alt tag](info01low.png)
 ![alt tag](info02low2.png)
