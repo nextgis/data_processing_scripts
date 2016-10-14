@@ -9,7 +9,7 @@ import os
 def updateDump():
     
     dump_url='http://planet.openstreetmap.org/pbf/planet-latest.osm.pbf'
-    dump_utl='http://download.geofabrik.de/europe/estonia-latest.osm.pbf'
+    dump_utl='http://download.geofabrik.de/europe/belarus-latest.osm.pbf'
     downloaded_dump='planet-latest.osm.pbf'
     work_dump='data.o5m'
     updated_dump='just_updated_dump.o5m'
@@ -22,7 +22,7 @@ def updateDump():
         os.system(cmd)
 
     #if prevdump dump exists - run osmupdate, it updating it to last hour state with MosOblast clipping, and save as currentdump
-    os.system('osmupdate '+ work_dump + ' ' + updated_dump + '--daily --hourly ')
+    os.system('osmupdate '+ work_dump + ' ' + updated_dump + '') #add --day or --hour --day
     
     #rename currentdump to prevdump
     os.remove(work_dump)
