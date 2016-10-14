@@ -28,3 +28,5 @@ def updateDump():
     os.rename(updated_dump, work_dump)
 
     return 0
+
+updateDump()
