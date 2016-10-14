@@ -3,7 +3,7 @@
 # Project: Update and crop osm dump file for Moscow Oblast
 # Author: Artem Svetlov <artem.svetlov@nextgis.com>
 
-
+import os
 
 #if prevdump not exists - download CFO from geofabrik and crop to MosOblast
 def updateDump():
@@ -15,7 +15,7 @@ def updateDump():
 
 
     #frist run of program
-    if exists(work_dump) = False:
+    if exists(work_dump) == False:
         cmd='wget -O - '+dump_url ' | osmconvert - -o={dst_filename}.o5m'.format(src_filename=downloaded_dump, dst_filename=work_dump)
         print cmd
         os.system(cmd)
