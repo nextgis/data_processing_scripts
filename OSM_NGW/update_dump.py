@@ -16,7 +16,7 @@ def updateDump():
 
     #frist run of program
     if exists(work_dump) == False:
-        cmd='wget -O - '+dump_url ' | osmconvert - -o={dst_filename}'.format(src_filename=downloaded_dump, dst_filename=work_dump)
+        cmd='wget -O - '+dump_url + ' | osmconvert - -o={dst_filename}'.format(src_filename=downloaded_dump, dst_filename=work_dump)
         print cmd
         os.system(cmd)
 
