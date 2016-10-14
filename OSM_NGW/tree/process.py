@@ -31,6 +31,12 @@ class Processor:
     ogr2ogr_pg = config.ogr2ogr_pg
     pgpass=config.pgpass #for osm2pgsql
     osm2pgsql_style=config.osm2pgsql_style
+    
+    ngw_url = config.ngw_url
+    ngw_user = config.ngw_user
+    ngw_password = config.ngw_password
+    ngw_res_id = config.ngw_res_id
+    
      
 	    # print the connection string we will use to connect
 
