@@ -134,14 +134,14 @@ class Processor:
 
 
         sql='''
-        DROP TABLE planet_osm_line CASCADE;
-        DROP TABLE planet_osm_point CASCADE;
-        DROP TABLE planet_osm_polygon CASCADE;
-        DROP TABLE planet_osm_roads CASCADE;
+        DROP TABLE IF EXISTS planet_osm_line CASCADE;
+        DROP TABLE IF EXISTS planet_osm_point CASCADE;
+        DROP TABLE IF EXISTS planet_osm_polygon CASCADE;
+        DROP TABLE IF EXISTS planet_osm_roads CASCADE;
 
         '''
-        self.cursor.execute(sql)
-        self.conn.commit()
+        #self.cursor.execute(sql)
+        #self.conn.commit()
 
     
         print 'pbf to o5m'
@@ -163,7 +163,7 @@ class Processor:
         print 'pbf to postgis'
         cmd='osm2pgsql {osm2pgsql_config}  -s --create --multi-geometry --latlon   -C 12000 --number-processes 3 --password --style osm/special.style {filename}-filtered.pbf'.format(osm2pgsql_config=config.osm2pgsql,filename=filename)
         print cmd        
-        os.system(cmd)
+        #os.system(cmd)
 
 
 
@@ -269,7 +269,7 @@ SELECT special_point.osm_id FROM special_point LEFT JOIN boundary  ON ST_Interse
         xmin=-20014504
         ymax=11612294
         ymin=-1672092
-        xmax=20037398
+        xmax=-7134360
 
         '''
         #Oklakhoma-edit
@@ -290,8 +290,8 @@ SELECT special_point.osm_id FROM special_point LEFT JOIN boundary  ON ST_Interse
 
 
         #придумать шаг в единицах измерения СК
-        xstep=1609.34*0.25*10000
-        ystep=1609.34*0.25*10000
+        xstep=1609.34*0.25
+        ystep=1609.34*0.25
 
         #цикл по шагу
         startx=((xmin / xstep)*xstep)+0
