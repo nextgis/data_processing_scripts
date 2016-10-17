@@ -318,7 +318,7 @@ SELECT special_point.osm_id FROM special_point LEFT JOIN boundary  ON ST_Interse
 
 
 
-        quit()
+        
 
         print "Сброс таблицы точек на экспорт"
         sql ='''TRUNCATE  special_point2;TRUNCATE  grid_export;
