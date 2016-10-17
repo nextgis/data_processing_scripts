@@ -373,8 +373,6 @@ SELECT special_point.osm_id FROM special_point LEFT JOIN boundary  ON ST_Interse
             #print sql
             
             cmd='ogr2ogr  -f "PostgreSQL" PG:"{ogr2ogr_pg}" "grid.geojson" -nln grid4326 -overwrite -t_srs EPSG:4326'.format(ogr2ogr_pg=config.ogr2ogr_pg)
-            #print cmd
-            quit()
             os.system(cmd)
         
             
