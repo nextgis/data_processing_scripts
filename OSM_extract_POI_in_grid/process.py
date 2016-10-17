@@ -351,6 +351,9 @@ SELECT special_point.osm_id FROM special_point LEFT JOIN boundary  ON ST_Interse
                 y=y+ystep
                 ynum=y // ystep
 
+                print 'y=',str(y)
+                print 'ynum=',str(ynum)
+
                 str1='{ "type": "Feature", "properties": { "id": null, "x": '+str(int(xnum))+', "y": '+str(int(ynum))+' }, "geometry": { "type": "Polygon", "coordinates":'
 
                 
@@ -366,7 +369,7 @@ SELECT special_point.osm_id FROM special_point LEFT JOIN boundary  ON ST_Interse
             gridgeojson.close()
             print 'Сетка из grid.geojson импортируется в PostGIS одной операцией. В таблице всё время держится по одному столбцу сетки.'
 
-            sql="TRUNCATE grid4326; INSERT INTO grid4326 SELECT (ST_GeomFromText('POLYGON  ',4326), {xnum} AS x, generate_series({ynummin},{totaly},{ystep})  ".format(xnum=str(xnum),ynummin=ynummin, totaly=totaly, ystep=ystep )
+            sql="TRUNCATE grid4326; INSERT INTO grid4326 SELECT (ST_GeomFromText('POLYGON  ',4326)), {xnum} AS x, generate_series({ynummin},{totaly},{ystep})  ".format(xnum=str(xnum),ynummin=ynummin, totaly=totaly, ystep=ystep )
             print sql
             cmd='ogr2ogr  -f "PostgreSQL" PG:"{ogr2ogr_pg}" "grid.geojson" -nln grid4326 -overwrite -t_srs EPSG:4326'.format(ogr2ogr_pg=config.ogr2ogr_pg)
             print cmd
