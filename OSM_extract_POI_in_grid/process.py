@@ -290,8 +290,8 @@ SELECT special_point.osm_id FROM special_point LEFT JOIN boundary  ON ST_Interse
 
 
         #придумать шаг в единицах измерения СК
-        xstep=int(1609.34*0.25)
-        ystep=int(1609.34*0.25)
+        xstep=1609.34*0.25
+        ystep=1609.34*0.25
 
         #цикл по шагу
         startx=((xmin / xstep)*xstep)+0 #-20014504.0
