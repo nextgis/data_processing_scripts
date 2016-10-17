@@ -386,6 +386,8 @@ ST_GeomFromText(\''''+bbox+'''\',4326)
 SELECT distinct on (grid4326.wkb_geometry) grid4326.wkb_geometry , grid4326.x, grid4326.y  from grid4326  JOIN special_point  ON ST_Covers(grid4326.wkb_geometry , special_point.way)
 ) AS squares_with_pois'''
 
+            print sql
+
             self.cursor.execute(sql)
             self.conn.commit()
 
