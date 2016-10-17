@@ -267,8 +267,8 @@ SELECT special_point.osm_id FROM special_point LEFT JOIN boundary  ON ST_Interse
 
         #США с заморскими территориями
         xmin=-20014504
-        ymax=11612294
-        ymin=-1672092
+        ymax=-14466423
+        ymin=6622128
         xmax=1860922
 
         '''
@@ -373,6 +373,7 @@ SELECT special_point.osm_id FROM special_point LEFT JOIN boundary  ON ST_Interse
             #print sql
             
             cmd='ogr2ogr  -f "PostgreSQL" PG:"{ogr2ogr_pg}" "grid.geojson" -nln grid4326 -overwrite -t_srs EPSG:4326'.format(ogr2ogr_pg=config.ogr2ogr_pg)
+
             os.system(cmd)
         
             
