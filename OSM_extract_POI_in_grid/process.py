@@ -345,7 +345,9 @@ SELECT special_point.osm_id FROM special_point LEFT JOIN boundary  ON ST_Interse
             gridgeojson.write(self.geojson_footer)
             gridgeojson.close()
             print 'Сетка из grid.geojson импортируется в PostGIS одной операцией. В таблице всё время держится по одному столбцу сетки.'
-            os.system('ogr2ogr  -f "PostgreSQL" PG:"{ogr2ogr_pg}" "grid.geojson" -nln grid4326 -overwrite -t_srs EPSG:4326'.format(ogr2ogr_pg=config.ogr2ogr_pg))
+            cmd='ogr2ogr  -f "PostgreSQL" PG:"{ogr2ogr_pg}" "grid.geojson" -nln grid4326 -overwrite -t_srs EPSG:4326'.format(ogr2ogr_pg=config.ogr2ogr_pg)
+            print cmd
+            os.system(cmd)
         
             
             #print 'Создается таблица только используемых квадратов'
