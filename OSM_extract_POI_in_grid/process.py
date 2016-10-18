@@ -417,7 +417,7 @@ ST_GeomFromText(\''''+bbox+'''\',4326)
 
             print "Рассчитывается пересечение сетки со кусочком страны, обрезанном по столбцу"
             sql='''TRUNCATE grid4326used; INSERT INTO grid4326used (wkb_geometry,x,y) SELECT ST_Intersection(squares_with_pois.wkb_geometry,ST_GeomFromText(\''''+bbox+'''\',4326)),x,y FROM(
-SELECT distinct on (grid4326.wkb_geometry) grid4326.wkb_geometry , grid4326.x, grid4326.y  from grid4326  JOIN special_point  ON ST_Covers(grid4326.wkb_geometry , special_point.way)
+SELECT distinct on (grid4326.wkb_geometry) grid4326.wkb_geometry , grid4326.x, grid4326.y  FROM grid4326  JOIN special_point  ON ST_Covers(grid4326.wkb_geometry , special_point.way)
 ) AS squares_with_pois'''
 
             sql='''TRUNCATE grid4326used; INSERT INTO grid4326used (wkb_geometry,x,y) SELECT distinct on (grid4326.wkb_geometry) grid4326.wkb_geometry , grid4326.x, grid4326.y  from grid4326  JOIN special_point  ON ST_Covers(grid4326.wkb_geometry , ST_Intersection(special_point.way,ST_GeomFromText(\''''+bbox+'''\',4326))
