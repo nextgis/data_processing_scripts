@@ -294,16 +294,16 @@ SELECT special_point.osm_id FROM special_point LEFT JOIN boundary  ON ST_Interse
         ystep=1609.34*0.25
 
         #цикл по шагу
-        startx=((xmin / xstep)*xstep)+0 #-20014504.0
-        starty=((ymin / ystep)*ystep)+0 #-1672092.0
+        startx=((xmin / xstep)*xstep)+0
+        starty=((ymin / ystep)*ystep)+0
         
-        endy=((ymax / ystep)*ystep)+0 #11612294.0
+        endy=((ymax / ystep)*ystep)+0
 
-        x=startx-xstep #-20014906.335
-        y=starty-ystep #-1672494.335
+        x=startx-xstep
+        y=starty-ystep
 
-        totalx=((xmax-xmin) // xstep)+1 #54372.0
-        totaly=((ymax-ymin) // ystep)+1
+        totalx=((xmax-xmin) // xstep)+1
+
 
 
         print 'startx #' + str(startx)
@@ -314,9 +314,6 @@ SELECT special_point.osm_id FROM special_point LEFT JOIN boundary  ON ST_Interse
  
         print 'x #' + str(x)
         print 'y #' + str(y)
-
-
-
 
         quit()
 
@@ -344,9 +341,6 @@ SELECT special_point.osm_id FROM special_point LEFT JOIN boundary  ON ST_Interse
             print 'Генерируем одну строку сетки. Она записывается в файл grid.geojson'
             gridgeojson = open('grid.geojson','w')
             gridgeojson.write(self.geojson_header3857)
-
-            ynummin=y // ystep
-
             while y < ymax:
                 y=y+ystep
                 ynum=y // ystep
@@ -354,7 +348,7 @@ SELECT special_point.osm_id FROM special_point LEFT JOIN boundary  ON ST_Interse
                 str1='{ "type": "Feature", "properties": { "id": null, "x": '+str(int(xnum))+', "y": '+str(int(ynum))+' }, "geometry": { "type": "Polygon", "coordinates":'
 
                 
-                str2=' [ [ [ {0}, {1} ], [ {2}, {3} ], [ {4}, {5} ], [ {6}, {7} ], [ {0}, {1} ] ] ] '.format( str(x+xstep),str(y),str(x+xstep),str(y+ystep),str(x),str(y+ystep),str(x),str(y))
+                str2=' [ [ [ {0}, {1} ], [ {2}, {3} ], [ {4}, {5} ], [ {6}, {7} ], [ {0}, {1} ] ] ] '.format( str(x+xstep),str(y),str(x+xstep),str(y+ystep),str(x),str(y+ystep),str(x),str(y) )
                 str3="} }, \n"
 
                 #Добавляем в файл geojson один квадрат
@@ -366,7 +360,7 @@ SELECT special_point.osm_id FROM special_point LEFT JOIN boundary  ON ST_Interse
             gridgeojson.close()
             print 'Сетка из grid.geojson импортируется в PostGIS одной операцией. В таблице всё время держится по одному столбцу сетки.'
 
-            sql="TRUNCATE grid4326; INSERT INTO grid4326 SELECT (ST_GeomFromText('POLYGON  ',4326), {xnum} AS x, generate_series({ynummin},{totaly},{ystep})  ".format(xnum=str(xnum),ynummin=ynummin, ystep=ystep )
+            sql="TRUNCATE grid4326; INSERT INTO grid4326 SELECT (ST_GeomFromText('POLYGON  ',4326), generate_series({starty},{totalx},{ystep})  ".format(x=str(x),starty=starty,endy=endy,ystep=ystep, totalx=totalx)
             print sql
             cmd='ogr2ogr  -f "PostgreSQL" PG:"{ogr2ogr_pg}" "grid.geojson" -nln grid4326 -overwrite -t_srs EPSG:4326'.format(ogr2ogr_pg=config.ogr2ogr_pg)
             print cmd
