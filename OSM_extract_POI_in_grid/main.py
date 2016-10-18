@@ -14,7 +14,7 @@ import process
 processor=process.Processor()
 #processor.generate_filter_string() #Generate string with tags for osmfilter
 #processor.osmimport('osm/north-america-latest')
-processor.needed_tags() #выгрузка всей базы в шейпы
+#processor.needed_tags() #Инициализация, занесение нужных poi во временную таблицу
 processor.grid_cycle() #генерирует в цикле сетку по одной строке, и пересекает точки
 
 
