@@ -355,6 +355,8 @@ INSERT INTO grid4326used (wkb_geometry,x,y) SELECT ST_Intersection(grid_with_poi
 
             print "Рассчитывается bbox столбца"
             sql='''SELECT ST_AsText(ST_SetSRID(ST_Extent(wkb_geometry),4326)) as table_extent FROM grid4326;'''
+            print sql
+
             self.cursor.execute(sql)
             self.conn.commit()
             rows2 = self.cursor.fetchall()
@@ -370,6 +372,7 @@ ST_Intersection(boundary.wkb_geometry,
 ST_GeomFromText(\''''+bbox+'''\',4326)
 )
 ) as table_extent FROM  boundary;'''
+            print sql
 
             self.cursor.execute(sql)
             self.conn.commit()
