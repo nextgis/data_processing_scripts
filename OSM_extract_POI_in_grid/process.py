@@ -194,12 +194,10 @@ class Processor:
         self.cursor.execute(sql)
         self.conn.commit()
 
-        sql='''
-        INSERT INTO special_point (way, name, amenity) (SELECT wkb_geometry AS way, brand AS name, 'cafe' AS amenity  FROM starbucks   ) ;
-        '''
-        print('Добавляются точки starbucks')
-        self.cursor.execute(sql)
-        self.conn.commit()
+        #sql='''INSERT INTO special_point (way, name, amenity) (SELECT wkb_geometry AS way, brand AS name, 'cafe' AS amenity  FROM starbucks   ) ;'''
+        #print('Добавляются точки starbucks')
+        #self.cursor.execute(sql)
+        #self.conn.commit()
 
 
         sql='''
@@ -213,7 +211,7 @@ class Processor:
 
 
         sql='''
-        INSERT INTO special_point (way, name, osm_id,'''+self.generate_sql_columns_string()+''') (SELECT ST_PointOnSurface(way) AS way, name,  CONCAT('p',"osm_id")::varchar(20) AS osm_id, '''+self.generate_sql_columns_string()+''' FROM planet_osm_polygon WHERE ''' + selects+ '''  ) 
+        INSERT INTO special_point (way, name, osm_id,'''+self.generate_sql_columns_string()+''') (SELECT ST_PointOnSurface(way) AS way, name,  CONCAT('p',"osm_id")::varchar(20) AS osm_id, '''+self.generate_sql_columns_string()+''' FROM planet_osm_polygon WHERE ''' + selects+ '''  LIMIT 1) 
         '''
         print('Добавляются центроиды полигонов POI')
         self.cursor.execute(sql)
