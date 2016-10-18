@@ -265,11 +265,11 @@ SELECT special_point.osm_id FROM special_point LEFT JOIN boundary  ON ST_Interse
         ymin=2781805
         xmax=-7445254
 
-        #США с заморскими территориями
+        #Аляска
         xmin=-20014504
         ymax=11612294
-        ymin=-1672092
-        xmax=-7134360
+        ymin=6601027
+        xmax=-14466440
 
         '''
         #Oklakhoma-edit
