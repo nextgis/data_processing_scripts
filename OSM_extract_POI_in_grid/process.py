@@ -346,7 +346,7 @@ ORDER BY userid, timestamp desc;
 		
 	    #Проверка: есть ли POI в этом столбце	
             gridColumnWKT='{x1} {y1},{x2} {y1},{x2} {y2},{x1} {y2}, {x1} {y1}'.format(x1=x, x2=x+xstep,y1=ymax, y2=ymin)
-            sql='''SELECT COUNT(special_point.*) AS cnt FROM special_point WHERE ST_Intersects(wkb_geometry,  ST_GeomFromText(\''''+gridColumnWKT+'''\',4326))'''
+            sql='''SELECT COUNT(special_point.*) AS cnt FROM special_point WHERE ST_Intersects(wkb_geometry,  ST_GeomFromText(\''''+gridColumnWKT+'''\',3857))'''
             print sql
             self.cursor.execute(sql)
             self.conn.commit()
@@ -355,7 +355,7 @@ ORDER BY userid, timestamp desc;
             for row in rows:
                 cnt=row[0]
             if str(cnt)=='0':
-                print 'Этот столбец сетки не попадает в страну, пропуск'
+                print 'В этот столбец сетки не попадают POI, пропуск'
                 continue
 		
             #цикл по строкам
