@@ -420,7 +420,14 @@ ST_GeomFromText(\''''+bbox+'''\',4326)
 SELECT distinct on (grid4326.wkb_geometry) grid4326.wkb_geometry , grid4326.x, grid4326.y  FROM grid4326  JOIN special_point  ON ST_Covers(grid4326.wkb_geometry , special_point.way)
 ) AS squares_with_pois'''
 
-            sql='''TRUNCATE grid4326used; INSERT INTO grid4326used (wkb_geometry,x,y) SELECT distinct on (grid4326.wkb_geometry) grid4326.wkb_geometry , grid4326.x, grid4326.y  from grid4326  JOIN special_point  ON ST_Covers(grid4326.wkb_geometry , ST_Intersection(special_point.way,ST_GeomFromText(\''''+bbox+'''\',4326))
+            sql='''TRUNCATE grid4326used; INSERT INTO grid4326used (wkb_geometry,x,y) SELECT grid4326.wkb_geometry,grid4326.x,grid4326.y
+FROM grid4326 JOIN 
+(
+SELECT  special_point.way
+FROM special_point
+WHERE ST_Intersects(special_point.way,ST_GeomFromText(\''''+bbox+'''\',4326))
+) pois_in_grid
+ON ST_Intersects(grid4326.wkb_geometry,pois_in_grid.way)
 '''
 
             print sql
