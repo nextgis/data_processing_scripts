@@ -391,7 +391,8 @@ INSERT INTO grid4326used (wkb_geometry,x,y) SELECT ST_Intersection(grid_with_poi
             bbox=''
             for row2 in rows2:
                 bbox=row2[0]
-
+    
+            
 
             print "Рассчитывается пересечение bbox столбца со страной (получается прямоугольник, у которого сверху и снизу кривые границы страны"
             sql='''SELECT 
@@ -409,6 +410,9 @@ ST_GeomFromText(\''''+bbox+'''\',4326)
             for row2 in rows2:
                 bbox=row2[0]
 
+            if bbox=='GEOMETRYCOLLECTION EMPTY':
+                print 'Этот столбец сетки не попадает в страну, пропуск'
+                continue
 
             print "Рассчитывается пересечение сетки со кусочком страны, обрезанном по столбцу"
             sql='''TRUNCATE grid4326used; INSERT INTO grid4326used (wkb_geometry,x,y) SELECT ST_Intersection(squares_with_pois.wkb_geometry,ST_GeomFromText(\''''+bbox+'''\',4326)),x,y FROM(
