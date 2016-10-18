@@ -399,7 +399,7 @@ ST_AsText(
 ST_Intersection(boundary.wkb_geometry,
 ST_GeomFromText(\''''+bbox+'''\',4326)
 )
-) as table_extent FROM  boundary_optimized;'''
+) as table_extent FROM  boundary_optimized AS boundary;'''
             print sql
 
             self.cursor.execute(sql)
