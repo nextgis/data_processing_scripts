@@ -194,10 +194,12 @@ class Processor:
         self.cursor.execute(sql)
         self.conn.commit()
 
-        #sql='''INSERT INTO special_point (way, name, amenity) (SELECT wkb_geometry AS way, brand AS name, 'cafe' AS amenity  FROM starbucks   ) ;'''
-        #print('Добавляются точки starbucks')
-        #self.cursor.execute(sql)
-        #self.conn.commit()
+        sql='''INSERT INTO special_point (way, name, amenity) (SELECT starbucks.wkb_geometry AS way, brand AS name, 'cafe' AS amenity  FROM starbucks JOIN boundary_optimized ON ST_Intersects(starbucks.wkb_geometry, boundary_optimized.wkb_geometry)
+
+   ) ;'''
+        print('Добавляются точки starbucks внутри страны')
+        self.cursor.execute(sql)
+        self.conn.commit()
 
 
         sql='''
@@ -242,8 +244,7 @@ http://gis.stackexchange.com/questions/19832/how-to-fix-performance-problem-in-p
 
 
 
-CREATE TABLE boundary_optimized as
-SELECT (ST_Dump(wkb_geometry)).geom as wkb_geometry FROM boundary;
+CREATE TABLE boundary_optimized as SELECT (ST_Dump(wkb_geometry)).geom as wkb_geometry FROM boundary;
 
 -- It is always great to put a primary key on the table
 ALTER table boundary_optimized ADD Column gid serial PRIMARY KEY;
