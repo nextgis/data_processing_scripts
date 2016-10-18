@@ -235,7 +235,35 @@ SELECT special_point.osm_id FROM special_point LEFT JOIN boundary  ON ST_Interse
         
         return 0;
         
+        '''
+Эксперимент.
+http://gis.stackexchange.com/questions/19832/how-to-fix-performance-problem-in-postgis-st-intersects
+Из таблицы с мультиполигоном границы - сделать таблицу где каждый остров - отдельный объект, и навесить индекс
 
+
+
+CREATE TABLE boundary_optimized as
+SELECT (ST_Dump(wkb_geometry)).geom as wkb_geometry FROM boundary;
+
+-- It is always great to put a primary key on the table
+ALTER table boundary_optimized ADD Column gid serial PRIMARY KEY;
+
+-- Create the index
+CREATE INDEX idx_boundary_optimized_geom
+on boundary_optimized
+USING gist(wkb_geometry);
+
+-- To give the database some information about how the index looks
+vacuum analyze boundary_optimized;
+
+-- Then you go:
+SELECT DISTINCT ON (userid) userid ,ST_AsText(position), timestamp  
+FROM table1, big polygon WHERE ST_Intersects ( big_polygon.geom,position) 
+ORDER BY userid, timestamp desc;
+
+
+
+        '''
 
 
 
@@ -371,7 +399,7 @@ ST_AsText(
 ST_Intersection(boundary.wkb_geometry,
 ST_GeomFromText(\''''+bbox+'''\',4326)
 )
-) as table_extent FROM  boundary;'''
+) as table_extent FROM  boundary_optimized;'''
             print sql
 
             self.cursor.execute(sql)
