@@ -298,13 +298,7 @@ ORDER BY userid, timestamp desc;
         ymin=-1671038
         xmax=2003083
 
-        '''
-        #Oklakhoma-edit
-        xmin=-11479022
-        ymax=6340463
-        xmax=-10452195
-        ymin=3424009
-        '''
+
 
         #Начало координат
         x0=0
@@ -349,6 +343,21 @@ ORDER BY userid, timestamp desc;
             xnum= x // xstep
 
             y=starty-ystep
+		
+	    #Проверка: есть ли POI в этом столбце	
+            gridColumnWKT='{x1} {y1},{x2} {y1},{x2} {y2},{x1} {y2}, {x1} {y1}'.format(x1=x, x2=x+xstep,y1=ymax, y2=ymin)
+            sql='''SELECT COUNT(special_point.*) AS cnt FROM special_point WHERE ST_Intersects(wkb_geometry,  ST_GeomFromText(\''''+bbox+'''\',4326))'''
+            print sql
+            self.cursor.execute(sql)
+            self.conn.commit()
+            rows = self.cursor.fetchall()
+            bbox=''
+            for row in rows:
+                cnt=row2[0]
+            if str(cnt)=='0':
+                print 'Этот столбец сетки не попадает в страну, пропуск'
+                continue
+		
             #цикл по строкам
             print "Обрабатывается столбец "+ str(stepcounterx) +" из " + str(totalx)
             print 'Генерируем одну строку сетки. Она записывается в файл grid.geojson'
