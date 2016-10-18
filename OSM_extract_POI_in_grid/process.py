@@ -293,6 +293,7 @@ ORDER BY userid, timestamp desc;
 
         #Аляска
         xmin=-20014504
+        xmin=-16711152 #Анкоридж
         ymax=11612294
         ymin=6601027
         xmax=-14466440
