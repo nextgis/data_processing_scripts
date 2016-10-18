@@ -269,7 +269,7 @@ SELECT special_point.osm_id FROM special_point LEFT JOIN boundary  ON ST_Interse
         xmin=-20014504
         ymax=11612294
         ymin=-1672092
-        xmax=1860922
+        xmax=-7134360
 
         '''
         #Oklakhoma-edit
