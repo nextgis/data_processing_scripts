@@ -346,7 +346,7 @@ ORDER BY userid, timestamp desc;
 		
 	    #Проверка: есть ли POI в этом столбце	
             gridColumnWKT='{x1} {y1},{x2} {y1},{x2} {y2},{x1} {y2}, {x1} {y1}'.format(x1=x, x2=x+xstep,y1=ymax, y2=ymin)
-            sql='''SELECT COUNT(special_point.*) AS cnt FROM special_point WHERE ST_Intersects(way,  ST_GeomFromText(\''''+gridColumnWKT+'''\',3857))'''
+            sql='''SELECT COUNT(special_point.*) AS cnt FROM special_point WHERE ST_Intersects(way,  ST_Transform(ST_GeomFromText(\'POLYGON(('''+gridColumnWKT+'''))\',3857)))'''
             print sql
             self.cursor.execute(sql)
             self.conn.commit()
