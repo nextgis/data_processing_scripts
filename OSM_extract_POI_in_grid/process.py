@@ -410,7 +410,10 @@ ST_AsText(
 ST_Intersection(boundary.wkb_geometry,
 ST_GeomFromText(\''''+bbox+'''\',4326)
 )
-) as table_extent FROM  boundary_optimized AS boundary;'''
+) as table_extent FROM  boundary_optimized AS boundary
+WHERE not ST_IsEmpty(ST_Intersection(boundary.wkb_geometry,
+ST_GeomFromText(\''''+bbox+'''\',4326)
+)) '''
             print sql
 
             self.cursor.execute(sql)
