@@ -426,7 +426,7 @@ ST_GeomFromText(\''''+bbox+'''\',4326)
             if bbox=='GEOMETRYCOLLECTION EMPTY':
                 print 'Этот столбец сетки не попадает в страну, пропуск'
                 continue
-            if bbox==''
+            if bbox=='':
                 print 'Этот столбец сетки не попадает в страну, пропуск'
                 continue	 
 
