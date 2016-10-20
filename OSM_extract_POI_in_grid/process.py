@@ -401,26 +401,24 @@ ORDER BY userid, timestamp desc;
             os.system('ogr2ogr  -f "PostgreSQL" PG:"{ogr2ogr_pg}" "grid.geojson" -nln grid4326 -overwrite -t_srs EPSG:4326'.format(ogr2ogr_pg=config.ogr2ogr_pg))
         
             
-            #print 'Создается таблица только используемых квадратов'
+            print 'Создается таблица только используемых квадратов'
             sql=''' 
 TRUNCATE grid4326used;
 INSERT INTO grid4326used (wkb_geometry,x,y) SELECT distinct on (grid4326.wkb_geometry) grid4326.wkb_geometry , grid4326.x, grid4326.y  
 from grid4326  JOIN special_point  ON ST_Intersects( special_point.way,grid4326.wkb_geometry )  ;'''
+	    print sql
             self.cursor.execute(sql)
             self.conn.commit()
+	    quit()
 
             print "Рассчитывается bbox столбца"
             sql='''SELECT ST_AsText(ST_SetSRID(ST_Extent(wkb_geometry),4326)) as table_extent FROM grid4326;'''
-            print sql
-
             self.cursor.execute(sql)
             self.conn.commit()
             rows2 = self.cursor.fetchall()
             bbox=''
             for row2 in rows2:
                 bbox=row2[0]
-    
-            
 
             print "Рассчитывается пересечение bbox столбца со страной (получается прямоугольник, у которого сверху и снизу кривые границы страны"
             sql='''SELECT 
