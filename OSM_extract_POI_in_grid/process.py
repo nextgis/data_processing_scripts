@@ -409,7 +409,9 @@ from grid4326  JOIN special_point  ON ST_Intersects( special_point.way,grid4326.
 	    print sql
             self.cursor.execute(sql)
             self.conn.commit()
-	    quit()
+
+            if str(int(xnum))=='-49077':
+                quit()
 
             print "Рассчитывается bbox столбца"
             sql='''SELECT ST_AsText(ST_SetSRID(ST_Extent(wkb_geometry),4326)) as table_extent FROM grid4326;'''
@@ -477,8 +479,6 @@ ON ST_Intersects(grid4326.wkb_geometry,pois_in_grid.way)
             self.points_in_grid()
             #return 0
 
-            if str(int(xnum))=='-49077':
-                quit()
 	
 
 
