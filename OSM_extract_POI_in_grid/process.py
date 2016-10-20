@@ -203,7 +203,7 @@ class Processor:
 
 
         sql='''
-        INSERT INTO special_point (way, name, osm_id,'''+self.generate_sql_columns_string()+''') (SELECT way AS way, name, CONCAT('n',"osm_id")::varchar(20) AS osm_id, '''+self.generate_sql_columns_string()+''' FROM planet_osm_point WHERE ''' + selects+ '''  ) 
+        INSERT INTO special_point (way, name, osm_id,'''+self.generate_sql_columns_string()+''') (SELECT way AS way, name, CONCAT('n',"osm_id")::varchar(20) AS osm_id, '''+self.generate_sql_columns_string()+''' FROM planet_osm_point JOIN boundary_optimized ON ST_Intersects(planet_osm_point.way, boundary_optimized.wkb_geometry) WHERE ''' + selects+ '''  ) 
         '''
         print sql
         print('Добавляются  POI из таблицы точек')
@@ -213,7 +213,7 @@ class Processor:
 
 
         sql='''
-        INSERT INTO special_point (way, name, osm_id,'''+self.generate_sql_columns_string()+''') (SELECT ST_PointOnSurface(way) AS way, name,  CONCAT('p',"osm_id")::varchar(20) AS osm_id, '''+self.generate_sql_columns_string()+''' FROM planet_osm_polygon WHERE ''' + selects+ '''  ) 
+        INSERT INTO special_point (way, name, osm_id,'''+self.generate_sql_columns_string()+''') (SELECT ST_PointOnSurface(way) AS way, name,  CONCAT('p',"osm_id")::varchar(20) AS osm_id, '''+self.generate_sql_columns_string()+''' FROM planet_osm_polygon JOIN boundary_optimized ON ST_Intersects(planet_osm_polygon.way, boundary_optimized.wkb_geometry) WHERE ''' + selects+ '''  ) 
         '''
         print('Добавляются центроиды полигонов POI')
         self.cursor.execute(sql)
