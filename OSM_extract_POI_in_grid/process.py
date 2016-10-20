@@ -404,9 +404,9 @@ ORDER BY userid, timestamp desc;
             #print 'Создается таблица только используемых квадратов'
             sql=''' 
 TRUNCATE grid4326used;
-INSERT INTO grid4326used (wkb_geometry,x,y) SELECT ST_Intersection(grid_with_pois.wkb_geometry, boundary.wkb_geometry), x,y FROM (SELECT distinct on (grid4326.wkb_geometry) grid4326.wkb_geometry , grid4326.x, grid4326.y  from grid4326  JOIN special_point  ON ST_Covers(grid4326.wkb_geometry , special_point.way)) AS grid_with_pois, boundary  ;'''
-            #self.cursor.execute(sql)
-            #self.conn.commit()
+INSERT INTO grid4326used (wkb_geometry,x,y) SELECT ST_Intersection(grid_with_pois.wkb_geometry, boundary.wkb_geometry), x,y FROM (SELECT distinct on (grid4326.wkb_geometry) grid4326.wkb_geometry , grid4326.x, grid4326.y  from grid4326  JOIN special_point  ON ST_Covers(grid4326.wkb_geometry , special_point.way)) AS grid_with_pois, boundary_optimized AS boundary  ;'''
+            self.cursor.execute(sql)
+            self.conn.commit()
 
             print "Рассчитывается bbox столбца"
             sql='''SELECT ST_AsText(ST_SetSRID(ST_Extent(wkb_geometry),4326)) as table_extent FROM grid4326;'''
