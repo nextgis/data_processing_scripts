@@ -220,7 +220,7 @@ class Processor:
         self.cursor.execute(sql)
         self.conn.commit()
 	
-	quit()
+	
 
 
 
