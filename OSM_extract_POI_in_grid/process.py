@@ -363,7 +363,7 @@ ORDER BY userid, timestamp desc;
 		
             #цикл по строкам
             print "Обрабатывается столбец "+ str(stepcounterx) +" из " + str(totalx)
-            print 'Генерируем одну строку сетки. Она записывается в файл grid.geojson'
+            print 'Генерируем один столбец сетки. Он записывается в файл grid.geojson'
             gridgeojson = open('grid.geojson','w')
             gridgeojson.write(self.geojson_header3857)
             while y < ymax:
