@@ -404,7 +404,8 @@ ORDER BY userid, timestamp desc;
             #print 'Создается таблица только используемых квадратов'
             sql=''' 
 TRUNCATE grid4326used;
-INSERT INTO grid4326used (wkb_geometry,x,y) SELECT ST_Intersection(grid_with_pois.wkb_geometry, boundary.wkb_geometry), x,y FROM (SELECT distinct on (grid4326.wkb_geometry) grid4326.wkb_geometry , grid4326.x, grid4326.y  from grid4326  JOIN special_point  ON ST_Covers(grid4326.wkb_geometry , special_point.way)) AS grid_with_pois, boundary_optimized AS boundary  ;'''
+INSERT INTO grid4326used (wkb_geometry,x,y) SELECT distinct on (grid4326.wkb_geometry) grid4326.wkb_geometry , grid4326.x, grid4326.y  
+from grid4326  JOIN special_point  ON ST_Covers(grid4326.wkb_geometry , special_point.way)  ;'''
             self.cursor.execute(sql)
             self.conn.commit()
 
