@@ -478,7 +478,7 @@ ON ST_Intersects(grid4326.wkb_geometry,pois_in_grid.way)
             self.points_in_grid()
             #return 0
 
-            if x==-49077:
+            if str(int(xnum))==-49077:
                 quit()
 	
 
