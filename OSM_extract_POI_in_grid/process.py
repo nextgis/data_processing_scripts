@@ -405,7 +405,7 @@ ORDER BY userid, timestamp desc;
             sql=''' 
 TRUNCATE grid4326used;
 INSERT INTO grid4326used (wkb_geometry,x,y) SELECT distinct on (grid4326.wkb_geometry) grid4326.wkb_geometry , grid4326.x, grid4326.y  
-from grid4326  JOIN special_point  ON ST_Covers(grid4326.wkb_geometry , special_point.way)  ;'''
+from grid4326  JOIN special_point  ON ST_Intersects( special_point.way,grid4326.wkb_geometry )  ;'''
             self.cursor.execute(sql)
             self.conn.commit()
 
