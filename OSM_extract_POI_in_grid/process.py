@@ -297,6 +297,7 @@ ORDER BY userid, timestamp desc;
 
         #Аляска
         xmin=-20014504
+	xmin=6497648
         ymax=11612294
         ymin=-1671038
         xmax=2003083
