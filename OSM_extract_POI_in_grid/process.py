@@ -406,12 +406,10 @@ ORDER BY userid, timestamp desc;
 TRUNCATE grid4326used;
 INSERT INTO grid4326used (wkb_geometry,x,y) SELECT distinct on (grid4326.wkb_geometry) grid4326.wkb_geometry , grid4326.x, grid4326.y  
 from grid4326  JOIN special_point  ON ST_Intersects( special_point.way,grid4326.wkb_geometry )  ;'''
-	    print sql
+
             self.cursor.execute(sql)
             self.conn.commit()
 
-            if str(int(xnum))=='-49077':
-                quit()
 
             print "Рассчитывается bbox столбца"
             sql='''SELECT ST_AsText(ST_SetSRID(ST_Extent(wkb_geometry),4326)) as table_extent FROM grid4326;'''
@@ -448,7 +446,7 @@ ST_GeomFromText(\''''+bbox+'''\',4326)
                 print 'Этот столбец сетки не попадает в страну, пропуск'
                 continue	 
 
-            print "Рассчитывается пересечение сетки со кусочком страны, обрезанном по столбцу"
+            #print "Рассчитывается пересечение сетки со кусочком страны, обрезанном по столбцу" вырублено, потому что теперь poi обрезаны по стране
             sql='''TRUNCATE grid4326used; INSERT INTO grid4326used (wkb_geometry,x,y) SELECT ST_Intersection(squares_with_pois.wkb_geometry,ST_GeomFromText(\''''+bbox+'''\',4326)),x,y FROM(
 SELECT distinct on (grid4326.wkb_geometry) grid4326.wkb_geometry , grid4326.x, grid4326.y  FROM grid4326  JOIN special_point  ON ST_Covers(grid4326.wkb_geometry , special_point.way)
 ) AS squares_with_pois'''
@@ -463,10 +461,10 @@ WHERE ST_Intersects(special_point.way,ST_GeomFromText(\''''+bbox+'''\',4326))
 ON ST_Intersects(grid4326.wkb_geometry,pois_in_grid.way)
 '''
 
-            print sql
+            #print sql
 
-            self.cursor.execute(sql)
-            self.conn.commit()
+            #self.cursor.execute(sql)
+            #self.conn.commit()
 
             print "Добавляются квадраты в таблицу используемых квадратов сетки"
             sql='''INSERT INTO grid_export (wkb_geometry,x,y) SELECT wkb_geometry,x,y FROM grid4326used'''
