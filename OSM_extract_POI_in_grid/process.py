@@ -369,7 +369,21 @@ ORDER BY userid, timestamp desc;
             while y < ymax:
                 y=y+ystep
                 ynum=y // ystep
-
+		
+		
+                gridColumnWKT='{0} {1}, {2} {3} ,  {4} {5} , {6} {7} , {0} {1}'.format( str(x+xstep),str(y),str(x+xstep),str(y+ystep),str(x),str(y+ystep),str(x),str(y) )
+                sql='''SELECT COUNT(special_point.*) AS cnt FROM special_point WHERE ST_Intersects(way,  ST_Transform(ST_GeomFromText(\'POLYGON(('''+gridColumnWKT+'''))\',3857),4326))'''
+                print sql
+                self.cursor.execute(sql)
+                self.conn.commit()
+                rows = self.cursor.fetchall()
+                bbox=''
+                for row in rows:
+                    cnt=row[0]
+                if str(cnt)=='0':
+                    print 'В эту ячейку сетки не попадают POI, пропуск'
+                    continue
+			
                 str1='{ "type": "Feature", "properties": { "id": null, "x": '+str(int(xnum))+', "y": '+str(int(ynum))+' }, "geometry": { "type": "Polygon", "coordinates":'
 
                 
