@@ -350,7 +350,7 @@ ORDER BY userid, timestamp desc;
 	    #Проверка: есть ли POI в этом столбце	
             gridColumnWKT='{x1} {y1},{x2} {y1},{x2} {y2},{x1} {y2}, {x1} {y1}'.format(x1=x, x2=x+xstep,y1=ymax, y2=ymin)
             sql='''SELECT COUNT(special_point.*) AS cnt FROM special_point WHERE ST_Intersects(way,  ST_Transform(ST_GeomFromText(\'POLYGON(('''+gridColumnWKT+'''))\',3857),4326))'''
-            print sql
+            #print sql
             self.cursor.execute(sql)
             self.conn.commit()
             rows = self.cursor.fetchall()
@@ -358,7 +358,7 @@ ORDER BY userid, timestamp desc;
             for row in rows:
                 cnt=row[0]
             if str(cnt)=='0':
-                print 'В этот столбец сетки не попадают POI, пропуск'
+                #print 'В этот столбец сетки не попадают POI, пропуск'
                 continue
 		
             #цикл по строкам
@@ -373,7 +373,7 @@ ORDER BY userid, timestamp desc;
 		
                 gridColumnWKT='{0} {1}, {2} {3} ,  {4} {5} , {6} {7} , {0} {1}'.format( str(x+xstep),str(y),str(x+xstep),str(y+ystep),str(x),str(y+ystep),str(x),str(y) )
                 sql='''SELECT COUNT(special_point.*) AS cnt FROM special_point WHERE ST_Intersects(way,  ST_Transform(ST_GeomFromText(\'POLYGON(('''+gridColumnWKT+'''))\',3857),4326))'''
-                print sql
+                #print sql
                 self.cursor.execute(sql)
                 self.conn.commit()
                 rows = self.cursor.fetchall()
@@ -381,7 +381,7 @@ ORDER BY userid, timestamp desc;
                 for row in rows:
                     cnt=row[0]
                 if str(cnt)=='0':
-                    print 'В эту ячейку сетки не попадают POI, пропуск'
+                    #print 'В эту ячейку сетки не попадают POI, пропуск'
                     continue
 			
                 str1='{ "type": "Feature", "properties": { "id": null, "x": '+str(int(xnum))+', "y": '+str(int(ynum))+' }, "geometry": { "type": "Polygon", "coordinates":'
