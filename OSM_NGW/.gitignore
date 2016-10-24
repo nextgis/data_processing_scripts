@@ -1,0 +1,6 @@
+*/osm
+*.pbf
+*.o5m
+*.pyc
+*.geojson
+*.config.py

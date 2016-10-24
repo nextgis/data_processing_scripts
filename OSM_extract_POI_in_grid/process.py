@@ -203,7 +203,7 @@ class Processor:
 
 
         sql='''
-        INSERT INTO special_point (way, name, osm_id,'''+self.generate_sql_columns_string()+''') (SELECT way AS way, name, CONCAT('n',"osm_id")::varchar(20) AS osm_id, '''+self.generate_sql_columns_string()+''' FROM planet_osm_point WHERE ''' + selects+ '''  ) 
+        INSERT INTO special_point (way, name, osm_id,'''+self.generate_sql_columns_string()+''') (SELECT way AS way, name, CONCAT('n',"osm_id")::varchar(20) AS osm_id, '''+self.generate_sql_columns_string()+''' FROM planet_osm_point JOIN boundary_optimized ON ST_Intersects(planet_osm_point.way, boundary_optimized.wkb_geometry) WHERE ''' + selects+ '''  ) 
         '''
         print sql
         print('Добавляются  POI из таблицы точек')
@@ -213,11 +213,14 @@ class Processor:
 
 
         sql='''
-        INSERT INTO special_point (way, name, osm_id,'''+self.generate_sql_columns_string()+''') (SELECT ST_PointOnSurface(way) AS way, name,  CONCAT('p',"osm_id")::varchar(20) AS osm_id, '''+self.generate_sql_columns_string()+''' FROM planet_osm_polygon WHERE ''' + selects+ '''  ) 
+        INSERT INTO special_point (way, name, osm_id,'''+self.generate_sql_columns_string()+''') (SELECT ST_PointOnSurface(way) AS way, name,  CONCAT('p',"osm_id")::varchar(20) AS osm_id, '''+self.generate_sql_columns_string()+''' FROM planet_osm_polygon JOIN boundary_optimized ON ST_Intersects(planet_osm_polygon.way, boundary_optimized.wkb_geometry) WHERE ''' + selects+ '''  ) 
         '''
         print('Добавляются центроиды полигонов POI')
+	print sql
         self.cursor.execute(sql)
         self.conn.commit()
+	
+	
 
 
 
@@ -296,15 +299,10 @@ ORDER BY userid, timestamp desc;
         xmin=-20014504
         ymax=11612294
         ymin=-1671038
+	ymin=6497648
         xmax=2003083
 
-        '''
-        #Oklakhoma-edit
-        xmin=-11479022
-        ymax=6340463
-        xmax=-10452195
-        ymin=3424009
-        '''
+
 
         #Начало координат
         x0=0
@@ -349,15 +347,44 @@ ORDER BY userid, timestamp desc;
             xnum= x // xstep
 
             y=starty-ystep
+		
+	    #Проверка: есть ли POI в этом столбце	
+            gridColumnWKT='{x1} {y1},{x2} {y1},{x2} {y2},{x1} {y2}, {x1} {y1}'.format(x1=x, x2=x+xstep,y1=ymax, y2=ymin)
+            sql='''SELECT COUNT(special_point.*) AS cnt FROM special_point WHERE ST_Intersects(way,  ST_Transform(ST_GeomFromText(\'POLYGON(('''+gridColumnWKT+'''))\',3857),4326))'''
+            #print sql
+            self.cursor.execute(sql)
+            self.conn.commit()
+            rows = self.cursor.fetchall()
+            bbox=''
+            for row in rows:
+                cnt=row[0]
+            if str(cnt)=='0':
+                #print 'В этот столбец сетки не попадают POI, пропуск'
+                continue
+		
             #цикл по строкам
             print "Обрабатывается столбец "+ str(stepcounterx) +" из " + str(totalx)
-            print 'Генерируем одну строку сетки. Она записывается в файл grid.geojson'
+            print 'Генерируем один столбец сетки. Он записывается в файл grid.geojson'
             gridgeojson = open('grid.geojson','w')
             gridgeojson.write(self.geojson_header3857)
             while y < ymax:
                 y=y+ystep
                 ynum=y // ystep
-
+		
+		
+                gridColumnWKT='{0} {1}, {2} {3} ,  {4} {5} , {6} {7} , {0} {1}'.format( str(x+xstep),str(y),str(x+xstep),str(y+ystep),str(x),str(y+ystep),str(x),str(y) )
+                sql='''SELECT COUNT(special_point.*) AS cnt FROM special_point WHERE ST_Intersects(way,  ST_Transform(ST_GeomFromText(\'POLYGON(('''+gridColumnWKT+'''))\',3857),4326))'''
+                #print sql
+                self.cursor.execute(sql)
+                self.conn.commit()
+                rows = self.cursor.fetchall()
+                bbox=''
+                for row in rows:
+                    cnt=row[0]
+                if str(cnt)=='0':
+                    #print 'В эту ячейку сетки не попадают POI, пропуск'
+                    continue
+			
                 str1='{ "type": "Feature", "properties": { "id": null, "x": '+str(int(xnum))+', "y": '+str(int(ynum))+' }, "geometry": { "type": "Polygon", "coordinates":'
 
                 
@@ -375,25 +402,24 @@ ORDER BY userid, timestamp desc;
             os.system('ogr2ogr  -f "PostgreSQL" PG:"{ogr2ogr_pg}" "grid.geojson" -nln grid4326 -overwrite -t_srs EPSG:4326'.format(ogr2ogr_pg=config.ogr2ogr_pg))
         
             
-            #print 'Создается таблица только используемых квадратов'
+            print 'Создается таблица только используемых квадратов'
             sql=''' 
 TRUNCATE grid4326used;
-INSERT INTO grid4326used (wkb_geometry,x,y) SELECT ST_Intersection(grid_with_pois.wkb_geometry, boundary.wkb_geometry), x,y FROM (SELECT distinct on (grid4326.wkb_geometry) grid4326.wkb_geometry , grid4326.x, grid4326.y  from grid4326  JOIN special_point  ON ST_Covers(grid4326.wkb_geometry , special_point.way)) AS grid_with_pois, boundary  ;'''
-            #self.cursor.execute(sql)
-            #self.conn.commit()
+INSERT INTO grid4326used (wkb_geometry,x,y) SELECT distinct on (grid4326.wkb_geometry) grid4326.wkb_geometry , grid4326.x, grid4326.y  
+from grid4326  JOIN special_point  ON ST_Intersects( special_point.way,grid4326.wkb_geometry )  ;'''
+
+            self.cursor.execute(sql)
+            self.conn.commit()
+
 
             print "Рассчитывается bbox столбца"
             sql='''SELECT ST_AsText(ST_SetSRID(ST_Extent(wkb_geometry),4326)) as table_extent FROM grid4326;'''
-            print sql
-
             self.cursor.execute(sql)
             self.conn.commit()
             rows2 = self.cursor.fetchall()
             bbox=''
             for row2 in rows2:
                 bbox=row2[0]
-    
-            
 
             print "Рассчитывается пересечение bbox столбца со страной (получается прямоугольник, у которого сверху и снизу кривые границы страны"
             sql='''SELECT 
@@ -401,7 +427,10 @@ ST_AsText(
 ST_Intersection(boundary.wkb_geometry,
 ST_GeomFromText(\''''+bbox+'''\',4326)
 )
-) as table_extent FROM  boundary_optimized AS boundary;'''
+) as table_extent FROM  boundary_optimized AS boundary
+WHERE not ST_IsEmpty(ST_Intersection(boundary.wkb_geometry,
+ST_GeomFromText(\''''+bbox+'''\',4326)
+)) '''
             print sql
 
             self.cursor.execute(sql)
@@ -414,8 +443,11 @@ ST_GeomFromText(\''''+bbox+'''\',4326)
             if bbox=='GEOMETRYCOLLECTION EMPTY':
                 print 'Этот столбец сетки не попадает в страну, пропуск'
                 continue
+            if bbox=='':
+                print 'Этот столбец сетки не попадает в страну, пропуск'
+                continue	 
 
-            print "Рассчитывается пересечение сетки со кусочком страны, обрезанном по столбцу"
+            #print "Рассчитывается пересечение сетки со кусочком страны, обрезанном по столбцу" вырублено, потому что теперь poi обрезаны по стране
             sql='''TRUNCATE grid4326used; INSERT INTO grid4326used (wkb_geometry,x,y) SELECT ST_Intersection(squares_with_pois.wkb_geometry,ST_GeomFromText(\''''+bbox+'''\',4326)),x,y FROM(
 SELECT distinct on (grid4326.wkb_geometry) grid4326.wkb_geometry , grid4326.x, grid4326.y  FROM grid4326  JOIN special_point  ON ST_Covers(grid4326.wkb_geometry , special_point.way)
 ) AS squares_with_pois'''
@@ -430,10 +462,10 @@ WHERE ST_Intersects(special_point.way,ST_GeomFromText(\''''+bbox+'''\',4326))
 ON ST_Intersects(grid4326.wkb_geometry,pois_in_grid.way)
 '''
 
-            print sql
+            #print sql
 
-            self.cursor.execute(sql)
-            self.conn.commit()
+            #self.cursor.execute(sql)
+            #self.conn.commit()
 
             print "Добавляются квадраты в таблицу используемых квадратов сетки"
             sql='''INSERT INTO grid_export (wkb_geometry,x,y) SELECT wkb_geometry,x,y FROM grid4326used'''
@@ -446,8 +478,7 @@ ON ST_Intersects(grid4326.wkb_geometry,pois_in_grid.way)
             self.points_in_grid()
             #return 0
 
-
-
+	
 
 
 

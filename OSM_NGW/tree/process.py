@@ -118,18 +118,18 @@ class Processor:
     
 
         print 'o5m tag filtration'
-        cmd='osmfilter {filename}.o5m --drop-author --keep= --keep-nodes="{fl}"   --out-o5m >{filename}-filtered.o5m'.format(filename=filename, fl=self.generate_filter_string())
+        cmd='osmfilter {filename}.o5m --drop-author --keep= --keep-nodes="{fl}"   --out-o5m >osm/{filename}-filtered.o5m'.format(filename=filename, fl=self.generate_filter_string())
         print cmd        
         os.system(cmd)
 
         print 'o5m to pbf'
-        cmd='osmconvert {filename}-filtered.o5m -o={filename}-filtered.pbf'.format(filename=filename)
+        cmd='osmconvert osm/{filename}-filtered.o5m -o=osm/{filename}-filtered.pbf'.format(filename=filename)
         print cmd        
         os.system(cmd)
 
 
         print 'pbf to postgis'
-        cmd='osm2pgsql {osm2pgsql_config}  --slim  --create --multi-geometry --latlon   -C 12000 --number-processes 3 --style {osm2pgsql_style} {filename}-filtered.pbf'.format(osm2pgsql_config=config.osm2pgsql,filename=filename,osm2pgsql_style=self.osm2pgsql_style)
+        cmd='osm2pgsql {osm2pgsql_config}  --slim  --create --multi-geometry --latlon   -C 12000 --number-processes 3 --style {osm2pgsql_style} osm/{filename}-filtered.pbf'.format(osm2pgsql_config=config.osm2pgsql,filename=filename,osm2pgsql_style=self.osm2pgsql_style)
         print cmd        
         os.system(cmd)
 
@@ -139,7 +139,7 @@ class Processor:
             os.remove(table+'.geojson')
 
         cmd='''
-    ogr2ogr -fieldTypeToString Integer -f GeoJSON '''+table+'''.geojson    \
+    ogr2ogr -fieldTypeToString All -f GeoJSON '''+table+'''.geojson    \
       "PG:'''+self.ogr2ogr_pg+'''" "'''+table+'''" 
         '''
         print cmd
