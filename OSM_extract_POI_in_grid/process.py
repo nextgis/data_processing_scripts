@@ -295,13 +295,6 @@ ORDER BY userid, timestamp desc;
         ymin=2781805
         xmax=-7445254
 
-        #Аляска
-        xmin=-20014504
-        ymax=11612294
-        ymin=-1671038
-	ymin=6497648
-        xmax=2003083
-
 
 
         #Начало координат
