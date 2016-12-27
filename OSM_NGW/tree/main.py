@@ -18,7 +18,7 @@ import os
 processor=process.Processor()
 processor.osmimport('data')
 processor.postgis2geojson('planet_osm_point')
-os.system('python update_ngw_from_geojson.py  --ngw_url '+processor.ngw_url+' --ngw_resource_id '+processor.ngw_res_id+' --ngw_login '+processor.ngw_login+' --ngw_password '+processor.ngw_password+' --check_field osm_id --filename planet_osm_point.geojson')
+os.system('python update_ngw_from_geojson.py  --ngw_url '+processor.ngw_url+' --ngw_resource_id '+processor.ngw_res_id+' --ngw_login '+processor.ngw_login+' --ngw_password '+processor.ngw_password+' --check_field osm_id --filename tree/planet_osm_point.geojson')
 
 
 
