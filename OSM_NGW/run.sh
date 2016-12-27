@@ -1,6 +1,6 @@
 #!/bin/bash   
 
-echo (timedatectl | grep Local) >> cronruns.txt
+echo "$(date)" >> cronruns.txt
 cd data_processing_scripts/OSM_NGW/
 
 python update_dump.py
