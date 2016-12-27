@@ -129,6 +129,15 @@ class Processor:
         print cmd        
         os.system(cmd)
 
+    def postgis2geojson(self,table):
+        if os.path.exists(table+'.geojson'):
+            os.remove(table+'.geojson')
 
+        cmd='''
+    ogr2ogr -fieldTypeToString All -f GeoJSON '''+table+'''.geojson    \
+      "PG:'''+self.ogr2ogr_pg+'''" "'''+table+'''" 
+        '''
+        print cmd
+        os.system(cmd)   
 
 
