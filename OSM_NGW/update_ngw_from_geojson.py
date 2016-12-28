@@ -185,6 +185,10 @@ class NGWSynchroniser:
     def openGeoJson(self,check_field, filename):
 
 
+        import os.path
+        if os.path.isfile(filename)<>True:
+            raise IOError('File not found '+filename)
+            
 
         driver = ogr.GetDriverByName("GeoJSON")
         dataSource = driver.Open(filename, 0)
