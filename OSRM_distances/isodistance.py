@@ -177,10 +177,30 @@ psql -U trolleway -d osm_ch3 -c "DROP TABLE planet_osm_roads CASCADE;"
 
 
                 '''
+        self.cursor.execute(sql)
+        self.conn.commit()
+
+        sql='''
+        DROP TABLE IF EXISTS costs;'''
+
+       
 
         self.cursor.execute(sql)
         self.conn.commit()
 
+
+        sql='''
+CREATE TABLE costs
+(
+id    serial primary key,
+a        integer not null,
+b        integer not null,
+cost_max integer
+);'''
+
+        
+        self.cursor.execute(sql)
+        self.conn.commit()
 
         #Для каждой точки старта
         sql='''SELECT ogc_fid AS num,ST_X(wkb_geometry), ST_Y(wkb_geometry) FROM starts;'''
@@ -213,6 +233,7 @@ AND starts.ogc_fid::varchar={startsnum}::varchar'''
             
             self.cursor.execute(sql)
             self.conn.commit()
+			
             
 
             #Для каждой точки здания считаем расстояние
@@ -235,9 +256,13 @@ AND starts.ogc_fid::varchar={startsnum}::varchar'''
                 distanceBA = osrm_response["routes"][0]["distance"]
 
                 #print distance
-                if (int(distance)<cutdistance):
-                    sql = 'UPDATE calcpoints SET cost='+str(max(distanceAB,distanceBA)) + 'WHERE osm_id = '+str(finishpoint[2])
-                    self.cursor.execute(sql)
+                #if (int(distance)<cutdistance):
+                #    sql = 'UPDATE calcpoints SET cost='+str(max(distanceAB,distanceBA)) + 'WHERE osm_id = '+str(finishpoint[2])
+                #    self.cursor.execute(sql)
+
+                sql = 'INSERT INTO costs (a,b,cost_max) VALUES ({a}, {b},{cost})'
+                sql=sql.format(a=startpoint[0],b=str(finishpoint[2]),cost=str(max(distanceAB,distanceBA)))
+                self.cursor.execute(sql)
 
             self.conn.commit()
 
