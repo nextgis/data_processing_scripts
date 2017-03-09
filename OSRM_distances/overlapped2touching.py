@@ -30,7 +30,7 @@ def argparser_prepare():
 
         max_help_position = 35
 
-    parser = argparse.ArgumentParser(description='Convert partially overlapped polygons to touching polygons with common border in PostGIS',
+    parser = argparse.ArgumentParser(description='Генерация в PostGIS таблицы с полигонами доступности по зданиям',
             formatter_class=PrettyFormatter)
     parser.add_argument('-pg', '--pg_conn', type=str, default='',
                         help='PostGIS connection string to osm dump')
@@ -49,26 +49,25 @@ def argparser_prepare():
         % {'prog': parser.prog}
     return parser
 
-
-
-
-
-
 parser = argparser_prepare()
 args = parser.parse_args()
-     
 
-print ('Importing')
-cmd='ogr2ogr -f "PostgreSQL" PG:"{pg_conn}" "{filename}" -nln overlap2touch1  -nlt Polygon -overwrite'.format(pg_conn=pg_conn,filename=args.input)
-print cmd
-os.system(cmd)
 
-conn_string = conn_string
+conn_string = args.pg_conn
 conn = psycopg2.connect(conn_string)
 conn.autocommit = True #для vaccuum
 
 # conn.cursor will return a cursor object, you can use this cursor to perform queries
 cursor = conn.cursor()
+
+
+
+     
+
+print ('Import')
+cmd='ogr2ogr -f "PostgreSQL" PG:"{pg_conn}" "{filename}" -nln overlap2touch1  -nlt Polygon -overwrite  -t_srs EPSG:4326'.format(pg_conn=conn_string,filename=args.input)
+print cmd
+os.system(cmd)
 
 
 
@@ -80,13 +79,17 @@ SELECT shop_id,
     ST_Difference(
         wkb_geometry, 
         (SELECT ST_Union(b.wkb_geometry) FROM overlap2touch1 b 
-            WHERE ST_Intersects(a.wkb_geometry,b.wkb_geometry) AND a.shop_id < b.shop_id)),a.wkb_geometry) AS wkb_geometry
+            WHERE ST_Intersects(a.wkb_geometry,b.wkb_geometry) AND ST_Area(a.wkb_geometry) < ST_AREA(b.wkb_geometry))),a.wkb_geometry) AS wkb_geometry
 FROM overlap2touch1 AS a;
 '''
 
 
-print ('Exporting')
-cmd='ogr2ogr -f "PostgreSQL" -f "{output}" PG:"{pg_conn}"  -sql "{sql}"  -nlt Polygon -overwrite'.format(pg_conn=pg_conn,output=args.output,sql=sql)
+print ('Export')
+cmd='ogr2ogr  -f "GeoJSON"  "{output}" PG:"{pg_conn}"  -sql "{sql}" -s_srs EPSG:4326 -t_srs EPSG:4326 -nlt Polygon -overwrite'.format(pg_conn=conn_string,output=args.output,sql=sql)
 print cmd
 os.system(cmd)
 
+
+'''
+
+'''
