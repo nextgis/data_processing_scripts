@@ -1,14 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Project: Рассчёт зон транспортной доступности
-# Author: Artem Svetlov <artem.svetlov@nextgis.com>
-# Copyright: 2017, NextGIS <info@nextgis.com>
-
-
-
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-# Project: Generate isodistances for set of start points
+# Project: Расчёт зон транспортной доступности
 # Author: Artem Svetlov <artem.svetlov@nextgis.com>
 # Copyright: 2017, NextGIS <info@nextgis.com>
 
@@ -24,21 +16,13 @@ from time import gmtime, strftime
 
 global str
 
-
-
-
 class Processor:
-
 
     statistic={}
         #Define our connection string
 
     connection = None
-    cursor = None    
-
-     
-
-
+    cursor = None      
      
         # get a connection, if a connect cannot be made an exception will be raised here
 
@@ -347,7 +331,7 @@ Outputs:
     2. В PostGIS создаётся таблица costs3 - полигоны, описывающие вогнутым многоугольником зоны, тяготеющие к одному из стартов.
         Эти зоны могут друг на друга накладываться, но совсем немножко.
 
-    Дальше эти зоны можно сгладить в кугисе моделью  и потом сделать общие границы скриптом smooth_touches_polygons.py    
+    Дальше эти зоны можно сгладить в QGIS используя buffer_smooth.model и потом сделать общие границы скриптом overlapped2touching.py    
 
 
     где-то расстояния могут быть захардкодены внутри.
