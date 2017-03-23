@@ -67,7 +67,7 @@ def truncate_folder(folder):
             print(e)
 
 
-def pbf2shplayer(layerref,OSM_CONFIG_FILE,nlt,where,export_filename,temp_filename,config_content,sql):
+def pbf2shplayer(layerref,OSM_CONFIG_FILE,nlt,where,export_filename,temp_filename,config_content):
 
 
     if not os.path.exists(pbf2shpfolder):
@@ -172,9 +172,9 @@ other_tags=no
 sql='''SELECT name,admin_level AS admin_lvl,name_ru,name_en FROM multipolygons'''
 
 
-pbf2shplayer(layerref=layerref,OSM_CONFIG_FILE=OSM_CONFIG_FILE,nlt=nlt,where=where,export_filename=export_filename,temp_filename=temp_filename,config_content=config_content,sql=sql)
+pbf2shplayer(layerref=layerref,OSM_CONFIG_FILE=OSM_CONFIG_FILE,nlt=nlt,where=where,export_filename=export_filename,temp_filename=temp_filename,config_content=config_content)
 
-quit()
+
 
 #---------------------------------------------------------------------------------------------------------------------------------
 
