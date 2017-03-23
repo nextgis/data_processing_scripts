@@ -69,6 +69,10 @@ def truncate_folder(folder):
 
 def pbf2shplayer(layerref,OSM_CONFIG_FILE,nlt,where,export_filename,temp_filename,config_content,sql):
 
+
+    if not os.path.exists(pbf2shpfolder):
+        os.makedirs(pbf2shpfolder)
+
     ogr_config = open(OSM_CONFIG_FILE, 'w')
     ogr_config.write(config_content)
     ogr_config.close()
@@ -83,7 +87,9 @@ def pbf2shplayer(layerref,OSM_CONFIG_FILE,nlt,where,export_filename,temp_filenam
         #print(response)
         pass
 
+    print 'это был запуск'
     print cmd 
+    print
 
 
     #Если не задан параметр sql, то используем where
@@ -93,13 +99,15 @@ def pbf2shplayer(layerref,OSM_CONFIG_FILE,nlt,where,export_filename,temp_filenam
 
     cmd = 'ogr2ogr -overwrite  \
     -lco ENCODING=UTF-8  \
-    -skipfailures  -sql "{sql} WHERE {where}" -f "ESRI Shapefile" {export_filename}.shp {temp_filename}.shp'
+    -skipfailures  -where "{where}" -f "ESRI Shapefile" {export_filename}.shp {temp_filename}.shp'
     cmd = cmd.format(export_filename=export_filename,temp_filename=temp_filename, where=where,sql=sql)
     for response in execute(cmd):
         print(response)
 
+    print
     print 'truncate temporary shapefiles folder'
-    truncate_folder(pbf2shpfolder)
+    #truncate_folder(pbf2shpfolder)
+    shutil.rmtree(pbf2shpfolder)
     print 'Processed layer ' + layerref
 
 region = args.region
@@ -132,7 +140,7 @@ layerref='boundary-polygon'
 OSM_CONFIG_FILE = os.path.join('layerscfg',layerref)+'.ini'
 #тип, хотя он вроде не используется
 nlt = 'MULTIPOLYGON'
-where = " admin_level is not null"
+where = "admin_level is not null"
 #путь+базовая часть имени шейпфайла, как он будет класться в папку с проектом qgis 
 export_filename=os.path.join(exportfolder,layerref)
 #путь+базовая часть имени шейпфайла, как он получается при конвертации из pbf
