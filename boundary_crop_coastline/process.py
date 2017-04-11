@@ -85,30 +85,29 @@ class Processor:
 
 
 
-    def process(self):
+    def process(self,b=None):
         '''
                                                                                
 
 
-        '''
+            '''
+        sql = '''DROP TABLE IF EXISTS boundary_inner; '''    
+        self.cursor.execute(sql)
+        self.conn.commit()    
 
-    sql = '''DROP TABLE IF EXISTS boundary_inner; '''    
-    self.cursor.execute(sql)
-    self.conn.commit()    
-
-    sql='''CREATE TABLE boundary_inner AS SELECT boundary.OSM_ID, boundary.NAME
- , CASE 
-   WHEN ST_CoveredBy(boundary.wkb_geometry, coastline.wkb_geometry) 
-   THEN boundary.wkb_geometry 
-   ELSE 
-    ST_Multi(
-      ST_Intersection(boundary.wkb_geometry, coastline.wkb_geometry)
-      ) END AS geom 
- FROM boundary  
-   INNER JOIN coastline 
-    ON (ST_Intersects(boundary.wkb_geometry, coastline.wkb_geometry) 
-      AND NOT ST_Touches(boundary.wkb_geometry, coastline.wkb_geometry) );'''
+        sql='''CREATE TABLE boundary_inner AS SELECT boundary.OSM_ID, boundary.NAME
+     , CASE 
+       WHEN ST_CoveredBy(boundary.wkb_geometry, coastline.wkb_geometry) 
+       THEN boundary.wkb_geometry 
+       ELSE 
+        ST_Multi(
+          ST_Intersection(boundary.wkb_geometry, coastline.wkb_geometry)
+          ) END AS geom 
+     FROM boundary  
+       INNER JOIN coastline 
+        ON (ST_Intersects(boundary.wkb_geometry, coastline.wkb_geometry) 
+          AND NOT ST_Touches(boundary.wkb_geometry, coastline.wkb_geometry) );'''
 
 
-    self.cursor.execute(sql)
-    self.conn.commit()
+        self.cursor.execute(sql)
+        self.conn.commit()

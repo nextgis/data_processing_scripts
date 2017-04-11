@@ -13,5 +13,5 @@ import process
 
 processor=process.Processor()
 #processor.generate_filter_string() #Generate string with tags for osmfilter
-processor.coastlineimport('')
+processor.data_import('')
 processor.process()
