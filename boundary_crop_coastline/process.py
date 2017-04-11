@@ -75,11 +75,11 @@ class Processor:
         '''
         print 'Import coastline to PostGIS'
 
-        cmd = 'ogr2ogr -progress -nlt multipolygon -f "PostgreSQL" PG:"{ogr2ogr_pg}" ../../simplifed/land_polygons_z5.shp -nln coastline'.format(ogr2ogr_pg=config.ogr2ogr_pg)
+        cmd = 'ogr2ogr -progress -nlt multipolygon -overwrite -f "PostgreSQL" PG:"{ogr2ogr_pg}" ../../simplifed/land_polygons_z5.shp -nln coastline'.format(ogr2ogr_pg=config.ogr2ogr_pg)
         print cmd        
         os.system(cmd)
 
-        cmd = 'ogr2ogr -progress -nlt multipolygon -f "PostgreSQL" PG:"{ogr2ogr_pg}" ../../boundary-polygon.shp -nln boundary'.format(ogr2ogr_pg=config.ogr2ogr_pg)
+        cmd = 'ogr2ogr -progress -nlt multipolygon -overwrite -f "PostgreSQL" PG:"{ogr2ogr_pg}" ../../boundary-polygon.shp -nln boundary'.format(ogr2ogr_pg=config.ogr2ogr_pg)
         print cmd        
         os.system(cmd)
 
