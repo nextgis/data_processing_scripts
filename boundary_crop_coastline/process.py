@@ -75,7 +75,7 @@ class Processor:
         '''
         print 'Import coastline to PostGIS'
 
-        cmd = 'ogr2ogr -progress -nlt multipolygon -overwrite -t_srs EPSG:4326 -f "PostgreSQL" PG:"{ogr2ogr_pg}" ../../land-polygons-complete/land_polygons.shp -nln coastline'.format(ogr2ogr_pg=config.ogr2ogr_pg)
+        cmd = 'ogr2ogr -progress -nlt multipolygon -overwrite -t_srs EPSG:4326 -f "PostgreSQL" PG:"{ogr2ogr_pg}" ../../land-polygons-complete-4326/land_polygons.shp -nln coastline'.format(ogr2ogr_pg=config.ogr2ogr_pg)
         print cmd        
         os.system(cmd)
 
