@@ -95,7 +95,7 @@ class Processor:
         self.cursor.execute(sql)
         self.conn.commit()    
 
-        sql='''CREATE TABLE boundary_inner AS SELECT boundary.OSM_ID, boundary.NAME
+        sql='''CREATE TABLE boundary_inner AS SELECT boundary.OSM_ID, boundary.NAME, boundary.ADMIN_LVL, 
      , CASE 
        WHEN ST_CoveredBy(boundary.wkb_geometry, coastline.wkb_geometry) 
        THEN boundary.wkb_geometry 
@@ -120,8 +120,15 @@ class Processor:
         '''
         print 'Export frop PostGIS'
 
-        cmd = 'ogr2ogr -progress -nlt multipolygon -overwrite -t_srs EPSG:4326 -f "ESRI Shapefile" boundary-polygon-cropped.shp  PG:"{ogr2ogr_pg}" "boundary_inner" '.format(ogr2ogr_pg=config.ogr2ogr_pg)
+        cmd = 'ogr2ogr -progress -nlt multipolygon  -fieldTypeToString all -overwrite -t_srs EPSG:4326 -sql "SELECT osm_id AS osm_id, name as name, ADMIN_LVL as admin_lev" -f "ESRI Shapefile" boundary-polygon-cropped.shp  PG:"{ogr2ogr_pg}" "boundary_inner" '.format(ogr2ogr_pg=config.ogr2ogr_pg)
         print cmd        
         os.system(cmd)
 
+        cmd = 'rm -f boundary-polygon-cropped.7z'
+        print cmd        
+        os.system(cmd)
+
+        cmd = '7z a boundary-polygon-cropped.7z boundary-polygon-cropped.*'
+        print cmd        
+        os.system(cmd)
 
