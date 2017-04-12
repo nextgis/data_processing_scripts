@@ -95,7 +95,7 @@ class Processor:
         self.cursor.execute(sql)
         self.conn.commit()    
 
-        sql='''CREATE TABLE boundary_inner AS SELECT boundary.OSM_ID, boundary.NAME, boundary.ADMIN_LVL 
+        sql='''CREATE TABLE boundary_inner AS SELECT boundary.OSM_ID, boundary.NAME, boundary.ADMIN_LVL AS admin_lev
      , CASE 
        WHEN ST_CoveredBy(boundary.wkb_geometry, coastline.wkb_geometry) 
        THEN boundary.wkb_geometry 
