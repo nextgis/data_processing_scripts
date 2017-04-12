@@ -111,3 +111,17 @@ class Processor:
 
         self.cursor.execute(sql)
         self.conn.commit()
+
+    def data_export(self,filename):
+        '''
+
+▀▀▀▝▘▀▝▘▐▌▀▘  ▝▀▘ ▀     ▀▀    ▝▀▘  ▀▀▘ ▝▘ ▝▘     ▀▀ ▝▀▘    ▝▘   ▝▀▘  ▀▀▀   ▀▀  ▀▀ ▀▀▀ ▀▀▘ 
+
+        '''
+        print 'Export frop PostGIS'
+
+        cmd = 'ogr2ogr -progress -nlt multipolygon -overwrite -t_srs EPSG:4326 -f "ESRI Shapefile" boundary-polygon-cropped.shp  PG:"{ogr2ogr_pg}" "boundary_inner" '.format(ogr2ogr_pg=config.ogr2ogr_pg)
+        print cmd        
+        os.system(cmd)
+
+
