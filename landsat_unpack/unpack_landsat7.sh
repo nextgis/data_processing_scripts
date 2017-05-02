@@ -3,9 +3,9 @@
 #Скрипт, который распаковывает сцены Landsat-5, делает 3-канальные tif, обрезает по geojson, генерит пирамиды, раскладывает по годам съёмки
 
 #Все tar.gz лежат в одной папке. Распаковываем из них по одной нужной сцене
-for zipped in *tar.gz; do tar -xzvf "$zipped" --wildcards --no-anchored '*B4.TIF'; done
-for zipped in *tar.gz; do tar -xzvf "$zipped" --wildcards --no-anchored '*B3.TIF'; done
-for zipped in *tar.gz; do tar -xzvf "$zipped" --wildcards --no-anchored '*B2.TIF'; done
+for zipped in *tar.gz; do tar -xzvf "$zipped" --wildcards --no-anchored --skip-old-files '*B4.TIF'; done
+for zipped in *tar.gz; do tar -xzvf "$zipped" --wildcards --no-anchored --skip-old-files '*B3.TIF'; done
+for zipped in *tar.gz; do tar -xzvf "$zipped" --wildcards --no-anchored --skip-old-files '*B2.TIF'; done
 
 
 #Генерация файла со списком сцен
@@ -25,6 +25,10 @@ while read s; do  cp landsat7.qml ../$s.qml ; done < scenes.list
 
 #Генерация пирамид, что бы было быстрее скроллить в qgis
 while read s; do  gdaladdo -r CUBIC --config COMPRESS_OVERVIEW JPEG -ro  ../$s.tif 2 4 8 16 32 64 ; done < scenes.list
+
+
+while read s; do echo $s; newname=`echo $s|cut -c18-25`;  mv ../$s.tif ../$newname-$s.tif ; done < 'scenes.list'
+while read s; do echo $s; newname=`echo $s|cut -c18-25`;  mv ../$s.qml ../$newname-$s.qml ; done < 'scenes.list'
 
 cd ../
 mkdir 2000
