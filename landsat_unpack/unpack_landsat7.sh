@@ -3,13 +3,13 @@
 #Скрипт, который распаковывает сцены Landsat-5, делает 3-канальные tif, обрезает по geojson, генерит пирамиды, раскладывает по годам съёмки
 
 #Все tar.gz лежат в одной папке. Распаковываем из них по одной нужной сцене
-for zipped in *tar.gz; do tar -xzvf "$zipped" --wildcards --no-anchored --skip-old-files '*B4.TIF'; done
-for zipped in *tar.gz; do tar -xzvf "$zipped" --wildcards --no-anchored --skip-old-files '*B3.TIF'; done
-for zipped in *tar.gz; do tar -xzvf "$zipped" --wildcards --no-anchored --skip-old-files '*B2.TIF'; done
+for zipped in *tar.gz; do tar -xzf "$zipped" --wildcards --no-anchored --skip-old-files '*B4.TIF'; done
+for zipped in *tar.gz; do tar -xzf "$zipped" --wildcards --no-anchored --skip-old-files '*B3.TIF'; done
+for zipped in *tar.gz; do tar -xzf "$zipped" --wildcards --no-anchored --skip-old-files '*B2.TIF'; done
 
 
-#Генерация файла со списком сцен
-ls *tar.gz | sed 's/_T1.*//' > scenes.list
+#Генерация файла со списком сцен (названия архивов без расширения)
+ls -1 *tar.gz | sed -e 's/\..*$//' > scenes.list
 
 #Создание vrt с тремя каналами
 while read s; do  gdalbuildvrt -separate $s.vrt ${s}_T1_B4.TIF ${s}_T1_B3.TIF ${s}_T1_B2.TIF; done < scenes.list
