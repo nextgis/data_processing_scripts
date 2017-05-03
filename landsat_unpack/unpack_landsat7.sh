@@ -12,7 +12,7 @@ for zipped in *tar.gz; do tar -xzf "$zipped" --wildcards --no-anchored --skip-ol
 ls -1 *tar.gz | sed -e 's/\..*$//' > scenes.list
 
 #Создание vrt с тремя каналами
-while read s; do  gdalbuildvrt -separate $s.vrt ${s}_T1_B4.TIF ${s}_T1_B3.TIF ${s}_T1_B2.TIF; done < scenes.list
+while read s; do  gdalbuildvrt -separate $s.vrt ${s}_B4.TIF ${s}_B3.TIF ${s}_B2.TIF; done < scenes.list
 
 #Конвертирование полигона обрезки в систему координат растра
 ogr2ogr -progress -f "GeoJSON" boundary.geojson boundary_reprojected.geojson  -t_srs EPSG:32650
