@@ -18,7 +18,7 @@ while read s; do  gdalbuildvrt -separate $s.vrt ${s}_B4.TIF ${s}_B3.TIF ${s}_B2.
 ogr2ogr -progress -f "GeoJSON"  boundary_reprojected.geojson boundary.geojson -t_srs EPSG:32650
 
 #Обрезка по полигональному geojson. Он должен быть в той же CRS, что и космоснимки, у меня - EPSG:32650
-while read s; do  gdalwarp -dstnodata 0 -co COMPRESS=JPEG -co JPEG_QUALITY=95  -cutline boudary_reprojected.geojson  $s.vrt ../$s.tif ; done < scenes.list
+while read s; do  gdalwarp -dstnodata 0 -co COMPRESS=JPEG -co JPEG_QUALITY=95  -cutline boundary_reprojected.geojson  $s.vrt ../$s.tif ; done < scenes.list
 
 #К каждому tiff прикладываем одинаковую копию qml с названием сцены - там настройки цветов и констрастности, чтоб в qgis было лучше видно
 while read s; do  cp landsat7.qml ../$s.qml ; done < scenes.list
