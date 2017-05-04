@@ -26,6 +26,9 @@ while read s; do  cp default.qml ../$s.qml ; done < scenes.list
 #Генерация пирамид, что бы было быстрее скроллить в qgis
 while read s; do  gdaladdo -r CUBIC --config COMPRESS_OVERVIEW JPEG -ro  ../$s.tif 2 4 8 16 32 64 ; done < scenes.list
 
+while read s; do echo $s; newname=`echo $s|cut -c18-25`;  mv ../$s.tif ../$newname-$s.tif ; done < 'scenes.list'
+while read s; do echo $s; newname=`echo $s|cut -c18-25`;  mv ../$s.qml ../$newname-$s.qml ; done < 'scenes.list'
+
 cd ../
 mkdir 2000
 mkdir 2001
