@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<osm version="0.6" upload="false" generator="uvmogr2osm">
+<node id="1000000001" lat="55.682489811" lon="37.90490495" visible="true" />
+<node id="1000000002" lat="55.684937535" lon="37.904632849" visible="true" />
+<node id="1000000004" lat="55.682823297" lon="37.908312121" visible="true" />
+<node id="1000000005" lat="55.684905871" lon="37.908211539" visible="true" />
+<node id="1000000007" lat="55.685167491" lon="37.908198903" visible="true" />
+<node id="1000000009" lat="55.685517763" lon="37.908181986" visible="true" />
+<node id="1000000011" lat="55.685531101" lon="37.907472159" visible="true" />
+<node id="1000000013" lat="55.684370637" lon="37.908844492" visible="true" />
+<node id="1000000015" lat="55.685617801" lon="37.907661446" visible="true" />
+<node id="1000000017" lat="55.684537372" lon="37.908950966" visible="true" />
+<way id="1000000000" visible="true"><nd ref="1000000001" /><nd ref="1000000002" /><tag k="FID" v="0" /></way>
+<way id="1000000003" visible="true"><nd ref="1000000004" /><nd ref="1000000005" /><tag k="FID" v="1" /></way>
+<way id="1000000006" visible="true"><nd ref="1000000005" /><nd ref="1000000007" /><tag k="FID" v="2" /></way>
+<way id="1000000008" visible="true"><nd ref="1000000007" /><nd ref="1000000009" /><tag k="FID" v="3" /></way>
+<way id="1000000010" visible="true"><nd ref="1000000011" /><nd ref="1000000005" /><tag k="FID" v="4" /></way>
+<way id="1000000012" visible="true"><nd ref="1000000005" /><nd ref="1000000013" /><tag k="FID" v="5" /></way>
+<way id="1000000014" visible="true"><nd ref="1000000015" /><nd ref="1000000007" /><tag k="FID" v="6" /></way>
+<way id="1000000016" visible="true"><nd ref="1000000007" /><nd ref="1000000017" /><tag k="FID" v="7" /></way>
+<way id="1000000018" visible="true"><nd ref="1000000001" /><nd ref="1000000002" /><tag k="FID" v="8" /></way>
+<way id="1000000019" visible="true"><nd ref="1000000004" /><nd ref="1000000005" /><tag k="FID" v="9" /></way>
+<way id="1000000020" visible="true"><nd ref="1000000005" /><nd ref="1000000007" /><tag k="FID" v="10" /></way>
+<way id="1000000021" visible="true"><nd ref="1000000007" /><nd ref="1000000009" /><tag k="FID" v="11" /></way>
+<way id="1000000022" visible="true"><nd ref="1000000011" /><nd ref="1000000005" /><tag k="FID" v="12" /></way>
+<way id="1000000023" visible="true"><nd ref="1000000005" /><nd ref="1000000013" /><tag k="FID" v="13" /></way>
+<way id="1000000024" visible="true"><nd ref="1000000015" /><nd ref="1000000007" /><tag k="FID" v="14" /></way>
+<way id="1000000025" visible="true"><nd ref="1000000007" /><nd ref="1000000017" /><tag k="FID" v="15" /></way>
+</osm>
