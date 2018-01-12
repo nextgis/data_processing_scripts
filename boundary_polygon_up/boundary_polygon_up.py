@@ -4,7 +4,7 @@
 # Author: Artem Svetlov <artem.svetlov@nextgis.com>
 # Copyright: 2018, NextGIS <info@nextgis.com>
 
-# open boundary-polygon.shp, for each feature add 3 attributes with names of upper administrative objects
+# open boundary-polygon.shp from nextgis OSM to SHP extracts, for each feature add 2 attributes with names of upper administrative objects.
 
 
 import os
@@ -31,11 +31,11 @@ def argparser_prepare():
 
         max_help_position = 35
 
-    parser = argparse.ArgumentParser(description='',
+    parser = argparse.ArgumentParser(description='open boundary-polygon.shp from nextgis OSM to SHP extracts, for each feature add 2 attributes with names of upper administrative objects.',
             formatter_class=PrettyFormatter)
 
     parser.add_argument('-s', '--source', type=str,help='Source shapefile',required=True)
-    parser.add_argument('-d', '--destination', type=str,help='Destination shapefile',required=True)
+    parser.add_argument('-d', '--destination', type=str,help='Destination shapefile. If ommited, original file will replaced.',required=False)
 
     parser.epilog = \
         '''Samples:
@@ -91,18 +91,21 @@ ogr2ogr -f "ESRI Shapefile" ../../test/result.shp ../../test/data/boundary-polyg
         dataSource = driver.Open(path, 0)
         layer = dataSource.GetLayer()
 
-        '''
+        
         #get physical filename for destination
         #By default in emporary folder
 
         temp_destination_folder = ''
         if destination is None:
-        	import tempfile
-        	temp_destination_folder = tempfile.mkdtemp()
-        '''
+            import tempfile
+            import shutil
+            folder_was_temp = True
+            temp_destination_folder = tempfile.mkdtemp()
+            outShapefile = os.path.join(temp_destination_folder,'boundary-polygon.shp')
 
-        # Save to a new Shapefile
-        outShapefile = destination
+        else:
+            # Save to a new Shapefile
+            outShapefile = destination
         outDriver = ogr.GetDriverByName("ESRI Shapefile")
 
         # Remove output shapefile if it already exists
@@ -277,17 +280,14 @@ ogr2ogr -f "ESRI Shapefile" ../../test/result.shp ../../test/data/boundary-polyg
         outDataSource = None
 
 
-        '''
-        layer.SetAttributeFilter("ADMIN_LVL = '6'")
-        for feature in layer:
-            current_polygon_geomery = ogr.CreateGeometryFromWkb(wkb)
-            current_polygon_centroid = current_polygon_geomery.Centroid()
-            print feature.GetField("NAME"), ' - '
-            #print feature.GetField("NAME")
-            #print feature.GetField("val")
-        layer.ResetReading()
-        ogr_ds.Destroy()
-        '''
+        if destination is None:
+            shutil.move(os.path.join(temp_destination_folder, 'boundary-polygon.shp'), os.path.join(os.path.dirname(path), 'boundary-polygon.shp'))
+            shutil.move(os.path.join(temp_destination_folder, 'boundary-polygon.shx'), os.path.join(os.path.dirname(path), 'boundary-polygon.shx'))
+            shutil.move(os.path.join(temp_destination_folder, 'boundary-polygon.cpg'), os.path.join(os.path.dirname(path), 'boundary-polygon.cpg'))
+            shutil.move(os.path.join(temp_destination_folder, 'boundary-polygon.dbf'), os.path.join(os.path.dirname(path), 'boundary-polygon.dbf'))
+            shutil.move(os.path.join(temp_destination_folder, 'boundary-polygon.prj'), os.path.join(os.path.dirname(path), 'boundary-polygon.prj'))
+            shutil.rmtree(temp_destination_folder)
+
 
 
 

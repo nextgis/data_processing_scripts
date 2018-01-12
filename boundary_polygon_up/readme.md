@@ -6,6 +6,12 @@ open boundary-polygon.shp from nextgis OSM to SHP extracts, for each feature add
 
 # Usage
 
+With overwrite
+```
+python boundary_polygon_up.py -s ../../test/data/boundary-polygon.shp
+```
+
+With create new files
 ```
 python boundary_polygon_up.py -s ../../test/data/boundary-polygon.shp -d ../../test/result.shp
 ```
