@@ -34,8 +34,8 @@ def argparser_prepare():
     parser = argparse.ArgumentParser(description='',
             formatter_class=PrettyFormatter)
 
-    parser.add_argument('-s', '--source', type=str,help='Source shapefile')
-    parser.add_argument('-d', '--destination', type=str,help='Destination shapefile')
+    parser.add_argument('-s', '--source', type=str,help='Source shapefile',required=True)
+    parser.add_argument('-d', '--destination', type=str,help='Destination shapefile',required=True)
 
     parser.epilog = \
         '''Samples:
@@ -106,6 +106,14 @@ ogr2ogr -f "ESRI Shapefile" ../../test/result.shp ../../test/data/boundary-polyg
         dataSource = driver.Open(path, 0)
         layer = dataSource.GetLayer()
 
+
+        #get physical filename for destination
+        #By default in emporary folder
+
+
+        #if destination is None:
+        #	temp_destination_folder = 
+
         # Save to a new Shapefile
         outShapefile = destination
         outDriver = ogr.GetDriverByName("ESRI Shapefile")
@@ -118,7 +126,7 @@ ogr2ogr -f "ESRI Shapefile" ../../test/result.shp ../../test/data/boundary-polyg
         outDataSource = outDriver.CreateDataSource(outShapefile)
         srs = osr.SpatialReference()
         srs.ImportFromEPSG(4326)
-        outLayer = outDataSource.CreateLayer("test", geom_type=ogr.wkbMultiPolygon,options=["ENCODING=UTF-8"])
+        outLayer = outDataSource.CreateLayer("test", srs=srs, geom_type=ogr.wkbMultiPolygon,options=["ENCODING=UTF-8"])
 
 
         # Add input Layer Fields to the output Layer
