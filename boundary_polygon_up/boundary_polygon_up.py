@@ -69,9 +69,8 @@ python process.py --path ../../test/data/boundary-polygon.shp
 ogr2ogr -f "ESRI Shapefile" ../../test/result.shp ../../test/data/boundary-polygon.shp -dialect sqlite \
 -sql "select ST_buffer(Geometry,0.001) from boundary-polygon"
 
-		'''
-        print path
-       
+        '''
+
 
         from osgeo import ogr
         '''
@@ -86,6 +85,9 @@ ogr2ogr -f "ESRI Shapefile" ../../test/result.shp ../../test/data/boundary-polyg
         defaultDestination = os.path.dirname(path) , "test.shp"
 
         driver = ogr.GetDriverByName("ESRI Shapefile")
+        if os.path.isfile(path) == False:
+            raise IOError('file {path} does not exist.'.format(path=path))
+            quit()  
         dataSource = driver.Open(path, 0)
         layer = dataSource.GetLayer()
 
