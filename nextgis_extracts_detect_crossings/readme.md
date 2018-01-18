@@ -1,7 +1,7 @@
 # detect_crossings
 open highway-line.shp from nextgis OSM to SHP extracts, generate point layer with crossings, and count of road on each crossing
 
-![alt text](https://github.com/nextgis/data_processing_scripts/raw/master/detect_crossings/sample.png "Result in QGIS")
+![alt text](https://github.com/nextgis/data_processing_scripts/raw/master/nextgis_extracts_detect_crossings/sample.png "Result in QGIS")
 
 
 # Usage
