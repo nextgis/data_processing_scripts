@@ -1,8 +1,13 @@
 На входе - точки (crossings), точки событий (dtp2014).
+
+![alt text](https://github.com/nextgis/data_processing_scripts/raw/master/points_near_points/demo1.png "source")
+
 Для перекрёстков строится 3 буфера, они объединяются.
 Делается spatial self join, и подсчитывается количество и разные суммы атрибутов аварий у перекрёстков.
 На выходе - полигональный слой с кружками вокруг пеерекрёстков и разными атрибутами.
 Скрипт недописан, но комманды работают
+
+![alt text](https://github.com/nextgis/data_processing_scripts/raw/master/points_near_points/demo2.png "result")
 
 
 ```
