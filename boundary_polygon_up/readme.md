@@ -5,7 +5,7 @@ open boundary-polygon.shp from nextgis OSM to SHP extracts, for each feature add
 Открывает  boundary-polygon.shp из выгрузкок OSM в SHP, для каждого полигона добавляет 3 атрибута с названиями вышестоящих административных единиц.
 
 ![alt text](https://github.com/nextgis/data_processing_scripts/raw/master/boundary_polygon_up/sample.png "Result in QGIS")
-
+Линиями обозначены границы сельсоветов, цветом - районы.
 
 # Usage
 
