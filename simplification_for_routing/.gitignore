@@ -1,0 +1,16 @@
+source/*
+tmp/*
+config.cfg
+ogr2osm
+test
+tmp
+*.shp
+*.qix
+*.pbf
+*.shx
+*.dbf
+*.prj
+*.cpg
+*.osm
+config.py
+*.pyc
