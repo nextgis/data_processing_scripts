@@ -1,4 +1,4 @@
-Merge two line layers with OSM data in pbf format to new pbf file for routing use in OSRM
+align points with linear coordinates to linestring with geographic coordinates
 
 # Installation
 
