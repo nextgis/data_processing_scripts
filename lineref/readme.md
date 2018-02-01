@@ -4,14 +4,12 @@ Merge two line layers with OSM data in pbf format to new pbf file for routing us
 
 ```
 1. Скопировать config.example.py в config.py 
-2. Прописать в config.py доступ к базе
-3. pip install -r requirements.txt
+2. Прописать в config.py доступ к базе и имена файлов
+
 ```
 
 # Usage
 
-
-Прописать в файле run.py ссылки на файлы.
 
 ```
 python run.py
