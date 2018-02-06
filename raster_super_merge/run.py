@@ -29,7 +29,7 @@ dirpath = os.getcwd()
 compress = '-co COMPRESS=JPEG -co JPEG_QUALITY=50'
 # generate filelist from dir
 import os
-for file in os.listdir(dirpath):
+for file in sorted(os.listdir(dirpath)):
     if (file.endswith(".tif")) or (file.endswith(".tiff")):
         #print(file)
         files.append(file)
@@ -37,7 +37,7 @@ for file in os.listdir(dirpath):
 # output dir is same as input
 stack_dir = os.path.join(dirpath,'stack')
 if not os.path.exists(stack_dir):
-    os.makedir(stack_dir)
+    os.makedirs(stack_dir)
 
 i=0
 # for each raster
@@ -46,17 +46,20 @@ for file in files:
     if i == 1:
         #копирование первого растра
         #на всякий случай без shutil чтоб заработало на винде
-        file_result = os.path.join(stack_dir,str(i))+'.tiff'
+        file_result = os.path.join(stack_dir,str(i))+'.tif'
+        file_result = os.path.join(stack_dir,file)
         file_current = file
-        cmd = 'gdal_translate  -o {file_result} {file_current}'.format(file_result=file_result,file_current=file_current)
+        cmd = 'gdal_translate -of GTiff -co COMPRESS=JPEG -co JPEG_QUALITY=25  {file_current} {file_result} '.format(file_result=file_result,file_current=file_current)
         print cmd
         os.system(cmd)
     #print file
-    if i > 2:
-        file_result = os.path.join(stack_dir,str(i))+'.tiff'
-        file_prev = os.path.join(stack_dir,str(i-1))+'.tiff'
+    if i > 1:
+        file_result = os.path.join(stack_dir,str(i))+'.tif'
+        file_prev = os.path.join(stack_dir,str(i-1))+'.tif'
         file_current = file
-        cmd = 'gdal_merge -of GTiff -o {file_result} {file_prev} {file_current}'.format(file_result = file_result,file_prev=file_prev,file_current=file_current)
+        file_result = os.path.join(stack_dir,file)
+        cmd = 'gdal_merge.py -of GTiff -o {file_result} {file_prev} {file_current}'.format(file_result = file_result,file_prev=file_prev,file_current=file_current)
+        cmd = 'gdal_translate -of GTiff -co COMPRESS=JPEG -co JPEG_QUALITY=25  {file_current} {file_result} '.format(file_result=file_result,file_current=file_current)
         print cmd
         os.system(cmd)
 # merge prev raster with next and save to stack dir
