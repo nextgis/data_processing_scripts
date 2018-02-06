@@ -1,4 +1,4 @@
-align points with linear coordinates to linestring with geographic coordinates
+align points with linear coordinates to linestring with geographic coordinates. Loop operations with ogrlineref utility
 
 Имеется линия трассы (трубопровода), точечный слой пикетных отметок на трубе, точечный слой с координатами заданными пикетной отметкой на трубе.
 1. Создаём вручную слой пикетных отметок (реперов) если его нет, считаем его пикетные отметки точными.
