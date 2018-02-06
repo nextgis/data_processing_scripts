@@ -47,7 +47,6 @@ for file in files:
         #копирование первого растра
         #на всякий случай без shutil чтоб заработало на винде
         file_result = os.path.join(stack_dir,str(i))+'.tif'
-        file_result = os.path.join(stack_dir,file)
         file_current = file
         cmd = 'gdal_translate -of GTiff -co COMPRESS=JPEG -co JPEG_QUALITY=25  {file_current} {file_result} '.format(file_result=file_result,file_current=file_current)
         print cmd
@@ -57,7 +56,6 @@ for file in files:
         file_result = os.path.join(stack_dir,str(i))+'.tif'
         file_prev = os.path.join(stack_dir,str(i-1))+'.tif'
         file_current = file
-        file_result = os.path.join(stack_dir,file)
         cmd = 'gdal_merge.py -of GTiff -co COMPRESS=JPEG -co JPEG_QUALITY=25 -o {file_result} {file_prev} {file_current}'.format(file_result = file_result,file_prev=file_prev,file_current=file_current)
         
         print cmd
