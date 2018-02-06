@@ -58,8 +58,8 @@ for file in files:
         file_prev = os.path.join(stack_dir,str(i-1))+'.tif'
         file_current = file
         file_result = os.path.join(stack_dir,file)
-        cmd = 'gdal_merge.py -of GTiff -o {file_result} {file_prev} {file_current}'.format(file_result = file_result,file_prev=file_prev,file_current=file_current)
-        cmd = 'gdal_translate -of GTiff -co COMPRESS=JPEG -co JPEG_QUALITY=25  {file_current} {file_result} '.format(file_result=file_result,file_current=file_current)
+        cmd = 'gdal_merge.py -of GTiff -co COMPRESS=JPEG -co JPEG_QUALITY=25 -o {file_result} {file_prev} {file_current}'.format(file_result = file_result,file_prev=file_prev,file_current=file_current)
+        
         print cmd
         os.system(cmd)
 # merge prev raster with next and save to stack dir
