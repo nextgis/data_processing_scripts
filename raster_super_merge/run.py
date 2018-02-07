@@ -7,6 +7,8 @@
 
 #import progressbar
 
+import os 
+import shutil
 
 
 def progress(count, total, status=''):
@@ -19,20 +21,50 @@ def progress(count, total, status=''):
     sys.stdout.write('[%s] %s%s ...%s\r' % (bar, percents, '%', status))
     sys.stdout.flush()  # As suggested by Rom Ruben (see: http://stackoverflow.com/questions/3173320/text-progress-bar-in-the-console/27871113#comment50529068_27871113)
 
+import argparse
+def argparser_prepare():
 
-import os 
-import shutil
+    class PrettyFormatter(argparse.ArgumentDefaultsHelpFormatter,
+        argparse.RawDescriptionHelpFormatter):
+
+        max_help_position = 45
+
+    parser = argparse.ArgumentParser(description='merge rasters smart way',
+            formatter_class=PrettyFormatter)
+
+    parser.add_argument('--folder', help = 'Take all tiffs from this folder',default=os.getcwd())
+
+
+
+
+
+
+    parser.epilog = \
+        ''' ''' 
+        
+    return parser
+
+parser = argparser_prepare()
+args = parser.parse_args()
+
+
+
+
 files = list()
 
-dirpath = os.getcwd()
+
+dirpath = args.folder
 
 compress = '-co COMPRESS=JPEG -co JPEG_QUALITY=50'
 # generate filelist from dir
 import os
 for file in sorted(os.listdir(dirpath)):
     if (file.endswith(".tif")) or (file.endswith(".tiff")):
-        #print(file)
-        files.append(file)
+        listfiles=['2017-11-03','2017-11-04','2017-11-05'] #фильтр по именам файлов
+        if any(word in file for word in listfiles):
+            #print(file)
+            files.append(file)
+
 
 # output dir is same as input
 stack_dir = os.path.join(dirpath,'stack')
@@ -56,7 +88,7 @@ for file in files:
         file_result = os.path.join(stack_dir,str(i))+'.tif'
         file_prev = os.path.join(stack_dir,str(i-1))+'.tif'
         file_current = file
-        cmd = 'gdal_merge.py -of GTiff -co COMPRESS=JPEG -co JPEG_QUALITY=25 -o {file_result} {file_prev} {file_current}'.format(file_result = file_result,file_prev=file_prev,file_current=file_current)
+        cmd = 'gdal_merge.py -of GTiff -co COMPRESS=JPEG -co JPEG_QUALITY=25 -v -o {file_result} {file_prev} {file_current}'.format(file_result = file_result,file_prev=file_prev,file_current=file_current)
         
         print cmd
         os.system(cmd)
