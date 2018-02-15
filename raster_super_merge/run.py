@@ -48,7 +48,7 @@ parser = argparser_prepare()
 args = parser.parse_args()
 
 
-compress_settings = '-co COMPRESS=JPEG -co JPEG_QUALITY=25'
+compress_settings = '-co COMPRESS=JPEG -co JPEG_QUALITY=85'
 
 files = list()
 
