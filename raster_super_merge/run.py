@@ -48,7 +48,7 @@ parser = argparser_prepare()
 args = parser.parse_args()
 
 
-
+compress_settings = '-co COMPRESS=JPEG -co JPEG_QUALITY=25'
 
 files = list()
 
@@ -60,7 +60,7 @@ compress = '-co COMPRESS=JPEG -co JPEG_QUALITY=50'
 import os
 for file in sorted(os.listdir(dirpath)):
     if (file.endswith(".tif")) or (file.endswith(".tiff")):
-        listfiles=['2017-11-03','2017-11-04','2017-11-05'] #фильтр по именам файлов
+        listfiles=['2017-11-03','2017-11-04','2017-11-05','2017-11-06','2017-11-07','2017-11-08'] #фильтр по именам файлов
         if any(word in file for word in listfiles):
             #print(file)
             files.append(file)
@@ -80,7 +80,7 @@ for file in files:
         #на всякий случай без shutil чтоб заработало на винде
         file_result = os.path.join(stack_dir,str(i))+'.tif'
         file_current = os.path.join(dirpath,file)
-        cmd = 'gdal_translate -of GTiff -co COMPRESS=JPEG -co JPEG_QUALITY=25  {file_current} {file_result} '.format(file_result=file_result,file_current=file_current)
+        cmd = 'gdal_translate -of GTiff {compress_settings}  {file_current} {file_result} '.format(file_result=file_result,file_current=file_current,compress_settings=compress_settings)
         print cmd
         os.system(cmd)
     #print file
@@ -88,7 +88,7 @@ for file in files:
         file_result = os.path.join(stack_dir,str(i))+'.tif'
         file_prev = os.path.join(stack_dir,str(i-1))+'.tif'
         file_current = os.path.join(dirpath,file)
-        cmd = 'gdal_merge.py -of GTiff -co COMPRESS=JPEG -co JPEG_QUALITY=25 -v -o {file_result} {file_prev} {file_current}'.format(file_result = file_result,file_prev=file_prev,file_current=file_current)
+        cmd = 'gdal_merge.py -of GTiff {compress_settings} -v -o {file_result} {file_prev} {file_current}'.format(file_result = file_result,file_prev=file_prev,file_current=file_current,compress_settings=compress_settings)
         
         print cmd
         os.system(cmd)
