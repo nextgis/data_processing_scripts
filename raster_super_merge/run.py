@@ -56,7 +56,7 @@ files = list()
 
 dirpath = args.folder
 
-compress = '-co COMPRESS=JPEG -co JPEG_QUALITY=50'
+
 # generate filelist from dir
 import os
 for file in sorted(os.listdir(dirpath)):
@@ -94,3 +94,11 @@ for file in files:
         print cmd
         os.system(cmd)
 # merge prev raster with next and save to stack dir
+
+#result raster
+print 'final'
+file_current = file_result
+file_result = os.path.join(stack_dir,'supermerge')+'.tif'
+cmd = 'gdal_translate -of GTiff -co COMPRESS=JPEG -co JPEG_QUALITY=75  {file_current} {file_result} '.format(file_result=file_result,file_current=file_current,compress_settings=compress_settings)
+print cmd
+os.system(cmd)
