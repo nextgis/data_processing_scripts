@@ -16,3 +16,8 @@ With custom highway filter
 python detect_crossings.py -s highway-line.shp -d crossings.shp -f "HIGHWAY IN ('primary')"
 python detect_crossings.py -s highway-line.shp -d crossings.shp -f "HIGHWAY IN ('motorway','motorway_link','trunk','trunk_link','primary','primary_link','secondary','secondary_link','tertiary','tertiary_link','unclassified','residential')"
 ```
+
+# Features
+
+Работает на биндингах gdal, используя Shapefile. Москву считает долго - ночь, скорее всего из-за недостаточной работы с индексами.
+Я пробовал перевести его внутреннее хранение с Shapefile на GeoPackage, но из-за глюков в биндингах оно не получилось.
