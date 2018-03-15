@@ -42,7 +42,7 @@ parser = argparser_prepare()
 args = parser.parse_args()
 
 
-compress_settings = '-co COMPRESS=JPEG -co JPEG_QUALITY=85'
+compress_settings = '-co COMPRESS=JPEG -co JPEG_QUALITY=75'
 compress_settings = ''
 
 files = list()
@@ -55,7 +55,7 @@ dirpath = args.folder
 
 for file in sorted(os.listdir(dirpath)):
     if (file.endswith(".tif")) or (file.endswith(".tiff")):
-        listfiles=['2017-11-03','2017-11-04','2017-11-05','2017-11-06','2017-11-07','2017-11-08'] #фильтр по именам файлов
+        listfiles=['2017-11-03','2017-11-04','2017-11-05'] #фильтр по именам файлов
         if any(word in file for word in listfiles):
             #print(file)
             files.append(file)
