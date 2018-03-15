@@ -1,15 +1,12 @@
 ﻿#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Project: 
+# Project: Raster super merge
 # Author: Artem Svetlov <artem.svetlov@nextgis.com>
 # Copyright: 2016-2018, NextGIS <info@nextgis.com>
 
 
-#import progressbar
-
-import os 
-import shutil
-
+import os
+import argparse
 
 def progress(count, total, status=''):
     bar_len = 60
@@ -19,30 +16,27 @@ def progress(count, total, status=''):
     bar = '=' * filled_len + '-' * (bar_len - filled_len)
 
     sys.stdout.write('[%s] %s%s ...%s\r' % (bar, percents, '%', status))
-    sys.stdout.flush()  # As suggested by Rom Ruben (see: http://stackoverflow.com/questions/3173320/text-progress-bar-in-the-console/27871113#comment50529068_27871113)
+    sys.stdout.flush()
 
-import argparse
+
 def argparser_prepare():
 
     class PrettyFormatter(argparse.ArgumentDefaultsHelpFormatter,
-        argparse.RawDescriptionHelpFormatter):
+                          argparse.RawDescriptionHelpFormatter):
 
         max_help_position = 45
 
     parser = argparse.ArgumentParser(description='merge rasters smart way',
-            formatter_class=PrettyFormatter)
+                                     formatter_class=PrettyFormatter)
 
-    parser.add_argument('--folder', help = 'Take all tiffs from this folder',default=os.getcwd())
-
-
-
-
-
+    parser.add_argument('--folder',
+                        help='Take all tiffs from this folder',
+                        default=os.getcwd())
 
     parser.epilog = \
-        ''' ''' 
-        
+        ''' '''
     return parser
+
 
 parser = argparser_prepare()
 args = parser.parse_args()
@@ -58,7 +52,7 @@ dirpath = args.folder
 
 
 # generate filelist from dir
-import os
+
 for file in sorted(os.listdir(dirpath)):
     if (file.endswith(".tif")) or (file.endswith(".tiff")):
         listfiles=['2017-11-03','2017-11-04','2017-11-05','2017-11-06','2017-11-07','2017-11-08'] #фильтр по именам файлов
@@ -81,7 +75,7 @@ for file in files:
         #на всякий случай без shutil чтоб заработало на винде
         file_result = os.path.join(stack_dir,str(i))+'.tif'
         file_current = os.path.join(dirpath,file)
-        cmd = 'gdal_translate -of GTiff {compress_settings}  {file_current} {file_result} '.format(file_result=file_result,file_current=file_current,compress_settings=compress_settings)
+        cmd = 'gdal_translate -of GTiff {compress_settings}  {file_current} {file_result} '.format(file_result=file_result, file_current=file_current, compress_settings=compress_settings)
         print cmd
         os.system(cmd)
     #print file
@@ -89,7 +83,7 @@ for file in files:
         file_result = os.path.join(stack_dir,str(i))+'.tif'
         file_prev = os.path.join(stack_dir,str(i-1))+'.tif'
         file_current = os.path.join(dirpath,file)
-        cmd = 'gdal_merge.py -of GTiff {compress_settings} -v -o {file_result} {file_prev} {file_current}'.format(file_result = file_result,file_prev=file_prev,file_current=file_current,compress_settings=compress_settings)
+        cmd = 'gdal_merge.py -of GTiff {compress_settings} -v -o {file_result} {file_prev} {file_current}'.format(file_result = file_result, file_prev=file_prev, file_current=file_current, compress_settings=compress_settings)
         
         print cmd
         os.system(cmd)
@@ -99,6 +93,6 @@ for file in files:
 print 'final'
 file_current = file_result
 file_result = os.path.join(stack_dir,'supermerge')+'.tif'
-cmd = 'gdal_translate -of GTiff -co COMPRESS=JPEG -co JPEG_QUALITY=75  {file_current} {file_result} '.format(file_result=file_result,file_current=file_current,compress_settings=compress_settings)
+cmd = 'gdal_translate -of GTiff -co COMPRESS=JPEG -co JPEG_QUALITY=75  {file_current} {file_result} '.format(file_result=file_result, file_current=file_current, compress_settings=compress_settings)
 print cmd
 os.system(cmd)
