@@ -13,9 +13,9 @@ ogr2ogr -progress -overwrite -nln adm2 -f "PostgreSQL"   PG:"host=$host dbname=$
 ogr2ogr -progress -overwrite -nln adm3 -f "PostgreSQL"   PG:"host=$host dbname=$dbname" "$admfile" "Имена полей"
 
 
-admfile='adm4.gpkg'
+admfile='adm6.gpkg'
 
-ogr2ogr -progress -overwrite -nln admosm -f "PostgreSQL"   PG:"host=$host dbname=$dbname" "$admfile" "Имена полей"
+ogr2ogr -progress -overwrite -nln admosm -nlt MULTIPOLYGON -f "PostgreSQL"   PG:"host=$host dbname=$dbname" "$admfile" 
 
 
 SQL=$(cat <<-ENDTEXT
