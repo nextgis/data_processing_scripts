@@ -8,5 +8,5 @@ admfile='Муниципальные_образования_уровень_6_на
 echo "Reading config...."
 source config.cfg
 
-#ogr2ogr -progress -overwrite -nln adm -f "PostgreSQL"   PG:"host=$host dbname=$dbname" $admfile 
+ogr2ogr -progress -overwrite -nln adm -f "PostgreSQL"   PG:"host=$host dbname=$dbname" "$admfile" 
 
