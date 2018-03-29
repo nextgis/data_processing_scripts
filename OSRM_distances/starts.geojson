@@ -1,10 +1,37 @@
 {
 "type": "FeatureCollection",
+"name": "starts",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
-                                                                                
 "features": [
-{ "type": "Feature", "properties": { "num": 1 }, "geometry": { "type": "Point", "coordinates": [ 37.704238821436775, 55.680679130980458 ] } },
-{ "type": "Feature", "properties": { "num": 2 }, "geometry": { "type": "Point", "coordinates": [ 37.680565672659604, 55.680679130980458 ] } },
-{ "type": "Feature", "properties": { "num": 3 }, "geometry": { "type": "Point", "coordinates": [ 37.596305312605253, 55.679321782355458 ] } }
+{ "type": "Feature", "properties": { "num": 1, "address": "Туристская ул, 13 к 2", "y": 55.85001, "x": 37.4219 }, "geometry": { "type": "Point", "coordinates": [ 37.4219, 55.85001 ] } },
+{ "type": "Feature", "properties": { "num": 2, "address": "Петрозаводская ул., д. 24А стр.1", "y": 55.86751, "x": 37.49284 }, "geometry": { "type": "Point", "coordinates": [ 37.49284, 55.86751 ] } },
+{ "type": "Feature", "properties": { "num": 3, "address": "Полярная ул., 10", "y": 55.87473, "x": 37.64012 }, "geometry": { "type": "Point", "coordinates": [ 37.64012, 55.87473 ] } },
+{ "type": "Feature", "properties": { "num": 4, "address": "Сиреневый бульвар, 50", "y": 55.80273, "x": 37.82017 }, "geometry": { "type": "Point", "coordinates": [ 37.82017, 55.80273 ] } },
+{ "type": "Feature", "properties": { "num": 5, "address": "Вешняковская ул., 29", "y": 55.72404, "x": 37.82803 }, "geometry": { "type": "Point", "coordinates": [ 37.82803, 55.72404 ] } },
+{ "type": "Feature", "properties": { "num": 6, "address": "Совхозная ул., 41", "y": 55.67433, "x": 37.76036 }, "geometry": { "type": "Point", "coordinates": [ 37.76036, 55.67433 ] } },
+{ "type": "Feature", "properties": { "num": 7, "address": "Маршала Захарова ул., 2", "y": 55.62402, "x": 37.70707 }, "geometry": { "type": "Point", "coordinates": [ 37.70707, 55.62402 ] } },
+{ "type": "Feature", "properties": { "num": 8, "address": "Профсоюзная ул., 142 к 1", "y": 55.62538, "x": 37.50885 }, "geometry": { "type": "Point", "coordinates": [ 37.50885, 55.62538 ] } },
+{ "type": "Feature", "properties": { "num": 9, "address": "Нагорная ул., 30", "y": 55.67565, "x": 37.59771 }, "geometry": { "type": "Point", "coordinates": [ 37.59771, 55.67565 ] } },
+{ "type": "Feature", "properties": { "num": 10, "address": "Беловежская ул, 1", "y": 55.71489, "x": 37.40188 }, "geometry": { "type": "Point", "coordinates": [ 37.40188, 55.71489 ] } },
+{ "type": "Feature", "properties": { "num": 11, "address": "Чертановская ул., 32с1", "y": 55.61864, "x": 37.59122 }, "geometry": { "type": "Point", "coordinates": [ 37.59122, 55.61864 ] } },
+{ "type": "Feature", "properties": { "num": 12, "address": "Комсомольский пр., 38\/16", "y": 55.72301, "x": 37.5756 }, "geometry": { "type": "Point", "coordinates": [ 37.5756, 55.72301 ] } },
+{ "type": "Feature", "properties": { "num": 13, "address": "Большие Каменщики ул., 6", "y": 55.73675, "x": 37.65462 }, "geometry": { "type": "Point", "coordinates": [ 37.65462, 55.73675 ] } },
+{ "type": "Feature", "properties": { "num": 14, "address": "Стрельбищенский пер., 5", "y": 55.75807, "x": 37.53861 }, "geometry": { "type": "Point", "coordinates": [ 37.53861, 55.75807 ] } },
+{ "type": "Feature", "properties": { "num": 15, "address": "Александра Невского ул., 1", "y": 55.77491, "x": 37.59269 }, "geometry": { "type": "Point", "coordinates": [ 37.59269, 55.77491 ] } },
+{ "type": "Feature", "properties": { "num": 16, "address": "Большая Спасская ул., 8 с1А", "y": 55.77582, "x": 37.64275 }, "geometry": { "type": "Point", "coordinates": [ 37.64275, 55.77582 ] } },
+{ "type": "Feature", "properties": { "num": 17, "address": "Складочная ул, 1", "y": 55.80079, "x": 37.59433 }, "geometry": { "type": "Point", "coordinates": [ 37.59433, 55.80079 ] } },
+{ "type": "Feature", "properties": { "num": 18, "address": "Маршала Прошлякова ул, 11", "y": 55.791, "x": 37.3885 }, "geometry": { "type": "Point", "coordinates": [ 37.3885, 55.791 ] } },
+{ "type": "Feature", "properties": { "num": 19, "address": "Ленинградское ш., 71", "y": 55.87618, "x": 37.44841 }, "geometry": { "type": "Point", "coordinates": [ 37.44841, 55.87618 ] } },
+{ "type": "Feature", "properties": { "num": 20, "address": "Дмитровское ш., 165Б", "y": 55.91661, "x": 37.54007 }, "geometry": { "type": "Point", "coordinates": [ 37.54007, 55.91661 ] } },
+{ "type": "Feature", "properties": { "num": 21, "address": "Проспект Мира, 211к1", "y": 55.84377, "x": 37.66329 }, "geometry": { "type": "Point", "coordinates": [ 37.66329, 55.84377 ] } },
+{ "type": "Feature", "properties": { "num": 22, "address": "МКАД, 104 км, 6", "y": 55.81118, "x": 37.8368 }, "geometry": { "type": "Point", "coordinates": [ 37.8368, 55.81118 ] } },
+{ "type": "Feature", "properties": { "num": 23, "address": "1-ая Дубровская ул., 13А", "y": 55.72272, "x": 37.67458 }, "geometry": { "type": "Point", "coordinates": [ 37.67458, 55.72272 ] } },
+{ "type": "Feature", "properties": { "num": 24, "address": "Шоссейная ул, 2Б", "y": 55.70068, "x": 37.72668 }, "geometry": { "type": "Point", "coordinates": [ 37.72668, 55.70068 ] } },
+{ "type": "Feature", "properties": { "num": 25, "address": "Дорожная, ул, 1к1", "y": 55.63077, "x": 37.62463 }, "geometry": { "type": "Point", "coordinates": [ 37.625266196061624, 55.631874533365142 ] } },
+{ "type": "Feature", "properties": { "num": 26, "address": "Рябинова, 59", "y": 55.68599, "x": 37.43163 }, "geometry": { "type": "Point", "coordinates": [ 37.43163, 55.68599 ] } },
+{ "type": "Feature", "properties": { "num": 27, "address": "Большая Черёмушкинская ул., 1", "y": 55.690278, "x": 37.601879 }, "geometry": { "type": "Point", "coordinates": [ 37.601879, 55.690278 ] } },
+{ "type": "Feature", "properties": { "num": 28, "address": "Ореховый бульвар, 22А", "y": 55.612045, "x": 37.732718 }, "geometry": { "type": "Point", "coordinates": [ 37.732718, 55.612045 ] } },
+{ "type": "Feature", "properties": { "num": 29, "address": "г. Реутов, 2-й км МКАД, 2", "y": 55.763802, "x": 37.84499 }, "geometry": { "type": "Point", "coordinates": [ 37.84499, 55.763802 ] } },
+{ "type": "Feature", "properties": { "num": 30, "address": "Озёрная ул., 50", "y": 55.664519, "x": 37.437166 }, "geometry": { "type": "Point", "coordinates": [ 37.437166, 55.664519 ] } }
 ]
 }

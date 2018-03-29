@@ -41,9 +41,9 @@ class Processor:
     '''
 
 
-    def __init__(self, conn_string=None):
-        self.conn_string = conn_string
-        self.conn = psycopg2.connect(conn_string)
+    def __init__(self, pg_conn=None):
+        self.pg_conn = pg_conn
+        self.conn = psycopg2.connect(pg_conn)
         self.conn.autocommit = True #для vaccuum
      
         # conn.cursor will return a cursor object, you can use this cursor to perform queries
@@ -88,10 +88,10 @@ class Processor:
 
 
         cmd='''
-psql -U trolleway -d osm_ch3 -c "DROP TABLE planet_osm_line CASCADE;"
-psql -U trolleway -d osm_ch3 -c "DROP TABLE planet_osm_point CASCADE;"
-psql -U trolleway -d osm_ch3 -c "DROP TABLE planet_osm_polygon CASCADE;"
-psql -U trolleway -d osm_ch3 -c "DROP TABLE planet_osm_roads CASCADE;"
+#psql -U trolleway -d osm_ch3 -c "DROP TABLE planet_osm_line CASCADE;"
+#psql -U trolleway -d osm_ch3 -c "DROP TABLE planet_osm_point CASCADE;"
+#psql -U trolleway -d osm_ch3 -c "DROP TABLE planet_osm_polygon CASCADE;"
+#psql -U trolleway -d osm_ch3 -c "DROP TABLE planet_osm_roads CASCADE;"
         '''
         os.system(cmd)
     
@@ -112,7 +112,7 @@ psql -U trolleway -d osm_ch3 -c "DROP TABLE planet_osm_roads CASCADE;"
 
 
         print 'pbf to postgis'
-        cmd='osm2pgsql -s --create --multi-geometry --latlon --database osm_ch3 --username trolleway -C 2000 --number-processes 3    --style special.style {filename}-filtered.pbf'.format(filename=filename)
+        cmd='osm2pgsql -s --create --multi-geometry --latlon --database processing_osm_ch1 --username trolleway -C 2000 --number-processes 3    --style special.style {filename}-filtered.pbf'.format(filename=filename)
         print cmd        
         os.system(cmd)
 
@@ -123,13 +123,14 @@ psql -U trolleway -d osm_ch3 -c "DROP TABLE planet_osm_roads CASCADE;"
 
 
         print ('Импортируем точки стартов')
-        cmd='ogr2ogr -f "PostgreSQL" PG:"dbname=osm_ch3 user=trolleway" "{filename}" -nln starts  -nlt Point -overwrite'.format(filename=filename)
+        cmd='ogr2ogr -f "PostgreSQL" PG:"{pg_conn}" "{filename}" -nln starts  -nlt Point -overwrite'.format(filename=filename,pg_conn=self.pg_conn)
         print cmd
         os.system(cmd)
 
 
     def isodistances(self,distance,cutdistance=2000):
         print ('Генерация полигонов isodistance по зданиям')
+
 
         #Создаём таблицу равноудалённости
 
@@ -193,7 +194,7 @@ cost_max integer
         startpoints = self.cursor.fetchall()
         startPoint=''
         for startpoint in startpoints:
-            print 'рассчёт равноудалённости для точки num=' + str(startpoint[0])
+            print 'start num={num} distance={targetdistance}'.format(num=str(startpoint[0]),targetdistance=distance ) 
             
 
 
@@ -212,9 +213,11 @@ ST_PointOnSurface(planet_osm_polygon.way)
 FROM
     planet_osm_polygon, starts 
 
-WHERE ST_Distance_Sphere(planet_osm_polygon.way, starts.wkb_geometry) <= {cutdistance}
+WHERE 
+--ST_Distance_Sphere(planet_osm_polygon.way, starts.wkb_geometry) <= {cutdistance}
+ST_Distance(ST_PointOnSurface(planet_osm_polygon.way)::geography, starts.wkb_geometry::geography) BETWEEN 0 AND {targetdistance}
 AND starts.num::varchar={startsnum}::varchar'''
-            sql=sql.format(startsnum=startpoint[0],cutdistance=cutdistance)
+            sql=sql.format(startsnum=startpoint[0],targetdistance=distance, cutdistance=cutdistance)
 
 
             
@@ -252,7 +255,8 @@ AND starts.num::varchar={startsnum}::varchar'''
                 #    self.cursor.execute(sql)
 
                 distanceBA=0
-                if (int(max(distanceAB,distanceBA))<distance):
+
+                if (int(max(distanceAB,distanceBA))<int(distance)):
                 	sql = 'INSERT INTO costs (a,b,cost_max) VALUES ({a}, {b},{cost});'
                 	sql=sql.format(a=startpoint[0],b=str(finishpoint[2]),cost=str(max(distanceAB,distanceBA)))
                 	sql_big += sql
@@ -274,7 +278,7 @@ AND starts.num::varchar={startsnum}::varchar'''
 select ST_Centroid(planet_osm_polygon.way) AS wkb_geometry,  costs.a,subquery.b,subquery.min FROM (
 SELECT b,min(cost_max) as min
 FROM costs
-WHERE cost_max<10000
+WHERE cost_max<{distance}
 GROUP BY b ) as subquery JOIN costs ON subquery.b=costs.b AND subquery.min=costs.cost_max
 JOIN planet_osm_polygon ON planet_osm_polygon.osm_id=costs.b;
 
@@ -285,6 +289,7 @@ JOIN planet_osm_polygon ON planet_osm_polygon.osm_id=costs.b;
             SELECT ST_ConcaveHull(ST_Union(wkb_geometry),0.6) AS wkb_geometry, a as shop_id FROM costs2 group by shop_id;
 
 '''
+        sql=sql.format(distance=distance)
         self.cursor.execute(sql)
         self.conn.commit()
 
@@ -320,7 +325,7 @@ def argparser_prepare():
 Requires: 
     1. PostGIS database в pg_conn
     2. ogr-compatible point file with "num" attribute --starts
-    3. Database should have layer planet_osm_polygons - distances will calc to PointOnSurface of these polygons.
+    3. Database should have layer planet_osm_polygons - distances will calc to PointOnSurface of these polygons. /*В базе должны быть только дома, а если будут ещё границы городов - то будут левые точки*/
     4. ORSM server, listening to his default address.
 
 Outputs:
@@ -367,11 +372,11 @@ args = parser.parse_args()
     
 
 
-processor=Processor(conn_string=args.pg_conn)
+processor=Processor(pg_conn=args.pg_conn)
 #processor.generate_filter_string() #Generate string with tags for osmfilter
 #processor.osmimport('moscow_russia')
 processor.pointsimport(args.starts)
-processor.isodistances(args.distance,cutdistance=args.calc_distance)
+processor.isodistances(distance=args.distance,cutdistance=args.calc_distance)
 #processor.isodistances2geojson(isodistances)
 
 
