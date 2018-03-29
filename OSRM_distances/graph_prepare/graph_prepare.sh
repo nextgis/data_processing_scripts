@@ -27,5 +27,5 @@ mv ".osm.pbf" "RU-MOS_clipped.osm.pbf"
 filenamecl='RU-MOS_clipped'
 osrm-extract /home/trolleway/GIS/GIS/project98_isodistances/my6/data_processing_scripts/OSRM_distances/graph_prepare/$filenamecl.osm.pbf
 osrm-contract /home/trolleway/GIS/GIS/project98_isodistances/my6/data_processing_scripts/OSRM_distances/graph_prepare/$filenamecl.osrm
-osrm-routed /home/trolleway/GIS/GIS/project98_isodistances/my6/data_processing_scripts/OSRM_distances/graph_prepare/$filenamecl.osrm
+osrm-routed --threads=6 /home/trolleway/GIS/GIS/project98_isodistances/my6/data_processing_scripts/OSRM_distances/graph_prepare/$filenamecl.osrm
 

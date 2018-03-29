@@ -188,11 +188,12 @@ cost_max integer
         self.conn.commit()
 
         #Для каждой точки старта
-        sql='''SELECT num AS num,ST_X(wkb_geometry), ST_Y(wkb_geometry) FROM starts;'''
+        sql='''SELECT num AS num,ST_X(wkb_geometry), ST_Y(wkb_geometry) FROM starts ORDER BY num::integer;'''
         self.cursor.execute(sql)
         self.conn.commit()
         startpoints = self.cursor.fetchall()
         startPoint=''
+        print sql
         for startpoint in startpoints:
             print 'start num={num} distance={targetdistance}'.format(num=str(startpoint[0]),targetdistance=distance ) 
             
@@ -202,6 +203,30 @@ cost_max integer
             #Берём все входяшие в него здания
             #Для каждого здания делаем точку на здании
             sql='''
+            --temporary table with circle around start, later we take all building in this circle.
+            --it should be faster than query all buildings by distance
+            DROP TABLE IF EXISTS querycircle;
+            CREATE TEMPORARY TABLE querycircle ON COMMIT DROP AS
+                SELECT ST_Buffer(starts.wkb_geometry::geography,{targetdistance}) AS wkb_geography,
+                1 AS id
+                FROM starts 
+                WHERE starts.num::varchar={startsnum}::varchar;
+
+            DROP TABLE IF EXISTS calcpoints;
+            CREATE TABLE calcpoints AS
+SELECT
+ST_PointOnSurface(planet_osm_polygon.way) AS wkb_geometry ,
+0::Bigint AS cost,
+planet_osm_polygon.osm_id AS osm_id   
+FROM
+planet_osm_polygon, 
+querycircle 
+WHERE 
+ST_Intersects(planet_osm_polygon.way::geography,querycircle.wkb_geography)
+;'''
+
+
+            ''' предыдущий вариант, отбор зданий по расстоянию
             DROP TABLE IF EXISTS calcpoints;
             CREATE TABLE calcpoints AS
              SELECT
@@ -216,7 +241,8 @@ FROM
 WHERE 
 --ST_Distance_Sphere(planet_osm_polygon.way, starts.wkb_geometry) <= {cutdistance}
 ST_Distance(ST_PointOnSurface(planet_osm_polygon.way)::geography, starts.wkb_geometry::geography) BETWEEN 0 AND {targetdistance}
-AND starts.num::varchar={startsnum}::varchar'''
+AND starts.num::varchar={startsnum}::varchar
+'''
             sql=sql.format(startsnum=startpoint[0],targetdistance=distance, cutdistance=cutdistance)
 
 

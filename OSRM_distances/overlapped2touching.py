@@ -70,11 +70,11 @@ print cmd
 os.system(cmd)
 
 
-
+#Return second polygon if it has more area than frist polygon, else return frist polygon
 sql='''
 
 
-SELECT shop_id,
+SELECT fid AS shop_id,
     COALESCE(
     ST_Difference(
         wkb_geometry, 
@@ -85,7 +85,7 @@ FROM overlap2touch1 AS a;
 
 
 print ('Export')
-cmd='ogr2ogr  -f "GeoJSON"  "{output}" PG:"{pg_conn}"  -sql "{sql}" -s_srs EPSG:4326 -t_srs EPSG:4326 -nlt Polygon -overwrite'.format(pg_conn=conn_string,output=args.output,sql=sql)
+cmd='ogr2ogr  -f "gpkg" -overwrite "{output}" PG:"{pg_conn}"  -sql "{sql}" -s_srs EPSG:4326 -t_srs EPSG:4326 -nlt Polygon -overwrite'.format(pg_conn=conn_string,output=args.output,sql=sql)
 print cmd
 os.system(cmd)
 
