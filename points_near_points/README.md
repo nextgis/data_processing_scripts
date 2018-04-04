@@ -25,6 +25,8 @@ ogr2ogr -progress -overwrite PG:"host=localhost dbname=gis " dtp2016.gpkg -skipf
 Выполнить SQL
 
 ```
+-- генерируем три слоя буферов с разным расстоянием
+-- Укажите тут нужную СК, если это не Москва.
 CREATE TEMPORARY TABLE buffers100 ON COMMIT DROP AS 
 SELECT st_buffer(ST_Transform(wkb_geometry,32637),100) AS wkb_geometry,100 AS buffer_size FROM moscow_crossings WHERE ways_cnt = 4;
 CREATE TEMPORARY TABLE buffers50 ON COMMIT DROP AS 
@@ -32,20 +34,14 @@ SELECT st_buffer(ST_Transform(wkb_geometry,32637),50) AS wkb_geometry,50 AS buff
 CREATE TEMPORARY TABLE buffers20 ON COMMIT DROP AS 
 SELECT st_buffer(ST_Transform(wkb_geometry,32637),20) AS wkb_geometry,20 AS buffer_size FROM moscow_crossings WHERE ways_cnt = 4;
 
-/*
-CREATE TEMPORARY TABLE crossingsarea ON COMMIT DROP AS 
-SELECT * FROM buffers100
-UNION
-SELECT * FROM buffers50
-UNION
-SELECT * FROM buffers20;
-*/
+
 
 DROP TABLE IF EXISTS crossingsarea_disolved;
 CREATE TABLE crossingsarea_disolved ( 
     wkb_geometry geometry,
     buffer integer);
-
+    
+--для 100 метров
 DROP TABLE IF EXISTS crossingsarea_disolved_onebuffer ;
 CREATE 
 TEMPORARY 
@@ -62,7 +58,7 @@ WITH
       (SELECT id, (ST_DUMP(wkb_geometry)).geom AS wkb_geometry FROM multis) d GROUP BY id;
 INSERT INTO  crossingsarea_disolved SELECT wkb_geometry, 100 as buffer FROM crossingsarea_disolved_onebuffer;  
 
-
+--для 50 метров
 DROP TABLE IF EXISTS crossingsarea_disolved_onebuffer ;
 CREATE 
 TEMPORARY 
@@ -79,7 +75,7 @@ WITH
       (SELECT id, (ST_DUMP(wkb_geometry)).geom AS wkb_geometry FROM multis) d GROUP BY id;
 INSERT INTO  crossingsarea_disolved SELECT wkb_geometry, 50 as buffer FROM crossingsarea_disolved_onebuffer;   
 
-
+--для 20 метров
 DROP TABLE IF EXISTS crossingsarea_disolved_onebuffer ;
 CREATE 
 TEMPORARY 
@@ -97,7 +93,7 @@ WITH
 INSERT INTO  crossingsarea_disolved SELECT wkb_geometry, 20 as buffer FROM crossingsarea_disolved_onebuffer;   
 
 
-
+--добавление столбцов и рассчёт числовых значений
 ALTER TABLE crossingsarea_disolved ADD COLUMN count_2014 integer;
 ALTER TABLE crossingsarea_disolved ADD COLUMN count_2015 integer;
 ALTER TABLE crossingsarea_disolved ADD COLUMN count_2016 integer;
@@ -133,7 +129,6 @@ FROM
 dtp2014 , crossingsarea_disolved
 WHERE 
 ST_Within(dtp2014.wkb_geometry, crossingsarea_disolved.wkb_geometry);
-
 
 
 CREATE TEMPORARY TABLE medium2014_cnt ON COMMIT DROP AS 
