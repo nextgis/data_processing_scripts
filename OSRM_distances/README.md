@@ -5,11 +5,29 @@ https://github.com/nextgis/data_processing_scripts/raw/master/OSRM_distances/ani
 
 ## Usade
 
-```
-#Подготовка файла домов
-wget http://data.gis-lab.info/osm_dump/dump/latest/RU-MOW.osm.pbf
-osm2pgsql --database processing_osm_ch1 --latlon RU-MOW.osm.pbf
+### Create Postgis table with buildig polygons
 
+see graph_prepar/graph_prepare.sh
+
+### Prepare OSRM graph
+
+see graph_prepar/graph_prepare.sh
+
+### Calc isodistances polygon
+```
 python transport_atraction_zones.py -h
-
 ```
+
+Create polygons for all points in point layer
+
+### Smooth polygon borders
+
+Smooth borders in QGIS Processing using buffer_smooth.model
+
+### Overlap polygons to touch polygons
+```
+python overlapped2touching.py -h
+```
+
+
+Run python transport_atraction_zones.py -h for more detailed description
