@@ -24,6 +24,9 @@ Create polygons for all points in point layer
 
 Smooth borders in QGIS Processing using buffer_smooth.model
 
+![demo](
+https://raw.githubusercontent.com/nextgis/data_processing_scripts/master/OSRM_distances/isodistances_smooth.svg)
+
 ### Overlap polygons to touch polygons
 ```
 python overlapped2touching.py -h
