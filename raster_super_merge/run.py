@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # Project: Raster super merge
 # Author: Artem Svetlov <artem.svetlov@nextgis.com>
@@ -44,6 +44,9 @@ parser = argparser_prepare()
 args = parser.parse_args()
 
 
+
+
+
 compress_settings = '-co COMPRESS=JPEG -co JPEG_QUALITY=75'
 compress_settings = ''
 
@@ -52,15 +55,15 @@ files = list()
 
 dirpath = args.folder
 
-
+'''
+        listfiles=['2017-11-06','2017-11-07','2017-11-08'] #фильтр по именам файлов
+        if any(word in file for word in listfiles):
+'''
 # generate filelist from dir
 
 for file in sorted(os.listdir(dirpath)):
     if (file.endswith(".tif")) or (file.endswith(".tiff")):
-        listfiles=['2017-11-06','2017-11-07','2017-11-08'] #фильтр по именам файлов
-        if any(word in file for word in listfiles):
-            #print(file)
-            files.append(file)
+        files.append(file)
 
 
 # output dir is same as input
@@ -95,6 +98,6 @@ for file in files:
 print 'final'
 file_current = file_result
 file_result = os.path.join(stack_dir,'supermerge')+'.tif'
-cmd = 'gdal_translate -of GTiff -co COMPRESS=JPEG -co JPEG_QUALITY={quality}  {file_current} {file_result} '.format(file_result=file_result, file_current=file_current, quality=str(agrs.quality))
+cmd = 'gdal_translate -of GTiff -co COMPRESS=JPEG -co JPEG_QUALITY={quality}  {file_current} {file_result} '.format(file_result=file_result, file_current=file_current, quality=str(args.quality))
 print cmd
 os.system(cmd)
