@@ -80,7 +80,7 @@ for file in files:
         #на всякий случай без shutil чтоб заработало на винде
         file_result = os.path.join(stack_dir,str(i))+'.tif'
         file_current = os.path.join(dirpath,file)
-        cmd = 'gdal_translate -of GTiff {compress_settings}  {file_current} {file_result} '.format(file_result=file_result, file_current=file_current, compress_settings=compress_settings)
+        cmd = 'gdal_translate  -q -of GTiff {compress_settings}  {file_current} {file_result} '.format(file_result=file_result, file_current=file_current, compress_settings=compress_settings)
         print cmd
         os.system(cmd)
     #print file
@@ -88,7 +88,7 @@ for file in files:
         file_result = os.path.join(stack_dir,str(i))+'.tif'
         file_prev = os.path.join(stack_dir,str(i-1))+'.tif'
         file_current = os.path.join(dirpath,file)
-        cmd = 'gdal_merge.py -of GTiff {compress_settings} -v -o {file_result} {file_prev} {file_current}'.format(file_result = file_result, file_prev=file_prev, file_current=file_current, compress_settings=compress_settings)
+        cmd = 'gdal_merge.py  -q -of GTiff {compress_settings} -v -o {file_result} {file_prev} {file_current}'.format(file_result = file_result, file_prev=file_prev, file_current=file_current, compress_settings=compress_settings)
         
         print cmd
         os.system(cmd)
@@ -98,6 +98,6 @@ for file in files:
 print 'final'
 file_current = file_result
 file_result = os.path.join(stack_dir,'supermerge')+'.tif'
-cmd = 'gdal_translate -of GTiff -co COMPRESS=JPEG -co JPEG_QUALITY={quality}  {file_current} {file_result} '.format(file_result=file_result, file_current=file_current, quality=str(args.quality))
+cmd = 'gdal_translate  -q -of GTiff -co COMPRESS=JPEG -co JPEG_QUALITY={quality}  {file_current} {file_result} '.format(file_result=file_result, file_current=file_current, quality=str(args.quality))
 print cmd
 os.system(cmd)
