@@ -1,7 +1,8 @@
+Merge many rasters with one-by-one, when put 40 files in one gdal_merge not working
+
+
 Склейка 40 растров в одном каталоге, когда засовывание всех файлов в gdal_merge в лоб - не работает
 
-Merge many rasters with one-by-one
-
-
-run jpg.py
-run run.py
+```
+python run.py --folder rasters/dem
+```
