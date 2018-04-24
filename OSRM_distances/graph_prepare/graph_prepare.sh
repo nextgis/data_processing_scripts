@@ -21,7 +21,7 @@ rm background-filtered.o5m
 filename='RU-MOS'
 wget --timestamping http://data.gis-lab.info/osm_dump/dump/latest/${filename}.osm.pbf
 osmconvert $filename.osm.pbf -B=area.poly -o=buildings_clipped.osm.pbf
-mv ".osm.pbf" "buildings_clipped.osm.pbf"
+#mv ".osm.pbf" "buildings_clipped.osm.pbf"
 
 #далее выполнять ищиз каталога osrm-backend
 
