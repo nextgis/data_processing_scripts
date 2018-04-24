@@ -2,6 +2,7 @@
 
 filename='RU-MOS'
 dbname='gis'
+osrmbackend='~/osrm-backend'
 
 wget --timestamping http://data.gis-lab.info/osm_dump/dump/latest/${filename}.osm.pbf
 osmconvert $filename.osm.pbf -B=area.poly -o=background_clipped.o5m
@@ -23,11 +24,14 @@ wget --timestamping http://data.gis-lab.info/osm_dump/dump/latest/${filename}.os
 osmconvert $filename.osm.pbf -B=area.poly -o=buildings_clipped.osm.pbf
 #mv ".osm.pbf" "buildings_clipped.osm.pbf"
 
-#далее выполнять ищиз каталога osrm-backend
+#далее запускаются штуки из каталога osrm-backend
 
 
 filenamecl='background_clipped'
-osrm-extract /home/trolleway/GIS/GIS/project98_isodistances/my6/data_processing_scripts/OSRM_distances/graph_prepare/$filenamecl.osm.pbf
-osrm-contract /home/trolleway/GIS/GIS/project98_isodistances/my6/data_processing_scripts/OSRM_distances/graph_prepare/$filenamecl.osrm
-osrm-routed --threads=6 /home/trolleway/GIS/GIS/project98_isodistances/my6/data_processing_scripts/OSRM_distances/graph_prepare/$filenamecl.osrm
+
+set -x
+${osrmbackend}/build/osrm-extract $filenamecl.osm.pbf
+${osrmbackend}/build/osrm-contract  $filenamecl.osrm
+${osrmbackend}/build/osrm-routed --threads=6  $filenamecl.osrm
+set +x
 
