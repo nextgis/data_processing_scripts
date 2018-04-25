@@ -252,7 +252,7 @@ AND starts.num::varchar={startsnum}::varchar
 			
             
 
-            #Для каждой точки здания считаем расстояние
+            #Для каждой точки старта считаем расстояние
             sql = 'SELECT ST_X(wkb_geometry), ST_Y(wkb_geometry),osm_id FROM calcpoints'
             self.cursor.execute(sql)
             self.conn.commit()
@@ -265,8 +265,11 @@ AND starts.num::varchar={startsnum}::varchar
 
                 osrm_query='http://127.0.0.1:5000/route/v1/driving/{startpoint_coord_string};{finishpoint_coord_string}'.format(startpoint_coord_string=str(startpoint[1])+','+str(startpoint[2]),finishpoint_coord_string=str(finishpoint[0])+','+str(finishpoint[1]))
                 r = requests.get(osrm_query)
-                osrm_response = r.json()
-                distanceAB = osrm_response["routes"][0]["distance"]
+		if (r.status_code == 200):
+		        osrm_response = r.json()
+		        distanceAB = osrm_response["routes"][0]["distance"]
+                else:
+                        continue
 
                 '''
                 osrm_query='http://127.0.0.1:5000/route/v1/driving/{finishpoint_coord_string};{startpoint_coord_string}'.format(startpoint_coord_string=str(startpoint[1])+','+str(startpoint[2]),finishpoint_coord_string=str(finishpoint[0])+','+str(finishpoint[1]))
