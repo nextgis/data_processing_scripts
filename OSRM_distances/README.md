@@ -20,14 +20,28 @@ python transport_atraction_zones.py -h
 
 Create polygons for all points in point layer
 
+Settings:
+
+```
+--overlap touching (default)
+```
+Генерирует соприкасающиеся полигоны, которые показывают, от какого старта ближе ехать до какой-либо точки. Потом следует сделать постобработку overlapped2touching.py
+```
+--overlap overlapped: 
+```
+Генерирует накладывающиеся полигоны, которые показывают все точки на заданом расстоянии от каждого старта.
+
+![demo](
+https://raw.githubusercontent.com/nextgis/data_processing_scripts/master/OSRM_distances/overlapped.png)
+
 ### Smooth polygon borders
 
 Smooth borders in QGIS Processing using buffer_smooth.model
 
 ![demo](
-https://raw.githubusercontent.com/nextgis/data_processing_scripts/master/OSRM_distances/isodistances_smooth.svg)
+https://raw.githubusercontent.com/nextgis/data_processing_scripts/master/OSRM_distances/isodistances_smooth.png)
 
-### Overlap polygons to touch polygons
+### Touch polygons postprocessing when --overlap touching
 ```
 python overlapped2touching.py -h
 ```
