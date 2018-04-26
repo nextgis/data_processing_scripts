@@ -128,199 +128,253 @@ class Processor:
         os.system(cmd)
 
 
-    def isodistances(self,distance,cutdistance=2000):
+    def isodistances(self,distance,overlap,cutdistance=2000):
         print ('Генерация полигонов isodistance по зданиям')
-
-
-        #Создаём таблицу равноудалённости
-
-        print('Создаётся таблица точек')
-        sql='''
-        DROP TABLE IF EXISTS isodistances;
-        CREATE TABLE isodistances
-        (
-          --ogc_fid integer NOT NULL DEFAULT nextval('grid4326_ogc_fid_seq'::regclass),
-          id character varying,
-          wkb_geometry geometry(Polygon,4326),
-          distance bigint
-        --  CONSTRAINT isodistances_pkey PRIMARY KEY (ogc_fid)
-        --)
-
-        );
-        ALTER TABLE isodistances
-          OWNER TO trolleway;
-
-        -- Index: public.grid4326_wkb_geometry_geom_idx
-
-        -- DROP INDEX public.grid4326_wkb_geometry_geom_idx;
-
-        CREATE INDEX isodistances_wkb_geometry_geom_idx
-          ON isodistances
-          USING gist
-          (wkb_geometry);
-
-
-
-                '''
-        self.cursor.execute(sql)
-        self.conn.commit()
-
-        sql='''
-        DROP TABLE IF EXISTS costs;'''
-
-       
-
-        self.cursor.execute(sql)
-        self.conn.commit()
-
-
-        sql='''
-CREATE TABLE costs
-(
-id    serial primary key,
-a        integer not null,
-b        integer not null,
-cost_max integer
-);'''
+	    #в этом методе код разбит на две функции для отладки. Их нужно сделать как методы класса - перетащить на уровень выше
 
         
-        self.cursor.execute(sql)
-        self.conn.commit()
+        def call_router(distance,cutdistance=2000):
+            #Создаём таблицу равноудалённости
 
-        #Для каждой точки старта
-        sql='''SELECT num AS num,ST_X(wkb_geometry), ST_Y(wkb_geometry) FROM starts ORDER BY num::integer;'''
-        self.cursor.execute(sql)
-        self.conn.commit()
-        startpoints = self.cursor.fetchall()
-        startPoint=''
-        print sql
-        for startpoint in startpoints:
-            print 'start num={num} distance={targetdistance}'.format(num=str(startpoint[0]),targetdistance=distance ) 
-            
-
-
-            #Генерируем круг в 5 километров
-            #Берём все входяшие в него здания
-            #Для каждого здания делаем точку на здании
+            print('Создаётся таблица точек')
             sql='''
-            --temporary table with circle around start, later we take all building in this circle.
-            --it should be faster than query all buildings by distance
-            DROP TABLE IF EXISTS querycircle;
-            CREATE TEMPORARY TABLE querycircle ON COMMIT DROP AS
-                SELECT ST_Buffer(starts.wkb_geometry::geography,{targetdistance}) AS wkb_geography,
-                1 AS id
-                FROM starts 
-                WHERE starts.num::varchar={startsnum}::varchar;
+            DROP TABLE IF EXISTS isodistances;
+            CREATE TABLE isodistances
+            (
+              --ogc_fid integer NOT NULL DEFAULT nextval('grid4326_ogc_fid_seq'::regclass),
+              id character varying,
+              wkb_geometry geometry(Polygon,4326),
+              distance bigint
+            --  CONSTRAINT isodistances_pkey PRIMARY KEY (ogc_fid)
+            --)
 
-            DROP TABLE IF EXISTS calcpoints;
-            CREATE TABLE calcpoints AS
-SELECT
-ST_PointOnSurface(planet_osm_polygon.way) AS wkb_geometry ,
-0::Bigint AS cost,
-planet_osm_polygon.osm_id AS osm_id   
-FROM
-planet_osm_polygon, 
-querycircle 
-WHERE 
-ST_Intersects(planet_osm_polygon.way::geography,querycircle.wkb_geography)
-;'''
+            );
+            ALTER TABLE isodistances
+              OWNER TO trolleway;
+
+            -- Index: public.grid4326_wkb_geometry_geom_idx
+
+            -- DROP INDEX public.grid4326_wkb_geometry_geom_idx;
+
+            CREATE INDEX isodistances_wkb_geometry_geom_idx
+              ON isodistances
+              USING gist
+              (wkb_geometry);
 
 
-            ''' предыдущий вариант, отбор зданий по расстоянию
-            DROP TABLE IF EXISTS calcpoints;
-            CREATE TABLE calcpoints AS
-             SELECT
-ST_PointOnSurface(planet_osm_polygon.way)
- AS wkb_geometry ,
- 0::Bigint AS cost,
 
- planet_osm_polygon.osm_id AS osm_id   
-FROM
-    planet_osm_polygon, starts 
+                    '''
+            self.cursor.execute(sql)
+            self.conn.commit()
 
-WHERE 
---ST_Distance_Sphere(planet_osm_polygon.way, starts.wkb_geometry) <= {cutdistance}
-ST_Distance(ST_PointOnSurface(planet_osm_polygon.way)::geography, starts.wkb_geometry::geography) BETWEEN 0 AND {targetdistance}
-AND starts.num::varchar={startsnum}::varchar
-'''
-            sql=sql.format(startsnum=startpoint[0],targetdistance=distance, cutdistance=cutdistance)
+            sql='''
+            DROP TABLE IF EXISTS costs;'''
 
+           
+
+            self.cursor.execute(sql)
+            self.conn.commit()
+
+
+            sql='''
+    CREATE TABLE costs
+    (
+    id    serial primary key,
+    a        integer not null,
+    b        integer not null,
+    cost_max integer,
+    wkb_geometry geometry(Polygon,4326)
+    );'''
 
             
             self.cursor.execute(sql)
             self.conn.commit()
-			
-            
 
-            #Для каждой точки старта считаем расстояние
-            sql = 'SELECT ST_X(wkb_geometry), ST_Y(wkb_geometry),osm_id FROM calcpoints'
+            #Для каждой точки старта
+            sql='''SELECT num AS num,ST_X(wkb_geometry), ST_Y(wkb_geometry) FROM starts ORDER BY num::integer;'''
             self.cursor.execute(sql)
             self.conn.commit()
-            finishpoints= self.cursor.fetchall()
-            #r = requests.session()
+            startpoints = self.cursor.fetchall()
+            startPoint=''
+            print sql
+            for startpoint in startpoints:
+                print 'start num={num} distance={targetdistance}'.format(num=str(startpoint[0]),targetdistance=distance ) 
+                
 
-            sql_big=''
-            for finishpoint in finishpoints:
-                #print 'Подсчёт расстояния для точки '+ finishpoint[0] + ' ' + finishpoint[1]
 
-                osrm_query='http://127.0.0.1:5000/route/v1/driving/{startpoint_coord_string};{finishpoint_coord_string}'.format(startpoint_coord_string=str(startpoint[1])+','+str(startpoint[2]),finishpoint_coord_string=str(finishpoint[0])+','+str(finishpoint[1]))
-                r = requests.get(osrm_query)
-		if (r.status_code == 200):
-		        osrm_response = r.json()
-		        distanceAB = osrm_response["routes"][0]["distance"]
-                else:
-                        continue
+                #Генерируем круг в 5 километров
+                #Берём все входяшие в него здания
+                #Для каждого здания делаем точку на здании
+                sql='''
+                --temporary table with circle around start, later we take all building in this circle.
+                --it should be faster than query all buildings by distance
+                DROP TABLE IF EXISTS querycircle;
+                CREATE TEMPORARY TABLE querycircle ON COMMIT DROP AS
+                    SELECT ST_Buffer(starts.wkb_geometry::geography,{targetdistance}) AS wkb_geography,
+                    1 AS id
+                    FROM starts 
+                    WHERE starts.num::varchar={startsnum}::varchar;
 
-                '''
-                osrm_query='http://127.0.0.1:5000/route/v1/driving/{finishpoint_coord_string};{startpoint_coord_string}'.format(startpoint_coord_string=str(startpoint[1])+','+str(startpoint[2]),finishpoint_coord_string=str(finishpoint[0])+','+str(finishpoint[1]))
-                r = requests.get(osrm_query)
-                osrm_response = r.json()
-                distanceBA = osrm_response["routes"][0]["distance"]
-				'''
+                DROP TABLE IF EXISTS calcpoints;
+                CREATE TABLE calcpoints AS
+    SELECT
+    ST_PointOnSurface(planet_osm_polygon.way) AS wkb_geometry ,
+    0::Bigint AS cost,
+    planet_osm_polygon.osm_id AS osm_id   
+    FROM
+    planet_osm_polygon, 
+    querycircle 
+    WHERE 
+    ST_Intersects(planet_osm_polygon.way::geography,querycircle.wkb_geography)
+    ;'''
 
-                #print distance
-                #if (int(distance)<cutdistance):
-                #    sql = 'UPDATE calcpoints SET cost='+str(max(distanceAB,distanceBA)) + 'WHERE osm_id = '+str(finishpoint[2])
-                #    self.cursor.execute(sql)
 
-                distanceBA=0
+                ''' предыдущий вариант, отбор зданий по расстоянию
+                DROP TABLE IF EXISTS calcpoints;
+                CREATE TABLE calcpoints AS
+                 SELECT
+    ST_PointOnSurface(planet_osm_polygon.way)
+     AS wkb_geometry ,
+     0::Bigint AS cost,
 
-                if (int(max(distanceAB,distanceBA))<int(distance)):
-                	sql = 'INSERT INTO costs (a,b,cost_max) VALUES ({a}, {b},{cost});'
-                	sql=sql.format(a=startpoint[0],b=str(finishpoint[2]),cost=str(max(distanceAB,distanceBA)))
-                	sql_big += sql
-            
-            self.cursor.execute(sql_big)
+     planet_osm_polygon.osm_id AS osm_id   
+    FROM
+        planet_osm_polygon, starts 
+
+    WHERE 
+    --ST_Distance_Sphere(planet_osm_polygon.way, starts.wkb_geometry) <= {cutdistance}
+    ST_Distance(ST_PointOnSurface(planet_osm_polygon.way)::geography, starts.wkb_geometry::geography) BETWEEN 0 AND {targetdistance}
+    AND starts.num::varchar={startsnum}::varchar
+    '''
+                sql=sql.format(startsnum=startpoint[0],targetdistance=distance, cutdistance=cutdistance)
+
+
+                
+                self.cursor.execute(sql)
+                self.conn.commit()
+			    
+                
+
+                #Для каждой точки старта считаем расстояние
+                sql = 'SELECT ST_X(wkb_geometry), ST_Y(wkb_geometry),osm_id,wkb_geometry  FROM calcpoints'
+                self.cursor.execute(sql)
+                self.conn.commit()
+                finishpoints= self.cursor.fetchall()
+                #r = requests.session()
+
+                sql_big=''
+                for finishpoint in finishpoints:
+                    #print 'Подсчёт расстояния для точки '+ finishpoint[0] + ' ' + finishpoint[1]
+
+                    osrm_query='http://127.0.0.1:5000/route/v1/driving/{startpoint_coord_string};{finishpoint_coord_string}'.format(startpoint_coord_string=str(startpoint[1])+','+str(startpoint[2]),finishpoint_coord_string=str(finishpoint[0])+','+str(finishpoint[1]))
+                    r = requests.get(osrm_query)
+		    if (r.status_code == 200):
+		            osrm_response = r.json()
+		            distanceAB = osrm_response["routes"][0]["distance"]
+                    else:
+                            continue
+
+                    '''
+                    osrm_query='http://127.0.0.1:5000/route/v1/driving/{finishpoint_coord_string};{startpoint_coord_string}'.format(startpoint_coord_string=str(startpoint[1])+','+str(startpoint[2]),finishpoint_coord_string=str(finishpoint[0])+','+str(finishpoint[1]))
+                    r = requests.get(osrm_query)
+                    osrm_response = r.json()
+                    distanceBA = osrm_response["routes"][0]["distance"]
+				    '''
+
+                    #print distance
+                    #if (int(distance)<cutdistance):
+                    #    sql = 'UPDATE calcpoints SET cost='+str(max(distanceAB,distanceBA)) + 'WHERE osm_id = '+str(finishpoint[2])
+                    #    self.cursor.execute(sql)
+
+                    distanceBA=0
+
+                    if (int(max(distanceAB,distanceBA))<int(distance)):
+                    	sql = 'INSERT INTO costs (a,b,cost_max) VALUES ({a}, {b},{cost});'
+                    	sql=sql.format(a=startpoint[0],b=str(finishpoint[2]),cost=str(max(distanceAB,distanceBA)),wkb_geometry=finishpoint[3])
+                    	sql_big += sql
+                
+                self.cursor.execute(sql_big)
+                print 'signal'
+                self.conn.commit()
+
+
+        def calc_polygons(distance,overlap):
+
+            if overlap=='independed':
+                sql = '''
+        --Для каждого финиша берём минимальное расстояние, получается расстояние от ближайшего старта
+        DROP TABLE IF EXISTS costs2;
+
+
+        CREATE TABLE costs2 AS
+        SELECT ST_Centroid(planet_osm_polygon.way) AS wkb_geometry,
+               costs.a,
+               subquery.b,
+               subquery.min
+        FROM
+          (SELECT b,
+                  min(cost_max) AS MIN
+           FROM costs
+           WHERE cost_max<{distance}
+           GROUP BY b) AS subquery
+        JOIN costs ON subquery.b=costs.b
+        AND subquery.min=costs.cost_max
+        JOIN planet_osm_polygon ON planet_osm_polygon.osm_id=costs.b;
+
+
+        DROP TABLE IF EXISTS costs3;
+
+
+        CREATE TABLE costs3 AS
+        SELECT ST_ConcaveHull(ST_Union(wkb_geometry),
+                              0.6) AS wkb_geometry,
+               a AS shop_id
+        FROM costs2
+        GROUP BY shop_id;
+
+        '''
+            elif (overlap=='overlapped'):
+                sql = '''
+        --Для каждого финиша берём минимальное расстояние, получается расстояние от ближайшего старта
+        DROP TABLE IF EXISTS costs2;
+
+
+        CREATE TABLE costs2 AS
+        SELECT ST_Centroid(planet_osm_polygon.way) AS wkb_geometry,
+               costs.a,     -- id of start
+               subquery.b,  -- if of finish
+               subquery.min -- distance
+        FROM
+          (SELECT b,
+                  cost_max AS MIN -- no MIN for overlapped
+           FROM costs
+           WHERE cost_max<{distance}
+           ) AS subquery
+        JOIN costs ON subquery.b=costs.b
+        AND subquery.min=costs.cost_max
+        JOIN planet_osm_polygon ON planet_osm_polygon.osm_id=costs.b;
+
+
+        DROP TABLE IF EXISTS costs3;
+
+
+        CREATE TABLE costs3 AS
+        SELECT ST_ConcaveHull(ST_Union(wkb_geometry),
+                              0.6) AS wkb_geometry,
+               a AS shop_id
+        FROM costs2
+        GROUP BY shop_id;
+
+            '''
+            sql=sql.format(distance=distance)
+            print "Генерация полигонов по расчитанным растояниям"
+            self.cursor.execute(sql)
             self.conn.commit()
-
-            #Теперь у точек записалось расстояние от 1 до dist_max. А те что дальше dist_max - мы пропускали, у них cost=0, удаляем их.
-            #sql = 'DELETE FROM costs WHERE cost_max<10000;'
-            #self.cursor.execute(sql)
-            #self.conn.commit()
-
-        #print 'Дальше открывайте в qgis таблицу calcpoints, и обрабатывайте её процесингом'
-
-        sql = '''
-            DROP TABLE IF EXISTS costs2;
-            CREATE TABLE costs2 AS
-
-select ST_Centroid(planet_osm_polygon.way) AS wkb_geometry,  costs.a,subquery.b,subquery.min FROM (
-SELECT b,min(cost_max) as min
-FROM costs
-WHERE cost_max<{distance}
-GROUP BY b ) as subquery JOIN costs ON subquery.b=costs.b AND subquery.min=costs.cost_max
-JOIN planet_osm_polygon ON planet_osm_polygon.osm_id=costs.b;
-
-
-            DROP TABLE IF EXISTS costs3;
-            CREATE TABLE costs3 AS
-
-            SELECT ST_ConcaveHull(ST_Union(wkb_geometry),0.6) AS wkb_geometry, a as shop_id FROM costs2 group by shop_id;
-
-'''
-        sql=sql.format(distance=distance)
-        self.cursor.execute(sql)
-        self.conn.commit()
+        
+        
+        
+        call_router(distance,cutdistance)
+        calc_polygons(distance,overlap=overlap)
 
             #Если расстояние меньше 5000, то добавляем точку в новую таблицу
             #Делаем для точек concave hull
@@ -384,7 +438,10 @@ Outputs:
                         help='Distance in meters')
     parser.add_argument('-c', '--calc_distance', type=str, default='1000',
                         help='Distance for initial selection of calc points. Ideally should be same as distance, but for big city may be 50%% of distance to spped up')
-
+    parser.add_argument('--overlap',
+                    default='independed',
+                    choices=[ 'overlapped', 'independed'],
+                    help='overlapped: return overlapped polygons; independed: use only distance from nearest start, return touched polygons')
 
 
 
@@ -398,14 +455,11 @@ Outputs:
 
 parser = argparser_prepare()
 args = parser.parse_args()
-    
-
-
 processor=Processor(pg_conn=args.pg_conn)
 #processor.generate_filter_string() #Generate string with tags for osmfilter
 #processor.osmimport('moscow_russia')
 processor.pointsimport(args.starts)
-processor.isodistances(distance=args.distance,cutdistance=args.calc_distance)
+processor.isodistances(distance=args.distance,cutdistance=args.calc_distance,overlap=args.overlap)
 #processor.isodistances2geojson(isodistances)
 
 
