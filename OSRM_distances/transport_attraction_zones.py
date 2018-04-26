@@ -294,7 +294,6 @@ class Processor:
                     	sql_big += sql
                 
                 self.cursor.execute(sql_big)
-                print 'signal'
                 self.conn.commit()
 
 

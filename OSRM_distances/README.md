@@ -36,7 +36,28 @@ https://raw.githubusercontent.com/nextgis/data_processing_scripts/master/OSRM_di
 
 ### Smooth polygon borders
 
-Smooth borders in QGIS Processing using buffer_smooth.model
+```
+ogr2ogr -overwrite -progress -f "PostgreSQL" "PG:host=localhost port=5432 user=trolleway dbname=gis password=trolleway" -nln smoothing -lco GEOMETRY_NAME=wkb_geometry merged.vrt 
+
+
+SQL=$(cat <<-ENDTEXT
+--deleting holes
+UPDATE smoothing AS maintable SET wkb_geometry = fillingholes.wkb_geometry
+FROM (
+SELECT ogc_fid, ST_Collect(ST_MakePolygon(wkb_geometry)) As wkb_geometry
+FROM (
+    SELECT ogc_fid, ST_ExteriorRing((ST_Dump(wkb_geometry)).geom) As wkb_geometry
+    FROM smoothing
+    ) s
+GROUP BY ogc_fid) AS fillingholes 
+WHERE fillingholes.ogc_fid = maintable.ogc_fid;
+ENDTEXT
+)
+ogrinfo "PG:host=localhost port=5432 user=trolleway dbname=gis password=trolleway" -sql "$SQL"
+#smoothing, simplifying
+rm output/sum.geojson
+ogr2ogr -overwrite -progress -f "GeoJSON" output/sum.geojson "PG:host=localhost port=5432 user=trolleway dbname=gis password=trolleway"  -sql "SELECT ST_SimplifyPreserveTopology(ST_Buffer(wkb_geometry::geography,100)::geometry,0.001) AS wkb_geometry, left(right(val,-5),4)::integer/1000 AS distance,shop_id FROM smoothing"
+```
 
 ![demo](
 https://raw.githubusercontent.com/nextgis/data_processing_scripts/master/OSRM_distances/isodistances_smooth.png)
