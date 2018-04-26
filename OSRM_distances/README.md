@@ -45,6 +45,9 @@ https://raw.githubusercontent.com/nextgis/data_processing_scripts/master/OSRM_di
 ```
 python overlapped2touching.py -h
 ```
+![demo](
+https://raw.githubusercontent.com/nextgis/data_processing_scripts/master/OSRM_distances/isodistances_overlap2touched.png)
+
 #### When polygons needed with different distances 
 
 ```
