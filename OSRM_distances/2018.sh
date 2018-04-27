@@ -3,7 +3,7 @@
 
 
 set -x
-: '
+
 dist='2000'
 time python transport_attraction_zones.py --pg_conn "dbname=gis" --distance $dist --calc_distance 10000 --overlap overlapped
 ogr2ogr -f gpkg -overwrite calc_$dist.gpkg PG:"dbname=gis" costs3
@@ -33,7 +33,7 @@ ogr2ogr -f gpkg -overwrite calc_$dist.gpkg PG:"dbname=gis" costs3
 dist='6000'
 time python transport_attraction_zones.py --pg_conn "dbname=gis" --distance $dist --calc_distance 40000 --overlap overlapped
 ogr2ogr -f gpkg -overwrite calc_$dist.gpkg PG:"dbname=gis" costs3
-'
+
 ts=$(date +"%Y-%m-%d")
 zip -R backup_step1_$ts '*.gpkg'
 
@@ -57,7 +57,13 @@ WHERE fillingholes.ogc_fid = maintable.ogc_fid;
 ENDTEXT
 )
 ogrinfo "PG:host=localhost port=5432 user=trolleway dbname=gis password=trolleway" -sql "$SQL"
-#smoothing, simplifying
-rm output/sum.geojson
-ogr2ogr -overwrite -progress -f "GeoJSON" output/sum.geojson "PG:host=localhost port=5432 user=trolleway dbname=gis password=trolleway"  -sql "SELECT ST_SimplifyPreserveTopology(ST_Buffer(wkb_geometry::geography,100)::geometry,0.001) AS wkb_geometry, left(right(val,-5),4)::integer/1000 AS distance,shop_id FROM smoothing"
+#smoothing, simplifying, join address from starts layer
+
+name=isodistances_20180427
+rm output/$name.gpkg
+ogr2ogr -overwrite -progress -f "gpkg" output/$name.gpkg "PG:host=localhost port=5432 user=trolleway dbname=gis password=trolleway"  -sql "SELECT ST_SimplifyPreserveTopology(ST_Buffer(smoothing.wkb_geometry::geography,100)::geometry,0.001) AS wkb_geometry, left(right(val,-5),4)::real/1000 AS distance,shop_id, address, concat("address",' - ',left(right(val,-5),4)::real/1000,' км.') as name FROM smoothing JOIN starts ON smoothing.shop_id=starts.num"
+rm output/$name.geojson
+ogr2ogr -overwrite -progress -f "geojson" output/$name.geojson "PG:host=localhost port=5432 user=trolleway dbname=gis password=trolleway"  -sql "SELECT ST_SimplifyPreserveTopology(ST_Buffer(smoothing.wkb_geometry::geography,100)::geometry,0.001) AS wkb_geometry, left(right(val,-5),4)::real/1000 AS distance,shop_id, address, concat("address",' - ',left(right(val,-5),4)::real/1000,' км.') as name FROM smoothing JOIN starts ON smoothing.shop_id=starts.num"
+rm output/$name.kml
+ogr2ogr -overwrite -progress -f "kml" output/$name.kml "PG:host=localhost port=5432 user=trolleway dbname=gis password=trolleway"  -sql "SELECT ST_SimplifyPreserveTopology(ST_Buffer(smoothing.wkb_geometry::geography,100)::geometry,0.001) AS wkb_geometry, left(right(val,-5),4)::real/1000 AS distance,shop_id, address, concat("address",' - ',left(right(val,-5),4)::real/1000,' км.') as name FROM smoothing JOIN starts ON smoothing.shop_id=starts.num"
 
