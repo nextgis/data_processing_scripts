@@ -20,6 +20,8 @@ python transport_atraction_zones.py -h
 
 Create polygons for all points in point layer
 
+параметр --calc_distance вроде бы больше в запросах не используется, его надо проверить и выкинуть. Это была оптимизация количества запросов, но от неё только код запутанее
+
 Settings:
 
 ```
