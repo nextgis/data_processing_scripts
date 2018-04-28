@@ -17,35 +17,8 @@ class Processor:
     statistic={}
         #Define our connection string
 
-    connection = None
-    cursor = None      
-     
-        # get a connection, if a connect cannot be made an exception will be raised here
 
-
-    
-    geojson_header3857='''{
-"type": "FeatureCollection",
-"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
-                                                                                
-"features": [
-
-    '''
-    geojson_footer='''
-]
-}
-    '''
-
-
-    def __init__(self, pg_conn=None):
-        self.pg_conn = pg_conn
-        self.conn = psycopg2.connect(pg_conn)
-        self.conn.autocommit = True #для vaccuum
-     
-        # conn.cursor will return a cursor object, you can use this cursor to perform queries
-        self.cursor = self.conn.cursor()
-        
-
+    def __init__(self):
 
 
     def oam_download(self):
