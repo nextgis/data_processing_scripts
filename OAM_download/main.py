@@ -30,7 +30,14 @@ class Processor:
             print scene['uuid']
         urllist.close()
 
-        #os.system('cat urllist.txt | parallel --gnu "wget --timestamping {}"')
+        #paralel download of all files from file list 
+        os.system('cat urllist.txt | parallel --gnu "wget --timestamping {}"')
+
+        #call other script
+        #merge all rasters in folder
+        print 'time python ../raster_super_merge/run.py'
+        #os.system('time python ../raster_super_merge/run.py ')
+
 
 
 import argparse
