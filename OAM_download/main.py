@@ -8,19 +8,14 @@
 import os
 import requests
 import urllib
-
+import json
 
 
 
 class Processor:
 
-    statistic={}
-        #Define our connection string
-
-
     def __init__(self):
         pass
-
 
     def oam_download(self):
         
@@ -35,8 +30,6 @@ class Processor:
 
 
 import argparse
-
-
 def argparser_prepare():
 
     class PrettyFormatter(argparse.ArgumentDefaultsHelpFormatter,
@@ -44,16 +37,12 @@ def argparser_prepare():
 
         max_help_position = 35
 
-
-    parser = argparse.ArgumentParser(description='''Ge
+    parser = argparse.ArgumentParser(description='''Download Moscow imagery from OpenAerialMap and merge to one file
     ''',
             formatter_class=PrettyFormatter)
 
 
     
-
-    #parser.add_argument('-d', '--distance', type=str, default='1000',
-    #                    help='Distance in meters')
 
 
 
