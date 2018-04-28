@@ -88,7 +88,7 @@ for file in files:
         file_result = os.path.join(stack_dir,str(i))+'.tif'
         file_prev = os.path.join(stack_dir,str(i-1))+'.tif'
         file_current = os.path.join(dirpath,file)
-        cmd = 'gdal_merge.py co SPARSE_OK=TRUE -co NUM_THREADS=4 -co COMPRESS=DEFLATE -q -of GTiff {compress_settings} -v -o {file_result} {file_prev} {file_current}'.format(file_result = file_result, file_prev=file_prev, file_current=file_current, compress_settings=compress_settings)
+        cmd = 'gdal_merge.py -co SPARSE_OK=TRUE -co NUM_THREADS=4 -co COMPRESS=DEFLATE -q -of GTiff {compress_settings} -v -o {file_result} {file_prev} {file_current}'.format(file_result = file_result, file_prev=file_prev, file_current=file_current, compress_settings=compress_settings)
         
         print cmd
         os.system(cmd)
