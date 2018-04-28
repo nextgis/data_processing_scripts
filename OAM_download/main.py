@@ -25,6 +25,8 @@ class Processor:
         response = urllib.urlopen(query)
         data = json.loads(response.read())
         
+        print data
+        
         for scene in data:
             print scene['uuid']
 
