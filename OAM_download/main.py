@@ -25,10 +25,9 @@ class Processor:
         os.system('wget -O response.json '+query)
         
 
-        json = json.loads((open('response.json'))
+        listresp = json.loads((open('response.json'))
 
-     
-        for scene in json:
+        for scene in listresp:
             print scene['uuid']
 
 
