@@ -22,13 +22,14 @@ class Processor:
         endpoint = 'http://api.openaerialmap.org/meta'
         query = endpoint + '?bbox=37.3193,55.4899,37.9457,56.0097&gsd_to=1&gsd_from=0.001&acquisition_from=2014-01-01&acquisition_to=2018-01-01&limit=100'
         
-        print query
-        response = urllib.urlopen(query)
-        data = json.loads(response.read())
+        req = urllib2.Request(query)
+        opener = urllib2.build_opener()
+        f = opener.open(req)
+        json = json.loads(f.read())
+        print json
         
-        print data
-        
-        for scene in data:
+     
+        for scene in json:
             print scene['uuid']
 
 
