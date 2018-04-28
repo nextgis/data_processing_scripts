@@ -23,10 +23,7 @@ class Processor:
         query = endpoint + '?bbox=37.3193,55.4899,37.9457,56.0097&gsd_to=1&gsd_from=0.001&acquisition_from=2014-01-01&acquisition_to=2018-01-01&limit=100'
         print query
         os.system('wget -O response.json '+query)
-        
-
-        listresp = json.loads((open('response.json'))
-
+        listresp = json.loads((open('response.json')))
         for scene in listresp:
             print scene['uuid']
 
@@ -42,9 +39,6 @@ def argparser_prepare():
     parser = argparse.ArgumentParser(description='''Download Moscow imagery from OpenAerialMap and merge to one file
     ''',
             formatter_class=PrettyFormatter)
-
-
-    
 
 
 
