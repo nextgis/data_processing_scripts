@@ -19,6 +19,7 @@ class Processor:
 
 
     def __init__(self):
+        pass
 
 
     def oam_download(self):
