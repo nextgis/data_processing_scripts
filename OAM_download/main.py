@@ -56,7 +56,8 @@ class Processor:
         response = urllib.urlopen(query)
         data = json.loads(response.read())
         
-        for scene in 
+        for scene in data:
+            print scene['uuid']
 
 
 import argparse
@@ -77,24 +78,14 @@ def argparser_prepare():
 
     
 
-    parser.add_argument('-pg', '--pg_conn', type=str, default='',
-                        help='PostGIS connection string to osm dump')
-    parser.add_argument('-s', '--starts', type=str, default='starts.geojson',
-                        help='Point geodata file')
-    parser.add_argument('-d', '--distance', type=str, default='1000',
-                        help='Distance in meters')
-    parser.add_argument('-c', '--calc_distance', type=str, default='1000',
-                        help='Distance for initial selection of calc points. Ideally should be same as distance, but for big city may be 50%% of distance to spped up')
-    parser.add_argument('--overlap',
-                    default='independed',
-                    choices=[ 'overlapped', 'independed'],
-                    help='overlapped: return overlapped polygons; independed: use only distance from nearest start, return touched polygons')
+    #parser.add_argument('-d', '--distance', type=str, default='1000',
+    #                    help='Distance in meters')
 
 
 
     parser.epilog = \
         '''Samples: 
-%(prog)s --pg_conn "dbname=osm_ch3" --filename starts.shp
+%(prog)s 
 ''' \
         % {'prog': parser.prog}
     return parser
@@ -102,11 +93,7 @@ def argparser_prepare():
 
 parser = argparser_prepare()
 args = parser.parse_args()
-processor=Processor(pg_conn=args.pg_conn)
-#processor.generate_filter_string() #Generate string with tags for osmfilter
-#processor.osmimport('moscow_russia')
-processor.pointsimport(args.starts)
-processor.isodistances(distance=args.distance,cutdistance=args.calc_distance,overlap=args.overlap)
-#processor.isodistances2geojson(isodistances)
+processor=Processor()
+processor.oam_download()
 
 
