@@ -7,7 +7,7 @@
 
 import os
 import requests
-
+import urllib
 
 
 
@@ -44,7 +44,19 @@ class Processor:
      
         # conn.cursor will return a cursor object, you can use this cursor to perform queries
         self.cursor = self.conn.cursor()
+        
 
+
+
+    def oam_download(self):
+        
+        endpoint = 'http://api.openaerialmap.org/meta'
+        query = endpoint + '?bbox=37.3193,55.4899,37.9457,56.0097&gsd_to=1&gsd_from=0.001&acquisition_from=2014-01-01&acquisition_to=2018-01-01&limit=100'
+        
+        response = urllib.urlopen(query)
+        data = json.loads(response.read())
+        
+        for scene in 
 
 
 import argparse
