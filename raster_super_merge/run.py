@@ -70,7 +70,13 @@ for file in sorted(os.listdir(dirpath)):
 stack_dir = os.path.join(dirpath,'stack')
 if not os.path.exists(stack_dir):
     os.makedirs(stack_dir)
+    
+# output dir is same as input
+reproject_dir = os.path.join(dirpath,'reproject')
+if not os.path.exists(reproject_dir):
+    os.makedirs(reproject_dir)
 
+    
 i=0
 # for each raster
 for file in files:
@@ -78,9 +84,13 @@ for file in files:
     if i == 1:
         #копирование первого растра
         #на всякий случай без shutil чтоб заработало на винде
+        file_reproject = os.path.join(reproject_dir,str(i))+'.tif'        
         file_result = os.path.join(stack_dir,str(i))+'.tif'
         file_current = os.path.join(dirpath,file)
-        cmd = 'gdal_translate -co COMPRESS=JPEG -co PHOTOMETRIC=YCBCR -q -of GTiff {compress_settings}  {file_current} {file_result} '.format(file_result=file_result, file_current=file_current, compress_settings=compress_settings)
+        cmd = 'gdalwarp -co COMPRESS=JPEG -co PHOTOMETRIC=YCBCR -q -t_srs EPSG:3857 -of GTiff {compress_settings}  {file_current} {file_reproject} '.format(file_reproject=file_reproject, file_current=file_current, compress_settings=compress_settings)
+        print cmd
+        os.system(cmd)
+        cmd = 'gdal_translate -co COMPRESS=JPEG -co PHOTOMETRIC=YCBCR -q -of GTiff {compress_settings}  {file_reproject} {file_result} '.format(file_result=file_result, file_reproject=file_reproject, compress_settings=compress_settings)
         print cmd
         os.system(cmd)
     #print file
@@ -88,7 +98,12 @@ for file in files:
         file_result = os.path.join(stack_dir,str(i))+'.tif'
         file_prev = os.path.join(stack_dir,str(i-1))+'.tif'
         file_current = os.path.join(dirpath,file)
-        cmd = 'gdal_merge.py -co COMPRESS=JPEG -co PHOTOMETRIC=YCBCR -q -of GTiff {compress_settings} -v -o {file_result} {file_prev} {file_current}'.format(file_result = file_result, file_prev=file_prev, file_current=file_current, compress_settings=compress_settings)
+        file_reproject = os.path.join(reproject_dir,str(i))+'.tif' 
+        
+        cmd = 'gdalwarp -co COMPRESS=JPEG -co PHOTOMETRIC=YCBCR -q -t_srs EPSG:3857 -of GTiff {compress_settings}  {file_prev} {file_reproject} '.format(file_reproject=file_reproject, file_prev=file_prev, compress_settings=compress_settings)
+        print cmd
+        os.system(cmd)
+        cmd = 'gdal_merge.py -co COMPRESS=JPEG -co PHOTOMETRIC=YCBCR -q -of GTiff {compress_settings} -v -o {file_result} {file_reproject} {file_current}'.format(file_result = file_result, file_reproject=file_reproject, file_current=file_current, compress_settings=compress_settings)
         
         print cmd
         os.system(cmd)
