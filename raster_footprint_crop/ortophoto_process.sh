@@ -1,9 +1,10 @@
 #!/bin/bash
 
+masks=dagestan2017_scene3/scene3_masks.gpkg
 
 # Some DEMs after Photoscan i found in 4326. Convert all to 32638. There should be convert only 4326
-folder=dem
-folder2=dem_rerojected
+folder=imagery
+folder2=imagery_reprojected
 rm -r $folder2
 mkdir $folder2
 FILES=$folder/*.tif
@@ -17,7 +18,7 @@ done
 
 
 #Walk by folder with rasters, clip by vector feature from masks vector file
-masks=masks.gpkg
+
 folder=dem_rerojected
 folder2=stage2
 rm -r $folder2
@@ -32,38 +33,6 @@ do
 done
 
 
-#align dem heights
-folder1=stage2
-folderout=stage3
-rm -r $folderout
-mkdir $folderout
-
-scene='2017-11-03-01'
-delta=$(echo "155 - 121.77" | bc)
-gdal_calc.py --calc "A+$delta" --format GTiff --type Float32 -A $folder1/$scene.tif --A_band 1 --outfile $folderout/$scene.tif
-scene='2017-11-04-01'
-delta=$(echo "156 - 125.45" | bc)
-gdal_calc.py --calc "A+$delta" --format GTiff --type Float32 -A $folder1/$scene.tif --A_band 1 --outfile $folderout/$scene.tif
-
-scene='2017-11-04-02'
-delta=$(echo "139 - 146.62" | bc)
-gdal_calc.py --calc "A+$delta" --format GTiff --type Float32 -A $folder1/$scene.tif --A_band 1 --outfile $folderout/$scene.tif
-
-scene='2017-11-03-04'
-delta=$(echo "87 - 65.18" | bc)
-gdal_calc.py --calc "A+$delta" --format GTiff --type Float32 -A $folder1/$scene.tif --A_band 1 --outfile $folderout/$scene.tif
-
-scene='2017-11-08-02'
-delta=$(echo "306 - 243" | bc)
-gdal_calc.py --calc "A+$delta" --format GTiff --type Float32 -A $folder1/$scene.tif --A_band 1 --outfile $folderout/$scene.tif
-
-time python run.py --folder $folderout
-gdal_translate  -q -of GTiff -outsize 30% 30%  stage3/stack/5.tif stage3/stack/stitched_relief.tif
-
-
-mkdir tiles
-cd tiles 
-time gdal2tiles.py -z 1-17 ../stage3/stack/5.tif
 
 #time gdal_translate -of GTiff  -outsize 20% 20% $folderout/stack/$scene.tif test.tif
 #time gdal_translate -of GTiff  -outsize 20% 20% $folderout/$scene.tif test.tif
