@@ -1,0 +1,24 @@
+# Script for quadrates creation.
+
+Uses python3
+
+# Example of using
+
+## Single run
+
+```
+rectangles.py --lon1=50 --lat1=50 --lon2=55 --lat2=30 --sq_size=1000 --long=20 --short=9
+```
+
+## Creation of several quadrate sets
+
+```
+M=20
+N=9
+DIST=1000
+
+rectangles.py --polygones --lon1=50 --lat1=50 --lon2=55 --lat2=30 --sq_size=$DIST --long=$M --short=$N --output=net1.shp
+rectangles.py --polygones --lon1=50 --lat1=50 --lon2=55 --lat2=30 --sq_size=$(($DIST / 2 )) --long=$(($M "*" 2)) --short=$(($N "*" 2)) --output=net2.shp
+rectangles.py --lines --lon1=50 --lat1=50 --lon2=55 --lat2=30 --sq_size=$(($DIST / 2 )) --long=$(($M "*" 2)) --short=$(($N "*" 2)) --output=net3.shp
+
+```
