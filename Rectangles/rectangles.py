@@ -134,7 +134,6 @@ def main():
     gdal.PushErrorHandler(gdal_error_handler)
 
     epsg = get_projected_epsg(args.lon1, args.lat1)
-    print(epsg)
 
     x1, y1 = reproj(args.lon1, args.lat1, epsg)
     x2, y2 = reproj(args.lon2, args.lat2, epsg)
