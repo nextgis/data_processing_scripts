@@ -16,6 +16,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--long", type=int, help="Size of the long side", default=10)
 parser.add_argument("--short", type=int, help="Size of the short side", default=5)
 parser.add_argument("--sq_size", type=int, help="Length of square side in meters", default=1000)
+parser.add_argument("--offset", type=float, help="Offset of rectangles in meters", default=500)
 
 parser.add_argument("--lon1", type=float, help="Longitude for 1st point")
 parser.add_argument("--lon2", type=float, help="Longitude for 2nd point")
@@ -65,13 +66,13 @@ def reproj(lon, lat, epsg):
 
     return (point.GetX(), point.GetY())
 
-def get_transform(x1, y1, x2, y2, sq_size):
+def get_transform(x1, y1, x2, y2, offset):
     dist = sqrt((x2-x1)**2 + (y2-y1)**2)
     sinA = (y2-y1) / dist
     cosA = (x2-x1) / dist
 
-    deltaX = (cosA - sinA) * sq_size / 2
-    deltaY = (sinA + cosA) * sq_size / 2
+    deltaX = (cosA - sinA) * offset
+    deltaY = (sinA + cosA) * offset
     x1, y1 = x1 - deltaX, y1 - deltaY
 
     return [cosA, -sinA, sinA, cosA, x1, y1]
@@ -144,7 +145,7 @@ def main():
     x2, y2 = reproj(args.lon2, args.lat2, epsg)
 
     net = make_net(args.long, args.short, args.sq_size, lines=args.lines)
-    trans = get_transform(x1, y1, x2, y2, args.sq_size)
+    trans = get_transform(x1, y1, x2, y2, args.offset)
     net = transform_net(net, trans)
 
     save(net, args.output, epsg)
