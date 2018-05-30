@@ -26,6 +26,9 @@ parser.add_argument("--lat2", type=float, help="Latitude for 2nd point")
 parser.add_argument('--lines', dest='lines', action='store_true')
 parser.add_argument('--polygones', dest='lines', action='store_false')
 
+parser.add_argument('--right-side', dest='left', action='store_false')
+parser.add_argument('--left-side', dest='left', action='store_true')
+
 parser.add_argument("--output", help="Name of result file", default='net.shp')
 
 def gdal_error_handler(err_class, err_num, err_msg):
@@ -66,20 +69,27 @@ def reproj(lon, lat, epsg):
 
     return (point.GetX(), point.GetY())
 
-def get_transform(x1, y1, x2, y2, offset):
+def get_transform(x1, y1, x2, y2, offset, left_side=True):
+    flip = 1.0 if left_side else -1.0
+
     dist = sqrt((x2-x1)**2 + (y2-y1)**2)
-    sinA = (y2-y1) / dist
-    cosA = (x2-x1) / dist
+    sinA = flip * (y2-y1) / dist
+    cosA = flip * (x2-x1) / dist
 
     deltaX = (cosA - sinA) * offset
     deltaY = (sinA + cosA) * offset
-    x1, y1 = x1 - deltaX, y1 - deltaY
+    if left_side:
+        x0, y0 = x1 - deltaX, y1 - deltaY
+    else:
+        x0, y0 = x2 - deltaX, y2 - deltaY
 
-    return [cosA, -sinA, sinA, cosA, x1, y1]
+
+    return [cosA, -sinA, sinA, cosA, x0, y0]
 
 
 def make_net(x_count, y_count, dist, lines=False):
     geoms = dict()
+
     for i in range(x_count):
         for j in range(y_count):
             c1 = (i*dist, j*dist)
@@ -144,8 +154,11 @@ def main():
     x1, y1 = reproj(args.lon1, args.lat1, epsg)
     x2, y2 = reproj(args.lon2, args.lat2, epsg)
 
-    net = make_net(args.long, args.short, args.sq_size, lines=args.lines)
-    trans = get_transform(x1, y1, x2, y2, args.offset)
+    net = make_net(
+        args.long, args.short, args.sq_size,
+        lines=args.lines
+    )
+    trans = get_transform(x1, y1, x2, y2, args.offset, left_side=args.left)
     net = transform_net(net, trans)
 
     save(net, args.output, epsg)
