@@ -29,37 +29,37 @@ parser.add_argument("--output", help="Name of result file", default='net.shp')
 
 def gdal_error_handler(err_class, err_num, err_msg):
     errtype = {
-            gdal.CE_None:'None',
-            gdal.CE_Debug:'Debug',
-            gdal.CE_Warning:'Warning',
-            gdal.CE_Failure:'Failure',
-            gdal.CE_Fatal:'Fatal'
+            gdal.CE_None: 'None',
+            gdal.CE_Debug: 'Debug',
+            gdal.CE_Warning: 'Warning',
+            gdal.CE_Failure: 'Failure',
+            gdal.CE_Fatal: 'Fatal'
     }
-    err_msg = err_msg.replace('\n',' ')
+    err_msg = err_msg.replace('\n', ' ')
     err_class = errtype.get(err_class, 'None')
     print('Error Number: %s' % (err_num))
     print('Error Type: %s' % (err_class))
     print('Error Message: %s' % (err_msg))
 
 def get_projected_epsg(lon, lat):
-    zone = ((lon + 180) // 6 ) % 60 + 1
+    zone = ((lon + 180) // 6) % 60 + 1
 
     if lat > 0:
         epsg = 32600 + zone
     else:
         epsg = 32700 + zone
-    
+
     return int(epsg)
 
 def reproj(lon, lat, epsg):
     source = osr.SpatialReference()
     source.ImportFromEPSG(4326)
-    
+
     target = osr.SpatialReference()
     target.ImportFromEPSG(epsg)
-    
+
     transform = osr.CoordinateTransformation(source, target)
-    
+
     point = ogr.CreateGeometryFromWkt("POINT (%s %s)" % (lon, lat))
     point.Transform(transform)
 
@@ -84,14 +84,14 @@ def make_net(x_count, y_count, dist, lines=False):
             if lines:
                 geoms[(i, j)] = LineString([c1, c4])
             else:
-                geoms[(i, j)] = Polygon([c1, c2 ,c3, c4])
-    
+                geoms[(i, j)] = Polygon([c1, c2, c3, c4])
+
     return geoms
 
 def transform_net(polys, transform):
     for k, geom in polys.items():
         polys[k] = affine_transform(geom, transform)
-    
+
     return polys
 
 def save(polygones, name, epsg):
@@ -113,19 +113,19 @@ def save(polygones, name, epsg):
     layer.CreateField(ogr.FieldDefn('col', ogr.OFTInteger))
     layer.CreateField(ogr.FieldDefn('row', ogr.OFTInteger))
     defn = layer.GetLayerDefn()
-    
+
     for (col, row), poly in polygones.items():
         feat = ogr.Feature(defn)
         feat.SetField('col', col)
         feat.SetField('row', row)
-        
-        
+
+
         geom = ogr.CreateGeometryFromWkb(poly.wkb)
         feat.SetGeometry(geom)
-        
+
         layer.CreateFeature(feat)
         feat = geom = None
-    
+
     ds = layer = feat = geom = None
 
 def main():
@@ -143,7 +143,6 @@ def main():
     net = transform_net(net, trans)
 
     save(net, args.output, epsg)
-
 
 
 if __name__ == "__main__":
