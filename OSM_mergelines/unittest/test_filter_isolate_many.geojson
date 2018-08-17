@@ -1,0 +1,15 @@
+{
+"type": "FeatureCollection",
+"name": "test_filter_isolate_many",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "name": "улица Вавилова" }, "geometry": { "type": "LineString", "coordinates": [ [ 37.6888, 55.6954 ], [ 37.6895, 55.6959 ] ] } },
+{ "type": "Feature", "properties": { "name": "улица Вавилова" }, "geometry": { "type": "LineString", "coordinates": [ [ 37.6895, 55.6959 ], [ 37.6904, 55.6961 ] ] } },
+{ "type": "Feature", "properties": { "name": "улица Вавилова" }, "geometry": { "type": "LineString", "coordinates": [ [ 37.6905, 55.6956 ], [ 37.6907, 55.6952 ] ] } },
+{ "type": "Feature", "properties": { "name": "улица Вавилова" }, "geometry": { "type": "LineString", "coordinates": [ [ 37.6907, 55.6955 ], [ 37.6916, 55.6953 ] ] } },
+{ "type": "Feature", "properties": { "name": "улица Вавилова" }, "geometry": { "type": "LineString", "coordinates": [ [ 37.689, 55.695 ], [ 37.6888, 55.6954 ] ] } },
+{ "type": "Feature", "properties": { "name": null }, "geometry": { "type": "LineString", "coordinates": [ [ 37.692945767626377, 55.695108084528087 ], [ 37.693009190558826, 55.694238281122544 ] ] } },
+{ "type": "Feature", "properties": { "name": null }, "geometry": { "type": "LineString", "coordinates": [ [ 37.69116992551794, 55.693976144794291 ], [ 37.693009190558826, 55.694238281122544 ] ] } },
+{ "type": "Feature", "properties": { "name": null }, "geometry": { "type": "LineString", "coordinates": [ [ 37.692015564617201, 55.694873755834848 ], [ 37.69116992551794, 55.693976144794291 ] ] } }
+]
+}
