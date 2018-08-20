@@ -296,17 +296,17 @@ class Processor:
         
         return None
         
-    def splitFeaturesBlock(self,features_list):
+    def splitFeaturesBlock(self,features_list,featureDefn):
         #take a list with features with simlar attributes.
         #Return a list of features, features from same street will merged to continous LINESTRING
         
         non_isolated_features,isolated_features = self.filterIsolateFeatures(features_list)
                 
+
                     
         #isolated_features - ready for output
         #non_isolated_features - ready for alalysis
         merged_features = list()
-        merge_feature = feature()
         clusters_count = 0
         features_state = dict()
         features_in_clusters = dict()
@@ -321,7 +321,8 @@ class Processor:
         
         for a in range(0,len(non_isolated_features)):
             #С каким кластером соприкасается фича a?
-            with_cluster_touching_feature = self.withClusterTouchingGeometry(clusters_geometry,feature.GetGeometryRef())
+
+            with_cluster_touching_feature = self.withClusterTouchingGeometry(clusters_geometry,non_isolated_features[a].GetGeometryRef())
             if with_cluster_touching_feature is None:
                 clusters_count=+1
                 clusters_geometry[clusters_count] = non_isolated_features[a].GetGeometryRef()
@@ -333,19 +334,31 @@ class Processor:
                 #point_b_a = getFristPointOfLine(non_isolated_features[b].GetGeometryRef())
                 #point_b_b = getLastPointOfLine(non_isolated_features[b].GetGeometryRef())
                 
-                if is_lines_touching_ends(clusters_geometry[current_cluster],non_isolated_features[b].GetGeometryRef()):
+                if self.is_lines_touching_ends(clusters_geometry[current_cluster],non_isolated_features[b].GetGeometryRef()):
                 #if self.compareGeom(point_a_a,point_b_a) or self.compareGeom(point_a_a,point_b_b) or self.compareGeom(point_a_b,point_b_a) or self.compareGeom(point_a_b,point_b_b):
                     if b in features_in_clusters:
                         continue
-                    clusters_geometry[current_cluster] = self.geometry_merge(clusters_geometry[current_cluster],non_isolated_features[b].geometry)
+                    clusters_geometry[current_cluster] = self.geometry_merge(clusters_geometry[current_cluster],non_isolated_features[b].GetGeometryRef())
                     features_in_clusters[b]=current_cluster
 
-                
-                
         
-            
         result = list()
-        return list
+            
+        for cluster_number in range(0,clusters_count+1):
+            for key, value in features_in_clusters.items():
+                if value == cluster_number:
+                    feature = ogr.Feature(featureDefn)
+                    feature.SetGeometry(clusters_geometry[cluster_number])
+                    result.append(feature)
+                    feature = None
+
+                    break
+                    
+        for i in isolated_features:
+            result.append(i)
+        #result = result + isolated_features
+        
+        return result
         
         #iterate in each group
             #if this feature not connected with any other feature in group:
