@@ -130,10 +130,32 @@ class Processor:
         
         
 
+    def create_output_layer(self,inLayer):
+        outShapefile = "mergelines.geojson"
+        outDriver = ogr.GetDriverByName("GeoJSON")
+
+        # Remove output shapefile if it already exists
+        if os.path.exists(outShapefile):
+            outDriver.DeleteDataSource(outShapefile)
+
+        # Create the output shapefile
+        outDataSource = outDriver.CreateDataSource(outShapefile)
+        outLayer = outDataSource.CreateLayer("mergelines", geom_type=ogr.wkbLineString)
         
+        
+        # Add input Layer Fields to the output Layer
+        inLayerDefn = inLayer.GetLayerDefn()
+        for i in range(0, inLayerDefn.GetFieldCount()):
+            fieldDefn = inLayerDefn.GetFieldDefn(i)
+            outLayer.CreateField(fieldDefn)
+
+        # Get the output Layer's Feature Definition
+        outLayerDefn = outLayer.GetLayerDefn()
+        return outLayer
+
     def mergelines(self,DifferentFeaturesList=('NAME','HIGHWAY')):
     
-
+        src_layer = self.srclayer
         logging.debug( 'Layer name: ' + self.srclayer.GetName() )
         
         #sort features gruoping by attributes
@@ -142,21 +164,37 @@ class Processor:
         sql = '''SELECT * FROM {layername} ORDER BY {fields} '''.format(fields = ','.join(DifferentFeaturesList), layername = self.srclayer.GetName())
         
         logging.debug(sql)
+        
+        outLayer = self.create_output_layer(src_layer)
+        out_featureDefn = outLayer.GetLayerDefn()
 
         ResultSet = self.srcdataSource.ExecuteSQL(sql)
         layer = self.srcdataSource.GetLayer()
         features_list = list()
+        i = 0
         for feature in ResultSet:
             a = feature.GetField("NAME")
             logging.debug(a)
+            if i == 0:
+                fields = a
+                prev_fields = fields
+            
             if fields <> prev_fields:
-                new_features = self.splitFeaturesBlock(features_list) #return list of features
+                new_features = self.splitFeaturesBlock(features_list,layer.GetLayerDefn()) #return list of features
                 new_layer.addFeatures(new_features)
+                #copy calculated features to output file
+                for feature in new_features:
+                    out_feature = ogr.feature(out_featureDefn)
+                    out_feature.SetGeometry(feature.GetGeometryRef())
+                    outLayer.CreateFeature(outLayer)
+
                 features_list = list()
                 features_list.append(feature)
             else:
                 features_list.append(feature)
-            
+                
+            prev_fields = fields
+            i = i+1
             #logging.debug(a.decode('utf-8'))
                 
     def getFristPointOfLine(self,geom):
