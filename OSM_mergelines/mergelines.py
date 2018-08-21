@@ -221,7 +221,7 @@ class Processor:
                     logging.debug(wkt)
                     
                     out_feature.SetGeometry(new_feature.GetGeometryRef())
-                    out_feature.SetField( "NAME", a )
+                    out_feature.SetField( "NAME", prev_fields ) #take attributes from previsious feature from sql
                     outLayer.CreateFeature(out_feature)
 
                 features_list = list()
