@@ -134,7 +134,10 @@ class Processor:
         from osgeo import ogr, osr
         outShapefile = "mergelines/mergelines.shp"
         outDriver = ogr.GetDriverByName("ESRI Shapefile")
-
+        
+        outShapefile = "mergelines/mergelines.gpkg"
+        outDriver = ogr.GetDriverByName("GPKG")
+        
         # Remove output shapefile if it already exists
         if os.path.exists(outShapefile):
             outDriver.DeleteDataSource(outShapefile)
@@ -206,9 +209,19 @@ class Processor:
                 logging.debug('new street')
                 new_features = self.splitFeaturesBlock(features_list,layer.GetLayerDefn()) #return list of features
                 #copy calculated features to output file
-                for feature in new_features:
+                for new_feature in new_features:
                     out_feature = ogr.Feature(out_featureDefn)
-                    out_feature.SetGeometry(feature.GetGeometryRef())
+                    
+                    p = features_list[0].GetGeometryRef()
+                    wkt = p.ExportToWkt()
+                    logging.debug(wkt)
+                                        
+                    p = new_feature.GetGeometryRef()
+                    wkt = p.ExportToWkt()
+                    logging.debug(wkt)
+                    
+                    out_feature.SetGeometry(new_feature.GetGeometryRef())
+                    out_feature.SetField( "NAME", a )
                     outLayer.CreateFeature(out_feature)
 
                 features_list = list()
@@ -267,9 +280,15 @@ class Processor:
     def filterIsolateFeatures(self,features_list):
         #take a list with features with simlar attributes.
         #returns a list of non_isolated_features and list of non_isolated_features
+        
+            
+        
         isolated_features = list()
         non_isolated_features = list()
         non_isolated_features_ids = dict()
+        
+        if len(features_list)==1:
+            return non_isolated_features, features_list
 
 
         for a in range(0,len(features_list)):
@@ -434,6 +453,7 @@ class Processor:
                     
         for i in isolated_features:
             result.append(i)
+            #logging.debug(i.GetField("NAME").decode('utf-8'))
         #result = result + isolated_features
         
         return result
