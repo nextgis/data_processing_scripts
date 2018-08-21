@@ -46,7 +46,7 @@ class Processor:
                 geom = feature.GetGeometryRef()
                 if geom.IsValid() <> True:
                     raise ValueError('Invalid geometry')
-                
+        logging.info('initialization complete')
         
 
     def compareValues(self,ngw_value, wfs_value):
@@ -131,8 +131,9 @@ class Processor:
         
 
     def create_output_layer(self,inLayer):
-        outShapefile = "mergelines.geojson"
-        outDriver = ogr.GetDriverByName("GeoJSON")
+        from osgeo import ogr, osr
+        outShapefile = "mergelines/mergelines.shp"
+        outDriver = ogr.GetDriverByName("ESRI Shapefile")
 
         # Remove output shapefile if it already exists
         if os.path.exists(outShapefile):
@@ -140,18 +141,31 @@ class Processor:
 
         # Create the output shapefile
         outDataSource = outDriver.CreateDataSource(outShapefile)
-        outLayer = outDataSource.CreateLayer("mergelines", geom_type=ogr.wkbLineString)
+        srs = osr.SpatialReference()
+        srs.ImportFromEPSG(4326)
+        outLayer = outDataSource.CreateLayer("mergelines", srs, geom_type=ogr.wkbLineString)
         
         
         # Add input Layer Fields to the output Layer
         inLayerDefn = inLayer.GetLayerDefn()
         for i in range(0, inLayerDefn.GetFieldCount()):
             fieldDefn = inLayerDefn.GetFieldDefn(i)
+            logging.debug(fieldDefn.GetName())
             outLayer.CreateField(fieldDefn)
+            
+        line = ogr.Geometry(ogr.wkbLineString)
+        line.AddPoint(0.1, 0.1)
+        line.AddPoint(1.2, 1.2)
+        featureDefn = outLayer.GetLayerDefn()
+        feature = ogr.Feature(featureDefn)
+        feature.SetGeometry(line)
+        feature.SetField("NAME", 'PEPYAKA')
+        outLayer.CreateFeature(feature)
+        feature = None
 
         # Get the output Layer's Feature Definition
-        outLayerDefn = outLayer.GetLayerDefn()
-        return outLayer
+        #outLayerDefn = outLayer.GetLayerDefn()
+        return outDataSource
 
     def mergelines(self,DifferentFeaturesList=('NAME','HIGHWAY')):
     
@@ -161,38 +175,48 @@ class Processor:
         #sort features gruoping by attributes
         fields = u''
         DifferentFeaturesList = ['"'+item+'"' for item in DifferentFeaturesList]
-        sql = '''SELECT * FROM {layername} ORDER BY {fields} '''.format(fields = ','.join(DifferentFeaturesList), layername = self.srclayer.GetName())
+        sql = '''SELECT * FROM {layername} WHERE NAME IS NOT NULL ORDER BY {fields} '''.format(fields = ','.join(DifferentFeaturesList), layername = self.srclayer.GetName())
         
         logging.debug(sql)
         
-        outLayer = self.create_output_layer(src_layer)
+        ogr.UseExceptions()
+        
+        outDataSource = self.create_output_layer(self.srclayer)
+        outLayer = outDataSource.GetLayer()
+        logging.debug('out layer created')
         out_featureDefn = outLayer.GetLayerDefn()
+        logging.debug('layer defn get')
 
         ResultSet = self.srcdataSource.ExecuteSQL(sql)
+        logging.debug('sql executed')
         layer = self.srcdataSource.GetLayer()
+        
+        logging.debug('getlayer ok')
+        
         features_list = list()
         i = 0
         for feature in ResultSet:
             a = feature.GetField("NAME")
-            logging.debug(a)
+            fields = a
             if i == 0:
                 fields = a
                 prev_fields = fields
             
             if fields <> prev_fields:
+                logging.debug('new street')
                 new_features = self.splitFeaturesBlock(features_list,layer.GetLayerDefn()) #return list of features
-                new_layer.addFeatures(new_features)
                 #copy calculated features to output file
                 for feature in new_features:
-                    out_feature = ogr.feature(out_featureDefn)
+                    out_feature = ogr.Feature(out_featureDefn)
                     out_feature.SetGeometry(feature.GetGeometryRef())
-                    outLayer.CreateFeature(outLayer)
+                    outLayer.CreateFeature(out_feature)
 
                 features_list = list()
                 features_list.append(feature)
             else:
                 features_list.append(feature)
                 
+            logging.debug(str(a).decode('utf-8'))
             prev_fields = fields
             i = i+1
             #logging.debug(a.decode('utf-8'))
@@ -338,6 +362,11 @@ class Processor:
         #take a list with features with simlar attributes.
         #Return a list of features, features from same street will merged to continous LINESTRING
         
+        if len(features_list)==1:
+            result = list()
+            result.append(features_list[0])
+            return result
+        
         non_isolated_features,isolated_features = self.filterIsolateFeatures(features_list)
                 
 
@@ -354,6 +383,17 @@ class Processor:
         #Сравнение по координатам с тем кластером, куда эта линия уже включена
         #Если включена в кластер, то пропускаем
         
+        logging.debug(len(non_isolated_features))
+        
+        if (len(non_isolated_features) == 0):   
+            #has many streets with same name, but they all not touching by ends
+            result = list()
+            for i in isolated_features:
+                result.append(i) 
+            return result
+            
+            
+            
         clusters_geometry[clusters_count] = non_isolated_features[0].GetGeometryRef()
         features_in_clusters[0] = 0
         

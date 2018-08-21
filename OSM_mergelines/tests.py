@@ -513,6 +513,91 @@ class TestStringMethods(unittest.TestCase):
             wkt_etalon = g_etalon.ExportToWkt()
 
             self.assertEqual(wkt,wkt_etalon)
+
+       
+    def test_splitFeaturesBlock_onefeature_return_one(self):
+        #take a list with features with simlar attributes.
+        #Return a list of features, features from same street will merged to continous LINESTRING
+        from osgeo import ogr, osr
+        import mergelines
+        processor = mergelines.Processor()
+        
+        # set up the shapefile driver
+        driver = ogr.GetDriverByName("MEMORY")
+        # create the data source
+        data_source = driver.CreateDataSource("memData")
+        srs = osr.SpatialReference()
+        srs.ImportFromEPSG(4326)
+        layer = data_source.CreateLayer("memData", srs, ogr.wkbLineString)
+        
+        features = list()
+        features_etalon = list()
+        
+        line = ogr.Geometry(ogr.wkbLineString)
+        line.AddPoint(37.1, 55.1)
+        line.AddPoint(37.2, 55.2)
+        line.AddPoint(37.3, 55.3)
+        featureDefn = layer.GetLayerDefn()
+        feature = ogr.Feature(featureDefn)
+        feature.SetGeometry(line)
+        features.append(feature)
+        line = None
+        feature = None
+                
+  
+        
+        #-------------------------
+        
+        line = ogr.Geometry(ogr.wkbLineString)
+        line.AddPoint(37.1, 55.1)
+        line.AddPoint(37.2, 55.2)
+        line.AddPoint(37.3, 55.3)
+        featureDefn = layer.GetLayerDefn()
+        feature = ogr.Feature(featureDefn)
+        feature.SetGeometry(line)
+        features_etalon.append(feature)
+        line = None
+        feature = None        
+        
+        
+        mfeatures = processor.splitFeaturesBlock(features,layer.GetLayerDefn())
+
+        self.assertTrue(len(mfeatures) == len(features_etalon))
+        #тут надо проверить геометрию полученого списка но это слишком сложный тест был был
+        for i in range(0,len(mfeatures)):
+            
+            g = mfeatures[i].GetGeometryRef()
+            wkt = g.ExportToWkt()
+            
+            g_etalon = features_etalon[i].GetGeometryRef()
+            wkt_etalon = g_etalon.ExportToWkt()
+
+            self.assertEqual(wkt,wkt_etalon)
+        
+        
+    def create_output_layer(self):
+        import os
+        from osgeo import ogr, osr
+        filename = 'mergelines.geojson'
+        if os.path.exists(filename):
+            os.remove(filename)
+        
+        self.assertFalse(os.path.exists(filename))
+        import mergelines
+        processor = mergelines.Processor()
+        
+        driver = ogr.GetDriverByName("MEMORY")
+        # create the data source
+        data_source = driver.CreateDataSource("memData")
+        srs = osr.SpatialReference()
+        srs.ImportFromEPSG(4326)
+        layer = data_source.CreateLayer("memData", srs, ogr.wkbLineString)
+
+        processor.create_output_layer(layer)
+        self.assertTrue(os.path.exists(filename))
+        os.remove(filename)
+        self.assertFalse(os.path.exists(filename))
+
         
     def test_isupper(self):
         self.assertTrue('FOO'.isupper())
@@ -524,6 +609,7 @@ class TestStringMethods(unittest.TestCase):
         # check that s.split fails when the separator is not a string
         with self.assertRaises(TypeError):
             s.split(2)
+            
 
 if __name__ == '__main__':
     unittest.main()
