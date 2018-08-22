@@ -9,9 +9,10 @@ import errno
 import logging
 
 import mergelines
-processor = mergelines.Processor('/home/trolleway/ssdgis/mergeline/testdata/hi3.gpkg')
+processor = mergelines.Processor('/home/trolleway/ssdgis/mergeline/testdata/hi3.gpkg') #only LINESTRING
+processor.mergelines(output_filename='/home/trolleway/ssdgis/mergeline/testdata/result.gpkg',DifferentFeaturesList=('NAME','HIGHWAY')) #only gpkg
 
-processor.mergelines()
+
 '''
 ogr2ogr -nlt Linestring /home/trolleway/ssdgis/mergeline/testdata/hi3.gpkg /home/trolleway/ssdgis/mergeline/testdata/hi2.gpkg
 '''

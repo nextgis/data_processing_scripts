@@ -130,12 +130,10 @@ class Processor:
         
         
 
-    def create_output_layer(self,inLayer):
+    def create_output_layer(self,inLayer,output_filename):
         from osgeo import ogr, osr
-        outShapefile = "mergelines/mergelines.shp"
-        outDriver = ogr.GetDriverByName("ESRI Shapefile")
-        
-        outShapefile = "mergelines/mergelines.gpkg"
+
+        outShapefile = output_filename
         outDriver = ogr.GetDriverByName("GPKG")
         
         # Remove output shapefile if it already exists
@@ -155,22 +153,13 @@ class Processor:
             fieldDefn = inLayerDefn.GetFieldDefn(i)
             logging.debug(fieldDefn.GetName())
             outLayer.CreateField(fieldDefn)
-            
-        line = ogr.Geometry(ogr.wkbLineString)
-        line.AddPoint(0.1, 0.1)
-        line.AddPoint(1.2, 1.2)
-        featureDefn = outLayer.GetLayerDefn()
-        feature = ogr.Feature(featureDefn)
-        feature.SetGeometry(line)
-        feature.SetField("NAME", 'PEPYAKA')
-        outLayer.CreateFeature(feature)
-        feature = None
+           
 
         # Get the output Layer's Feature Definition
         #outLayerDefn = outLayer.GetLayerDefn()
         return outDataSource
 
-    def mergelines(self,DifferentFeaturesList=('NAME','HIGHWAY','fid')):
+    def mergelines(self,output_filename,DifferentFeaturesList=('NAME','HIGHWAY')):
     
         src_layer = self.srclayer
         logging.debug( 'Layer name: ' + self.srclayer.GetName() )
@@ -184,7 +173,7 @@ class Processor:
         
         ogr.UseExceptions()
         
-        outDataSource = self.create_output_layer(self.srclayer)
+        outDataSource = self.create_output_layer(self.srclayer, output_filename)
         outLayer = outDataSource.GetLayer()
         logging.debug('out layer created')
         out_featureDefn = outLayer.GetLayerDefn()
