@@ -49,86 +49,75 @@ class Processor:
         logging.info('initialization complete')
         
 
-    def compareValues(self,ngw_value, wfs_value):
-        if (ngw_value == '' or ngw_value == None) and (wfs_value == '' or wfs_value == None):
+    def compareValues(self,left_value, right_value):
+        if (left_value == '' or left_value == None) and (right_value == '' or right_value == None):
             return True
         
-        if isinstance(ngw_value, float) and isinstance(wfs_value, float):              
-            return abs(ngw_value - wfs_value) < self.delta 
+        if isinstance(left_value, float) and isinstance(right_value, float):              
+            return abs(left_value - right_value) < self.delta 
             
-        if ngw_value != wfs_value:      
+        if left_value != right_value:      
             return False
         return True
         
-    def comparePoints(self,ngw_pt, wfs_pt):
-        return (abs(ngw_pt[0] - wfs_pt[0]) < self.delta) and (abs(ngw_pt[1] - wfs_pt[1]) < self.delta)
+    def comparePoints(self,left_pt, right_pt):
+        return (abs(left_pt[0] - right_pt[0]) < self.delta) and (abs(left_pt[1] - right_pt[1]) < self.delta)
         
-    def compareLines(self,ngw_line, wfs_line):
-        if ngw_line.GetPointCount() != wfs_line.GetPointCount():
+    def compareLines(self,left_line, right_line):
+        if left_line.GetPointCount() != right_line.GetPointCount():
             return False
-        for i in range(ngw_line.GetPointCount()):
+        for i in range(left_line.GetPointCount()):
             
-
-            if not self.comparePoints(ngw_line.GetPoint(i), wfs_line.GetPoint(i)):
+            if not self.comparePoints(left_line.GetPoint(i), right_line.GetPoint(i)):
                 return False
-            
         return True
         
-    def comparePolygons(self,ngw_poly, wfs_poly):
-        ngw_poly_rings = ngw_poly.GetGeometryCount()
-        wfs_poly_rings = wfs_poly.GetGeometryCount()
-        if ngw_poly_rings != wfs_poly_rings:
+    def comparePolygons(self,left_poly, right_poly):
+        left_poly_rings = left_poly.GetGeometryCount()
+        right_poly_rings = right_poly.GetGeometryCount()
+        if left_poly_rings != right_poly_rings:
             return False
 
-        for i in range(ngw_poly_rings):
-            if not self.compareLines(ngw_poly.GetGeometryRef(i), wfs_poly.GetGeometryRef(i)):
+        for i in range(left_poly_rings):
+            if not self.compareLines(left_poly.GetGeometryRef(i), right_poly.GetGeometryRef(i)):
                 return False 
-
-
-
-
-
-        for i in range(ngw_poly.GetPointCount()):
-            if not self.comparePoints(ngw_poly.GetGeometryRef(i), wfs_poly.GetGeometryRef(i)):
+        for i in range(left_poly.GetPointCount()):
+            if not self.comparePoints(left_poly.GetGeometryRef(i), right_poly.GetGeometryRef(i)):
                 return False
 
         return True                 
         
-    def compareGeom(self,ngw_geom, wfs_geom):  
+    def compareGeom(self,left_geom, right_geom):  
 
-        if ngw_geom.GetGeometryCount() <> wfs_geom.GetGeometryCount():
+        if left_geom.GetGeometryCount() <> right_geom.GetGeometryCount():
             return False    #Diffirent geometry count
-        elif ngw_geom.GetGeometryType() is ogr.wkbPoint:              
-            return self.comparePoints(ngw_geom.GetPoint(), wfs_geom.GetPoint())  
-        elif ngw_geom.GetGeometryType() is ogr.wkbLineString:
-            return self.compareLines(ngw_geom, wfs_geom)  
-        elif ngw_geom.GetGeometryType() is ogr.wkbPolygon:
-            return self.comparePolygons(ngw_geom, wfs_geom)  
-        elif ngw_geom.GetGeometryType() is ogr.wkbMultiPoint:
-            for i in range(ngw_geom.GetGeometryCount()):
-                if not self.comparePoints(ngw_geom.GetGeometryRef(i).GetPoint(0), wfs_geom.GetGeometryRef(i).GetPoint(0)):
+        elif left_geom.GetGeometryType() is ogr.wkbPoint:              
+            return self.comparePoints(left_geom.GetPoint(), right_geom.GetPoint())  
+        elif left_geom.GetGeometryType() is ogr.wkbLineString:
+            return self.compareLines(left_geom, right_geom)  
+        elif left_geom.GetGeometryType() is ogr.wkbPolygon:
+            return self.comparePolygons(left_geom, right_geom)  
+        elif left_geom.GetGeometryType() is ogr.wkbMultiPoint:
+            for i in range(left_geom.GetGeometryCount()):
+                if not self.comparePoints(left_geom.GetGeometryRef(i).GetPoint(0), right_geom.GetGeometryRef(i).GetPoint(0)):
                     return False
-        elif ngw_geom.GetGeometryType() is ogr.wkbMultiLineString:
-            for i in range(ngw_geom.GetGeometryCount()):
-                if not self.compareLines(ngw_geom.GetGeometryRef(i), wfs_geom.GetGeometryRef(i)):
+        elif left_geom.GetGeometryType() is ogr.wkbMultiLineString:
+            for i in range(left_geom.GetGeometryCount()):
+                if not self.compareLines(left_geom.GetGeometryRef(i), right_geom.GetGeometryRef(i)):
                     return False
-        elif ngw_geom.GetGeometryType() is ogr.wkbMultiPolygon:
-            for i in range(ngw_geom.GetGeometryCount()):
-                if not self.comparePolygons(ngw_geom.GetGeometryRef(i), wfs_geom.GetGeometryRef(i)):
+        elif left_geom.GetGeometryType() is ogr.wkbMultiPolygon:
+            for i in range(left_geom.GetGeometryCount()):
+                if not self.comparePolygons(left_geom.GetGeometryRef(i), right_geom.GetGeometryRef(i)):
                     return False
         else:
-            print 'ngw_geom.GetGeometryCount() <> wfs_geom.GetGeometryCount()'
-            print ngw_geom.GetGeometryCount() <> wfs_geom.GetGeometryCount()
+            print 'left_geom.GetGeometryCount() <> right_geom.GetGeometryCount()'
+            print left_geom.GetGeometryCount() <> right_geom.GetGeometryCount()
             
-            print 'ngw_geom.GetGeometryType() is ogr.wkbPoint:'
-            print ngw_geom.GetGeometryType() is ogr.wkbPoint
+            print 'left_geom.GetGeometryType() is ogr.wkbPoint:'
+            print left_geom.GetGeometryType() is ogr.wkbPoint
             raise ValueError('compareGeom get unexpected geometry')
-            return True # this is unexpected
-
         return True     
-        
-        
-        
+         
 
     def create_output_layer(self,inLayer,output_filename):
         from osgeo import ogr, osr
