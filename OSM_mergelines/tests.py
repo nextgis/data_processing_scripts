@@ -574,6 +574,66 @@ class TestStringMethods(unittest.TestCase):
 
             self.assertEqual(wkt,wkt_etalon)
         
+    def test_splitFeaturesBlock_Y_return_two(self):
+        #take a list with features with simlar attributes.
+        #Return a list of features, features from same street will merged to continous LINESTRING
+        from osgeo import ogr, osr
+        import mergelines
+        processor = mergelines.Processor()
+        
+        # set up the shapefile driver
+        driver = ogr.GetDriverByName("MEMORY")
+        # create the data source
+        data_source = driver.CreateDataSource("memData")
+        srs = osr.SpatialReference()
+        srs.ImportFromEPSG(4326)
+        layer = data_source.CreateLayer("memData", srs, ogr.wkbLineString)
+        
+        features = list()
+        features_etalon = list()
+        
+        line = ogr.Geometry(ogr.wkbLineString)
+        line.AddPoint(37.1, 55.1)
+        line.AddPoint(37.2, 55.2)
+        line.AddPoint(37.3, 55.3)
+        featureDefn = layer.GetLayerDefn()
+        feature = ogr.Feature(featureDefn)
+        feature.SetGeometry(line)
+        features.append(feature)
+        line = None
+        feature = None
+        
+        line = ogr.Geometry(ogr.wkbLineString)
+        line.AddPoint(37.3, 55.3)
+        line.AddPoint(37.4, 55.3)
+        line.AddPoint(37.5, 55.3)
+        featureDefn = layer.GetLayerDefn()
+        feature = ogr.Feature(featureDefn)
+        feature.SetGeometry(line)
+        features.append(feature)
+        line = None
+        feature = None    
+        
+        line = ogr.Geometry(ogr.wkbLineString)
+        line.AddPoint(37.3, 55.3)
+        line.AddPoint(37.25, 55.3)
+        line.AddPoint(37.15, 55.5)
+        featureDefn = layer.GetLayerDefn()
+        feature = ogr.Feature(featureDefn)
+        feature.SetGeometry(line)
+        features.append(feature)
+        line = None
+        feature = None        
+        
+                
+  
+        
+        #-------------------------
+        
+        mfeatures = processor.splitFeaturesBlock(features,layer.GetLayerDefn())
+
+        self.assertEqual(len(mfeatures) ,2)
+       
         
     def create_output_layer(self):
         import os

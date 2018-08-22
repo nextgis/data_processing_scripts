@@ -179,7 +179,7 @@ class Processor:
         fields = u''
         DifferentFeaturesList = ['"'+item+'"' for item in DifferentFeaturesList]
         sql = '''SELECT * FROM {layername} WHERE NAME IS NOT NULL  ORDER BY {fields} '''.format(fields = ','.join(DifferentFeaturesList), layername = self.srclayer.GetName())
-        '''WHERE NAME IS NOT NULL  AND NAME IN ("улица Михалевича", "улица Народное Имение")   '''
+        '''WHERE NAME IS NOT NULL  AND NAME IN ("улица Михалевича", "улица Народное Имение") AND NAME IN ("Северное шоссе")   '''
         logging.debug(sql)
         
         ogr.UseExceptions()
@@ -197,17 +197,23 @@ class Processor:
         logging.debug('getlayer ok')
         
         features_list = list()
-        i = 0
+        i = 1
+        result_count = ResultSet.GetFeatureCount()
         for feature in ResultSet:
             a = feature.GetField("NAME")
             fields = a
-            if i == 0:
+            if i == 1:
                 fields = a
                 prev_fields = fields
-            
-            if fields <> prev_fields:
+            logging.debug('feature '+str(i) + ' / ' + str(result_count))
+            if (fields <> prev_fields) or (i == result_count):
                 logging.debug('new street')
+                if i == result_count: #for last
+                    features_list.append(feature)
+                logging.debug('len features_list before sent '+str(len(features_list))) 
                 new_features = self.splitFeaturesBlock(features_list,layer.GetLayerDefn()) #return list of features
+                logging.debug('len new_features:'+str(len(new_features)))
+                
                 #copy calculated features to output file
                 for new_feature in new_features:
                     out_feature = ogr.Feature(out_featureDefn)
@@ -226,8 +232,8 @@ class Processor:
                 features_list.append(feature)
             else:
                 features_list.append(feature)
-                
-            logging.debug(str(a).decode('utf-8'))
+            fid = feature.GetField("OSM_ID")    
+            logging.debug(str(fid).decode('utf-8') + '  ' +str(a).decode('utf-8'))
             prev_fields = fields
             i = i+1
             #logging.debug(a.decode('utf-8'))
@@ -400,7 +406,9 @@ class Processor:
             return result
         
         non_isolated_features,isolated_features = self.filterIsolateFeatures(features_list)
-                
+        logging.debug('len features_list '+str(len(features_list)))        
+        logging.debug('len non_isolated '+str(len(non_isolated_features)))        
+        logging.debug('len isolated '+str(len(isolated_features)))        
 
                     
         #isolated_features - ready for output
@@ -415,7 +423,7 @@ class Processor:
         #Сравнение по координатам с тем кластером, куда эта линия уже включена
         #Если включена в кластер, то пропускаем
         
-        logging.debug(len(non_isolated_features))
+
         
         if (len(non_isolated_features) == 0):   
             #has many streets with same name, but they all not touching by ends
@@ -433,9 +441,14 @@ class Processor:
             #С каким кластером соприкасается фича a?
 
             with_cluster_touching_feature = self.withClusterTouchingGeometry(clusters_geometry,non_isolated_features[a].GetGeometryRef())
+            
+            logging.debug('a='+str(a))
+            logging.debug('with_cluster_touching_feature='+str(with_cluster_touching_feature))
+            
             if with_cluster_touching_feature is None:
-                clusters_count=+1
+                clusters_count= clusters_count+1
                 clusters_geometry[clusters_count] = non_isolated_features[a].GetGeometryRef()
+                features_in_clusters[a]=clusters_count
                 continue
             current_cluster = with_cluster_touching_feature
             #point_a_a = getFristPointOfLine(clusters_geometry[current_cluster].GetGeometryRef())
@@ -453,8 +466,10 @@ class Processor:
 
         
         result = list()
-            
+        
+        print features_in_clusters
         for cluster_number in range(0,clusters_count+1):
+            logging.debug('compute cluster ='+str(cluster_number))
             for key, value in features_in_clusters.items():
                 if value == cluster_number:
                     feature = ogr.Feature(featureDefn)
