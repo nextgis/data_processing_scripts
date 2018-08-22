@@ -178,7 +178,7 @@ class Processor:
         i = 1
         result_count = ResultSet.GetFeatureCount()
         for feature in ResultSet:
-            a = feature.GetField("NAME")
+            a = feature.GetField("NAME") #TODO: compare using DifferentFeaturesList
             fields = a
             if i == 1:
                 fields = a
