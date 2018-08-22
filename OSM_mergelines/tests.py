@@ -417,7 +417,7 @@ class TestStringMethods(unittest.TestCase):
         line = None    
         
         merge_result = processor.geometry_merge(source_line,append_line_1)
-
+        print(merge_result.ExportToWkt())
         compare_result = processor.compareGeom(merge_result,etalon_line)
         self.assertTrue(compare_result)
         source_line = None         

@@ -17,7 +17,7 @@ class Processor:
 
         self.delta = 0.00000001 #Using in compare points 
         #logging.basicConfig(level = logging.DEBUG)
-        logging.basicConfig(format = u'%(filename)s[LINE:%(lineno)d]# %(levelname)-8s [%(asctime)s]      %(message)s', level = logging.DEBUG)
+        logging.basicConfig(format = u'%(filename)s;[LINE:%(lineno)d]# ; %(levelname)-8s ; [%(asctime)s]      ; %(message)s', level = logging.DEBUG)
 
         '''
         logging.debug( u'This is a debug message' )
@@ -170,7 +170,7 @@ class Processor:
         #outLayerDefn = outLayer.GetLayerDefn()
         return outDataSource
 
-    def mergelines(self,DifferentFeaturesList=('NAME','HIGHWAY')):
+    def mergelines(self,DifferentFeaturesList=('NAME','HIGHWAY','fid')):
     
         src_layer = self.srclayer
         logging.debug( 'Layer name: ' + self.srclayer.GetName() )
@@ -178,8 +178,8 @@ class Processor:
         #sort features gruoping by attributes
         fields = u''
         DifferentFeaturesList = ['"'+item+'"' for item in DifferentFeaturesList]
-        sql = '''SELECT * FROM {layername} WHERE NAME IS NOT NULL AND NAME="Улица Михалевича"   ORDER BY {fields} '''.format(fields = ','.join(DifferentFeaturesList), layername = self.srclayer.GetName())
-        '''WHERE NAME IS NOT NULL'''
+        sql = '''SELECT * FROM {layername} WHERE NAME IS NOT NULL  ORDER BY {fields} '''.format(fields = ','.join(DifferentFeaturesList), layername = self.srclayer.GetName())
+        '''WHERE NAME IS NOT NULL  AND NAME IN ("улица Михалевича", "улица Народное Имение")   '''
         logging.debug(sql)
         
         ogr.UseExceptions()
@@ -214,11 +214,9 @@ class Processor:
                     
                     p = features_list[0].GetGeometryRef()
                     wkt = p.ExportToWkt()
-                    logging.debug(wkt)
                                         
                     p = new_feature.GetGeometryRef()
                     wkt = p.ExportToWkt()
-                    logging.debug(wkt)
                     
                     out_feature.SetGeometry(new_feature.GetGeometryRef())
                     out_feature.SetField( "NAME", prev_fields ) #take attributes from previsious feature from sql
@@ -318,6 +316,7 @@ class Processor:
     def geometry_merge(self,geometry_a,geometry_b):
         #WITCH POINTS LINES CONNECTED BY
         '''
+        CASES
         
         -----> -> a_b b_a
         -----> <- a_b b_b
@@ -330,7 +329,18 @@ class Processor:
         point_b_a = self.getFristPointOfLine(geometry_b)
         point_b_b = self.getLastPointOfLine(geometry_b)
         
-
+        debug_line = ogr.Geometry(ogr.wkbLineString)
+        
+        '''
+        print geometry_a.GetPointCount()
+        print int(round(geometry_a.GetPointCount()/2))
+        debug_lon, debug_lat,debug_z = geometry_b.GetPoint(int(round(geometry_a.GetPointCount()/2)))
+        debug_line.AddPoint_2D(debug_lon, debug_lat)         
+        '''
+        debug_lon, debug_lat,debug_z = geometry_b.GetPoint(int(round(geometry_b.GetPointCount()/2)))
+        debug_line.AddPoint_2D(debug_lon, debug_lat)
+        
+        #debug_wkt = debug_line.ExportToWkt()
         
         if self.compareGeom(point_a_b,point_b_a):
             for p in xrange(geometry_b.GetPointCount()):
@@ -338,6 +348,7 @@ class Processor:
                     continue
                 lon, lat, z = geometry_b.GetPoint(p)
                 geometry_a.AddPoint_2D(lon,lat)
+            logging.debug('merge case 1;'+str(debug_lon) + ';' + str(debug_lat))
             return geometry_a
         elif self.compareGeom(point_a_b,point_b_b):
             p = geometry_b.GetPointCount()-1
@@ -345,6 +356,7 @@ class Processor:
                 p = p - 1
                 lon, lat, z = geometry_b.GetPoint(p)
                 geometry_a.AddPoint_2D(lon,lat)
+            logging.debug('merge case 2;'+str(debug_lon) + ';' + str(debug_lat))
             return geometry_a
         elif self.compareGeom(point_a_a,point_b_a):
             
@@ -360,12 +372,12 @@ class Processor:
                     continue
                 lon, lat, z = geometry_a.GetPoint(p)
                 new_geometry.AddPoint_2D(lon,lat)
+            logging.debug('merge case 3;'+str(debug_lon) + ';' + str(debug_lat))
             return new_geometry        
         elif self.compareGeom(point_a_a,point_b_b):            
             new_geometry = ogr.Geometry(ogr.wkbLineString)
             p = geometry_b.GetPointCount()-1
-            while p > 0:
-                p = p - 1
+            for p in xrange(geometry_b.GetPointCount()-1):
                 lon, lat, z = geometry_b.GetPoint(p)
                 new_geometry.AddPoint_2D(lon,lat)
             for p in xrange(geometry_a.GetPointCount()):
@@ -373,6 +385,7 @@ class Processor:
                     pass
                 lon, lat, z = geometry_a.GetPoint(p)
                 new_geometry.AddPoint_2D(lon,lat)
+            logging.debug('merge case 4;'+str(debug_lon) + ';' + str(debug_lat))
             return new_geometry
         
         return None
