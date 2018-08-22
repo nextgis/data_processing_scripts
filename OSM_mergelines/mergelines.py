@@ -157,7 +157,7 @@ class Processor:
         fields = u''
         DifferentFeaturesList = ['"'+item+'"' for item in DifferentFeaturesList]
         sql = '''SELECT * FROM {layername} WHERE NAME IS NOT NULL  ORDER BY {fields} '''.format(fields = ','.join(DifferentFeaturesList), layername = self.srclayer.GetName())
-        '''WHERE NAME IS NOT NULL  AND NAME IN ("улица Михалевича", "улица Народное Имение") AND NAME IN ("Северное шоссе")   '''
+
         logging.debug(sql)
         
         ogr.UseExceptions()
