@@ -178,8 +178,8 @@ class Processor:
         #sort features gruoping by attributes
         fields = u''
         DifferentFeaturesList = ['"'+item+'"' for item in DifferentFeaturesList]
-        sql = '''SELECT * FROM {layername} WHERE NAME IS NOT NULL ORDER BY {fields} '''.format(fields = ','.join(DifferentFeaturesList), layername = self.srclayer.GetName())
-        
+        sql = '''SELECT * FROM {layername} WHERE NAME IS NOT NULL AND NAME="Улица Михалевича"   ORDER BY {fields} '''.format(fields = ','.join(DifferentFeaturesList), layername = self.srclayer.GetName())
+        '''WHERE NAME IS NOT NULL'''
         logging.debug(sql)
         
         ogr.UseExceptions()
