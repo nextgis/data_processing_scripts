@@ -156,7 +156,7 @@ class Processor:
         #sort features gruoping by attributes
         fields = u''
         DifferentFeaturesList = ['"'+item+'"' for item in DifferentFeaturesList]
-        sql = '''SELECT * FROM {layername} WHERE NAME IS NOT NULL  ORDER BY {fields} '''.format(fields = ','.join(DifferentFeaturesList), layername = self.srclayer.GetName())
+        sql = '''SELECT * FROM {layername} WHERE NAME IS NOT NULL ORDER BY {fields} '''.format(fields = ','.join(DifferentFeaturesList), layername = self.srclayer.GetName())
 
         logging.debug(sql)
         
@@ -315,12 +315,7 @@ class Processor:
         
         debug_line = ogr.Geometry(ogr.wkbLineString)
         
-        '''
-        print geometry_a.GetPointCount()
-        print int(round(geometry_a.GetPointCount()/2))
-        debug_lon, debug_lat,debug_z = geometry_b.GetPoint(int(round(geometry_a.GetPointCount()/2)))
-        debug_line.AddPoint_2D(debug_lon, debug_lat)         
-        '''
+
         debug_lon, debug_lat,debug_z = geometry_b.GetPoint(int(round(geometry_b.GetPointCount()/2)))
         debug_line.AddPoint_2D(debug_lon, debug_lat)
         
@@ -445,7 +440,6 @@ class Processor:
         
         result = list()
         
-        print features_in_clusters
         for cluster_number in range(0,clusters_count+1):
             logging.debug('compute cluster ='+str(cluster_number))
             for key, value in features_in_clusters.items():
