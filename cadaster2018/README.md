@@ -10,9 +10,9 @@
 
 Загрузить в postgis (встасить сюда пароль). Тут в списке полей опущены поля которые конфликтуют с postgis
 ```
-ogr2ogr -overwrite -nlt MULTIPOLYGON -unsetFid  -nln cadastral_units \
+ogr2ogr -overwrite -progress -nlt MULTIPOLYGON -unsetFid  -nln cadastral_units \
 -select " cns,  cnid, cnn, adate, anno_text, cs, date_change, lastmodified, local_id, pubdate, reg, oks_count_geo, oks_count_total, oks_adate, parcel_count_geo, parcel_count_total, parcel_adate, is_real_geom" \
--f "PostgreSQL" -nln "kpt" PG:"host=192.168.250.1 dbname=pkk2018 user=trolleway" "pkk_merge_filtered.gpkg" "cadastral_units"
+-f "PostgreSQL" -nln "kpt" PG:"host=192.168.250.1 dbname=pkk2018 user=trolleway password=" "pkk_merge.gpkg" "cadastral_units"
 
 
 ```
