@@ -1,0 +1,67 @@
+Дропнуть
+Создать схему
+
+Залить
+
+2. Притянуть к точкам
+
+Пройти по новым линиям
+Создать точки на всех их узлах
+Собрать точки в новую таблицу точек
+Собрать линии из новых точек.
+Найти пересечения новых линий между собой.
+Добавить пересечения новых линий в линии.
+Найти пересечения новых линий со старыми
+Добавить точки в новые линии.
+Добавить точки в старые линии.
+Добавить записи из новых таблиц в старые.
+Выгнать записи в pbf
+
+
+
+
+#Наработки по созданию скрипта, который мерджит пользовательские векторные дороги с дампом OSM.
+# На выходе нужен pbf со всеми релейшенами как в оригинальном дампе, но с добавленными дорогами
+#Эта версия работает на загрузку и выгрузку схемы apidb
+
+#фичи
+
+# операции osmosis с БД нужно запускать с ключом  validateSchemaVersion=no 
+# операции с pbf не проходят, потому что в библиотеке protobuf протух какой-то хак
+
+user=trolleway
+password=
+host='127.0.0.1'
+dbname=gis
+
+#типа поствился Osmosis, из его папки берётся скрипт создания базы
+psql --host $host --username $user --dbname=$dbname -a -f /usr/share/doc/osmosis/examples/pgsnapshot_schema_0.6.sql
+
+#должно быть osmosis --read-pbf dump.osm.pbf --write-apidb authFile=osmosis_creds.cfg  но в protobuf что-то сломалось
+osmconvert dump.osm.pbf -o=dump.osm
+osmosis/bin/osmosis --read-xml dump.osm --write-apidb authFile=osmosis_creds.cfg
+
+#импорт через файл работает
+#миграция БД с https://wiki.openstreetmap.org/wiki/Osmosis/PostGIS_Setup
+
+psql --username $user  --dbname $dbname --command='CREATE EXTENSION postgis; CREATE EXTENSION hstore;'
+psql --host $host --username $user --dbname=$dbname -a -f /usr/share/doc/osmosis/examples/pgsnapshot_schema_0.6.sql
+osmosis --read-xml dump.osm --log-progress --write-pgsql database=gis  authFile=osmosis_creds.cfg
+
+#импорт попробуем в схему apidb
+psql --host $host --username $user --dbname=$dbname -a -f /usr/share/doc/osmosis/examples/contrib/apidb_0.6.sql
+osmosis --read-xml dump.osm --log-progress --write-apidb  validateSchemaVersion=no authFile=osmosis_creds.cfg
+# экспорт из схемы apidb в файл
+osmosis --read-apidb authFile=osmosis_creds.cfg  validateSchemaVersion=no --write-xml file="output.osm"
+
+#вариант импорта через COPY
+rm -rf pgimport && mkdir pgimport
+osmosis/bin/osmosis --read-xml dump.osm --write-pgsql-dump directory=pgimport
+psql --host $host --username $user --dbname=$dbname -a -f /usr/share/doc/osmosis/examples/pgsimple_load_0.6.sql
+
+#выгрузка из БД в pbf
+osmosis --read-pgsql  validateSchemaVersion=no  authFile=osmosis_creds.cfg --write-xml output.osm
+
+
+
+osmium cat -o out.osm.pbf dump.osm.pbf userdata.osm
