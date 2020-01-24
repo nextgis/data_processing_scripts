@@ -1,0 +1,119 @@
+
+
+
+#Наработки по созданию скрипта, который мерджит пользовательские векторные дороги с дампом OSM.
+# На выходе нужен pbf со всеми релейшенами как в оригинальном дампе, но с добавленными дорогами
+#Эта версия работает на загрузку и выгрузку схемы apidb
+
+#фичи
+
+# операции osmosis с БД нужно запускать с ключом  validateSchemaVersion=no
+# операции с pbf не проходят, потому что в библиотеке protobuf протух какой-то хак
+# osmosis может грузить в 3 разные схемы: apidb (без использования фичей расширения postgis), snapshot, simple(?)
+
+
+
+
+
+host='127.0.0.1'
+dbname=gis
+user=trolleway
+password=
+
+#типа поствился Osmosis, из его папки берётся скрипт создания базы
+psql --host $host --username $user --dbname=$dbname -a -f /usr/share/doc/osmosis/examples/pgsnapshot_schema_0.6.sql
+
+#должно быть osmosis --read-pbf dump.osm.pbf --write-apidb authFile=osmosis_creds.cfg  но в protobuf что-то сломалось
+osmconvert dump.osm.pbf -o=dump.osm
+osmosis/bin/osmosis --read-xml dump.osm --write-apidb authFile=osmosis_creds.cfg
+
+#импорт в схему shapshot
+#миграция БД с https://wiki.openstreetmap.org/wiki/Osmosis/PostGIS_Setup
+
+psql --username $user  --dbname $dbname --command='CREATE EXTENSION postgis; CREATE EXTENSION hstore;'
+psql --host $host --username $user --dbname=$dbname -a -f /usr/share/doc/osmosis/examples/pgsnapshot_schema_0.6.sql
+osmosis --read-xml dump.osm --log-progress --write-pgsql database=gis  authFile=osmosis_creds.cfg
+
+#выгрузка из схемы snapshot
+#The problem is that --read-pgsql produces a dataset, but --write-xml expects an entity stream.
+#Use --dataset-dump between these two steps to convert the dataset to an entity stream:
+osmosis --read-pgsql authFile=osmosis_creds.cfg  validateSchemaVersion=no  --dataset-dump --write-xml file="output.osm"
+
+#импорт попробуем в схему apidb
+psql --host $host --username $user --dbname=$dbname -a -f /usr/share/doc/osmosis/examples/contrib/apidb_0.6.sql
+osmosis --read-xml dump.osm --log-progress --write-apidb  validateSchemaVersion=no authFile=osmosis_creds.cfg
+# экспорт из схемы apidb в файл
+osmosis --read-apidb authFile=osmosis_creds.cfg  validateSchemaVersion=no --write-xml file="output.osm"
+
+
+
+
+#вариант импорта через COPY
+rm -rf pgimport && mkdir pgimport
+osmosis/bin/osmosis --read-xml dump.osm --write-pgsql-dump directory=pgimport
+psql --host $host --username $user --dbname=$dbname -a -f /usr/share/doc/osmosis/examples/pgsimple_load_0.6.sql
+
+#выгрузка из БД в pbf
+osmosis --read-pgsql  validateSchemaVersion=no  authFile=osmosis_creds.cfg --write-xml output.osm
+
+
+
+osmium cat -o out.osm.pbf dump.osm.pbf userdata.osm
+
+
+
+
+Импорт в схему snapshot (именно в snapshot, apidb, apidb, osm2pgsql - всё не то)
+Импорт юзерских линий
+ogr2ogr -nln user_highways -overwrite -progress PG:"host=$host dbname=$dbname user=$user password=$password" user_highways.geojson
+
+
+Пройти по новым линиям
+
+--Создать точки на всех их узлах
+
+SELECT (dumppoints).path[1], (dumppoints).geom FROM
+(select ST_DumpPoints(wkb_geometry) AS dumppoints from user_highways) AS sub1;
+
+--Создание таблицы юзерских точек.
+
+DROP TABLE IF EXISTS user_nodes;
+CREATE TABLE user_nodes
+(
+  id bigint NOT NULL,
+  version integer NOT NULL,
+  user_id integer NOT NULL,
+  tstamp timestamp without time zone NOT NULL,
+  changeset_id bigint NOT NULL,
+  tags hstore,
+  geom geometry(Point,4326)
+  --CONSTRAINT pk_user_nodes PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+
+INSERT INTO user_nodes
+SELECT
+ROW_NUMBER () OVER () as id,
+1 as version,
+0 as user_id,
+'2020-01-01' as timestamp,
+0 as changeset_id,
+'highway=>residential'::hstore as tags,
+(dumppoints).geom as geom
+FROM
+(select user_highways.ogc_fid as uid, ST_DumpPoints(wkb_geometry) AS dumppoints from user_highways) AS sub1;
+
+
+--ROW_NUMBER () OVER (ORDER BY ogc_fid)
+
+
+
+Найти пересечения новых линий между собой.
+Добавить пересечения новых линий в линии.
+Найти пересечения новых линий со старыми
+Добавить точки в новые линии.
+Добавить точки в старые линии.
+Добавить записи из новых таблиц в старые.
+Выгнать записи в pbf
