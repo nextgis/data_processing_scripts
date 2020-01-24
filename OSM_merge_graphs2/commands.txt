@@ -1,22 +1,3 @@
-Дропнуть
-Создать схему
-
-Залить
-
-2. Притянуть к точкам
-
-Пройти по новым линиям
-Создать точки на всех их узлах
-Собрать точки в новую таблицу точек
-Собрать линии из новых точек.
-Найти пересечения новых линий между собой.
-Добавить пересечения новых линий в линии.
-Найти пересечения новых линий со старыми
-Добавить точки в новые линии.
-Добавить точки в старые линии.
-Добавить записи из новых таблиц в старые.
-Выгнать записи в pbf
-
 
 
 
@@ -26,11 +7,14 @@
 
 #фичи
 
-# операции osmosis с БД нужно запускать с ключом  validateSchemaVersion=no 
+# операции osmosis с БД нужно запускать с ключом  validateSchemaVersion=no
 # операции с pbf не проходят, потому что в библиотеке protobuf протух какой-то хак
+# osmosis может грузить в 3 разные схемы: apidb (без использования фичей расширения postgis), snapshot, simple(?)
+
+
 
 user=trolleway
-password=
+
 host='127.0.0.1'
 dbname=gis
 
@@ -41,18 +25,25 @@ psql --host $host --username $user --dbname=$dbname -a -f /usr/share/doc/osmosis
 osmconvert dump.osm.pbf -o=dump.osm
 osmosis/bin/osmosis --read-xml dump.osm --write-apidb authFile=osmosis_creds.cfg
 
-#импорт через файл работает
+#импорт в схему shapshot
 #миграция БД с https://wiki.openstreetmap.org/wiki/Osmosis/PostGIS_Setup
 
 psql --username $user  --dbname $dbname --command='CREATE EXTENSION postgis; CREATE EXTENSION hstore;'
 psql --host $host --username $user --dbname=$dbname -a -f /usr/share/doc/osmosis/examples/pgsnapshot_schema_0.6.sql
 osmosis --read-xml dump.osm --log-progress --write-pgsql database=gis  authFile=osmosis_creds.cfg
+osmosis --read-pgsql authFile=osmosis_creds.cfg  validateSchemaVersion=no  --dataset-dump --write-xml file="output.osm"
+#The problem is that --read-pgsql produces a dataset, but --write-xml expects an entity stream.
+#Use --dataset-dump between these two steps to convert the dataset to an entity stream:
+osmosis --read-pgsql authFile=osmosis_creds.cfg  validateSchemaVersion=no  --dataset-dump --write-xml file="output.osm"
 
 #импорт попробуем в схему apidb
 psql --host $host --username $user --dbname=$dbname -a -f /usr/share/doc/osmosis/examples/contrib/apidb_0.6.sql
 osmosis --read-xml dump.osm --log-progress --write-apidb  validateSchemaVersion=no authFile=osmosis_creds.cfg
 # экспорт из схемы apidb в файл
 osmosis --read-apidb authFile=osmosis_creds.cfg  validateSchemaVersion=no --write-xml file="output.osm"
+
+
+
 
 #вариант импорта через COPY
 rm -rf pgimport && mkdir pgimport
@@ -65,3 +56,19 @@ osmosis --read-pgsql  validateSchemaVersion=no  authFile=osmosis_creds.cfg --wri
 
 
 osmium cat -o out.osm.pbf dump.osm.pbf userdata.osm
+
+
+
+
+
+Пройти по новым линиям
+Создать точки на всех их узлах
+Собрать точки в новую таблицу точек
+Собрать линии из новых точек.
+Найти пересечения новых линий между собой.
+Добавить пересечения новых линий в линии.
+Найти пересечения новых линий со старыми
+Добавить точки в новые линии.
+Добавить точки в старые линии.
+Добавить записи из новых таблиц в старые.
+Выгнать записи в pbf
