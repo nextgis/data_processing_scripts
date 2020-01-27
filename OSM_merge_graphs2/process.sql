@@ -52,7 +52,7 @@ FROM
    user_highways
 WHERE
 
-   ST_DWithin(joining_segments.wkb_geometry,user_highways.wkb_geometry,0.0001);
+   ST_DWithin(ST_LineInterpolatePoint(joining_segments.wkb_geometry,0.5),user_highways.wkb_geometry,0.0001);
 
 -- получился слой joining_segments с линиями, разрезаными по перекрёсткам, но без атрибутов
 
