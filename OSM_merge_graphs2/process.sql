@@ -1,4 +1,11 @@
 
+
+--Конвертация схемы юзерских линий (перенос атрибутов в hstore)
+user_highways
+ALTER TABLE user_highways DROP COLUMN IF EXISTS tags;
+ALTER TABLE user_highways ADD COLUMN tags hstore;
+UPDATE user_highways SET tags=hstore('highway', highway::text)||hstore('maxweight', maxweight::text);
+--hstore('new_users', p_new_user_count::text)||hstore('post_count', p_post_count::text)
 --Создать точки на всех их узлах
 
 SELECT (dumppoints).path[1], (dumppoints).geom FROM
@@ -7,7 +14,7 @@ SELECT (dumppoints).path[1], (dumppoints).geom FROM
 --Пока работа идёт с таблицей linestring
 
 --Найти пересечения новых линий между собой.
---Добавить пересечения новых линий в линии.
+
 
 DROP TABLE IF EXISTS intersections;
 DROP TABLE IF EXISTS joining_union;
@@ -35,8 +42,22 @@ FROM joining_union a
 INNER JOIN intersections b
 ON ST_INTERSECTS(a.geom, b.ix)
 GROUP BY wkb_geometry;
+--подтягивание атрибутов
+ALTER TABLE joining_segments DROP COLUMN IF EXISTS tags;
+ALTER TABLE joining_segments ADD COLUMN tags hstore;
+
+UPDATE joining_segments
+SET tags = user_highways.tags
+FROM
+   user_highways
+WHERE
+
+   ST_DWithin(joining_segments.wkb_geometry,user_highways.wkb_geometry,0.0001);
 
 -- получился слой joining_segments с линиями, разрезаными по перекрёсткам, но без атрибутов
+
+-- Добавить пересечения новых линий в линии.
+
 -- надо заменить на joining_segments
 
 

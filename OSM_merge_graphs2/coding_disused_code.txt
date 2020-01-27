@@ -1,0 +1,25 @@
+coding_disused.code
+
+
+#импорт попробуем в схему apidb
+psql --host $host --username $user --dbname=$dbname -a -f /usr/share/doc/osmosis/examples/contrib/apidb_0.6.sql
+osmosis --read-xml dump.osm --log-progress --write-apidb  validateSchemaVersion=no authFile=osmosis_creds.cfg
+# экспорт из схемы apidb в файл
+osmosis --read-apidb authFile=osmosis_creds.cfg  validateSchemaVersion=no --write-xml file="output.osm"
+
+
+
+
+
+#вариант импорта через COPY
+rm -rf pgimport && mkdir pgimport
+osmosis/bin/osmosis --read-xml dump.osm --write-pgsql-dump directory=pgimport
+psql --host $host --username $user --dbname=$dbname -a -f /usr/share/doc/osmosis/examples/pgsimple_load_0.6.sql
+
+
+
+osmium cat -o out.osm.pbf dump.osm.pbf userdata.osm
+
+
+#выгрузка из БД в pbf
+osmosis --read-pgsql  validateSchemaVersion=no  authFile=osmosis_creds.cfg --write-xml output.osm
