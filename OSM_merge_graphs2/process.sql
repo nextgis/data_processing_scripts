@@ -18,7 +18,7 @@ SELECT (dumppoints).path[1], (dumppoints).geom FROM
 
 DROP TABLE IF EXISTS intersections;
 DROP TABLE IF EXISTS joining_union;
-DROP TABLE IF EXISTS joining_segments;
+DROP TABLE IF EXISTS userline_segments;
 
 CREATE TABLE intersections AS
 SELECT DISTINCT (ST_DUMP(ST_INTERSECTION(a.wkb_geometry, b.wkb_geometry))).geom AS ix
@@ -35,7 +35,7 @@ FROM user_highways;
 
 CREATE INDEX ON joining_union USING gist(geom);
 
-CREATE TABLE joining_segments AS
+CREATE TABLE userline_segments AS
 SELECT (ST_DUMP(ST_SPLIT(a.geom,b.ix))).geom AS wkb_geometry,
 ROW_NUMBER () OVER () as id
 FROM joining_union a
@@ -43,28 +43,70 @@ INNER JOIN intersections b
 ON ST_INTERSECTS(a.geom, b.ix)
 GROUP BY wkb_geometry;
 --подтягивание атрибутов
-ALTER TABLE joining_segments DROP COLUMN IF EXISTS tags;
-ALTER TABLE joining_segments ADD COLUMN tags hstore;
+ALTER TABLE userline_segments DROP COLUMN IF EXISTS tags;
+ALTER TABLE userline_segments ADD COLUMN tags hstore;
 
-UPDATE joining_segments
+UPDATE userline_segments
 SET tags = user_highways.tags
 FROM
-   user_highways
+user_highways
 WHERE
+ST_DWithin(ST_LineInterpolatePoint(userline_segments.wkb_geometry,0.5),user_highways.wkb_geometry,0.0001);
+DROP TABLE IF EXISTS intersections;
+DROP TABLE IF EXISTS joining_union;
+-- получился слой userline_segments с линиями, разрезаными по перекрёсткам, но без атрибутов
 
-   ST_DWithin(ST_LineInterpolatePoint(joining_segments.wkb_geometry,0.5),user_highways.wkb_geometry,0.0001);
+-- ДОСЮДА ВРОДЕ ОК
 
--- получился слой joining_segments с линиями, разрезаными по перекрёсткам, но без атрибутов
+-- для нахождения пересечений дампа и графа нужно собрать таблицу геометрий линий графа
 
--- Добавить пересечения новых линий в линии.
+--разворачивание массива со списком нодов в вее в отдельную таблицу, приклеивание к ней геометрии точек
+DROP TABLE IF EXISTS nodes_ways;
+CREATE TABLE nodes_ways AS
+(
+SELECT subquery.*, row_number() OVER (PARTITION BY way_id) AS node_order, row_number() OVER () AS id FROM
+( SELECT unnest(ways.nodes) AS node_id,
+ways.id AS way_id
+FROM ways
+WHERE ways.tags ? 'highway' ) AS subquery
+);
 
--- надо заменить на joining_segments
+ALTER TABLE nodes_ways ADD PRIMARY KEY(id);
+SELECT * FROM nodes_ways;
+ALTER TABLE nodes_ways ADD COLUMN wkb_geometry geometry(Point,4326);
+UPDATE nodes_ways
+SET wkb_geometry = nodes.geom
+FROM
+nodes
+WHERE
+nodes.id=nodes_ways.node_id;
+
+-- сборка linestrings
+DROP TABLE IF EXISTS ways_linestrings;
+CREATE TABLE ways_linestrings AS TABLE ways;
+DELETE FROM ways_linestrings WHERE tags ? 'highway' = false;
+
+SELECT * FROM ways_linestrings;
+ALTER TABLE ways_linestrings ADD COLUMN wkb_geometry geometry(Linestring,4326);
+--ALTER TABLE ways_linestrings ADD COLUMN points array geometry(Linestring,4326);
+
+UPDATE ways_linestrings
+SET wkb_geometry = subquery.wkb_geometry
+FROM
+(SELECT nodes_ways.way_id, ST_MakeLine(nodes_ways.wkb_geometry ORDER BY node_order::bigint) As wkb_geometry	FROM nodes_ways	GROUP BY way_id
+) as subquery
+
+WHERE
+subquery.way_id=ways_linestrings.id;
+
+SELECT nodes_ways.way_id, ST_AsText(ST_MakeLine(nodes_ways.wkb_geometry ORDER BY node_order)) As wkb_geometry	FROM nodes_ways	GROUP BY way_id;
 
 
--- =============================================================================
 
 --Найти пересечения новых линий со старыми
 --Добавить точки в новые линии.
+
+
 --Добавить точки в старые линии.
 --Нагенерировать новые таблицы точек и веев, с такой же структурой, как основыне
 --Создаётся таблица с такой же структурой, как nodes
