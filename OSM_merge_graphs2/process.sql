@@ -64,11 +64,13 @@ DROP TABLE IF EXISTS joining_union;
 DROP TABLE IF EXISTS nodes_ways;
 CREATE TABLE nodes_ways AS
 (
-SELECT subquery.*, row_number() OVER (PARTITION BY way_id) AS node_order, row_number() OVER () AS id FROM
-( SELECT unnest(ways.nodes) AS node_id,
-ways.id AS way_id
-FROM ways
-WHERE ways.tags ? 'highway' ) AS subquery
+  SELECT
+  row_number() OVER () AS id,
+  ordinality as node_order,
+  node_id,
+  ways.id AS way_id
+  FROM ways,  unnest(ways.nodes) WITH ORDINALITY AS node_id
+  WHERE ways.tags ? 'highway'
 );
 
 ALTER TABLE nodes_ways ADD PRIMARY KEY(id);
