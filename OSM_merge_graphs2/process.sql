@@ -1,6 +1,7 @@
 
 
 --Конвертация схемы юзерских линий (перенос атрибутов в hstore)
+-- BLOCK 01
 user_highways
 ALTER TABLE user_highways DROP COLUMN IF EXISTS tags;
 ALTER TABLE user_highways ADD COLUMN tags hstore;
@@ -13,54 +14,11 @@ SELECT (dumppoints).path[1], (dumppoints).geom FROM
 
 --Пока работа идёт с таблицей linestring
 
---Найти пересечения новых линий между собой.
-
-
-DROP TABLE IF EXISTS intersections;
-DROP TABLE IF EXISTS joining_union;
-DROP TABLE IF EXISTS userline_segments;
-
-CREATE TABLE intersections AS
-SELECT DISTINCT (ST_DUMP(ST_INTERSECTION(a.wkb_geometry, b.wkb_geometry))).geom AS ix
-FROM user_highways a
-INNER JOIN user_highways b
-ON ST_INTERSECTS(a.wkb_geometry,b.wkb_geometry)
-WHERE geometrytype(st_intersection(a.wkb_geometry,b.wkb_geometry)) = 'POINT';
-
-CREATE INDEX ON intersections USING gist(ix);
-
-CREATE TABLE joining_union AS
-SELECT ST_UNION(wkb_geometry) as geom
-FROM user_highways;
-
-CREATE INDEX ON joining_union USING gist(geom);
-
-CREATE TABLE userline_segments AS
-SELECT (ST_DUMP(ST_SPLIT(a.geom,b.ix))).geom AS wkb_geometry,
-ROW_NUMBER () OVER () as id
-FROM joining_union a
-INNER JOIN intersections b
-ON ST_INTERSECTS(a.geom, b.ix)
-GROUP BY wkb_geometry;
---подтягивание атрибутов
-ALTER TABLE userline_segments DROP COLUMN IF EXISTS tags;
-ALTER TABLE userline_segments ADD COLUMN tags hstore;
-
-UPDATE userline_segments
-SET tags = user_highways.tags
-FROM
-user_highways
-WHERE
-ST_DWithin(ST_LineInterpolatePoint(userline_segments.wkb_geometry,0.5),user_highways.wkb_geometry,0.0001);
-DROP TABLE IF EXISTS intersections;
-DROP TABLE IF EXISTS joining_union;
--- получился слой userline_segments с линиями, разрезаными по перекрёсткам, но без атрибутов
-
--- ДОСЮДА ВРОДЕ ОК
 
 -- для нахождения пересечений дампа и графа нужно собрать таблицу геометрий линий графа
 
 --разворачивание массива со списком нодов в вее в отдельную таблицу, приклеивание к ней геометрии точек
+-- BLOCK 03
 DROP TABLE IF EXISTS nodes_ways;
 CREATE TABLE nodes_ways AS
 (
@@ -101,13 +59,116 @@ FROM
 WHERE
 subquery.way_id=ways_linestrings.id;
 
-SELECT nodes_ways.way_id, ST_AsText(ST_MakeLine(nodes_ways.wkb_geometry ORDER BY node_order)) As wkb_geometry	FROM nodes_ways	GROUP BY way_id;
+--Найти пересечения новых линий между собой.
+-- BLOCK 02
 
---90446849
-SELECT * FROM nodes_ways WHERE way_id = 90446849;
+DROP TABLE IF EXISTS intersections_user_x_user; --перекрёстки пользовательских дорог
+DROP TABLE IF EXISTS intersections_user_x_osm; --перекрёстки пользовательских дорог c osm
+DROP TABLE IF EXISTS intersections; -- union двух предыдущих перекрёстков. В юзерский граф нужно одной операцией добавлять узлы на всех перекрёстках. Нельзя сделать сначала перекрёстки юзерских дорог, потом перекрёстки .зерских дорог и osm
+DROP TABLE IF EXISTS joining_union;
+DROP TABLE IF EXISTS userline_segments;
+
+CREATE TABLE intersections_user_x_user AS
+SELECT DISTINCT (ST_DUMP(ST_INTERSECTION(a.wkb_geometry, b.wkb_geometry))).geom AS wkb_geometry
+FROM user_highways a
+INNER JOIN user_highways b
+ON ST_INTERSECTS(a.wkb_geometry,b.wkb_geometry)
+WHERE geometrytype(st_intersection(a.wkb_geometry,b.wkb_geometry)) = 'POINT';
+
+CREATE INDEX ON intersections_user_x_user USING gist(wkb_geometry);
+
+CREATE TABLE intersections_user_x_osm AS
+SELECT DISTINCT (ST_DUMP(ST_INTERSECTION(a.wkb_geometry, b.wkb_geometry))).geom AS wkb_geometry
+FROM user_highways a
+INNER JOIN ways_linestrings b
+ON ST_INTERSECTS(a.wkb_geometry,b.wkb_geometry)
+WHERE geometrytype(st_intersection(a.wkb_geometry,b.wkb_geometry)) = 'POINT';
+
+CREATE TABLE intersections AS
+SELECT * FROM intersections_user_x_user UNION SELECT * FROM intersections_user_x_osm;
+CREATE INDEX ON intersections USING gist(wkb_geometry);
+
+CREATE TABLE joining_union AS
+SELECT ST_UNION(wkb_geometry) as geom
+FROM user_highways;
+
+CREATE INDEX ON joining_union USING gist(geom);
+
+CREATE TABLE userline_segments AS
+SELECT (ST_DUMP(ST_SPLIT(a.geom,b.wkb_geometry))).geom AS wkb_geometry,
+ROW_NUMBER () OVER () as id
+FROM joining_union a
+INNER JOIN intersections b
+ON ST_INTERSECTS(a.geom, b.wkb_geometry)
+GROUP BY wkb_geometry;
+--подтягивание атрибутов
+ALTER TABLE userline_segments DROP COLUMN IF EXISTS tags;
+ALTER TABLE userline_segments ADD COLUMN tags hstore;
+
+UPDATE userline_segments
+SET tags = user_highways.tags
+FROM
+user_highways
+WHERE
+ST_DWithin(ST_LineInterpolatePoint(userline_segments.wkb_geometry,0.5),user_highways.wkb_geometry,0.0001);
+DROP TABLE IF EXISTS intersections;
+DROP TABLE IF EXISTS joining_union;
+-- получился слой userline_segments с линиями, разрезаными по перекрёсткам, но без атрибутов
+
+-- ДОСЮДА ВРОДЕ ОК
+/*
+SELECT ST_AsText(ST_Dump(ST_Split(r1.geometry, ST_Intersection(r1.geometry, r2.geometry))).geom)
+FROM roads AS r1 JOIN roads AS r2 ON ST_Intersects(r1.geometry,r2.geometry)
+WHERE r1.id <> r2.id
+
+*/
 
 
 --Найти пересечения новых линий со старыми
+-- BLOCK 04 (same as 02, but other tables)
+DROP TABLE IF EXISTS intersections;
+DROP TABLE IF EXISTS joining_union;
+DROP TABLE IF EXISTS userline_splited;
+
+CREATE TABLE intersections AS
+SELECT DISTINCT (ST_DUMP(ST_INTERSECTION(a.wkb_geometry, b.wkb_geometry))).geom AS wkb_geometry
+FROM userline_segments a
+INNER JOIN ways_linestrings b
+ON ST_INTERSECTS(a.wkb_geometry,b.wkb_geometry)
+WHERE geometrytype(st_intersection(a.wkb_geometry,b.wkb_geometry)) = 'POINT';
+
+CREATE INDEX ON intersections USING gist(wkb_geometry);
+
+CREATE TABLE joining_union AS
+SELECT ST_UNION(wkb_geometry) as geom
+FROM user_highways;
+
+CREATE INDEX ON joining_union USING gist(geom);
+
+CREATE TABLE userline_splited AS
+SELECT (ST_DUMP(ST_SPLIT(a.geom,b.wkb_geometry))).geom AS wkb_geometry,
+ROW_NUMBER () OVER () as id
+FROM joining_union a
+INNER JOIN intersections b
+ON ST_INTERSECTS(a.geom, b.wkb_geometry)
+GROUP BY wkb_geometry;
+--подтягивание атрибутов
+ALTER TABLE userline_splited DROP COLUMN IF EXISTS tags;
+ALTER TABLE userline_splited ADD COLUMN tags hstore;
+
+UPDATE userline_splited
+SET tags = user_highways.tags
+FROM
+user_highways
+WHERE
+ST_DWithin(ST_LineInterpolatePoint(userline_splited.wkb_geometry,0.5),user_highways.wkb_geometry,0.0001);
+DROP TABLE IF EXISTS intersections;
+DROP TABLE IF EXISTS joining_union;
+-- ---------------------------------------------
+
+
+
+
 --Добавить точки в новые линии.
 
 
