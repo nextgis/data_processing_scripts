@@ -15,16 +15,22 @@ def argparser_prepare():
 
         max_help_position = 35
 
-    parser = argparse.ArgumentParser(description='Export QGIS map composer layout to png using pyqgis',
+    parser = argparse.ArgumentParser(description='Добавляет к объектам в pbf теги из полигона',
             formatter_class=PrettyFormatter)
-    parser.add_argument('--url', dest='dump_url', required=True, help='url of pbf file')
-    parser.add_argument('--output', dest='work_dump', required=True, help='path to new pbf file')
-    #parser.add_argument('--bbox', dest='bbox', required=False)
-    parser.add_argument('--poly', dest='poly', required=False)
+    parser.add_argument('source', dest='source', required=True, help='pbf')
+    parser.add_argument('output', dest='output', required=True, help='pbf')
+    parser.add_argument('--polygons', dest='polygons', required=True, help='geojson')
+    
+    parser.add_argument('--dbname', dest='work_dump', required=False, default='gis')
+    parser.add_argument('--host', dest='host', required=False, default='localhost')
+    parser.add_argument('--user', dest='user', required=False, default='')
+    parser.add_argument('--password', dest='password', required=False, default='')    
+    
+
 
     parser.epilog = \
         '''Samples:
-%(prog)s --project "/home/trolleway/tmp/tests/basemap.qgs" --url "http://download.geofabrik.de/russia/northwestern-fed-district-latest.osm.pbf" --output "../../tests/touchdown/rus-nw.osm.pbf"
+%(prog)s northwestern-fed-district-latest.osm.pbf
 
 ''' \
         % {'prog': parser.prog}
