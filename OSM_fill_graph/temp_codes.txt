@@ -1,0 +1,184 @@
+# Это временный файл с кодом, я сюда сваливаю всё чтоб сохранить недописаные куски в репозитории, пока цельные скрипты ещё не дописаны
+
+host='127.0.0.1'
+dbname=gis
+user=trolleway
+password=
+
+#так же нужен файл osmosis_creds.cfg
+
+file=dump.osm.pbf
+
+#импорт в схему shapshot
+#миграция БД с https://wiki.openstreetmap.org/wiki/Osmosis/PostGIS_Setup
+
+psql --username $user  --dbname $dbname --command='CREATE EXTENSION postgis; CREATE EXTENSION hstore;'
+psql --host $host --username $user --dbname=$dbname -a -f /usr/share/doc/osmosis/examples/pgsnapshot_schema_0.6.sql
+ogr2ogr -nln user_redzones -overwrite -progress PG:"host=$host dbname=$dbname user=$user password=$password" userpolygon.geojson
+
+osmconvert $file -o=dump.osm
+osmosis --read-xml dump.osm --log-progress --write-pgsql database=gis  authFile=osmosis_creds.cfg
+
+PGPASSFILE=.pgpass
+
+PGPASSWORD=$password psql --host $host --username $user --dbname=$dbname -a -f process.sql
+
+
+osmosis --read-pgsql authFile=osmosis_creds.cfg  validateSchemaVersion=no  --dataset-dump --write-xml file="output.osm"
+
+
+
+#-------- sql
+
+
+
+-- Линии, пересекающие границу зоны, удаляются. Вместо них создаются две новые
+
+--Конвертация схемы юзерских линий (перенос атрибутов в hstore)
+-- BLOCK 01
+
+ALTER TABLE user_redzones DROP COLUMN IF EXISTS tags;
+ALTER TABLE user_redzones ADD COLUMN tags hstore;
+
+--высасывание определённых атрибутов в hstore
+UPDATE user_redzones SET tags=hstore('condition', 'red'::text);
+--Создать точки на всех их узлах
+
+
+
+--разворачивание массива со списком нодов в вее в отдельную таблицу, приклеивание к ней геометрии точек
+--но в этот раз только тех нодов, что касаются границы полигонов
+--а как я узнаю, какие касаются, если геометрии собственно нет?
+
+-- BLOCK 03
+DROP TABLE IF EXISTS nodes_ways;
+CREATE TABLE nodes_ways AS
+(
+  SELECT
+  row_number() OVER () AS id,
+  ordinality as node_order,
+  node_id,
+  ways.id AS way_id
+  FROM ways,  unnest(ways.nodes) WITH ORDINALITY AS node_id
+  WHERE ways.tags ? 'highway'
+);
+
+ALTER TABLE nodes_ways ADD PRIMARY KEY(id);
+ALTER TABLE nodes_ways ADD COLUMN wkb_geometry geometry(Point,4326);
+UPDATE nodes_ways
+SET wkb_geometry = nodes.geom
+FROM
+nodes
+WHERE
+nodes.id=nodes_ways.node_id;
+
+-- сборка linestrings
+DROP TABLE IF EXISTS ways_linestrings;
+CREATE TABLE ways_linestrings AS TABLE ways;
+DELETE FROM ways_linestrings WHERE tags ? 'highway' = false;
+
+
+ALTER TABLE ways_linestrings ADD COLUMN wkb_geometry geometry(Linestring,4326);
+--ALTER TABLE ways_linestrings ADD COLUMN points array geometry(Linestring,4326);
+
+UPDATE ways_linestrings
+SET wkb_geometry = subquery.wkb_geometry
+FROM
+(SELECT nodes_ways.way_id, ST_MakeLine(nodes_ways.wkb_geometry ORDER BY node_order::bigint) As wkb_geometry	FROM nodes_ways	GROUP BY way_id
+) as subquery
+
+WHERE
+subquery.way_id=ways_linestrings.id;
+
+--это она создала линии с лайнстрингами
+
+-- ============================================
+
+
+/*
+Веи получаются 4 типов
+1. Те что целиком внутри зоны (covered by) - добавляется специальный тег.
+2. Те что снаружи зоны (not intersect) - не трогаются
+3. Те что касаются границы. Вместо них генерятся по 2 новые линии, а эти удаляются
+
+Нужно не забыть случай, когда W-образная дорога пересекает границу несколько раз
+
+*/
+
+
+--
+-- 1. Те что целиком внутри зоны (covered by) - добавляется специальный тег.
+--
+
+DROP TABLE IF EXISTS ways_temp;
+create table ways_temp as
+
+  select t2.id AS id,
+         t1.tags as tags_zone,
+         t2.tags AS tags,
+         (st_dump(st_intersection(t1.wkb_geometry, t2.wkb_geometry))).geom AS wkb_geometry
+  from   user_redzones as t1,
+         ways_linestrings as t2
+  where  ST_Covers(t1.wkb_geometry, t2.wkb_geometry);
+
+DROP TABLE IF EXISTS nodes_in_dangerzone;
+CREATE TABLE nodes_in_dangerzone AS
+SELECT nodes.* FROM nodes JOIN user_redzones ON ST_INTERSECTS(nodes.geom,user_redzones.wkb_geometry);
+
+  UPDATE ways SET tags = ways.tags || 'danger_zone=>1'::hstore FROM ways_temp WHERE ways.id=ways_temp.id;
+
+
+
+  --
+  -- 3. Те что касаются границы. Вместо них генерятся по 2 новые линии, а эти удаляютс
+  --
+--я тут пишу, всё что тут  - н иеспольеиеов
+
+DROP TABLE IF EXISTS nodes_in_dangerzone;
+CREATE TABLE nodes_in_dangerzone AS
+SELECT nodes.* FROM nodes JOIN user_redzones ON ST_INTERSECTS(nodes.geom,user_redzones.wkb_geometry);
+-- функция принимает id ноды
+CREATE OR REPLACE FUNCTION is_node_in_zone(bigint) RETURNS boolean AS $$
+DECLARE
+   status boolean;
+   vc_result varchar;
+BEGIN
+    SELECT COUNT(nodes_in_dangerzone.*) INTO vc_result FROM nodes_in_dangerzone WHERE id = $1;
+
+
+    status := vc_result::boolean;
+RETURN status;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT relation_status(4899100088) AS rels;
+
+--node not in danger zone SELECT ST_Intersects(nodes.geom,area.wkb_geometry) INTO vc_result FROM nodes,user_redzones AS area WHERE nodes.id = $1;
+--4899100088;
+
+-- функция принимает массив нодов,
+CREATE OR REPLACE FUNCTION node_process(bigint[]) RETURNS bigint[] AS $$
+DECLARE
+    node_id bigint;
+    new_nodes bigint[];
+BEGIN
+
+
+    FOREACH node_id IN ARRAY $1
+    LOOP
+        IF is_node_in_zone(node_id) = true THEN
+           new_nodes = new_nodes || node_id;
+        END IF;
+
+    END LOOP;
+
+RETURN new_nodes;
+END;
+$$ LANGUAGE plpgsql;
+
+
+--SELECT testf1(142647267) AS rels;
+
+--SELECT ways.nodes, node_process(nodes) FROM ways LIMIT 1;
+UPDATE ways
+SET nodes = node_process(nodes);
