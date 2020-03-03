@@ -12,12 +12,19 @@
 * Импортировать базу всё равно в чём - osm2pgsql, osmosis, imposm. Но эти утилиты дают разные схемы. Я использую osm2pgsql.
 
 # Инструкция.
-1. Поднять PostgreSQL и расширение к нему PostGIS. Воспользуйтесь пакетным менеджером вашей ОС или docker-compose.
-2. Поставить пакеты osm2pgsql, osmctools. Поставить PGadmin, версия 3 мне больше нравится по UX, чем версия 4.
-3. Импортировать дамп РФ долго, но его можно быстро отфильтровать, выкинув всё кроме магазинов, а потом импортировать.
+Поднять PostgreSQL и расширение к нему PostGIS. Воспользуйтесь пакетным менеджером вашей ОС или docker-compose.
+
+Создайте юзера в postgresql, базу данных "gis", в ней create extension PostGIS. Это проще всего делать в PGAdminIII.
+
+Поставить пакеты osm2pgsql, osmctools, aria2c. Поставить PGadmin, версия 3 мне больше нравится по UX, чем версия 4.
+
+Импортировать дамп РФ долго, но его можно быстро отфильтровать, выкинув всё кроме магазинов, а потом импортировать.
+
 
 ## Фильтрация дампа в pbf по тегам
 ```
+sudo apt-get install aria2c osmctools osm2pgsql 
+aria2c http://download.geofabrik.de/russia/kaliningrad-latest.osm.pbf  #многопоточная скачка файла
 $dump = 'russia-latest' #это переменная с названием файла
 
 osmconvert $dump.osm.pbf -o=$dump.o5m
@@ -25,3 +32,11 @@ osmfilter $dump.o5m --keep="amenity,shop" --out-o5m >$dump-filtered.o5m
 osmconvert $dump-filtered.o5m -o=$dump-filtered.osm.pbf
 
 ```
+
+## Загрузка дампа в PostGIS
+
+```
+osm2pgsql --create --latlong --database gis $dump-filtered.osm.pbf
+```
+Тут наверно будет спрашивать логин и пароль, с автоматизацией их ввода нужны какие-то танцы с бубном, проще вводить с клавиатуры вручную
+
