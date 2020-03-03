@@ -85,3 +85,29 @@ ST_PointOnSurface(geom) AS wkb_geometry
 FROM planet_osm_point
 )
 ```
+
+## Запросы
+
+```
+SELECT * 
+FROM shops
+WHERE name = 'Продукты';
+
+```
+
+Percent ( %)  for matching any sequence of characters.
+Underscore ( _)  for matching any single character.
+
+```
+SELECT * 
+FROM shops
+WHERE name = 'Продукт%';
+
+SELECT * 
+FROM shops
+WHERE name IN ('Продукты','Промтовары');
+
+SELECT * 
+FROM shops
+WHERE name IN ('Продукты','Промтовары') OR operator = 'Мария-Ра' ;
+```
