@@ -1,4 +1,4 @@
-# Как заниматься геомаркетингом в PostGIS
+# Как заниматься геомаркетинговым анализом в PostGIS
 
 Задача: посмотреть сколько в РФ магазинов одной сети, и посмотреть, у каких из них какие нужные теги введены.
 
@@ -56,4 +56,32 @@ osm2pgsql создаёт поля в таблице только для неко
 
 ```
 osm2pgsql --create --latlong --style shops.style --database gis $dump-filtered.osm.pbf
+```
+
+Ну а дальше берёшь PostGIS и выполняешь в нём SQL-запросы, реляционные СУБД именно для такого и придумали в 80-х.
+
+## Объединение полигональных и точечных POI
+
+```
+DROP TABLE IF EXISTS shops;
+CREATE TABLE shops AS 
+(
+SELECT 
+id,
+shop,
+amenity,
+name,
+ST_PointOnSurface(geom) AS wkb_geometry
+FROM planet_osm_polygon
+
+UNION
+
+SELECT 
+id,
+shop,
+amenity,
+name,
+ST_PointOnSurface(geom) AS wkb_geometry
+FROM planet_osm_point
+)
 ```
