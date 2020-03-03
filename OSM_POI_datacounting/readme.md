@@ -113,3 +113,11 @@ SELECT *
 FROM shops
 WHERE name IN ('Продукты','Промтовары') OR operator ILIKE 'Мария-Ра' ;
 ```
+
+## Получение количества записей
+
+```
+SELECT COUNT(*) AS cnt 
+FROM shops
+WHERE name IN ('Продукты','Промтовары');
+```
