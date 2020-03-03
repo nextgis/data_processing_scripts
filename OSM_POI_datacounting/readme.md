@@ -95,19 +95,21 @@ WHERE name = 'Продукты';
 
 ```
 
-Percent ( %)  for matching any sequence of characters.
-Underscore ( _)  for matching any single character.
+
 
 ```
 SELECT * 
 FROM shops
-WHERE name = 'Продукт%';
-
+WHERE name LIKE 'Продукт%';
+```
+Оператор LIKE: Знак процента ( %)  для сравнения любого числа символов. Нижнее подчёркивание ( _)  для сравнения любого одного символа.
+Оператор ILIKE - регистронезависимый
+```
 SELECT * 
 FROM shops
 WHERE name IN ('Продукты','Промтовары');
 
 SELECT * 
 FROM shops
-WHERE name IN ('Продукты','Промтовары') OR operator = 'Мария-Ра' ;
+WHERE name IN ('Продукты','Промтовары') OR operator ILIKE 'Мария-Ра' ;
 ```
