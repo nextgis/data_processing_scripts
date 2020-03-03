@@ -9,6 +9,19 @@
 * СК 4326
 * Кодировка UTF8
 * дампы имеют расширение .osm.pbf, так их видит josm.
+* Импортировать базу всё равно в чём - osm2pgsql, osmosis, imposm. Но эти утилиты дают разные схемы. Я использую osm2pgsql.
 
 # Инструкция.
 1. Поднять PostgreSQL и расширение к нему PostGIS. Воспользуйтесь пакетным менеджером вашей ОС или docker-compose.
+2. Поставить пакеты osm2pgsql, osmctools. Поставить PGadmin, версия 3 мне больше нравится по UX, чем версия 4.
+3. Импортировать дамп РФ долго, но его можно быстро отфильтровать, выкинув всё кроме магазинов, а потом импортировать.
+
+## Фильтрация дампа в pbf по тегам
+```
+$dump = 'russia-latest' #это переменная с названием файла
+
+osmconvert $dump.osm.pbf -o=$dump.o5m
+osmfilter $dump.o5m --keep="amenity,shop" --out-o5m >$dump-filtered.o5m
+osmconvert $dump-filtered.o5m -o=$dump-filtered.osm.pbf
+
+```
