@@ -20,11 +20,35 @@ logging.basicConfig(level=logging.DEBUG,format='%(asctime)s %(levelname)-8s %(me
 logger = logging.getLogger(__name__)
 
 class QGISTerminalRender:
+      def get_layout_extent_vector_file(self,filename):
+        #return xml code for qgis layout page 
+        
+        extent = geom.GetEnvelope()   
+        lx = extent[0]
+        ly = extent[2]
+        rx = extent[1]
+        ry = extent[3]           
+        bbox = '{lx},{ly},{rx},{ry}'.format(lx=lx,ly=ly,rx=rx,ry=ry)
+        
+        x1_3857,y1_3857 = self.reproject_4326_3857(ly,lx)
+        x2_3857,y2_3857 = self.reproject_4326_3857(ry,rx)
+                           
+        layout_extent = '''<Extent xmin="{xmin}" ymin="{ymin}" xmax="{xmax}" ymax="{ymax}"/>'''.format(
+        xmin=round(x1_3857),
+        ymin=round(y1_3857),
+        xmax=round(x2_3857),
+        ymax=round(y2_3857),
+         )
+         
+        return layout_extent
+        
+        
   def render(self):
     
         # Получить путь к слоям
         # Скопировать из архива слои в рабочий каталог
         # Расчитать экстент
+        layout_extent = self.get_layout_extent_vector_file(filename)
         
         # Записать файл проекта с экстентом в каталог
         substitute_project(
