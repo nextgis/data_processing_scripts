@@ -20,3 +20,13 @@ logging.basicConfig(level=logging.DEBUG,format='%(asctime)s %(levelname)-8s %(me
 logger = logging.getLogger(__name__)
 
 class QGISTerminalRender:
+  def render(self):
+        substitute_project(
+        src='../qgis_project_templates/manila.qgs.template.qgs',
+        dst = WORKDIR+'/manila.qgs',
+        layout_extent=layout_extent)
+      
+        cmd = 'python3 ../core/pyqgis_client_atlas.py --project "{WORKDIR}/manila.qgs" --layout "1000x1000_atlas" --output "{filename}" '
+        cmd = cmd.format(WORKDIR=WORKDIR,filename=os.path.join(os.path.realpath(WORKDIR),''+name+'_kakava1000.png'))
+        logger.info(cmd)
+        os.system(cmd)
