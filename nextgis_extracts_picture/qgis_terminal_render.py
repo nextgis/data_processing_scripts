@@ -5,6 +5,7 @@ import os
 import logging
 from osgeo import ogr
 from osgeo import osr
+from pyproj import Proj, transform # reproject to 3857
 
 #import sys
 import stat
@@ -20,10 +21,21 @@ logging.basicConfig(level=logging.DEBUG,format='%(asctime)s %(levelname)-8s %(me
 logger = logging.getLogger(__name__)
 
 class QGISTerminalRender:
-      def get_layout_extent_vector_file(self,filename):
+    def reproject_4326_3857(self,x,y):
+        inProj = Proj('epsg:4326')
+        outProj = Proj('epsg:3857')
+        xr,yr = transform(inProj,outProj,x,y)
+        return xr,yr
+
+    def get_layout_extent_vector_file(self,path):
         #return xml code for qgis layout page 
         
-        extent = geom.GetEnvelope()   
+        ds = gdal.OpenEx(path,gdal.OF_READONLY)
+        assert ds is not None
+        layer = ds.GetLayer()
+        assert layer is not None
+        extent = layer.GetExtent()
+  
         lx = extent[0]
         ly = extent[2]
         rx = extent[1]
