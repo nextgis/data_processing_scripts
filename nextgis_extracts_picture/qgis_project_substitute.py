@@ -1,6 +1,10 @@
 #!/usr/bin/python3
 # -*- coding: utf8 -*-
 
+'''
+Скрипт который берёт файл проекта qgis, меняет в xml запись <Extent на заданную.
+Может работать из коммандной строки или как модуль 
+'''
 
 import argparse
 
@@ -46,4 +50,11 @@ def substitute_project(src,dst,layout_extent):
 
 
 if __name__ == "__main__":
-    substitute_project(src='../qgis_project_templates/retrowave.qgs.template.qgs',dst = '/home/trolleway/tmp/tests/out.qgs', layout_extent='''<Extent ymax="8087642" xmax="3487345" xmin="3470799" ymin="8075943"/>''')
+    parser = argparser_prepare()
+    args = parser.parse_args()
+
+    substitute_project(src=args.src,dst = args.dst, layout_extent=args.layout_extent)
+
+    #substitute_project(src='../qgis_project_templates/retrowave.qgs.template.qgs',dst = '/home/trolleway/tmp/tests/out.qgs', layout_extent='''<Extent ymax="8087642" xmax="3487345" xmin="3470799" ymin="8075943"/>''')
+
+    
