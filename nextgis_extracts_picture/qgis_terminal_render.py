@@ -21,11 +21,18 @@ logger = logging.getLogger(__name__)
 
 class QGISTerminalRender:
   def render(self):
+    
+        # Получить путь к слоям
+        # Скопировать из архива слои в рабочий каталог
+        # Расчитать экстент
+        
+        # Записать файл проекта с экстентом в каталог
         substitute_project(
         src='../qgis_project_templates/manila.qgs.template.qgs',
         dst = WORKDIR+'/manila.qgs',
         layout_extent=layout_extent)
       
+        # Рендеринг в карртинку
         cmd = 'python3 ../core/pyqgis_client_atlas.py --project "{WORKDIR}/manila.qgs" --layout "1000x1000_atlas" --output "{filename}" '
         cmd = cmd.format(WORKDIR=WORKDIR,filename=os.path.join(os.path.realpath(WORKDIR),''+name+'_kakava1000.png'))
         logger.info(cmd)
