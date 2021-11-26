@@ -3,7 +3,7 @@
 
 import os
 import logging
-from osgeo import ogr
+from osgeo import gdal
 from osgeo import osr
 from pyproj import Proj, transform # reproject to 3857
 
@@ -13,9 +13,6 @@ import stat
 from qgis_project_substitute import substitute_project
 
 import shutil
-import zipfile
-
-import config
 
 logging.basicConfig(level=logging.DEBUG,format='%(asctime)s %(levelname)-8s %(message)s',datefmt='%Y-%m-%d %H:%M:%S')
 logger = logging.getLogger(__name__)
@@ -30,6 +27,7 @@ class QGISTerminalRender:
     def get_layout_extent_vector_file(self,path):
         #return xml code for qgis layout page 
         
+        assert os.path.isfile(path)
         ds = gdal.OpenEx(path,gdal.OF_READONLY)
         assert ds is not None
         layer = ds.GetLayer()
@@ -55,21 +53,27 @@ class QGISTerminalRender:
         return layout_extent
         
         
-  def render(self):
+    def render(self):
     
         # Получить путь к слоям
         # Скопировать из архива слои в рабочий каталог
-        # Расчитать экстент
-        layout_extent = self.get_layout_extent_vector_file(filename)
+        # Расчитать экстент - сгенерировать geojson с охватом
+        layout_extent = self.get_layout_extent_vector_file(os.path.join('data','highway.gpkg'))
+        logger.info(layout_extent)
+        assert layout_extent is not None
+        WORKDIR = 'data'
+        name = 'NAME'
         
-        # Записать файл проекта с экстентом в каталог
-        substitute_project(
-        src='../qgis_project_templates/manila.qgs.template.qgs',
-        dst = WORKDIR+'/manila.qgs',
-        layout_extent=layout_extent)
+        # Запись экстента в проект действует только для экспорта одиночной картинки.
+        # В этом проекте по-другому: генерируется атлас, охват листа qgis берёт из слоя geojson, который заранее генерируется по охвату слоя.
+        # Так упрощается отладка вёрстки страниц (это было актуально для OSMTram)
       
-        # Рендеринг в карртинку
-        cmd = 'python3 ../core/pyqgis_client_atlas.py --project "{WORKDIR}/manila.qgs" --layout "1000x1000_atlas" --output "{filename}" '
-        cmd = cmd.format(WORKDIR=WORKDIR,filename=os.path.join(os.path.realpath(WORKDIR),''+name+'_kakava1000.png'))
+        # Рендеринг в картинку
+        cmd = 'python3 pyqgis_client_atlas.py --project "{project}" --layout "1000x1000_atlas" --output "{filename}" '
+        #TODO: пути должны быть абсолютные! С относительными путями не выходит
+        cmd = cmd.format(project=os.path.join(WORKDIR,'manila.qgs'), filename=os.path.join(os.path.realpath(WORKDIR),''+name+'_kakava1000.png'))
         logger.info(cmd)
         os.system(cmd)
+
+processor = QGISTerminalRender()
+processor.render()
