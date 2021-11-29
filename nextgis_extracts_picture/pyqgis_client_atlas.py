@@ -35,9 +35,9 @@ def export_atlas(qgs_project_path, layout_name, filepath):
     project = QgsProject.instance()
     #print(os.path.abspath(os.path.dirname(qgs_project_path)))
     #os.chdir(os.path.abspath(os.path.dirname(qgs_project_path)))
-    #project.read(os.path.abspath(qgs_project_path))
+    project.read(os.path.abspath(qgs_project_path)) # Impotant! Work only with abspath
     #project.readPath(os.path.abspath(os.path.dirname(qgs_project_path)))
-    project.read(qgs_project_path)
+    #project.read(qgs_project_path)
 
     print('Project in "{fn} loaded successfully'.format(fn=project.fileName()) )
 
@@ -45,6 +45,7 @@ def export_atlas(qgs_project_path, layout_name, filepath):
     manager = QgsProject.instance().layoutManager()
     layout_names = list()
     for layout in manager.printLayouts(): layout_names.append(layout.name())
+    #print(layout_names)
     assert layout_name in layout_names
     layout = project.layoutManager().layoutByName(layout_name)
     assert layout is not None
@@ -53,7 +54,7 @@ def export_atlas(qgs_project_path, layout_name, filepath):
     exporter = QgsLayoutExporter(layout)
     settings = QgsLayoutExporter.ImageExportSettings()
 
-    img_path = os.path.dirname(filepath)
+    img_path = os.path.abspath(os.path.dirname(filepath))
     filename = os.path.basename(filepath)
     myAtlas = layout.atlas()
     myAtlasMap = myAtlas.layout()
@@ -86,13 +87,9 @@ def export_atlas(qgs_project_path, layout_name, filepath):
             if myAtlas.enabled():
                 myAtlas.beginRender() # https://stackoverflow.com/questions/63442161/qgis-how-to-export-atlas-separate-pdfs
                 print('rendering image to img_path: '+img_path)
-                #result, error = QgsLayoutExporter.exportToImage(myAtlas, 
-                #                    baseFilePath=img_path + '//', extension=imageExtension, settings=image_settings)
                 exporter = QgsLayoutExporter(layout)
-                base_path = '/OSMTram/test/'
-                exporter.exportToImage(layout.atlas(), img_path, 'png', QgsLayoutExporter.ImageExportSettings())
-                #exporter.exportToImage(layout.atlas(), '/OSMTram/test', 'png', image_settings)
-
+                exporter.exportToImage(layout.atlas(), os.path.join(img_path,'output_0.pdf'), 'png', QgsLayoutExporter.ImageExportSettings())
+        assert os.path.isfile(os.path.join(img_path,'output_0.png'))
         os.rename(os.path.join(img_path,'output_0.png'),os.path.join(img_path,filename))
            
     if imageExtension == '.pdf':

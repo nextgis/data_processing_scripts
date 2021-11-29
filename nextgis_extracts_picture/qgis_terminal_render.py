@@ -69,7 +69,7 @@ class QGISTerminalRender:
         # Так упрощается отладка вёрстки страниц (это было актуально для OSMTram)
       
         # Рендеринг в картинку
-        cmd = 'python3 pyqgis_client_atlas.py --project "{project}" --layout "1000x1000_atlas" --output "{filename}" '
+        cmd = 'python3 pyqgis_client_atlas.py --project "{project}" --layout "atlas800x800" --output "{filename}" '
         #TODO: пути должны быть абсолютные! С относительными путями не выходит
         cmd = cmd.format(project=os.path.join(WORKDIR,'manila.qgs'), filename=os.path.join(os.path.realpath(WORKDIR),''+name+'_kakava1000.png'))
         logger.info(cmd)
