@@ -11,12 +11,7 @@ take nextgis data extract archive, generate image using qgis render in terminal
 ```
 docker build -t nextgis_extract_picture:1.0 .
 
-docker run -it -v ${pwd}:/data   nextgis_extract_picture:1.0  /bin/bash
-
-Xvfb :1 -screen 0 800x600x24&
-export DISPLAY=:1
-
-python3 pyqgis_client_atlas.py --project "extract/data.qgs" --layout "atlas_800x800" --output "spoon_RU-AST.png"
+docker run -it -v ${pwd}:/data   nextgis_extract_picture:1.0  python3 run.py
 ```
 
 # Features
