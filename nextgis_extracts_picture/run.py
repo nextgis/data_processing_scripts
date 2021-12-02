@@ -4,6 +4,9 @@
 import os
 import shutil
 import argparse
+import zipfile
+import random
+import string
 from osgeo import gdal, ogr
 
 def argparser_prepare():
@@ -16,6 +19,7 @@ def argparser_prepare():
     parser = argparse.ArgumentParser(description='Export QGIS map composer layout to png using pyqgis',
             formatter_class=PrettyFormatter)
     parser.add_argument('extract',   help='Path to extract zip archive')
+    parser.add_argument('prefix',   help='Prefix for output images filename')
 
 
     return parser
@@ -26,13 +30,20 @@ def main():
     args = parser.parse_args()
     
     #unpack extract
-    unpack_dir = 'extract'
+    random_string = ''.join(random.choices(string.ascii_uppercase + string.digits, k=4))
+    unpack_dir = 'extract' + random_string
+    if os.path.exists(unpack_dir):
+        shutil.rmtree(unpack_dir)
+    os.makedirs(unpack_dir)
+    with zipfile.ZipFile(args.extract, 'r') as zip_ref:
+        zip_ref.extractall(unpack_dir)
+        
     
     #get bbox 
-    highways_layer_path = os.path.join(unpack_dir,'data','highway-line.shp')
-    assert os.path.isfile(highways_layer_path),'not found file for bbox generation '+highways_layer_path
+    source_layer_path = os.path.join(unpack_dir,'data','land.shp')
+    assert os.path.isfile(source_layer_path),'not found file for bbox generation '+source_layer_path
     
-    ds = gdal.OpenEx(highways_layer_path,gdal.OF_READONLY)
+    ds = gdal.OpenEx(source_layer_path,gdal.OF_READONLY)
     assert ds is not None
     layer = ds.GetLayer()
     assert layer is not None
@@ -70,12 +81,13 @@ def main():
     
     
 
-    shutil.copyfile(os.path.join(project_templates,'render_atlas.qgs'),os.path.join(unpack_dir,'render_atlas.qgs')
+    shutil.copyfile(os.path.join('project_templates','render_atlas.qgs'),os.path.join(unpack_dir,'render_atlas.qgs'))
     #https://gis.stackexchange.com/questions/362636/qgis-on-docker-container-could-not-connect-to-any-x-display
     os.environ["QT_QPA_PLATFORM"] = "offscreen"
 
-    os.system('python3 pyqgis_client_atlas.py --project "extract/render_atlas.qgs" --layout "atlas_800x800" --output "spoon_RU-AST.png"')
+    os.system('python3 pyqgis_client_atlas.py --project "'+unpack_dir+'/render_atlas.qgs" --layout "atlas_800x800" --output "'+args.prefix+'_region_800x800.png"')
     
+    shutil.rmtree(unpack_dir)
     
 if __name__ == "__main__":
     main()
