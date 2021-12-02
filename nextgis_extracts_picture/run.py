@@ -31,11 +31,11 @@ def main():
     
     #unpack extract
     random_string = ''.join(random.choices(string.ascii_uppercase + string.digits, k=4))
-    unpack_dir = 'extract' + random_string
+    unpack_dir = os.path.join('/data','extract_' + random_string)
     if os.path.exists(unpack_dir):
         shutil.rmtree(unpack_dir)
     os.makedirs(unpack_dir)
-    with zipfile.ZipFile(args.extract, 'r') as zip_ref:
+    with zipfile.ZipFile('/data/'+args.extract, 'r') as zip_ref:
         zip_ref.extractall(unpack_dir)
         
     
@@ -85,7 +85,7 @@ def main():
     #https://gis.stackexchange.com/questions/362636/qgis-on-docker-container-could-not-connect-to-any-x-display
     os.environ["QT_QPA_PLATFORM"] = "offscreen"
 
-    os.system('python3 pyqgis_client_atlas.py --project "'+unpack_dir+'/render_atlas.qgs" --layout "atlas_800x800" --output "'+args.prefix+'_region_800x800.png"')
+    os.system('python3 pyqgis_client_atlas.py --project "'+unpack_dir+'/render_atlas.qgs" --layout "atlas_800x800" --output "/data/'+args.prefix+'_region_800x800.png"')
     
     shutil.rmtree(unpack_dir)
     
