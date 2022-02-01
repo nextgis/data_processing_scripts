@@ -11,7 +11,11 @@ import shutil
 
 '''
 test run
+
 docker run -it -v ${PWD}:/data ods2qml:1.0  /bin/bash
+or
+docker run -it --rm -v ${PWD}:/root/mydata/ osgeo/gdal /bin/bash
+
 python3 run.py sample-features.gpkg sample-boundaries
 
 '''
@@ -91,6 +95,9 @@ for boundary_filename in regions_layers:
     v2=layer1.GetFeatureCount()
     if v2 == 0:
         print('extract skipped, no features found')
+        continue
+    if 'parts' in boundary_filename:
+        print('blacklisted filename of boundary, skipped')
         continue
 
     
