@@ -75,6 +75,7 @@ for dirpath, dnames, fnames in os.walk(regionsdir):
 assert(len(regions_layers)>0)
 total=len(regions_layers)
 
+regions_layers = sorted(regions_layers)
 
 exportdir = os.path.join(os.path.dirname(file1),'intersection')
 if not os.path.exists(exportdir): os.makedirs(exportdir)
