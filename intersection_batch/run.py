@@ -111,11 +111,11 @@ for boundary_filename in regions_layers:
 
     
     dst_prefix = os.path.splitext(os.path.basename(boundary_filename))[0]
-    dstdir = os.path.join(exportdir,dst_prefix)
+    #dstdir = os.path.join(exportdir,dst_prefix)
     
-    if not os.path.exists(dstdir):
-        os.makedirs(dstdir)
-    out_filename = os.path.join(dstdir,'intersection.gpkg')
+    #if not os.path.exists(dstdir):
+    #    os.makedirs(dstdir)
+    out_filename = os.path.join(exportdir,dst_prefix+'.gpkg')
     if os.path.exists(out_filename):
         print('extract skipped, result file already exists')
         continue
