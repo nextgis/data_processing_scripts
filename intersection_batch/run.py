@@ -13,8 +13,7 @@ import shutil
 test run
 
 docker run -it -v ${PWD}:/data ods2qml:1.0  /bin/bash
-or
-docker run -it --rm -v ${PWD}:/root/mydata/ osgeo/gdal /bin/bash
+
 
 python3 run.py sample-features.gpkg sample-boundaries
 
@@ -56,7 +55,22 @@ regions_layers=list()
 for dirpath, dnames, fnames in os.walk(regionsdir):
     for f in fnames:
         #if f.lower().endswith("gpkg"):
-        regions_layers.append(os.path.join(dirpath, f))
+        filename = os.path.join(dirpath, f)
+        #test if this ogr compatible
+        format_ok = False
+        ds_test = None
+        try:
+            ds_test = gdal.OpenEx(filename,gdal.OF_READONLY+gdal.OF_VECTOR)
+            if ds_test is not None: 
+                ds_test = True
+            else:
+                print(filename+' is not valid file for gdal, skipped')
+        except BaseException as err:
+            ds_test = False
+            print(filename+' is not valid file for gdal, skipped')
+        if ds_test is not None:
+            regions_layers.append(os.path.join(dirpath, f))
+            del ds_test
             
 assert(len(regions_layers)>0)
 total=len(regions_layers)
@@ -72,8 +86,6 @@ layer1 = ds1.GetLayer()
 assert layer1 is not None
 assert layer1.GetFeatureCount() > 0
 
-
-
 cnt=0
 for boundary_filename in regions_layers:
     cnt=cnt+1
@@ -85,10 +97,7 @@ for boundary_filename in regions_layers:
     assert layer2 is not None
     assert layer2.GetFeatureCount() > 0
 
-
     feature = layer2.GetNextFeature()
-    geom = feature.GetGeometryRef()
-    wkt=geom.Centroid().ExportToWkt()
     
     v1=layer1.GetFeatureCount()
     layer1.SetSpatialFilter(feature.GetGeometryRef())
@@ -103,10 +112,14 @@ for boundary_filename in regions_layers:
     
     dst_prefix = os.path.splitext(os.path.basename(boundary_filename))[0]
     dstdir = os.path.join(exportdir,dst_prefix)
-    if os.path.exists(dstdir) and os.path.isdir(dstdir):
-        shutil.rmtree(dstdir)
-    os.makedirs(dstdir)
+    
+    if not os.path.exists(dstdir):
+        os.makedirs(dstdir)
     out_filename = os.path.join(dstdir,'intersection.gpkg')
+    if os.path.exists(out_filename):
+        print('extract skipped, result file already exists')
+        continue
+    
     opt = []
     drv = ogr.GetDriverByName('GPKG')
     out_ds = drv.CreateDataSource(out_filename, options=opt)
