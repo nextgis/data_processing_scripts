@@ -54,8 +54,9 @@ regions_layers=list()
 for dirpath, dnames, fnames in os.walk(regionsdir):
     for f in fnames:
         #if f.lower().endswith("gpkg"):
-        if 'approx' not in f and 'parts' not in 'f' and f.lower().endswith("geopackage"):
+        if 'approx' not in f and 'parts' not in 'f' and f.lower().endswith("geojson"):
             filename = os.path.join(dirpath, f)
+            
             #test if this ogr compatible
             format_ok = False
             ds_test = None
@@ -110,12 +111,8 @@ for boundary_filename in regions_layers:
         print('blacklisted filename of boundary, skipped')
         continue
 
-    
     dst_prefix = os.path.splitext(os.path.basename(boundary_filename))[0]
-    #dstdir = os.path.join(exportdir,dst_prefix)
     
-    #if not os.path.exists(dstdir):
-    #    os.makedirs(dstdir)
     out_filename = os.path.join(exportdir,dst_prefix+'.gpkg')
     if os.path.exists(out_filename):
         print('extract skipped, result file already exists')
