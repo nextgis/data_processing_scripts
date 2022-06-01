@@ -14,7 +14,6 @@ test run
 
 docker run -it -v ${PWD}:/data ods2qml:1.0  /bin/bash
 
-
 python3 run.py sample-features.gpkg sample-boundaries
 
 '''
@@ -55,27 +54,28 @@ regions_layers=list()
 for dirpath, dnames, fnames in os.walk(regionsdir):
     for f in fnames:
         #if f.lower().endswith("gpkg"):
-        filename = os.path.join(dirpath, f)
-        #test if this ogr compatible
-        format_ok = False
-        ds_test = None
-        try:
-            ds_test = gdal.OpenEx(filename,gdal.OF_READONLY+gdal.OF_VECTOR)
-            if ds_test is not None: 
-                ds_test = True
-            else:
+        if 'approx' not in f and 'parts' not in 'f' and f.lower().endswith("geopackage"):
+            filename = os.path.join(dirpath, f)
+            #test if this ogr compatible
+            format_ok = False
+            ds_test = None
+            try:
+                ds_test = gdal.OpenEx(filename,gdal.OF_READONLY+gdal.OF_VECTOR)
+                if ds_test is not None: 
+                    ds_test = True
+                else:
+                    print(filename+' is not valid file for gdal, skipped')
+            except BaseException as err:
+                ds_test = False
                 print(filename+' is not valid file for gdal, skipped')
-        except BaseException as err:
-            ds_test = False
-            print(filename+' is not valid file for gdal, skipped')
-        if ds_test is not None:
-            regions_layers.append(os.path.join(dirpath, f))
-            del ds_test
+            if ds_test is not None:
+                regions_layers.append(os.path.join(dirpath, f))
+                del ds_test
             
 assert(len(regions_layers)>0)
 total=len(regions_layers)
 
-regions_layers = sorted(regions_layers)
+regions_layers.sort()
 
 exportdir = os.path.join(os.path.dirname(file1),'intersection')
 if not os.path.exists(exportdir): os.makedirs(exportdir)
