@@ -47,7 +47,6 @@ file1 = args.file1
 regionsdir = args.regionsdir
 
 assert os.path.isfile(file1)
- 
 
 assert os.path.isdir(regionsdir)
 regions_layers=list()
@@ -91,7 +90,7 @@ assert layer1.GetFeatureCount() > 0
 cnt=0
 for boundary_filename in regions_layers:
     cnt=cnt+1
-    cont == True
+    cont = True
     print('{cnt}/{total} {name}'.format(cnt=cnt,total=total,name=os.path.splitext(os.path.basename(boundary_filename))[0]))
     
     dst_prefix = os.path.splitext(os.path.basename(boundary_filename))[0]
