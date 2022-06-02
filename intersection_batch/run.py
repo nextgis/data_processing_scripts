@@ -5,7 +5,7 @@
 # Copyright: 2022, NextGIS <info@nextgis.com>
 
 import argparse
-import gdal, ogr
+from osgeo import gdal, ogr
 import os
 import shutil
 
