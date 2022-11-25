@@ -62,7 +62,7 @@ os.system(cmd)
 cmd = 'gdalbuildvrt -input_file_list list.txt mosaic.vrt'
 os.system(cmd)
 
-cmd = 'gdalwarp  -t_srs EPSG:3857 -co TILED=yes -co COMPRESS=DEFLATE  mosaic.vrt dem.tif'
+cmd = 'gdalwarp -r lanczos -t_srs EPSG:3857 -co TILED=yes -co COMPRESS=DEFLATE  mosaic.vrt dem.tif'
 os.system(cmd)
 
 executionTime = (time.time() - startTime)
