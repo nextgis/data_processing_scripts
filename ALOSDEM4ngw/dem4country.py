@@ -91,7 +91,8 @@ def alos4ngw(grid, src_path, result_path):
 
     print('Reprojecting preview 2000x2000 px ...')
     #To prevent blocky pattern, resampling in reproject must be one of cubicspline,cubic,bilinear.  Also you should set resampling in QML in QGIS.
-    cmd = 'gdalwarp -r cubicspline -multi -overwrite -ts 2000 2000 -t_srs EPSG:3857 -co TILED=yes -co COMPRESS=DEFLATE  -co BIGTIFF=YES  mosaic.vrt '+result_path.replace('.','_preview.')
+    preview_filename = os.path.splitext(result_path)[0] + '_preview'+os.path.splitext(result_path)[1]
+    cmd = 'gdalwarp -r cubicspline -multi -overwrite -ts 2000 2000 -t_srs EPSG:3857 -co TILED=yes -co COMPRESS=DEFLATE  -co BIGTIFF=YES  mosaic.vrt '+preview_filename
     os.system(cmd)
     
     print('Reprojecting...')    
