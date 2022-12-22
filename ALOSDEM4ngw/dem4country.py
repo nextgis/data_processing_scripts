@@ -89,12 +89,13 @@ def alos4ngw(grid, src_path, result_path):
     cmd = 'gdalbuildvrt -input_file_list list.txt mosaic.vrt'
     os.system(cmd)
 
-    print('Reprojecting')
+    print('Reprojecting preview 2000x2000 px ...')
     #To prevent blocky pattern, resampling in reproject must be one of cubicspline,cubic,bilinear.  Also you should set resampling in QML in QGIS.
-    cmd = 'gdalwarp -r cubicspline -t_srs EPSG:3857 -co TILED=yes -co COMPRESS=DEFLATE  mosaic.vrt '+result_path
-
-
-
+    cmd = 'gdalwarp -r cubicspline -multi -overwrite -ts 2000 2000 -t_srs EPSG:3857 -co TILED=yes -co COMPRESS=DEFLATE  -co BIGTIFF=YES  mosaic.vrt '+result_path.replace('.','_preview.')
+    os.system(cmd)
+    
+    print('Reprojecting...')    
+    cmd = 'gdalwarp -r cubicspline -multi -overwrite -t_srs EPSG:3857 -co TILED=yes -co COMPRESS=DEFLATE  -co BIGTIFF=YES  mosaic.vrt '+result_path
     os.system(cmd)
 
     executionTime = (time.time() - startTime)
