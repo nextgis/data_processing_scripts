@@ -23,8 +23,17 @@ from zipfile import ZipFile
 
 import time
 
-def alos4ngw(grid, src_path, result_path):
+def alos4ngw(grid, src_path, result_path, te=None, te_srs=None):
     startTime = time.time()
+    assert ',' not in te
+    if te is None: 
+        te = '' 
+    else: 
+        te='-te '+te
+    if te_srs is None: 
+        te_srs = '' 
+    else: 
+        te_srs='-te_srs '+te_srs
     
     assert os.path.isfile(grid)
     assert os.path.isdir(src_path)
@@ -92,17 +101,17 @@ def alos4ngw(grid, src_path, result_path):
     print('Reprojecting preview 2000x2000 px ...')
     #To prevent blocky pattern, resampling in reproject must be one of cubicspline,cubic,bilinear.  Also you should set resampling in QML in QGIS.
     preview_filename = os.path.splitext(result_path)[0] + '_preview'+os.path.splitext(result_path)[1]
-    cmd = 'gdalwarp -r cubicspline -multi -overwrite -ts 2000 2000 -t_srs EPSG:3857 -co TILED=yes -co COMPRESS=DEFLATE  -co BIGTIFF=YES  mosaic.vrt '+preview_filename
+    cmd = 'gdalwarp -r cubicspline -multi -overwrite -ts 2000 2000 -t_srs EPSG:3857 {te} {te_srs} -co TILED=yes -co COMPRESS=DEFLATE  -co BIGTIFF=YES  mosaic.vrt '.format(te=te,te_srs=te_srs)+preview_filename
     os.system(cmd)
     
     print('Reprojecting...')    
-    cmd = 'gdalwarp -r cubicspline -multi -overwrite -t_srs EPSG:3857 -co TILED=yes -co COMPRESS=DEFLATE  -co BIGTIFF=YES  mosaic.vrt '+result_path
+    cmd = 'gdalwarp -r cubicspline -multi -overwrite -t_srs EPSG:3857  {te} {te_srs} -co TILED=yes -co COMPRESS=DEFLATE  -co BIGTIFF=YES  mosaic.vrt '.format(te=te,te_srs=te_srs)+result_path
     os.system(cmd)
 
     executionTime = (time.time() - startTime)
     print('Execution time in seconds: ' + str(executionTime))
 
-    with open("times.log", "a") as myfile:
+    with open("times.log", "a") as myfile: 
         myfile.write('Execution time in seconds: ' + str(executionTime))
 
 
@@ -110,8 +119,9 @@ if __name__== "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('grid', help='Path to grid geojson file', type=str)
     parser.add_argument('src_path', help='Path to directory with ALOS DSM tiles', type=str)
+    parser.add_argument('-te','--bbox', help='gdalwarp te bbox', required=False, type=str)
+    parser.add_argument('-te_src','--bbox_srs', help='gdalwarp bbox SRC', required=False, type=str)
     parser.add_argument('result_path', help='Path to result TIF file', default='dem.tif', type=str)
     args = parser.parse_args()
 
-    alos4ngw(grid=args.grid, src_path=args.src_path, result_path=args.result_path)
-
+    alos4ngw(grid=args.grid, src_path=args.src_path, result_path=args.result_path, te=args.te, te_srs=args.te_srs)
