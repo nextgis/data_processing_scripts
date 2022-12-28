@@ -119,8 +119,8 @@ if __name__== "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('grid', help='Path to grid geojson file', type=str)
     parser.add_argument('src_path', help='Path to directory with ALOS DSM tiles', type=str)
-    parser.add_argument('-te','--bbox', help='gdalwarp te bbox', required=False, type=str)
-    parser.add_argument('-te_src','--bbox_srs', help='gdalwarp bbox SRC', required=False, type=str)
+    parser.add_argument('-te','--bbox', dest='te', help='gdalwarp te bbox', required=False, type=str)
+    parser.add_argument('-te_srs','--bbox_srs', dest='te_srs', help='gdalwarp bbox SRC', required=False, type=str)
     parser.add_argument('result_path', help='Path to result TIF file', default='dem.tif', type=str)
     args = parser.parse_args()
 
