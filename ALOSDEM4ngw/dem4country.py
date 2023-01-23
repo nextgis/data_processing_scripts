@@ -116,8 +116,7 @@ def alos4ngw(grid, src_path, result_path, te=None, te_srs=None):
 
 
 if __name__== "__main__":
-    parser = argparse.ArgumentParser(description='Convert ALOS DEM files to single GeoTIFF file for NextGIS WEB. Do select by geojson, merge, reproject, set special resampling method, raster compress algoritm',
-            formatter_class=PrettyFormatter)
+    parser = argparse.ArgumentParser(description='Convert ALOS DEM files to single GeoTIFF file for NextGIS WEB. Do select by geojson, merge, reproject, set special resampling method, raster compress algoritm')
     parser.add_argument('grid', help='Path to grid geojson file', type=str)
     parser.add_argument('src_path', help='Path to directory with ALOS DSM tiles', type=str)
     parser.add_argument('-te','--bbox', dest='te', help='gdalwarp te bbox', required=False, type=str)
