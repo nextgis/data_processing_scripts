@@ -25,7 +25,7 @@ import time
 
 def alos4ngw(grid, src_path, result_path, te=None, te_srs=None):
     startTime = time.time()
-    assert ',' not in te
+    assert te is None or ',' not in te
     if te is None: 
         te = '' 
     else: 
