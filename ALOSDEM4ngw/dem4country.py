@@ -65,7 +65,8 @@ def alos4ngw(grid, src_path, result_path, te=None, te_srs=None):
 
     tiles = layer.GetFeatureCount()
     i=0
-    
+    cmd = 'rm -rf list.txt'
+    os.system(cmd)
     for feature in layer:
         i = i+1
         tile = feature.GetField('TILE')
