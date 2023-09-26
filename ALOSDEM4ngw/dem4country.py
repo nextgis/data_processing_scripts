@@ -99,12 +99,13 @@ def alos4ngw(grid, src_path, result_path, te=None, te_srs=None):
     print('Reprojecting preview 2000x2000 px ...')
     #To prevent blocky pattern, resampling in reproject must be one of cubicspline,cubic,bilinear.  Also you should set resampling in QML in QGIS.
     preview_filename = os.path.splitext(result_path)[0] + '_preview'+os.path.splitext(result_path)[1]
-    cmd = 'gdalwarp -r cubicspline -multi -overwrite -ts 2000 2000 -t_srs EPSG:3857 {te} {te_srs} -co TILED=yes -co COMPRESS=DEFLATE  -co BIGTIFF=YES  mosaic.vrt '.format(te=te,te_srs=te_srs)+preview_filename
+    cmd = 'gdalwarp -r cubicspline -multi -overwrite -ts 2000 2000 -t_srs EPSG:3857  -ot Int16 {te} {te_srs} -co TILED=yes -co COMPRESS=DEFLATE  -co BIGTIFF=YES  mosaic.vrt '.format(te=te,te_srs=te_srs)+preview_filename
     os.system(cmd)
     
     print('Reprojecting...')    
-    cmd = 'gdalwarp -r cubicspline -multi -overwrite -t_srs EPSG:3857  {te} {te_srs} -co TILED=yes -co COMPRESS=DEFLATE  -co BIGTIFF=YES  mosaic.vrt '.format(te=te,te_srs=te_srs)+result_path
+    cmd = 'gdalwarp -r cubicspline -multi -overwrite -t_srs EPSG:3857  -ot Int16  {te} {te_srs} -co TILED=yes -co COMPRESS=DEFLATE  -co BIGTIFF=YES  mosaic.vrt '.format(te=te,te_srs=te_srs)+result_path
     os.system(cmd)
+    #if source raster is UInt16, a hillshade with splines will not draw good, explicit convert to Int16
 
     executionTime = (time.time() - startTime)
     print('Execution time in seconds: ' + str(executionTime))
