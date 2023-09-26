@@ -161,6 +161,8 @@
           <item value="4000" color="#e7735a" alpha="255" label="4000"/>
           <item value="5000" color="#c96555" alpha="255" label="5000"/>
           <item value="6000" color="#c15e55" alpha="255" label="6000"/>
+          <item value="9000" color="#c15e55" alpha="255" label="9000"/>
+          <item value="10000" color="#c15e55" alpha="0" label="inf"/>
           <rampLegendSettings orientation="2" useContinuousLegend="1" maximumLabel="" direction="0" prefix="" minimumLabel="" suffix="">
             <numericFormat id="basic">
               <Option type="Map">
