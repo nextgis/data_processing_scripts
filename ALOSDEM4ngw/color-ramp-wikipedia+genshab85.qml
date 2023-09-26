@@ -62,6 +62,8 @@
           <item alpha="255" color="#cac3b8" value="6000" label="altitude 17 eternal snow"/>
           <item alpha="255" color="#e0ded8" value="7000" label="altitude 18 eternal snow"/>
           <item alpha="255" color="#f5f4f2" value="8000" label="altitude 19 eternal snow"/>
+          <item alpha="255" color="#f5f4f2" value="9000" label="altitude 19 eternal snow"/>
+          <item alpha="0" color="#f5f4f2" value="10000" label="nodata transparent"/>
           <rampLegendSettings direction="0" suffix="" useContinuousLegend="1" minimumLabel="" prefix="" orientation="2" maximumLabel="">
             <numericFormat id="basic">
               <Option type="Map">
