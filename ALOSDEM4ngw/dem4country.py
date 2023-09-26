@@ -39,11 +39,6 @@ def alos4ngw(grid, src_path, result_path, te=None, te_srs=None):
     assert os.path.isdir(src_path)
     assert os.path.isdir(os.path.dirname(result_path)) or result_path == '', 'invalid result path: '+result_path
 
-    #grid = 'ru-alos.geojson'
-    #src_path = '/mnt/alpha/backups/data/dem-sources/alos2012dem'
-    
-
-    #src_path = 'test'
     unpack_dir = 'unpack'
 
     if os.path.isfile('dem.tif'): os.unlink('dem.tif')
@@ -79,6 +74,8 @@ def alos4ngw(grid, src_path, result_path, te=None, te_srs=None):
 
 
     #Extract ALOS scenes, extract *DSM*.tif
+    cmd = 'rm -rf unpack/*'
+    os.system(cmd)
     print('extracting...')
     i=0
     for filename in filenames_ok:
