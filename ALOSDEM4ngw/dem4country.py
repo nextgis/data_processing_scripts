@@ -36,8 +36,8 @@ def alos4ngw(grid, src_path, result_path, te=None, te_srs=None,clipsrc=None):
     else: 
         te_srs='-te_srs '+te_srs
     
-    assert os.path.isfile(grid)
-    assert os.path.isdir(src_path)
+    assert os.path.isfile(grid), 'invalid grid path: '+grid
+    assert os.path.isdir(src_path), 'invalid path: '+src_path
     assert os.path.isdir(os.path.dirname(result_path)) or result_path == '', 'invalid result path: '+result_path
 
     unpack_dir = 'unpack'
