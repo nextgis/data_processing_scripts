@@ -12,6 +12,7 @@ Convert ALOS DEM for NextGIS.com
 - write benchmark file
 
 python3 dem4country.py caucaus.geojson /mnt/alpha/backups/data/dem-sources/alos2012dem ./caucasus.tif
+python3 dem4country.py -cutline boundary4326.gpkg caucaus.geojson /mnt/alpha/backups/data/dem-sources/alos2012dem ./caucasus.tif
 '''
 
 import argparse
@@ -23,7 +24,7 @@ from zipfile import ZipFile
 
 import time
 
-def alos4ngw(grid, src_path, result_path, te=None, te_srs=None):
+def alos4ngw(grid, src_path, result_path, te=None, te_srs=None,clipsrc=None):
     startTime = time.time()
     assert te is None or ',' not in te
     if te is None: 
@@ -96,14 +97,18 @@ def alos4ngw(grid, src_path, result_path, te=None, te_srs=None):
     cmd = 'gdalbuildvrt -input_file_list list.txt mosaic.vrt'
     os.system(cmd)
 
-    print('Reprojecting preview 2000x2000 px ...')
+    print('Reprojecting preview 4000x4000 px ...')
     #To prevent blocky pattern, resampling in reproject must be one of cubicspline,cubic,bilinear.  Also you should set resampling in QML in QGIS.
     preview_filename = os.path.splitext(result_path)[0] + '_preview'+os.path.splitext(result_path)[1]
-    cmd = 'gdalwarp -r cubicspline -multi -overwrite -ts 2000 2000 -t_srs EPSG:3857  -ot Int16 {te} {te_srs} -co TILED=yes -co COMPRESS=DEFLATE  -co BIGTIFF=YES  mosaic.vrt '.format(te=te,te_srs=te_srs)+preview_filename
+    if clipsrc is not None:
+        clip_command = f'-cutline {clipsrc}  -crop_to_cutline -dstalpha '
+    else:
+        clip_command = ''
+    cmd = 'gdalwarp -r cubicspline -multi -overwrite -ts 4000 4000 -t_srs EPSG:3857  -ot Int16 {te} {te_srs} {clip_command} -co TILED=yes -co COMPRESS=DEFLATE  -co BIGTIFF=YES  mosaic.vrt '.format(te=te,te_srs=te_srs,clip_command=clip_command)+preview_filename
     os.system(cmd)
     
     print('Reprojecting...')    
-    cmd = 'gdalwarp -r cubicspline -multi -overwrite -t_srs EPSG:3857  -ot Int16  {te} {te_srs} -co TILED=yes -co COMPRESS=DEFLATE  -co BIGTIFF=YES  mosaic.vrt '.format(te=te,te_srs=te_srs)+result_path
+    cmd = 'gdalwarp -r cubicspline -multi -overwrite -t_srs EPSG:3857  -ot Int16  {te} {te_srs} {clip_command} -co TILED=yes -co COMPRESS=DEFLATE  -co BIGTIFF=YES  mosaic.vrt '.format(te=te,te_srs=te_srs,clip_command=clip_command)+result_path
     os.system(cmd)
     #if source raster is UInt16, a hillshade with splines will not draw good, explicit convert to Int16
 
@@ -120,7 +125,8 @@ if __name__== "__main__":
     parser.add_argument('src_path', help='Path to directory with ALOS DSM tiles', type=str)
     parser.add_argument('-te','--bbox', dest='te', help='gdalwarp te bbox', required=False, type=str)
     parser.add_argument('-te_srs','--bbox_srs', dest='te_srs', help='gdalwarp bbox SRC', required=False, type=str)
+    parser.add_argument('-cutline', dest='cutline', help='clip by mask using vector file', required=False, type=str)
     parser.add_argument('result_path', help='Path to result TIF file', default='dem.tif', type=str)
     args = parser.parse_args()
 
-    alos4ngw(grid=args.grid, src_path=args.src_path, result_path=args.result_path, te=args.te, te_srs=args.te_srs)
+    alos4ngw(grid=args.grid, src_path=args.src_path, result_path=args.result_path, te=args.te, te_srs=args.te_srs, clipsrc=args.clipsrc)
