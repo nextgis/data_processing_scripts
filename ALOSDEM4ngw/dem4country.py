@@ -127,6 +127,6 @@ if __name__== "__main__":
     parser.add_argument('-te_srs','--bbox_srs', dest='te_srs', help='gdalwarp bbox SRC', required=False, type=str)
     parser.add_argument('-cutline', dest='cutline', help='clip by mask using vector file', required=False, type=str)
     parser.add_argument('result_path', help='Path to result TIF file', default='dem.tif', type=str)
+    
     args = parser.parse_args()
-
-    alos4ngw(grid=args.grid, src_path=args.src_path, result_path=args.result_path, te=args.te, te_srs=args.te_srs, clipsrc=args.clipsrc)
+    alos4ngw(grid=args.grid, src_path=args.src_path, result_path=args.result_path, te=args.te, te_srs=args.te_srs, clipsrc=args.cutline)
