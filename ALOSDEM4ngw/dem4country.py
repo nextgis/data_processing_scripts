@@ -104,8 +104,10 @@ def alos4ngw(grid, src_path, result_path, te=None, te_srs=None,clipsrc=None):
         clip_command = f'-cutline {clipsrc}  -crop_to_cutline -dstalpha '
     else:
         clip_command = ''
-    cmd = 'gdalwarp -r cubicspline -multi -overwrite -ts 4000 4000 -t_srs EPSG:3857  -ot Int16 {te} {te_srs} {clip_command} -co TILED=yes -co COMPRESS=DEFLATE  -co BIGTIFF=YES  mosaic.vrt '.format(te=te,te_srs=te_srs,clip_command=clip_command)+preview_filename
-    os.system(cmd)
+
+    # -ts with -clip stil procesed as long as full file, i switch off it 
+    #cmd = 'gdalwarp -r cubicspline -multi -overwrite -ts 4000 4000 -t_srs EPSG:3857  -ot Int16 {te} {te_srs} {clip_command} -co TILED=yes -co COMPRESS=DEFLATE  -co BIGTIFF=YES  mosaic.vrt '.format(te=te,te_srs=te_srs,clip_command=clip_command)+preview_filename
+    #os.system(cmd)
     
     print('Reprojecting...')    
     cmd = 'gdalwarp -r cubicspline -multi -overwrite -t_srs EPSG:3857  -ot Int16  {te} {te_srs} {clip_command} -co TILED=yes -co COMPRESS=DEFLATE  -co BIGTIFF=YES  mosaic.vrt '.format(te=te,te_srs=te_srs,clip_command=clip_command)+result_path
