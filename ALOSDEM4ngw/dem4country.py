@@ -19,6 +19,8 @@ import argparse
 
 from osgeo import gdal, ogr, osr
 import os
+import shutil
+import pathlib
 
 from zipfile import ZipFile
 
@@ -61,8 +63,9 @@ def alos4ngw(grid, src_path, result_path, te=None, te_srs=None,clipsrc=None):
 
     tiles = layer.GetFeatureCount()
     i=0
-    cmd = 'rm -rf list.txt'
-    os.system(cmd)
+    if os.path.isfile('list.txt'):
+        os.remove('list.txt') 
+
     for feature in layer:
         i = i+1
         tile = feature.GetField('TILE')
@@ -75,8 +78,7 @@ def alos4ngw(grid, src_path, result_path, te=None, te_srs=None,clipsrc=None):
 
 
     #Extract ALOS scenes, extract *DSM*.tif
-    cmd = 'rm -rf unpack/*'
-    os.system(cmd)
+    shutil.rmtree('unpack', ignore_errors=True)
     print('extracting...')
     i=0
     for filename in filenames_ok:
@@ -91,13 +93,23 @@ def alos4ngw(grid, src_path, result_path, te=None, te_srs=None,clipsrc=None):
                    zipObject.extract(fileName, unpack_dir)
     
     #make VRT with all extracted rasters
-    cmd = 'find unpack -print | grep tif > list.txt'
-    os.system(cmd)
+
+    unpack_path = pathlib.Path(unpack_dir)
+    files = list()
+    for file in unpack_path.glob("**/*.tif"):
+        # write the file path to the list.txt file
+        files.append(str(file))
+    with open("list.txt", mode="w", encoding="utf-8") as textfile:
+        for file in files:
+            textfile.write(str(file)+"\n")
+    del unpack_dir
+        
     print('build VRT')
     cmd = 'gdalbuildvrt -input_file_list list.txt mosaic.vrt'
     os.system(cmd)
 
-    print('Reprojecting preview 4000x4000 px ...')
+    # PREVIEW 
+    #print('Reprojecting preview 4000x4000 px ...')
     #To prevent blocky pattern, resampling in reproject must be one of cubicspline,cubic,bilinear.  Also you should set resampling in QML in QGIS.
     preview_filename = os.path.splitext(result_path)[0] + '_preview'+os.path.splitext(result_path)[1]
     if clipsrc is not None:
@@ -115,10 +127,11 @@ def alos4ngw(grid, src_path, result_path, te=None, te_srs=None,clipsrc=None):
     #if source raster is UInt16, a hillshade with splines will not draw good, explicit convert to Int16
 
     executionTime = (time.time() - startTime)
-    print('Execution time in seconds: ' + str(executionTime))
+    print('Execution time in seconds: ' + str(round(executionTime)))
 
     with open("times.log", "a") as myfile: 
-        myfile.write('Execution time in seconds: ' + str(executionTime))
+        myfile.write('Execution time in seconds: ' + str(round(executionTime)))
+        myfile.write("\n")
 
 
 if __name__== "__main__":
