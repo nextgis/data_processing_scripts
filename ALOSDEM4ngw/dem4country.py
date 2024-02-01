@@ -114,6 +114,8 @@ def alos4ngw(grid, src_path, result_path, te=None, te_srs=None,clipsrc=None):
     preview_filename = os.path.splitext(result_path)[0] + '_preview'+os.path.splitext(result_path)[1]
     if clipsrc is not None:
         clip_command = f'-cutline {clipsrc}  -crop_to_cutline -dstalpha '
+        # do nou use -dstalpha, at big country it run seveal days
+        clip_command = f'-cutline {clipsrc}  -crop_to_cutline  '
     else:
         clip_command = ''
 
