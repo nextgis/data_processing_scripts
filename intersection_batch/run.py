@@ -7,13 +7,11 @@
 import argparse
 from osgeo import gdal, ogr
 import os
-import shutil
 
 '''
 test run
 
 docker run -it -v ${PWD}:/data ods2qml:1.0  /bin/bash
-
 python3 run.py sample-features.gpkg sample-boundaries
 
 '''
@@ -53,7 +51,7 @@ regions_layers=list()
 for dirpath, dnames, fnames in os.walk(regionsdir):
     for f in fnames:
         #if f.lower().endswith("gpkg"):
-        if 'approx' not in f and 'parts' not in 'f' and f.lower().endswith("geojson"):
+        if 'approx' not in f and 'sample' not in f and 'parts' not in 'f' and f.lower().endswith("geojson"):
             filename = os.path.join(dirpath, f)
             
             #test if this ogr compatible
